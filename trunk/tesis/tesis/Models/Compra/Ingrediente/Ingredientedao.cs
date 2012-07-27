@@ -9,7 +9,7 @@ using System.Web.Configuration;
 using System.Data;
 using log4net;
 
-namespace tesis.Models
+namespace Cafeteria.Models
 {
     public class Ingredientedao
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace tesis.Controllers.Compras
+namespace Cafeteria.Controllers.Compras
 {
     public class ProveedorController : Controller
     {

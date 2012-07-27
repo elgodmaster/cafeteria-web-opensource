@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Cafeteria.Models.Compra.Proveedor
+namespace cafeteria.Models.Compra.Producto
 {
-    public class ProveedorService
+    public class ProductoBean
     {
     }
 }

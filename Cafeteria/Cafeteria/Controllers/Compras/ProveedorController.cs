@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
+using Cafeteria.Models.Compra;
+using Cafeteria.Models;
+using Cafeteria.Models.Compra.Proveedor;
 
 namespace Cafeteria.Controllers.Compras
 {
     public class ProveedorController : Controller
     {
+        private static ILog log = LogManager.GetLogger(typeof(IngredienteController));
+        comprasfacade comprasfacade = new comprasfacade();
 
         public ActionResult Index()
         {
@@ -21,22 +27,40 @@ namespace Cafeteria.Controllers.Compras
         }
 
 
-        public ActionResult Create()
+        public ActionResult RegistrarProveedor()
         {
             return View();
         } 
 
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult RegistrarProveedor(ProveedorBean prov)
         {
             try
             {
 
-                return RedirectToAction("Index");
+                IngredienteBean Ingrediente = new IngredienteBean();
+                //Ingrediente.nombre = ;
+                //Ingrediente.descripcion = descripcion;
+                //Ingrediente.estado = "ACTIVO";
+                List<ProveedorBean> listprov = new List<ProveedorBean>();
+                //ingred = comprasfacade.ListarIngrediente(Ingrediente.nombre);
+
+                if (listprov.Count > 0)
+                {
+                    ViewBag.error = "El Proveedor ya existe";
+                    return View(prov);
+                }
+                else
+                {
+                    //comprasfacade.RegistrarIngrediente(Ingrediente);
+                    return RedirectToAction("Index");
+                }
             }
-            catch
+            catch(Exception e)
             {
+                log.Error("Create - GET(EXCEPTION):", e);
+                ModelState.AddModelError("", e.Message);
                 return View();
             }
         }

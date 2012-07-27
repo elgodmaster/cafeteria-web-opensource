@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using tesis.Models.Compra;
+using Cafeteria.Models.Compra;
 
-namespace tesis.Models.Compra
+namespace Cafeteria.Models.Compra
 {
     public class comprasfacade
     {

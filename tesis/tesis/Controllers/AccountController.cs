@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-using tesis.Models;
+using Cafeteria.Models;
 
-namespace tesis.Controllers
+namespace Cafeteria.Controllers
 {
     public class AccountController : Controller
     {

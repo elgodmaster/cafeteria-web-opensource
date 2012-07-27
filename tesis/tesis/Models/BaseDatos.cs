@@ -5,7 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 
-namespace tesis.Models
+namespace Cafeteria.Models
 {
     public class BaseDatos
     {

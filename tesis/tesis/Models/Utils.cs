@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using log4net;
 using System.Web.Configuration;
 
-namespace tesis.Models
+namespace Cafeteria.Models
 {
     public class Utils
     {

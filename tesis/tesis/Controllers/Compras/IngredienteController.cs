@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using log4net;
-using tesis.Models.Compra;
-using tesis.Models;
+using Cafeteria.Models.Compra;
+using Cafeteria.Models;
 
 
-namespace tesis.Controllers
+namespace Cafeteria.Controllers
 {
     public class IngredienteController : Controller
     {

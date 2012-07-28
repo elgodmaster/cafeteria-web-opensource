@@ -11,7 +11,7 @@ namespace Cafeteria.Models
         public List<IngredienteBean> ListarIngrediente(string nombre) 
         {
             List<IngredienteBean> prod = new List<IngredienteBean>();
-            Ingredientedao.ListarIngrediente(nombre);
+            prod=Ingredientedao.ListarIngrediente(nombre);
 
             return prod;
         }

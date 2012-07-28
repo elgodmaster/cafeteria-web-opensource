@@ -102,7 +102,7 @@ namespace Cafeteria.Models
                 IngredienteBean ingrediente = null;
 
                 objDB.Open();
-                String strQuery = "SELECT * FROM Hotel WHERE idIngrediente = @ID";
+                String strQuery = "SELECT * FROM Ingrediente WHERE idIngrediente = @ID";
                 SqlCommand objquery = new SqlCommand(strQuery, objDB);
                 BaseDatos.agregarParametro(objquery, "@ID", id);
 
@@ -111,7 +111,6 @@ namespace Cafeteria.Models
                 {
                     objDataReader.Read();
                     ingrediente = new IngredienteBean();
-
                     ingrediente.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
                     ingrediente.nombre = Convert.ToString(objDataReader[1]);
                     ingrediente.descripcion = Convert.ToString(objDataReader[2]);
@@ -144,7 +143,6 @@ namespace Cafeteria.Models
                                   "WHERE idIngrediente = @id";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                Utils.agregarParametro(objQuery, "@id", ingrediente.ID);
                 Utils.agregarParametro(objQuery, "@nombre", ingrediente.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", ingrediente.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", ingrediente.estado);
@@ -153,7 +151,7 @@ namespace Cafeteria.Models
             }
             catch (Exception e)
             {
-                log.Error("registrarIngrediente(EXCEPTION): ", e);
+                log.Error("Actualizar_Ingrediente(EXCEPTION): ", e);
             }
             finally
             {
@@ -166,6 +164,31 @@ namespace Cafeteria.Models
 
         public void EliminarIngrediente(string ID)
         {
+            string estado = "INACTIVO";
+			SqlConnection objDB = null;
+			try
+			{
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "UPDATE Ingrediente SET estado=@estado" +
+                                  "WHERE idIngrediente = @id";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@estado", estado);
+                objQuery.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                log.Error("EliminarIngrediente(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
 
         }
     }

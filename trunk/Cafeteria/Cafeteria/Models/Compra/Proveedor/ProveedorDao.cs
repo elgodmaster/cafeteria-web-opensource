@@ -31,7 +31,7 @@ namespace Cafeteria.Models.Compra.Proveedor
                    {
                         ProveedorBean ingrediente = new ProveedorBean();
                         ingrediente.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
-                        ingrediente.nombre = Convert.ToString(objDataReader[1]);
+                        //ingrediente.nombre = Convert.ToString(objDataReader[1]);
                         ingrediente.descripcion = Convert.ToString(objDataReader[2]);
                         ingrediente.estado = Convert.ToString(objDataReader[3]);    
                         ListaIngre.Add(ingrediente);
@@ -70,7 +70,7 @@ namespace Cafeteria.Models.Compra.Proveedor
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 Utils.agregarParametro(objQuery, "@id", prod.ID);
-                Utils.agregarParametro(objQuery, "@nombre", prod.nombre);
+                //Utils.agregarParametro(objQuery, "@nombre", prod.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", prod.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", prod.estado);
                 objQuery.ExecuteNonQuery();
@@ -96,7 +96,7 @@ namespace Cafeteria.Models.Compra.Proveedor
             try
             {
                 objDB = new SqlConnection(cadenaDB);
-                IngredienteBean ingrediente = null;
+                ProveedorBean ingrediente = null;
 
                 objDB.Open();
                 String strQuery = "SELECT * FROM Hotel WHERE idIngrediente = @ID";
@@ -107,10 +107,10 @@ namespace Cafeteria.Models.Compra.Proveedor
                 if (objDataReader.HasRows)
                 {
                     objDataReader.Read();
-                    ingrediente = new IngredienteBean();
+                    ingrediente = new ProveedorBean();
 
                     ingrediente.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
-                    ingrediente.nombre = Convert.ToString(objDataReader[1]);
+                    //ingrediente.nombre = Convert.ToString(objDataReader[1]);
                     ingrediente.descripcion = Convert.ToString(objDataReader[2]);
                     ingrediente.estado = Convert.ToString(objDataReader[3]);
                 }
@@ -142,7 +142,7 @@ namespace Cafeteria.Models.Compra.Proveedor
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 Utils.agregarParametro(objQuery, "@id", ingrediente.ID);
-                Utils.agregarParametro(objQuery, "@nombre", ingrediente.nombre);
+                //Utils.agregarParametro(objQuery, "@nombre", ingrediente.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", ingrediente.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", ingrediente.estado);
                 objQuery.ExecuteNonQuery();

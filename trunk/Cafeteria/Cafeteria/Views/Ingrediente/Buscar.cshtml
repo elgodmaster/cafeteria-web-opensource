@@ -38,6 +38,12 @@
                 <tr>
                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
                         <div class="DataTables_sort_wrapper">
+                        ID
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
+                     </th>
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                        <div class="DataTables_sort_wrapper">
                         Nombre
                         <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
                         </div>
@@ -64,7 +70,8 @@
     @foreach (var item in Model)
     {
         <tr class="gradeA odd">
-           <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+            <td>@Html.DisplayFor(modelItem => item.ID)</td>
+            <td>@Html.DisplayFor(modelItem => item.nombre)</td>
             <td>@Html.DisplayFor(modelItem => item.descripcion)</td>
             <td>@Html.DisplayFor(modelItem => item.estado)</td>
             <td>
@@ -77,9 +84,9 @@
         
     }
 
-     <div id="dialogEliminar" title="Desea Eliminar el Producto?">
+    <div id="dialogEliminar" title="Desea Eliminar el Producto?">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-    El Ingrediente que UD. Elimine ya no podra ser recuperado</p>
+    El Producto que UD. Elimine ya no podra ser recuperado</p>
     </div>
 
 
@@ -105,7 +112,7 @@
         draggable: false,
         width: 300,
         modal: true,
-        title: "!Confirmar Eliminacion de Producto",
+        title: "!Confirmar Eliminacion de Ingrediente",
         position: "center",
         buttons: {
             "Aceptar": function () {

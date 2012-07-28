@@ -64,16 +64,18 @@
     <script type="text/javascript" src="@Url.Content( "~/Content/js/charts/chart.js" )"></script> 
 </head>
 <body  >
-    <div id="top" style="background-image:url(images/backgrounds/bodyBg.png)"  >
+    @*<div id="top" style="background-image:url(images/backgrounds/bodyBg.png)"  >
        <div id="logindisplay" style="text-align:right; ">
                 @Html.Partial("_LogOnPartial")
         </div>
-    </div>
+    </div>*@
     <div id="leftSide" >
         <ul id="menu">
                <li>@Html.ActionLink("Home", "Index", "Home")</li>
                <li>@Html.ActionLink("About", "About", "Home")</li>
-               <li>@Html.ActionLink("Ingrediente", "Create", "Ingrediente")</li>
+               <li>@Html.ActionLink("Crear Ingrediente", "Create", "Ingrediente")</li>
+               <li>@Html.ActionLink("Buscar Ingrediente", "Buscar", "Ingrediente")</li>
+               <li>@Html.ActionLink("Lista Ingrediente", "Index", "Ingrediente")</li>
                <li>@Html.ActionLink("Proveedor", "RegistrarProveedor", "Proveedor")</li>
          </ul>
     </div>

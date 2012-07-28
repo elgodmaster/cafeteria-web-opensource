@@ -95,11 +95,10 @@ namespace Cafeteria.Controllers
             }
         }
         #endregion
-
         #region eliminar
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string ID)
         {
-            return View();
+            return View(comprasfacade.buscaringrediente(ID));
         }
 
         [HttpPost, ActionName("Delete")]

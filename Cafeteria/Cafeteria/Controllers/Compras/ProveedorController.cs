@@ -39,12 +39,12 @@ namespace Cafeteria.Controllers.Compras
             try
             {
 
-                IngredienteBean Ingrediente = new IngredienteBean();
+                //IngredienteBean Ingrediente = new IngredienteBean();
                 //Ingrediente.nombre = ;
                 //Ingrediente.descripcion = descripcion;
                 //Ingrediente.estado = "ACTIVO";
                 List<ProveedorBean> listprov = new List<ProveedorBean>();
-                //ingred = comprasfacade.ListarIngrediente(Ingrediente.nombre);
+                listprov = comprasfacade.ListarProveedor(prov.razonSocial,prov.ruc);
 
                 if (listprov.Count > 0)
                 {
@@ -87,10 +87,18 @@ namespace Cafeteria.Controllers.Compras
             }
         }
 
- 
-        public ActionResult Delete(int id)
+
+        public ActionResult Delete(string ID)
         {
-            return View();
+            
+            return View(comprasfacade.BuscarProveedor(ID));
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public JsonResult DeleteConfirmed(string ID)
+        {
+            comprasfacade.EliminarProveedor(ID);
+            return Json(new { me = "" });
         }
 
 

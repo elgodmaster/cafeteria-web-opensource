@@ -8,7 +8,7 @@ namespace Cafeteria.Models.Compra.Proveedor
 {
     public class ProveedorBean
     {
-        public int ID;
+        public string ID;
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Debe ingresar nombre de Producto")]
         [RegularExpression("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$", ErrorMessage = "El nombre ingresado no es válido")]
@@ -31,8 +31,8 @@ namespace Cafeteria.Models.Compra.Proveedor
         public string telefono_contacto;
         [Display(Name = "Descripción")]
         public string descripcion;
-        [Display(Name = "Observación")]
-        public string observacion;
+        [Display(Name = "Cargo Contacto")]
+        public string CargoContacto;
         [Display(Name = "Web")]
         public string web;
 

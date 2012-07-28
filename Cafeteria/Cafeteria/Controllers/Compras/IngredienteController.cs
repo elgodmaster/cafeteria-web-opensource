@@ -75,7 +75,7 @@ namespace Cafeteria.Controllers
 
         #endregion
         #region editar
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             IngredienteBean ingre = comprasfacade.buscaringrediente(id);
             return View(ingre);
@@ -103,7 +103,7 @@ namespace Cafeteria.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public JsonResult DeleteConfirmed(int ID)
+        public JsonResult DeleteConfirmed(string ID)
         {
             comprasfacade.eliminarIngrediente(ID);
             return Json(new { me = "" });

@@ -16,7 +16,7 @@ namespace Cafeteria.Models
         String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
 
-        public List<IngredienteBean> listaringrediente(string nombre)
+        public List<IngredienteBean> ListarIngrediente(string nombre)
         {
             SqlConnection objDB = null;
             try
@@ -92,7 +92,7 @@ namespace Cafeteria.Models
             }
         }
         
-        public IngredienteBean buscaringre(int id)
+        public IngredienteBean BuscarIngre(string id)
         {
             
             SqlConnection objDB = null;
@@ -133,7 +133,7 @@ namespace Cafeteria.Models
             }
            
         }
-        public void actualizaringre(IngredienteBean ingrediente)
+        public void ActualizarIngre(IngredienteBean ingrediente)
         {
             SqlConnection objDB = null;
             try
@@ -164,5 +164,9 @@ namespace Cafeteria.Models
             }
         }
 
+        public void EliminarIngrediente(string ID)
+        {
+
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Cafeteria.Models
         public List<IngredienteBean> ListarIngrediente(string nombre) 
         {
             List<IngredienteBean> prod = new List<IngredienteBean>();
-            Ingredientedao.listaringrediente(nombre);
+            Ingredientedao.ListarIngrediente(nombre);
 
             return prod;
         }
@@ -20,13 +20,18 @@ namespace Cafeteria.Models
         {
             Ingredientedao.registraringrediente(prod);
         }
-        public IngredienteBean buscaringre(int id)
+        public IngredienteBean buscaringre(string id)
         {
-            return Ingredientedao.buscaringre(id);
+            return Ingredientedao.BuscarIngre(id);
         }
         public void actualizaringre(IngredienteBean ingre)
         {
-            Ingredientedao.actualizaringre(ingre);
+            Ingredientedao.ActualizarIngre(ingre);
         }
+        public void EliminarIngrediente(string ID)
+        {
+            Ingredientedao.EliminarIngrediente(ID);
+        }
+
     }
 }

@@ -170,11 +170,12 @@ namespace Cafeteria.Models
 			{
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                String strQuery = "UPDATE Ingrediente SET estado=@estado" +
+                String strQuery = "UPDATE Ingrediente SET estado=@estado " +
                                   "WHERE idIngrediente = @id";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                Utils.agregarParametro(objQuery, "@estado", estado);
+                Utils.agregarParametro(objQuery, "@estado", estado); 
+                Utils.agregarParametro(objQuery, "@id", ID);
                 objQuery.ExecuteNonQuery();
 
             }

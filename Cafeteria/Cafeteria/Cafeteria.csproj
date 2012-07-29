@@ -14,6 +14,7 @@
     <AssemblyName>Cafeteria-web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -95,6 +96,7 @@
     <Content Include="Content\images\arrow.gif" />
     <Content Include="Content\images\backgrounds\arrows.png" />
     <Content Include="Content\images\backgrounds\bg.jpg" />
+    <Content Include="Content\images\backgrounds\bodyBg.png" />
     <Content Include="Content\images\backgrounds\breadcrumbArrow.png" />
     <Content Include="Content\images\backgrounds\calActiveBg.png" />
     <Content Include="Content\images\backgrounds\chosenSelect.png" />
@@ -1351,7 +1353,7 @@
     <Content Include="Content\js\plugins\wizard\jquery.form.js" />
     <Content Include="Content\js\plugins\wizard\jquery.form.wizard.js" />
     <Content Include="Content\js\plugins\wizard\jquery.validate.min.js" />
-    <Content Include="Content\main5.css" />
+    <Content Include="Content\main.css" />
     <Content Include="Global.asax" />
     <Content Include="libraries\AutoMapper.dll" />
     <Content Include="libraries\log4net.dll" />
@@ -1366,7 +1368,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

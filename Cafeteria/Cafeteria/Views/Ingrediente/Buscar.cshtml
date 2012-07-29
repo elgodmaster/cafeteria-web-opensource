@@ -86,7 +86,10 @@
                     </tr>
         
                 }
-
+            <div id="dialogEliminar" title="Desea Eliminar el Producto?">
+	            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                El Producto que UD. Elimine ya no podra ser recuperado</p>
+             </div>
             </tbody>
               
               </table>                                                                                                                                                                                                <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
@@ -96,18 +99,7 @@
         
         </div>
     </div>
-    <div style="display:none; z-index:1000; outline:0px; " class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialogEliminar">
-        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-            <span class="ui-dialog-title" id="ui-dialog-title-dialogEliminar">!confirmar Eliminacion de Ingrediente</span>
-            <a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
-                <span class="ui-icon ui-icon-closethick">close</span>
-            </a>
-           <div id="dialogEliminar" title="Desea Eliminar el Producto?">
-	            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-                El Ingrediente que UD. Elimine ya no podra ser recuperado</p>
-            </div>  
-        </div>
-    </div> 
+    
     
 }
     
@@ -137,7 +129,7 @@
                         contentType: "application/json; charset=utf-8",
                         url: "Delete/" + idEliminar,
                         success: function (data) {
-                            oTable.fnDraw(false);
+                            //oTable.fnDraw(false);
                             if (data.me == "") {
                                 $(this).dialog("close");
                                 location.reload();

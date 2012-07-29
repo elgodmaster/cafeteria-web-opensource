@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<Cafeteria.Models.IngredienteBean>
 
-<h2>Buscar Producto</h2>
+<h2>Buscar Ingrediente</h2>
+
+    
 
 @using (Html.BeginForm("Buscar", "Ingrediente", FormMethod.Post, new { @class = "form" }))
 {
@@ -18,7 +20,8 @@
     </fieldset>
     <p>
         <input type="submit" value="Buscar" class = "redB" />
-        <p></p><p></p>
+        <p></p>
+        <p></p>
         @Html.ActionLink("Regresar", "Buscar") | @Html.ActionLink("Lista Ingredientes", "Index", "Ingredientes")
     </p>
 }
@@ -29,12 +32,13 @@
 
 @if (ViewBag.estado != 0)
 {    
-<div class="wrapper">
-    <div class="widget">
-      <div class="title"><h6>Lista de Ingredientes</h6></div>
-      <div class="dataTables_wrapper">
-        <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
-            <thead>
+    <div class="wrapper">
+        <div class="widget">
+          <div class="title"><h6>Lista de Ingredientes</h6></div>
+          <div class="dataTables_wrapper">
+          
+              <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable"> 
+                <thead>
                 <tr>
                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
                         <div class="DataTables_sort_wrapper">
@@ -65,79 +69,88 @@
                     </th>
                 </tr>
             </thead>
-
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr class="gradeA odd">
-            <td>@Html.DisplayFor(modelItem => item.ID)</td>
-            <td>@Html.DisplayFor(modelItem => item.nombre)</td>
-            <td>@Html.DisplayFor(modelItem => item.descripcion)</td>
-            <td>@Html.DisplayFor(modelItem => item.estado)</td>
-            <td>
-                <a href="@Url.Action("Edit", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="gradeA odd">
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.ID)</td>
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.nombre)</td>
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.descripcion)</td>
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.estado)</td>
+                        <td class=" sorting_1">
+                            <a href="@Url.Action("Edit", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
                          
-              <a  ID = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
+                            <a  ID = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
 
-            </td>
-        </tr>
+                        </td>
+                    </tr>
         
-    }
+                }
 
+            </tbody>
+              
+              </table>                                                                                                                                                                                                <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
+                           
+               
+          </div>
+        
+        </div>
+    </div>
+    <div style="display:none; z-index:1000; outline:0px; " class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialogEliminar">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+            <span class="ui-dialog-title" id="ui-dialog-title-dialogEliminar">!confirmar Eliminacion de Ingrediente</span>
+            <a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
+                <span class="ui-icon ui-icon-closethick">close</span>
+            </a>
+           <div id="dialogEliminar" title="Desea Eliminar el Producto?">
+	            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                El Ingrediente que UD. Elimine ya no podra ser recuperado</p>
+            </div>  
+        </div>
+    </div> 
+    
+}
     
 
 
-    </tbody>
-</table>
-      </div>
-        
-    </div>
-    </div>
+    <script type = "text/javascript">
+        var idEliminar = 0;
+        $(".eliminar").click(function () {
+            $('#dialogEliminar').dialog('open');
+            idEliminar = $(this).attr("ID");
+            return false;
+        });
 
-}
-    <div ID="dialogEliminar" title="Desea Eliminar el Producto?">
-	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-    El Producto que UD. Elimine ya no podra ser recuperado</p>
-    </div>
-
-<script type = "text/javascript">
-    var idEliminar = 0;
-    $(".eliminar").click(function () {
-        $('#dialogEliminar').dialog('open');
-        idEliminar = $(this).attr("ID");
-        return false;
-    });
-
-    $('#dialogEliminar').dialog({
-        autoOpen: false,
-        resizable: false,
-        draggable: false,
-        width: 300,
-        modal: true,
-        title: "!Confirmar Eliminacion de Ingrediente",
-        position: "center",
-        buttons: {
-            "Aceptar": function () {
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    url: "Delete/" + idEliminar,
-                    success: function (data) {
-                        oTable.fnDraw(false);
-                        if (data.me == "") {
-                            $(this).dialog("close");
-                            location.reload();
+        $('#dialogEliminar').dialog({
+            autoOpen: false,
+            resizable: false,
+            draggable: false,
+            width: 300,
+            modal: true,
+            title: "!Confirmar Eliminacion de Ingrediente",
+            position: "center",
+            buttons: {
+                "Aceptar": function () {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Delete/" + idEliminar,
+                        success: function (data) {
+                            oTable.fnDraw(false);
+                            if (data.me == "") {
+                                $(this).dialog("close");
+                                location.reload();
+                            }
                         }
-                    }
-                });
+                    });
 
-            },
-            "Cancelar": function () {
-                $(this).dialog("close");
-                return false;
+                },
+                "Cancelar": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
             }
-        }
-    });
+        });
 
-</script>
+    </script>

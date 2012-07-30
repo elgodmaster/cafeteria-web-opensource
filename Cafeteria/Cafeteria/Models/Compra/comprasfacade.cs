@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models.Compra.Proveedor;
+using cafeteria.Models.Compra.Producto;
 
 namespace Cafeteria.Models.Compra
 {
@@ -11,8 +12,9 @@ namespace Cafeteria.Models.Compra
     {
         IngredienteService Ingredienteservice = new IngredienteService();
         ProveedorService ProveedorService = new ProveedorService();
-        
-        #region ingrediente
+        ProductoService ProductoService = new ProductoService();
+
+        #region Ingrediente
         public List<IngredienteBean> ListarIngrediente(string nombre)
         {
             List<IngredienteBean> prod = new List<IngredienteBean>();
@@ -39,7 +41,7 @@ namespace Cafeteria.Models.Compra
         }
         #endregion
 
-        #region proveedor
+        #region Proveedor
 
         public List<ProveedorBean> ListarProveedor(string razonsocial, string ruc)
         {
@@ -66,5 +68,33 @@ namespace Cafeteria.Models.Compra
             ProveedorService.EliminarProveedor(id);
         }
         #endregion
+
+        #region Producto
+        public List<ProductoBean> ListarProducto(string nombre)
+        {
+            List<ProductoBean> prod = new List<ProductoBean>();
+            prod = ProductoService.ListarProducto(nombre);
+
+            return prod;
+        }
+        public void RegistrarProducto(ProductoBean prod)
+        {
+            ProductoService.RegistrarProducto(prod);
+        }
+        public ProductoBean BuscarProducto(string id)
+        {
+            ProductoBean ingre = ProductoService.BuscarProducto(id);
+            return ingre;
+        }
+        public void ActualizarProducto(ProductoBean ingre)
+        {
+            ProductoService.ActualizarProducto(ingre);
+        }
+        public void EliminarProducto(string id)
+        {
+            ProductoService.EliminarProducto(id);
+        }
+        #endregion
+
     }
 }

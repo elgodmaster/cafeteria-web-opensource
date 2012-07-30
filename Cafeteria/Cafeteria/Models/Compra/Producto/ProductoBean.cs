@@ -18,4 +18,10 @@ namespace cafeteria.Models.Compra.Producto
         public string Tipo;
         public string estado;
     }
+    public class TipoProducto
+    {
+        public string ID;
+        public string nombre;
+    }
+
 }

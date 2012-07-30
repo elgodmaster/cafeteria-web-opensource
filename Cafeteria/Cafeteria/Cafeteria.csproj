@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Compras\IngredienteController.cs" />
+    <Compile Include="Controllers\Compras\ProductoController.cs" />
     <Compile Include="Controllers\Compras\ProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -79,6 +80,8 @@
     <Compile Include="Models\Compra\Ingrediente\Ingredientedao.cs" />
     <Compile Include="Models\Compra\Ingrediente\IngredienteService.cs" />
     <Compile Include="Models\Compra\Producto\ProductoBean.cs" />
+    <Compile Include="Models\Compra\Producto\ProductoDao.cs" />
+    <Compile Include="Models\Compra\Producto\ProductoService.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorBean.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorDao.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorService.cs" />
@@ -1427,6 +1430,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Proveedor\RegistrarProveedor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Producto\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Producto\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Producto\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Producto\Buscar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Producto\Edit.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

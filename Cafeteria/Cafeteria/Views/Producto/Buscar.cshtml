@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cafeteria.Models.IngredienteBean>
+﻿@model IEnumerable<cafeteria.Models.Compra.Producto.ProductoBean>
 
 <h2>Buscar Ingrediente</h2>
 
@@ -9,10 +9,15 @@
     @Html.ValidationSummary(false)
     <fieldset>
         <div class = "widget" >
-            <div class = "title"><h6>Buscar Ingrediente</h6></div>
+            <div class = "title"><h6>Buscar Producto</h6></div>
 
             <div class="formRow">
                 <label>Nombre</label>
+                <div class = "formRight" ><input type = "text" id = "nombre" name = "nombre" class="validate[required,custom[onlyLetterSp]]" ,name="lettersValid", maxlength = "50", placeholder = "Maximo 50 caracteres aqui" /></div>
+                <div class = "clear" ></div>
+            </div>
+            <div class="formRow">
+                <label>Tipo</label>
                 <div class = "formRight" ><input type = "text" id = "nombre" name = "nombre" class="validate[required,custom[onlyLetterSp]]" ,name="lettersValid", maxlength = "50", placeholder = "Maximo 50 caracteres aqui" /></div>
                 <div class = "clear" ></div>
             </div>
@@ -34,7 +39,7 @@
 {    
     <div class="wrapper">
         <div class="widget">
-          <div class="title"><h6>Lista de Ingredientes</h6></div>
+          <div class="title"><h6>Lista de Productos</h6></div>
           <div class="dataTables_wrapper">
           
               <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable"> 
@@ -121,7 +126,7 @@
             draggable: false,
             width: 300,
             modal: true,
-            title: "!Confirmar Eliminacion de Ingrediente",
+            title: "!Confirmar Eliminacion de Producto",
             position: "center",
             buttons: {
                 "Aceptar": function () {

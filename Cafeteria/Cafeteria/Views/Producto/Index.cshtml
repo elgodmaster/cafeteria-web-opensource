@@ -1,12 +1,13 @@
-﻿@model IEnumerable<Cafeteria.Models.IngredienteBean>
+﻿@model IEnumerable<cafeteria.Models.Compra.Producto.ProductoBean>
 
-<h2>Lista de Ingredientes</h2>
+
+<h2>Lista de Producto</h2>
 
 <p></p><p></p>
 
 <div class="wrapper">
     <div class="widget">
-      <div class="title"><h6>Lista de Ingredientes</h6></div>
+      <div class="title"><h6>Lista de Productos</h6></div>
       <div class="dataTables_wrapper">
         <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
             <thead>
@@ -63,7 +64,7 @@
 
     <div id="dialogEliminar" title="Desea Eliminar el Producto?">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-    El Ingrediente que UD. Elimine ya no podra ser recuperado</p>
+    El Producto que UD. Elimine ya no podra ser recuperado</p>
     </div>
 
 
@@ -90,7 +91,7 @@
         draggable: false,
         width: 300,
         modal: true,
-        title: "!Confirmar Eliminacion de Ingrediente",
+        title: "!Confirmar Eliminacion de Producto",
         position: "center",
         buttons: {
             "Aceptar": function () {
@@ -98,7 +99,7 @@
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    url: "Ingrediente/Delete/" + idEliminar,
+                    url: "Producto/Delete/" + idEliminar,
                     success: function (data) {
                         //oTable.fnDraw(false);
                         if (data.me == "") {

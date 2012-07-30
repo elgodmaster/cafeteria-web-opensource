@@ -30,17 +30,18 @@ namespace cafeteria.Controllers.Compras
         #region Create
         public ActionResult Create()
         {
-            return View();
+            ProductoBean producto = new ProductoBean();
+            return View(producto);
         }
 
         [HttpPost]
-        public ActionResult Create(string nombre, string descripcion)//ProductoBean producto)
+        public ActionResult Create(ProductoBean Producto)//ProductoBean producto)
         {
             try
             {
-                ProductoBean Producto = new ProductoBean();
-                Producto.nombre = nombre;
-                Producto.descripcion = descripcion;
+                //ProductoBean Producto = new ProductoBean();
+                //Producto.nombre = nombre;
+                //Producto.descripcion = descripcion;
                 Producto.estado = "ACTIVO";
                 List<ProductoBean> Produc = new List<ProductoBean>();
                 Produc = comprasfacade.ListarProducto(Producto.nombre);

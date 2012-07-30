@@ -34,7 +34,7 @@ namespace cafeteria.Models.Compra.Producto
                         Producto.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
                         Producto.nombre = Convert.ToString(objDataReader[1]);
                         Producto.descripcion = Convert.ToString(objDataReader[2]);
-                        Producto.Tipo = Convert.ToString(objDataReader[3]);
+                        Producto.ID_Tipo = Convert.ToString(objDataReader[3]);
                         Producto.estado = Convert.ToString(objDataReader[4]);
                         ListaProductos.Add(Producto);
                     }
@@ -74,7 +74,7 @@ namespace cafeteria.Models.Compra.Producto
                 Utils.agregarParametro(objQuery, "@id", produ.ID);
                 Utils.agregarParametro(objQuery, "@nombre", produ.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", produ.descripcion);
-                Utils.agregarParametro(objQuery, "@tipo", produ.Tipo);
+                Utils.agregarParametro(objQuery, "@tipo", produ.ID_Tipo);
                 Utils.agregarParametro(objQuery, "@estado", produ.estado);
                 objQuery.ExecuteNonQuery();
 
@@ -114,7 +114,7 @@ namespace cafeteria.Models.Compra.Producto
                     Producto.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
                     Producto.nombre = Convert.ToString(objDataReader[1]);
                     Producto.descripcion = Convert.ToString(objDataReader[2]);
-                    Producto.Tipo = Convert.ToString(objDataReader[3]);
+                    Producto.ID_Tipo = Convert.ToString(objDataReader[3]);
                     Producto.estado = Convert.ToString(objDataReader[4]);
                 }
                 return Producto;
@@ -147,7 +147,7 @@ namespace cafeteria.Models.Compra.Producto
                 Utils.agregarParametro(objQuery, "@nombre", produ.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", produ.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", produ.estado);
-                Utils.agregarParametro(objQuery, "@tipo", produ.Tipo);
+                Utils.agregarParametro(objQuery, "@tipo", produ.ID_Tipo);
                 objQuery.ExecuteNonQuery();
 
             }

@@ -74,11 +74,20 @@
     
     <div id="leftSide" >
          <ul id="menu" class="nav">
-             <li class="ui" id = "menu20"><a href="#" title="" class="exp"><span>Ingrediente</span><strong>4</strong></a>
+             <li class="ui"><a href="#" title="" class="exp"><span>Ingrediente</span><strong>4</strong></a>
                     <ul class="sub">
                         <li>@Html.ActionLink("Crear Ingrediente", "Create", "Ingrediente")</li>
                         <li>@Html.ActionLink("Buscar Ingrediente", "Buscar", "Ingrediente")</li>
                         <li>@Html.ActionLink("Lista Ingrediente", "Index", "Ingrediente")</li>
+                    </ul>
+              </li>
+          </ul>
+          <ul id="menu2" class="nav">
+             <li class="ui"><a href="#" title="" class="exp"><span>Producto</span><strong>4</strong></a>
+                    <ul class="sub">
+                        <li>@Html.ActionLink("Crear Producto", "Create", "Producto")</li>
+                        <li>@Html.ActionLink("Buscar Producto", "Buscar", "Producto")</li>
+                        <li>@Html.ActionLink("Lista Producto", "Index", "Producto")</li>
                     </ul>
               </li>
           </ul>

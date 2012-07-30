@@ -27,13 +27,11 @@ namespace Cafeteria.Controllers
         } 
 
         [HttpPost]
-        public ActionResult Create(string nombre, string descripcion)//ProductoBean producto)
+        public ActionResult Create(IngredienteBean Ingrediente)//string nombre, string descripcion)//ProductoBean producto)
         {
             try
             {
-               IngredienteBean Ingrediente = new IngredienteBean();
-               Ingrediente.nombre = nombre;
-               Ingrediente.descripcion = descripcion;
+
                Ingrediente.estado = "ACTIVO";
                List<IngredienteBean> ingred = new List<IngredienteBean>();
                ingred = comprasfacade.ListarIngrediente(Ingrediente.nombre);

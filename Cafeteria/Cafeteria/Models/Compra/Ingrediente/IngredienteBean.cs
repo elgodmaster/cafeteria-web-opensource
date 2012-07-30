@@ -8,14 +8,14 @@ namespace Cafeteria.Models
 {
     public class IngredienteBean
     {
-        public string ID;
+        public string ID { get; set; }
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Debe ingresar nombre de Producto")]
         [RegularExpression("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$", ErrorMessage = "El nombre ingresado no es válido")]
-        public string nombre;
+        public string nombre { get; set; }
         [Display(Name = "Descripción")]
-        public string descripcion;
-        
-        public string estado;
+        public string descripcion { get; set; }
+
+        public string estado { get; set; }
     }
 }

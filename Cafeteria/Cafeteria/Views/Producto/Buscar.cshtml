@@ -4,7 +4,7 @@
 
     
 
-@using (Html.BeginForm("Buscar", "Ingrediente", FormMethod.Post, new { @class = "form" }))
+@using (Html.BeginForm("Buscar", "Producto", FormMethod.Post, new { @class = "form" }))
 {
     @Html.ValidationSummary(false)
     <fieldset>
@@ -17,8 +17,10 @@
                 <div class = "clear" ></div>
             </div>
             <div class="formRow">
-                <label>Tipo</label>
-                <div class = "formRight" ><input type = "text" id = "nombre" name = "nombre" class="validate[required,custom[onlyLetterSp]]" ,name="lettersValid", maxlength = "50", placeholder = "Maximo 50 caracteres aqui" /></div>
+               <span>Tipo de Producto</span>                             
+                
+                <div class = "formRight" >
+                <div class = "selector">@Html.DropDownListFor(modelitem => modelitem.ElementAt(0).ID_Tipo, Model.ElementAt(0).Listatipo)</div></div>
                 <div class = "clear" ></div>
             </div>
         </div>
@@ -27,7 +29,7 @@
         <input type="submit" value="Buscar" class = "redB" />
         <p></p>
         <p></p>
-        @Html.ActionLink("Regresar", "Buscar") | @Html.ActionLink("Lista Ingredientes", "Index", "Ingredientes")
+        @Html.ActionLink("Regresar", "Buscar") | @Html.ActionLink("Lista de Productos", "Index", "Producto")
     </p>
 }
 
@@ -59,7 +61,7 @@
                      </th>
                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
                         <div class="DataTables_sort_wrapper">
-                        Descripción
+                        Nombre Tipo
                         <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
                         </div>
                      </th>
@@ -80,9 +82,10 @@
                     <tr class="gradeA odd">
                         <td class=" sorting_1">@Html.DisplayFor(modelItem => item.ID)</td>
                         <td class=" sorting_1">@Html.DisplayFor(modelItem => item.nombre)</td>
-                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.descripcion)</td>
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.Nombre_tipo)</td>
                         <td class=" sorting_1">@Html.DisplayFor(modelItem => item.estado)</td>
                         <td class=" sorting_1">
+                            <a href="@Url.Action("Details", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Detalle </a> | 
                             <a href="@Url.Action("Edit", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
                          
                             @if(item.estado=="ACTIVO"){

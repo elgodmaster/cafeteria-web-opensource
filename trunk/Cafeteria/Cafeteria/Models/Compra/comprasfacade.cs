@@ -70,10 +70,10 @@ namespace Cafeteria.Models.Compra
         #endregion
 
         #region Producto
-        public List<ProductoBean> ListarProducto(string nombre)
+        public List<ProductoBean> ListarProducto(string nombre, string idtipo)
         {
             List<ProductoBean> prod = new List<ProductoBean>();
-            prod = ProductoService.ListarProducto(nombre);
+            prod = ProductoService.ListarProducto(nombre, idtipo);
 
             return prod;
         }
@@ -93,6 +93,10 @@ namespace Cafeteria.Models.Compra
         public void EliminarProducto(string id)
         {
             ProductoService.EliminarProducto(id);
+        }
+        public string get_tipo(string idtipo)
+        {
+            return ProductoService.get_tipo(idtipo);
         }
         #endregion
 

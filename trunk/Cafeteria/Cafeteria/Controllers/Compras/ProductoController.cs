@@ -16,15 +16,15 @@ namespace cafeteria.Controllers.Compras
 
         public ActionResult Index()
         {
-            return View(comprasfacade.ListarProducto(""));
+            return View(comprasfacade.ListarProducto("",""));
         }
 
 
         public ActionResult Details(string id)
         {
             ProductoBean producto= comprasfacade.BuscarProducto(id);
-
-            return View();
+            producto.Nombre_tipo = comprasfacade.get_tipo(producto.ID_Tipo);
+            return View(producto);
         }
 
         #region Create
@@ -35,16 +35,14 @@ namespace cafeteria.Controllers.Compras
         }
 
         [HttpPost]
-        public ActionResult Create(ProductoBean Producto)//ProductoBean producto)
+        public ActionResult Create(ProductoBean Producto)
         {
             try
             {
-                //ProductoBean Producto = new ProductoBean();
-                //Producto.nombre = nombre;
-                //Producto.descripcion = descripcion;
+
                 Producto.estado = "ACTIVO";
                 List<ProductoBean> Produc = new List<ProductoBean>();
-                Produc = comprasfacade.ListarProducto(Producto.nombre);
+                Produc = comprasfacade.ListarProducto(Producto.nombre,"");
 
                 if (Produc.Count > 0)
                 {
@@ -53,6 +51,7 @@ namespace cafeteria.Controllers.Compras
                 }
                 else
                 {
+                    
                     comprasfacade.RegistrarProducto(Producto);
                     return RedirectToAction("Index");
                 }
@@ -66,27 +65,31 @@ namespace cafeteria.Controllers.Compras
             }
         }
         #endregion
-        #region buscar
+
+        #region Buscar
         public ActionResult Buscar()
         {
-            List<ProductoBean> prod = new List<ProductoBean>();
+            List<ProductoBean> prod = comprasfacade.ListarProducto("","");
+
+   
             ViewBag.estado = 0;
             return View(prod);
         }
 
         [HttpPost]
-        public ActionResult Buscar(string nombre)
+        public ActionResult Buscar(string nombre, string ID_tipo)
         {
             ViewBag.estado = 1;
-            return View(comprasfacade.ListarProducto(nombre));
+            return View(comprasfacade.ListarProducto(nombre, ID_tipo));
         }
 
         #endregion
+
         #region editar
         public ActionResult Edit(string id)
         {
-            ProductoBean ingre = comprasfacade.BuscarProducto(id);
-            return View(ingre);
+            ProductoBean Producto = comprasfacade.BuscarProducto(id);
+            return View(Producto);
         }
 
         [HttpPost]
@@ -103,6 +106,7 @@ namespace cafeteria.Controllers.Compras
             }
         }
         #endregion
+
         #region eliminar
         public ActionResult Delete(string ID)
         {

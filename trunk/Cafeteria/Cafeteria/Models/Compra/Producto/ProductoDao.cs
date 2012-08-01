@@ -14,7 +14,7 @@ namespace cafeteria.Models.Compra.Producto
         String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
 
-        public List<ProductoBean> ListarProductos(string nombre)
+        public List<ProductoBean> ListarProductos(string nombre, string id_tipo)
         {
             SqlConnection objDB = null;
             try
@@ -24,6 +24,9 @@ namespace cafeteria.Models.Compra.Producto
                 objDB.Open();
                 String strQuery = "SELECT * FROM Producto";
                 if (!String.IsNullOrEmpty(nombre)) strQuery = strQuery + " WHERE UPPER(nombre) LIKE '%" + nombre.ToUpper() + "%'";
+                if (!String.IsNullOrEmpty(id_tipo)) strQuery = strQuery + " WHERE UPPER(tipo) LIKE '%" + id_tipo.ToUpper() + "%'";
+                if (!String.IsNullOrEmpty(id_tipo) && !String.IsNullOrEmpty(nombre)) strQuery = strQuery + " WHERE UPPER(tipo) LIKE '%" + id_tipo.ToUpper() + "%'" + " AND UPPER(nombre) LIKE '%" + nombre.ToUpper() + "%'"; 
+
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
                 if (objDataReader.HasRows)
@@ -31,10 +34,11 @@ namespace cafeteria.Models.Compra.Producto
                     while (objDataReader.Read())
                     {
                         ProductoBean Producto = new ProductoBean();
-                        Producto.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
+                        Producto.ID = Convert.ToString(objDataReader[0]);
                         Producto.nombre = Convert.ToString(objDataReader[1]);
                         Producto.descripcion = Convert.ToString(objDataReader[2]);
                         Producto.ID_Tipo = Convert.ToString(objDataReader[3]);
+                        Producto.Nombre_tipo = getTipo(Producto.ID_Tipo);
                         Producto.estado = Convert.ToString(objDataReader[4]);
                         ListaProductos.Add(Producto);
                     }
@@ -67,7 +71,7 @@ namespace cafeteria.Models.Compra.Producto
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                String strQuery = "Insert into Ingrediente (idIngrediente,nombre, descripcion, tipo, estado) values " +
+                String strQuery = "Insert into Producto (idProducto,nombre, descripcion, tipo, estado) values " +
                                     "(@id,@nombre, @descripcion,@tipo, @estado)";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
@@ -193,6 +197,45 @@ namespace cafeteria.Models.Compra.Producto
                 }
             }
 
+        }
+
+        public string getTipo(string Id_tipo)
+        {
+            string nombre_tipo = null;
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                
+
+                objDB.Open();
+                String strQuery = "SELECT (nombre) FROM Tipo WHERE id = @ID";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@ID", Id_tipo);
+
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    objDataReader.Read();
+                    
+                     nombre_tipo= Convert.ToString(objDataReader[0]);
+                    
+                }
+                return nombre_tipo;
+            }
+            catch (Exception ex)
+            {
+                log.Error("GetTipo(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            
         }
 
 

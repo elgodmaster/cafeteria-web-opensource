@@ -9,10 +9,10 @@ namespace cafeteria.Models.Compra.Producto
     {
         ProductoDao ProductoDAo = new ProductoDao();
 
-        public List<ProductoBean> ListarProducto(string nombre)
+        public List<ProductoBean> ListarProducto(string nombre, string idtipo)
         {
             List<ProductoBean> prod = new List<ProductoBean>();
-            prod = ProductoDAo.ListarProductos(nombre);
+            prod = ProductoDAo.ListarProductos(nombre, idtipo);
 
             return prod;
         }
@@ -32,6 +32,11 @@ namespace cafeteria.Models.Compra.Producto
         public void EliminarProducto(string ID)
         {
             ProductoDAo.EliminarProducto(ID);
+        }
+
+        public string get_tipo(string ID_tipo)
+        {
+            return ProductoDAo.getTipo(ID_tipo);
         }
 
     }

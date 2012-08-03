@@ -26,6 +26,26 @@ namespace Cafeteria.Controllers.Compras
             return View();
         }
 
+        #region Buscar
+        public ActionResult Buscar()
+        {
+            List<ProveedorBean> prod = comprasfacade.ListarProveedor("", "");
+
+
+            ViewBag.estado = 0;
+            return View(prod);
+        }
+
+        [HttpPost]
+        public ActionResult Buscar(string nombre, string ID_tipo)
+        {
+            ViewBag.estado = 1;
+            return View(comprasfacade.ListarProveedor(nombre, ID_tipo));
+        }
+
+        #endregion
+
+        #region Registrar
 
         public ActionResult RegistrarProveedor()
         {
@@ -39,10 +59,6 @@ namespace Cafeteria.Controllers.Compras
             try
             {
 
-                //IngredienteBean Ingrediente = new IngredienteBean();
-                //Ingrediente.nombre = ;
-                //Ingrediente.descripcion = descripcion;
-                //Ingrediente.estado = "ACTIVO";
                 List<ProveedorBean> listprov = new List<ProveedorBean>();
                 listprov = comprasfacade.ListarProveedor(prov.razonSocial,prov.ruc);
 
@@ -53,7 +69,7 @@ namespace Cafeteria.Controllers.Compras
                 }
                 else
                 {
-                    //comprasfacade.RegistrarIngrediente(Ingrediente);
+                    comprasfacade.RegistrarProveedor(prov);
                     return RedirectToAction("Index");
                 }
             }
@@ -64,21 +80,22 @@ namespace Cafeteria.Controllers.Compras
                 return View();
             }
         }
-        
- 
- 
-        public ActionResult Edit(int id)
+
+        #endregion
+
+        #region editar
+        public ActionResult Edit(string id)
         {
-            return View();
+            ProveedorBean Producto = comprasfacade.BuscarProveedor(id);
+            return View(Producto);
         }
 
-
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(ProveedorBean Proveedor)
         {
             try
             {
- 
+                comprasfacade.ActualizarProve(Proveedor);
                 return RedirectToAction("Index");
             }
             catch
@@ -86,11 +103,11 @@ namespace Cafeteria.Controllers.Compras
                 return View();
             }
         }
+        #endregion
 
-
+        #region eliminar
         public ActionResult Delete(string ID)
         {
-            
             return View(comprasfacade.BuscarProveedor(ID));
         }
 
@@ -101,7 +118,7 @@ namespace Cafeteria.Controllers.Compras
             return Json(new { me = "" });
         }
 
-
+        #endregion
 
     }
 }

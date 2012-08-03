@@ -82,6 +82,8 @@
     <Compile Include="Models\Compra\Producto\ProductoBean.cs" />
     <Compile Include="Models\Compra\Producto\ProductoDao.cs" />
     <Compile Include="Models\Compra\Producto\ProductoService.cs" />
+    <Compile Include="Models\Compra\Proveedor\IngredienteProveedor.cs" />
+    <Compile Include="Models\Compra\Proveedor\IngredientexProveedorBean.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorBean.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorDao.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorService.cs" />

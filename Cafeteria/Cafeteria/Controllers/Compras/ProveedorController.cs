@@ -7,6 +7,7 @@ using log4net;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models;
 using Cafeteria.Models.Compra.Proveedor;
+using cafeteria.Models.Compra.Proveedor;
 
 namespace Cafeteria.Controllers.Compras
 {
@@ -15,9 +16,12 @@ namespace Cafeteria.Controllers.Compras
         private static ILog log = LogManager.GetLogger(typeof(IngredienteController));
         comprasfacade comprasfacade = new comprasfacade();
 
+        #region Proveedor
         public ActionResult Index()
         {
-            return View();
+            List<ProveedorBean> prod = comprasfacade.ListarProveedor("", "");
+            return View(prod);
+            
         }
 
 
@@ -37,10 +41,10 @@ namespace Cafeteria.Controllers.Compras
         }
 
         [HttpPost]
-        public ActionResult Buscar(string nombre, string ID_tipo)
+        public ActionResult Buscar(string nombre, string contacto)
         {
             ViewBag.estado = 1;
-            return View(comprasfacade.ListarProveedor(nombre, ID_tipo));
+            return View(comprasfacade.ListarProveedor(nombre, contacto));
         }
 
         #endregion
@@ -58,20 +62,24 @@ namespace Cafeteria.Controllers.Compras
         {
             try
             {
-
-                List<ProveedorBean> listprov = new List<ProveedorBean>();
-                listprov = comprasfacade.ListarProveedor(prov.razonSocial,prov.ruc);
-
-                if (listprov.Count > 0)
+                Boolean opcion1 = comprasfacade.existe_ruc(prov.ruc);
+                Boolean opcion2 = comprasfacade.existe_razonSocial(prov.razonSocial);
+                if (opcion1)
                 {
-                    ViewBag.error = "El Proveedor ya existe";
+                    ViewBag.error1 = "El Proveedor ya existe";
                     return View(prov);
                 }
                 else
-                {
-                    comprasfacade.RegistrarProveedor(prov);
-                    return RedirectToAction("Index");
-                }
+                    if (opcion2)
+                    {
+                        ViewBag.error2 = "El numero de RUC ya existe";
+                        return View(prov);
+                    }
+                    else
+                    {
+                        comprasfacade.RegistrarProveedor(prov);
+                        return RedirectToAction("Index");
+                    }
             }
             catch(Exception e)
             {
@@ -116,6 +124,21 @@ namespace Cafeteria.Controllers.Compras
         {
             comprasfacade.EliminarProveedor(ID);
             return Json(new { me = "" });
+        }
+
+        #endregion
+
+        #endregion
+
+        #region ProveedorxIngrediente
+
+        public ActionResult AsignarIngredientes(string ID)
+        {
+            ProveedorBean proveedor = comprasfacade.BuscarProveedor(ID);
+            List<IngredienteBean> ListIngre = comprasfacade.ListarIngrediente("");
+            IngredientexProveedorBean gg = new IngredientexProveedorBean();
+
+            return View(proveedor);
         }
 
         #endregion

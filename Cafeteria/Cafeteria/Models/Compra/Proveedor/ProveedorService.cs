@@ -9,10 +9,10 @@ namespace Cafeteria.Models.Compra.Proveedor
     {
         ProveedorDao ProveedorDao = new ProveedorDao();
 
-        public List<ProveedorBean> ListarProveedor(string nombre, string ruc)
+        public List<ProveedorBean> ListarProveedor(string nombre, string contacto)
         {
             List<ProveedorBean> prod = new List<ProveedorBean>();
-            ProveedorDao.ListarProveedor(nombre, ruc);
+            ProveedorDao.ListarProveedor(nombre, contacto);
 
             return prod;
         }
@@ -32,6 +32,14 @@ namespace Cafeteria.Models.Compra.Proveedor
         public void EliminarProveedor(string ID)
         {
             ProveedorDao.EliminarProveedor(ID);
+        }
+        public Boolean existe_ruc(string ruc)
+        {
+            return (ProveedorDao.existe_ruc(ruc));
+        }
+        public Boolean existe_razonsocial(string razonsocial)
+        {
+            return (ProveedorDao.existe_razonSocial(razonsocial));
         }
 
     }

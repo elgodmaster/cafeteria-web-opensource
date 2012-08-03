@@ -67,6 +67,15 @@ namespace Cafeteria.Models.Compra
         {
             ProveedorService.EliminarProveedor(id);
         }
+        public Boolean existe_ruc(string ruc)
+        {
+            return(ProveedorService.existe_ruc(ruc));
+        }
+        public Boolean existe_razonSocial(string razon_social) 
+        {
+            return (ProveedorService.existe_razonsocial(razon_social));
+        }
+
         #endregion
 
         #region Producto

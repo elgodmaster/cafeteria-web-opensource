@@ -13,7 +13,7 @@ namespace Cafeteria.Models.Compra.Proveedor
         String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
 
-        public List<ProveedorBean> ListarProveedor(string RazonSocial, string ruc)
+        public List<ProveedorBean> ListarProveedor(string RazonSocial, string contacto)
         {
             SqlConnection objDB = null;
             try
@@ -23,6 +23,9 @@ namespace Cafeteria.Models.Compra.Proveedor
                 objDB.Open();
                 String strQuery = "SELECT * FROM Proveedor";
                 if (!String.IsNullOrEmpty(RazonSocial)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'";
+                if (!String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'"+
+                                                                                            " AND UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
                 if (objDataReader.HasRows)
@@ -230,6 +233,70 @@ namespace Cafeteria.Models.Compra.Proveedor
                 }
             }
         }
+
+        public Boolean existe_ruc(string ruc)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT * FROM Proveedor WHERE ruc = @ruc";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@ruc", ruc);
+
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                log.Error("existe_Ruc(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+        public Boolean existe_razonSocial(string razonSocial)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT * FROM Proveedor WHERE  = @ruc";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@razonsocial", razonSocial);
+
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                log.Error("existe_razonsocial(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
 
     }
 }

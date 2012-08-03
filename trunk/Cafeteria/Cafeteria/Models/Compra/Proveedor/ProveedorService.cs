@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace Cafeteria.Models.Compra.Proveedor
 {
     public class ProveedorService
     {
         ProveedorDao ProveedorDao = new ProveedorDao();
 
+        #region Proveedor
         public List<ProveedorBean> ListarProveedor(string nombre, string contacto)
         {
             List<ProveedorBean> prod = new List<ProveedorBean>();
@@ -41,6 +43,16 @@ namespace Cafeteria.Models.Compra.Proveedor
         {
             return (ProveedorDao.existe_razonSocial(razonsocial));
         }
+
+        #endregion
+        #region ProveedorIngrediente
+
+        public ProveedorxIngredienteBean listardeingredientes(string ID)
+        {
+            return ProveedorDao.listaIngredientes(ID);
+        }
+
+        #endregion
 
     }
 }

@@ -7,7 +7,7 @@ using log4net;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models;
 using Cafeteria.Models.Compra.Proveedor;
-using cafeteria.Models.Compra.Proveedor;
+
 
 namespace Cafeteria.Controllers.Compras
 {
@@ -132,13 +132,34 @@ namespace Cafeteria.Controllers.Compras
 
         #region ProveedorxIngrediente
 
-        public ActionResult AsignarIngredientes(string ID)
+        public ViewResult ListarIngredientes(string ID)
         {
             ProveedorBean proveedor = comprasfacade.BuscarProveedor(ID);
-            List<IngredienteBean> ListIngre = comprasfacade.ListarIngrediente("");
-            IngredientexProveedorBean gg = new IngredientexProveedorBean();
+            //List<IngredienteBean> ListIngre = comprasfacade.ListarIngrediente("");
+            ProveedorxIngredienteBean ProveIngre = new ProveedorxIngredienteBean();
+            ProveIngre= comprasfacade.obtenerlistadeingredientes(ID);
+            ProveIngre.nombre_Proveedor = proveedor.razonSocial;
+            ProveIngre.idproveedor = proveedor.ID;
+            if (ProveIngre.ListadeIngredientesProveedor.Count > 0) ViewBag.estado = 0;
+            else ViewBag.estado = 1;
+            for (int i = 0; i < ProveIngre.ListadeIngredientesProveedor.Count; i++)
+            {
+                IngredienteBean Ingre= comprasfacade.buscaringrediente(ProveIngre.ListadeIngredientesProveedor[i].ID);
+                ProveIngre.ListadeIngredientesProveedor[i].nombre = Ingre.nombre;
+                
+            }
+            return View(ProveIngre);
+        }
 
-            return View(proveedor);
+        public ActionResult AñadirIngredientes(string ID)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AñadirIngredientes(ProveedorxIngredienteBean ProvexIngre)
+        {
+            return View();
         }
 
         #endregion

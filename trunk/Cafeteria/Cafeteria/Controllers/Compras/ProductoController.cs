@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using log4net;
 using Cafeteria.Models.Compra;
-using cafeteria.Models.Compra.Producto;
+using Cafeteria.Models.Compra.Producto;
 
-namespace cafeteria.Controllers.Compras
+namespace Cafeteria.Controllers.Compras
 {
     public class ProductoController : Controller
     {

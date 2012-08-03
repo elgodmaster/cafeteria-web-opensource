@@ -33,5 +33,6 @@ namespace Cafeteria.Models.Compra.Proveedor
         {
             ProveedorDao.EliminarProveedor(ID);
         }
+
     }
 }

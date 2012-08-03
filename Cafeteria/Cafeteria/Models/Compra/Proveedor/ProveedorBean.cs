@@ -29,8 +29,8 @@ namespace Cafeteria.Models.Compra.Proveedor
         public string telefono2 { get; set; }
         [Display(Name = "Telefono Contacto")]
         public string telefono_contacto { get; set; }
-        [Display(Name = "Descripción")]
-        public string descripcion { get; set; }
+        [Display(Name = "Observacion")]
+        public string Observacion { get; set; }
         [Display(Name = "Cargo Contacto")]
         public string CargoContacto { get; set; }
         [Display(Name = "Web")]

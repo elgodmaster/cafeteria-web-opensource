@@ -10,7 +10,7 @@
     <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>cafeteria</RootNamespace>
+    <RootNamespace>Cafeteria</RootNamespace>
     <AssemblyName>Cafeteria-web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -82,8 +82,8 @@
     <Compile Include="Models\Compra\Producto\ProductoBean.cs" />
     <Compile Include="Models\Compra\Producto\ProductoDao.cs" />
     <Compile Include="Models\Compra\Producto\ProductoService.cs" />
-    <Compile Include="Models\Compra\Proveedor\IngredienteProveedor.cs" />
-    <Compile Include="Models\Compra\Proveedor\IngredientexProveedorBean.cs" />
+    <Compile Include="Models\Compra\Proveedor\ProveedorIngrediente.cs" />
+    <Compile Include="Models\Compra\Proveedor\ProveedorxIngredienteBean.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorBean.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorDao.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorService.cs" />

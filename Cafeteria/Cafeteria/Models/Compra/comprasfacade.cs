@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models.Compra.Proveedor;
-using cafeteria.Models.Compra.Producto;
+using Cafeteria.Models.Compra.Producto;
+
 
 namespace Cafeteria.Models.Compra
 {
@@ -108,6 +109,15 @@ namespace Cafeteria.Models.Compra
             return ProductoService.get_tipo(idtipo);
         }
         #endregion
+
+        #region IngredientexProveedor
+
+        public ProveedorxIngredienteBean obtenerlistadeingredientes(string ID)
+        {
+            return ProveedorService.listardeingredientes(ID);
+        }
+        #endregion
+
 
     }
 }

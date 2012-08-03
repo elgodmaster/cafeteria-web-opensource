@@ -6,6 +6,7 @@ using System.Web.Configuration;
 using log4net;
 using System.Data.SqlClient;
 
+
 namespace Cafeteria.Models.Compra.Proveedor
 {
     public class ProveedorDao
@@ -296,6 +297,49 @@ namespace Cafeteria.Models.Compra.Proveedor
                 }
             }
         }
+
+        public ProveedorxIngredienteBean listaIngredientes(string ID)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                ProveedorxIngredienteBean prov = null;
+
+                objDB.Open();
+                String strQuery = "SELECT * FROM Proveedor_x_Producto WHERE idProveedor = @ID";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@ID", ID);
+
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    prov = new ProveedorxIngredienteBean();
+                    prov.ListadeIngredientesProveedor = new List<ProveedorIngrediente>();
+                    while (objDataReader.Read())
+                    {
+                        ProveedorIngrediente aux = new ProveedorIngrediente();
+                        aux.ID = Convert.ToString(objDataReader["idIngrediente"]);
+                        aux.precio = (int)objDataReader["precio"];
+                        prov.ListadeIngredientesProveedor.Add(aux);
+                    }
+                }
+                return prov;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Get_ListadeIngredientesxProveedor(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
 
 
     }

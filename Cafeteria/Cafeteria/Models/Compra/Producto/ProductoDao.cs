@@ -7,7 +7,7 @@ using System.Web.Configuration;
 using log4net;
 using Cafeteria.Models;
 
-namespace cafeteria.Models.Compra.Producto
+namespace Cafeteria.Models.Compra.Producto
 {
     public class ProductoDao
     {

@@ -16,8 +16,13 @@
                 <div class = "formRight" ><input type = "text" id = "nombre" name = "nombre" class="validate[required,custom[onlyLetterSp]]" ,name="lettersValid", maxlength = "50", placeholder = "Maximo 50 caracteres aqui" /></div>
                 <div class = "clear" ></div>
             </div>
-
+            <div class="formRow">
+                <label>Contacto</label>
+                <div class = "formRight" ><input type = "text" id = "Contacto" name = "nombre" class="validate[required,custom[onlyLetterSp]]" ,name="lettersValid", maxlength = "50", placeholder = "Maximo 50 caracteres aqui" /></div>
+                <div class = "clear" ></div>
+            </div>
         </div>
+
     </fieldset>
     <p>
         <input type="submit" value="Buscar" class = "redB" />
@@ -84,6 +89,7 @@
                          
                             @if(item.estado=="ACTIVO"){
                                 <a  ID = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
+                                <a href="@Url.Action("AsignarIngredientes", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Ver Ingredientes </a>    
                             }
 
                         </td>

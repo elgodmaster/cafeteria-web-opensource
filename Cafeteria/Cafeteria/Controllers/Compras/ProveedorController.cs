@@ -135,7 +135,6 @@ namespace Cafeteria.Controllers.Compras
         public ViewResult ListarIngredientes(string ID)
         {
             ProveedorBean proveedor = comprasfacade.BuscarProveedor(ID);
-            //List<IngredienteBean> ListIngre = comprasfacade.ListarIngrediente("");
             ProveedorxIngredienteBean ProveIngre = new ProveedorxIngredienteBean();
             ProveIngre= comprasfacade.obtenerlistadeingredientes(ID);
             ProveIngre.nombre_Proveedor = proveedor.razonSocial;
@@ -151,9 +150,27 @@ namespace Cafeteria.Controllers.Compras
             return View(ProveIngre);
         }
 
-        public ActionResult AñadirIngredientes(string ID)
+        public ActionResult AñadirIngredientes(string ID) //idproveedor
         {
-            return View();
+            ProveedorBean proveedor = comprasfacade.BuscarProveedor(ID);
+            List<IngredienteBean> Ingredientes = comprasfacade.ListarIngrediente("");
+            ProveedorxIngredienteBean ProveIngre = new ProveedorxIngredienteBean();
+            ProveIngre.nombre_Proveedor = proveedor.razonSocial;
+            ProveIngre.idproveedor = proveedor.ID;
+            ProveIngre.ListadeIngredientesProveedor = new List<ProveedorIngrediente>();
+            ProveedorxIngredienteBean aux = comprasfacade.obtenerlistadeingredientes(ID);
+            for (int j = 0; j < Ingredientes.Count; j++)
+            {
+                ProveedorIngrediente proveedorIngre = new ProveedorIngrediente();
+                proveedorIngre.nombre = Ingredientes[j].nombre;
+                for (int i = 0; i < aux.ListadeIngredientesProveedor.Count; i++)
+                {
+                    if (aux.ListadeIngredientesProveedor[i].ID == Ingredientes[j].ID) proveedorIngre.Estado_disponible = false;
+                }
+                ProveIngre.ListadeIngredientesProveedor.Add(proveedorIngre);
+            }
+            
+            return View(ProveIngre);
         }
 
         [HttpPost]

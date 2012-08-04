@@ -1431,9 +1431,6 @@
     <Content Include="Views\Proveedor\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Proveedor\RegistrarProveedor.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Producto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

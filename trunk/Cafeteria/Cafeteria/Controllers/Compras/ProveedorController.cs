@@ -51,14 +51,14 @@ namespace Cafeteria.Controllers.Compras
 
         #region Registrar
 
-        public ActionResult RegistrarProveedor()
+        public ActionResult Create()
         {
             return View();
         } 
 
 
         [HttpPost]
-        public ActionResult RegistrarProveedor(ProveedorBean prov)
+        public ActionResult Create(ProveedorBean prov)
         {
             try
             {

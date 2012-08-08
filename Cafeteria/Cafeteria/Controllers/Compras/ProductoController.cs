@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using log4net;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models.Compra.Producto;
+using Cafeteria.Models;
 
 namespace Cafeteria.Controllers.Compras
 {
@@ -127,60 +128,64 @@ namespace Cafeteria.Controllers.Compras
         #region Ingredientes de Producto
         public ViewResult ListarIngredientes(string ID)
         {
-            //ProveedorBean proveedor = comprasfacade.BuscarProveedor(ID);
-            //ProveedorxIngredienteBean ProveIngre = new ProveedorxIngredienteBean();
-            //ProveIngre = comprasfacade.obtenerlistadeingredientes(ID);
-            //ProveIngre.nombre_Proveedor = proveedor.razonSocial;
-            //ProveIngre.idproveedor = proveedor.ID;
-            //if (ProveIngre.ListadeIngredientesProveedor.Count > 0) ViewBag.estado = 0;
-            //else ViewBag.estado = 1;
-            //for (int i = 0; i < ProveIngre.ListadeIngredientesProveedor.Count; i++)
-            //{
-            //    IngredienteBean Ingre = comprasfacade.buscaringrediente(ProveIngre.ListadeIngredientesProveedor[i].ID);
-            //    ProveIngre.ListadeIngredientesProveedor[i].nombre = Ingre.nombre;
+            ProductoBean producto = comprasfacade.BuscarProducto(ID);
+            ProductoxIngredienteBean prodIngr = new ProductoxIngredienteBean();
+            //prodIngr = comprasfacade.obtenerlistadeingredientes(ID);
+            prodIngr.Nombre_Producto = producto.nombre;
+            prodIngr.IDProducto = producto.ID;
+            prodIngr.tipo = comprasfacade.get_tipo(producto.ID_Tipo);
+            if (prodIngr.listaIngre.Count > 0) ViewBag.estado = 0;
+            else ViewBag.estado = 1;
+            for (int i = 0; i < prodIngr.listaIngre.Count; i++)
+            {
+                IngredienteBean Ingre = comprasfacade.buscaringrediente(prodIngr.listaIngre[i].ID);
+                prodIngr.listaIngre[i].nombre = Ingre.nombre;
 
-            //}
-            //return View(ProveIngre);
-            return View();
+            }
+            return View(prodIngr);
+            
         }
 
-        public ActionResult ModificarIngredientes(/*ProveedorxIngredienteBean Prov*/)
+        public ActionResult ModificarIngredientes(ProductoxIngredienteBean prodxingre)
         {
-            return View(/*Prov*/);
+            return View(prodxingre);
         }
 
-        
-        public ActionResult ModificarIngredientes2(/*ProveedorxIngredienteBean Prov*/)
+
+        public ActionResult ModificarIngredientes2(ProductoxIngredienteBean prodxingre)
         {
-            return View(/*Prov*/);
+            return View(prodxingre);
         }
 
         public ActionResult AñadirIngredientes(string ID) //idProducto
         {
-            //ProveedorBean proveedor = comprasfacade.BuscarProveedor(ID);
-            //List<IngredienteBean> Ingredientes = comprasfacade.ListarIngrediente("");
-            //ProveedorxIngredienteBean ProveIngre = new ProveedorxIngredienteBean();
-            //ProveIngre.nombre_Proveedor = proveedor.razonSocial;
-            //ProveIngre.idproveedor = proveedor.ID;
-            //ProveIngre.ListadeIngredientesProveedor = new List<ProveedorIngrediente>();
-            //ProveedorxIngredienteBean aux = comprasfacade.obtenerlistadeingredientes(ID);
-            //for (int j = 0; j < Ingredientes.Count; j++)
-            //{
-            //    ProveedorIngrediente proveedorIngre = new ProveedorIngrediente();
-            //    proveedorIngre.nombre = Ingredientes[j].nombre;
-            //    for (int i = 0; i < aux.ListadeIngredientesProveedor.Count; i++)
-            //    {
-            //        if (aux.ListadeIngredientesProveedor[i].ID == Ingredientes[j].ID) proveedorIngre.Estado_disponible = false;
-            //    }
-            //    ProveIngre.ListadeIngredientesProveedor.Add(proveedorIngre);
-            //}
+            ProductoBean producto = comprasfacade.BuscarProducto(ID);
+            
+            
+            List<IngredienteBean> Ingredientes = comprasfacade.ListarIngrediente("");
+            ProductoxIngredienteBean ProdIngre = new ProductoxIngredienteBean();
+            ProdIngre.Nombre_Producto = producto.nombre;
+            ProdIngre.IDProducto = producto.ID;
+            ProdIngre.listaIngre = new List<ProductoxIngrediente>();
+            ProductoxIngredienteBean aux = new ProductoxIngredienteBean(); /*comprasfacade.obtenerlistaIngredientes(ID);*/
 
-            //return View(ProveIngre);
-            return View();
+            for (int j = 0; j < Ingredientes.Count; j++)
+            {
+                ProductoxIngrediente product = new ProductoxIngrediente();
+                product.nombre = Ingredientes[j].nombre;
+                for (int i = 0; i < aux.listaIngre.Count; i++)
+                {
+                    if (aux.listaIngre[i].ID == Ingredientes[j].ID) product.estadod_disponible = false;
+                }
+                ProdIngre.listaIngre.Add(product);
+            }
+
+            return View(ProdIngre);
+            
         }
 
         [HttpPost]
-        public ActionResult AñadirIngredientes(/*ProveedorxIngredienteBean ProvexIngre*/)
+        public ActionResult AñadirIngredientes( ProductoxIngredienteBean prodIngre)
         {
             return View();
         }

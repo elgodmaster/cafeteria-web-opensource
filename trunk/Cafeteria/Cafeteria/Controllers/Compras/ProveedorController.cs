@@ -150,6 +150,17 @@ namespace Cafeteria.Controllers.Compras
             return View(ProveIngre);
         }
 
+        public ActionResult ModificarIngredientes(ProveedorxIngredienteBean Prov) 
+        {
+            return View(Prov);
+        }
+
+        
+        public ActionResult ModificarIngredientes2(ProveedorxIngredienteBean Prov)
+        {
+            return View(Prov);
+        }
+
         public ActionResult AñadirIngredientes(string ID) //idproveedor
         {
             ProveedorBean proveedor = comprasfacade.BuscarProveedor(ID);
@@ -178,6 +189,8 @@ namespace Cafeteria.Controllers.Compras
         {
             return View();
         }
+
+        
 
         #endregion
 

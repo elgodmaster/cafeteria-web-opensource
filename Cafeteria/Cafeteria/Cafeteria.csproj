@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Administracion\UsuarioController.cs" />
     <Compile Include="Controllers\Compras\IngredienteController.cs" />
     <Compile Include="Controllers\Compras\ProductoController.cs" />
     <Compile Include="Controllers\Compras\ProveedorController.cs" />
@@ -74,6 +75,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Administracion\administracionfacade.cs" />
+    <Compile Include="Models\Administracion\Usuario\UsuarioBean.cs" />
+    <Compile Include="Models\Administracion\Usuario\UsuarioDao.cs" />
+    <Compile Include="Models\Administracion\Usuario\UsuarioService.cs" />
     <Compile Include="Models\BaseDatos.cs" />
     <Compile Include="Models\Compra\comprasfacade.cs" />
     <Compile Include="Models\Compra\Ingrediente\IngredienteBean.cs" />
@@ -1407,9 +1412,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Administracion\" />
     <Folder Include="Controllers\Venta\" />
-    <Folder Include="Models\Administracion\" />
     <Folder Include="Models\Venta\" />
   </ItemGroup>
   <ItemGroup>
@@ -1462,6 +1465,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Proveedor\AñadirIngredientes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Proveedor\ModificarIngredientes.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

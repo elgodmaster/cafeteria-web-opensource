@@ -13,7 +13,8 @@ namespace Cafeteria.Models.Compra.Proveedor
     {
         String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
-
+        
+        #region Proveedor
         public List<ProveedorBean> ListarProveedor(string RazonSocial, string contacto)
         {
             SqlConnection objDB = null;
@@ -23,10 +24,10 @@ namespace Cafeteria.Models.Compra.Proveedor
                 List<ProveedorBean> ListaIngre = new List<ProveedorBean>();
                 objDB.Open();
                 String strQuery = "SELECT * FROM Proveedor";
-                if (!String.IsNullOrEmpty(RazonSocial)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'";
-                if (!String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
-                if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'"+
-                                                                                            " AND UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                //if (!String.IsNullOrEmpty(RazonSocial)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'";
+                //if (!String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                //if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'"+
+                //                                                                            " AND UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
                 if (objDataReader.HasRows)
@@ -69,6 +70,8 @@ namespace Cafeteria.Models.Compra.Proveedor
         }
         public void RegistrarProveedor(ProveedorBean Prov)
         {
+            Prov.estado = "ACTIVO";
+            Prov.CargoContacto = "gG";
             SqlConnection objDB = null;
             int i = Utils.cantidad("Proveedor")+1;
             string ID="PROV00";//8caracteres-4letras-4#
@@ -78,8 +81,8 @@ namespace Cafeteria.Models.Compra.Proveedor
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                String strQuery = "Insert into Proveedor (idIngrediente,razonSocial, estado,contacto,email_contacto,direccion,"+
-                                   " ruc, telefono1, cargo_contacto, telefono_contacto, web, observacion, telefono2 values " +
+                String strQuery = "Insert into Proveedor (idProveedor,razonSocial, estado,contacto,email_contacto,direccion,"+
+                                   " ruc, telefono1, cargo_contacto, telefono_contacto, web, observacion, telefono2) values " +
                                     "(@id,@razonsocial,@estado,@contacto,@email_contacto, @direccion, @ruc, @telefono1,@cargo_contacto," +
                                     "@telefono_contacto, @web, @observacion, @telefono2)";
 
@@ -273,7 +276,7 @@ namespace Cafeteria.Models.Compra.Proveedor
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                String strQuery = "SELECT * FROM Proveedor WHERE  = @ruc";
+                String strQuery = "SELECT * FROM Proveedor WHERE razonSocial = @razonsocial";
                 SqlCommand objquery = new SqlCommand(strQuery, objDB);
                 BaseDatos.agregarParametro(objquery, "@razonsocial", razonSocial);
 
@@ -298,6 +301,9 @@ namespace Cafeteria.Models.Compra.Proveedor
             }
         }
 
+        #endregion
+
+        #region IngredientexProveedor
         public ProveedorxIngredienteBean listaIngredientes(string ID)
         {
             SqlConnection objDB = null;
@@ -312,10 +318,10 @@ namespace Cafeteria.Models.Compra.Proveedor
                 BaseDatos.agregarParametro(objquery, "@ID", ID);
 
                 SqlDataReader objDataReader = objquery.ExecuteReader();
+                prov = new ProveedorxIngredienteBean();
+                prov.ListadeIngredientesProveedor = new List<ProveedorIngrediente>();
                 if (objDataReader.HasRows)
                 {
-                    prov = new ProveedorxIngredienteBean();
-                    prov.ListadeIngredientesProveedor = new List<ProveedorIngrediente>();
                     while (objDataReader.Read())
                     {
                         ProveedorIngrediente aux = new ProveedorIngrediente();
@@ -340,6 +346,51 @@ namespace Cafeteria.Models.Compra.Proveedor
             }
         }
 
+        public void AñadirIngredientes (ProveedorxIngredienteBean ProvxIngre)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("Añadir IngredientesxProveedor(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        public void ModificarIngredientes(ProveedorxIngredienteBean prov)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+
+
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("Modificar IngredientesxProveedor(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+        #endregion
 
 
     }

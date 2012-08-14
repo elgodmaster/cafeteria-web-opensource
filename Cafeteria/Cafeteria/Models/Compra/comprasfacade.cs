@@ -47,7 +47,7 @@ namespace Cafeteria.Models.Compra
         public List<ProveedorBean> ListarProveedor(string razonsocial, string ruc)
         {
             List<ProveedorBean> prov = new List<ProveedorBean>();
-            ProveedorService.ListarProveedor(razonsocial,ruc);
+            prov=ProveedorService.ListarProveedor(razonsocial,ruc);
 
             return prov;
         }
@@ -116,6 +116,17 @@ namespace Cafeteria.Models.Compra
         {
             return ProveedorService.listardeingredientes(ID);
         }
+
+        public void Modificaringredientes(ProveedorxIngredienteBean prov)
+        {
+            ProveedorService.ModificarIngredientes(prov);
+        }
+
+        public void AñadirIngredientes(ProveedorxIngredienteBean ProvxIngred)
+        {
+            ProveedorService.AñadirIngredientes(ProvxIngred);
+        }
+
         #endregion
 
 

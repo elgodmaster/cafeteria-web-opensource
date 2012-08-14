@@ -1,7 +1,80 @@
 ﻿@model Cafeteria.Models.Compra.Producto.ProductoxIngredienteBean
 
 @{
-    ViewBag.Title = "ModificarIngredientes";
+    ViewBag.Title = "Modificar Ingredientes";
 }
 
-<h2>ModificarIngredientes</h2>
+<h2>Modificar Ingredientes</h2>
+<p></p><p></p><p></p>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validationEngine-en.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validationEngine.js")" type="text/javascript"></script>
+
+
+
+ @using (Html.BeginForm("ModificarIngredientes2", "Proveedor", FormMethod.Post, new { @class = "form", id = "validate" }))
+{   
+
+    <fieldset>
+        <div class="widget">
+            <div class="title">
+                <h6>Producto</h6>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.IDProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.IDProducto)  </div>@Html.HiddenFor(model => model.IDProducto) 
+                <div class="clear"></div>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.Nombre_Producto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.Nombre_Producto)  </div>@Html.HiddenFor(model => model.Nombre_Producto) 
+                <div class="clear"></div>
+            </div>
+            <div class="formRow"> @Html.LabelFor(model => model.tipo)
+                <div class=" formRight">  @Html.DisplayFor(model => model.tipo)  </div>@Html.HiddenFor(model => model.tipo) 
+                <div class="clear"></div>
+            </div>
+            
+            
+        </div>
+    </fieldset>
+    
+
+    <p></p><p></p><p></p><p></p>
+
+        <table cellpadding = "0" cellspacing = "0" width = "100%" class = "sTable" >
+
+    <thead>
+        <tr>
+            <td>Id Ingrediente</td>
+            <td>Ingrediente</td>
+            <td>Cantidad</td>
+            <td>Unidad</td>
+         
+        </tr>
+    </thead>
+
+    <tbody>
+
+  
+    @for (int i = 0; (i < Model.listaIngre.Count); i++)
+    {
+            @Html.HiddenFor(model => model.listaIngre[i].ID) 
+             <tr>  
+                <td> @Html.DisplayFor(model => model.listaIngre[i].ID)  @Html.HiddenFor(model => model.listaIngre[i].nombre) </td>
+                <td> @Html.TextBoxFor(model => model.listaIngre[i].nombre, new { @class = "validate[custom[onlyNumberSp]]", name = "numsValid", placeholder = "0.00" })         </td>
+                <td> @Html.TextBoxFor(model=> model.listaIngre[i].cantidad)</td>
+                <td> @Html.TextBoxFor(model=> model.listaIngre[i].medida)</td>
+     </tr>
+
+    }
+           
+    </tbody>
+
+    </table>
+    <p></p><p></p><p></p><p></p>
+    <p>
+        <input type="submit" value="Guardar" class = "redB" />
+         @Html.ActionLink("Regresar", "ListarProductos/" + Model.IDProducto, "Producto");
+    </p>
+    }

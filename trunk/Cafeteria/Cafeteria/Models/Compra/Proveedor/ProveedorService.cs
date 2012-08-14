@@ -14,7 +14,7 @@ namespace Cafeteria.Models.Compra.Proveedor
         public List<ProveedorBean> ListarProveedor(string nombre, string contacto)
         {
             List<ProveedorBean> prod = new List<ProveedorBean>();
-            ProveedorDao.ListarProveedor(nombre, contacto);
+            prod=ProveedorDao.ListarProveedor(nombre, contacto);
 
             return prod;
         }
@@ -51,7 +51,14 @@ namespace Cafeteria.Models.Compra.Proveedor
         {
             return ProveedorDao.listaIngredientes(ID);
         }
-
+        public void AñadirIngredientes(ProveedorxIngredienteBean ProvxIngre)
+        {
+            ProveedorDao.AñadirIngredientes(ProvxIngre);
+        }
+        public void ModificarIngredientes(ProveedorxIngredienteBean prov)
+        {
+            ProveedorDao.ModificarIngredientes(prov);
+        }
         #endregion
 
     }

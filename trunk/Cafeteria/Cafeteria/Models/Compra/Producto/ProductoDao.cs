@@ -145,13 +145,14 @@ namespace Cafeteria.Models.Compra.Producto
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
                 String strQuery = "UPDATE Producto SET nombre=@nombre, descripcion=@descripcion, estado=@estado, tipo=@tipo" +
-                                  "WHERE idProducto = @id";
+                                  " WHERE idProducto = @id";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 Utils.agregarParametro(objQuery, "@nombre", produ.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", produ.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", produ.estado);
                 Utils.agregarParametro(objQuery, "@tipo", produ.ID_Tipo);
+                Utils.agregarParametro(objQuery, "@id", produ.ID);
                 objQuery.ExecuteNonQuery();
 
             }

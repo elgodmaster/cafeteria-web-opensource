@@ -25,9 +25,10 @@ namespace Cafeteria.Controllers.Compras
         }
 
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string  id)
         {
-            return View();
+            ProveedorBean pro = comprasfacade.BuscarProveedor(id);
+            return View(pro);
         }
 
         #region Buscar
@@ -158,7 +159,8 @@ namespace Cafeteria.Controllers.Compras
         
         public ActionResult ModificarIngredientes2(ProveedorxIngredienteBean Prov)
         {
-            return View(Prov);
+            comprasfacade.Modificaringredientes(Prov);
+            return View();
         }
 
         public ActionResult AñadirIngredientes(string ID) //idproveedor
@@ -187,7 +189,9 @@ namespace Cafeteria.Controllers.Compras
         [HttpPost]
         public ActionResult AñadirIngredientes(ProveedorxIngredienteBean ProvexIngre)
         {
+            comprasfacade.AñadirIngredientes(ProvexIngre);
             return View();
+            //RedirectToAction( "ListarIngredientes/ "+ProvexIngre.idproveedor);
         }
 
         

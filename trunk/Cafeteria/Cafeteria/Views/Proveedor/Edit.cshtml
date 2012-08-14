@@ -71,7 +71,15 @@
             <div class="formRow">@Html.LabelFor(model => model.Observacion)
                 <div class="formRight"> @Html.TextAreaFor(model => model.Observacion, new { maxlength = "45" }) </div>
                 <div class="clear"></div>
-            </div>            
+            </div>  
+            <div class="formRow"> @Html.LabelFor(model => model.estado)
+                <div class="formRight"> 
+                                     @Html.RadioButtonFor(model => model.estado, "ACTIVO", true) Activo <br />
+                                     @Html.RadioButtonFor(model => model.estado, "INACTIVO", false) Inactivo    
+                                                                                                            
+                </div> 
+                <div class="clear"></div>
+           </div>          
             
         </div>
     </fieldset>

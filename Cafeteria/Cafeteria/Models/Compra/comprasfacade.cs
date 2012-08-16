@@ -129,6 +129,24 @@ namespace Cafeteria.Models.Compra
 
         #endregion
 
+        #region ProductoxIngrediente
+        public ProductoxIngredienteBean obtenerlistadeingredientesdeProducto(string ID)
+        {
+            return ProductoService.listardeingredientesdeproducto(ID);
+        }
+
+        public void Modificaringredientesdeproducto(ProductoxIngredienteBean ProdxIngred)
+        {
+            ProductoService.ModificarIngredientesdeproducto(ProdxIngred);
+        }
+
+        public void AñadirIngredientesdeproducto(ProductoxIngredienteBean ProdxIngred)
+        {
+            ProductoService.AñadirIngredientesdeproducto(ProdxIngred);
+        }
+
+        #endregion
+
 
     }
 }

@@ -33,10 +33,10 @@ namespace Cafeteria.Models
                    while (objDataReader.Read())
                    {
                         IngredienteBean ingrediente = new IngredienteBean();
-                        ingrediente.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
-                        ingrediente.nombre = Convert.ToString(objDataReader[1]);
-                        ingrediente.descripcion = Convert.ToString(objDataReader[2]);
-                        ingrediente.estado = Convert.ToString(objDataReader[3]);    
+                        ingrediente.ID = Convert.ToString(objDataReader["idIngrediente"]);//muy importante llenar este campo
+                        ingrediente.nombre = Convert.ToString(objDataReader["nombre"]);
+                        ingrediente.descripcion = Convert.ToString(objDataReader["descripcion"]);
+                        ingrediente.estado = Convert.ToString(objDataReader["estado"]);    
                         ListaIngre.Add(ingrediente);
                    }
                 }
@@ -111,10 +111,10 @@ namespace Cafeteria.Models
                 {
                     objDataReader.Read();
                     ingrediente = new IngredienteBean();
-                    ingrediente.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
-                    ingrediente.nombre = Convert.ToString(objDataReader[1]);
-                    ingrediente.descripcion = Convert.ToString(objDataReader[2]);
-                    ingrediente.estado = Convert.ToString(objDataReader[3]);
+                    ingrediente.ID = Convert.ToString(objDataReader["idIngrediente"]);
+                    ingrediente.nombre = Convert.ToString(objDataReader["nombre"]);
+                    ingrediente.descripcion = Convert.ToString(objDataReader["descripcion"]);
+                    ingrediente.estado = Convert.ToString(objDataReader["estado"]);   
                 }
                 return ingrediente;
             }
@@ -192,5 +192,6 @@ namespace Cafeteria.Models
             }
 
         }
+
     }
 }

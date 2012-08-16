@@ -160,7 +160,7 @@ namespace Cafeteria.Controllers.Compras
         public ActionResult ModificarIngredientes2(ProveedorxIngredienteBean Prov)
         {
             comprasfacade.Modificaringredientes(Prov);
-            return View();
+            return RedirectToAction("Index");
         }
 
         public ActionResult AñadirIngredientes(string ID) //idproveedor
@@ -175,6 +175,7 @@ namespace Cafeteria.Controllers.Compras
             for (int j = 0; j < Ingredientes.Count; j++)
             {
                 ProveedorIngrediente proveedorIngre = new ProveedorIngrediente();
+                proveedorIngre.ID = Ingredientes[j].ID;
                 proveedorIngre.nombre = Ingredientes[j].nombre;
                 for (int i = 0; i < aux.ListadeIngredientesProveedor.Count; i++)
                 {

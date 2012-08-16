@@ -130,7 +130,7 @@ namespace Cafeteria.Controllers.Compras
         {
             ProductoBean producto = comprasfacade.BuscarProducto(ID);
             ProductoxIngredienteBean prodIngr = new ProductoxIngredienteBean();
-            //prodIngr = comprasfacade.obtenerlistadeingredientes(ID);
+            prodIngr = comprasfacade.obtenerlistadeingredientesdeProducto(ID);
             prodIngr.Nombre_Producto = producto.nombre;
             prodIngr.IDProducto = producto.ID;
             prodIngr.tipo = comprasfacade.get_tipo(producto.ID_Tipo);
@@ -148,7 +148,8 @@ namespace Cafeteria.Controllers.Compras
 
         public ActionResult ModificarIngredientes(ProductoxIngredienteBean prodxingre)
         {
-            return View(prodxingre);
+            comprasfacade.Modificaringredientesdeproducto(prodxingre);
+            return RedirectToAction("Index");
         }
 
 
@@ -167,7 +168,7 @@ namespace Cafeteria.Controllers.Compras
             ProdIngre.Nombre_Producto = producto.nombre;
             ProdIngre.IDProducto = producto.ID;
             ProdIngre.listaIngre = new List<ProductoxIngrediente>();
-            ProductoxIngredienteBean aux = new ProductoxIngredienteBean(); /*comprasfacade.obtenerlistaIngredientes(ID);*/
+            ProductoxIngredienteBean aux = comprasfacade.obtenerlistadeingredientesdeProducto(ID);
 
             for (int j = 0; j < Ingredientes.Count; j++)
             {
@@ -187,6 +188,7 @@ namespace Cafeteria.Controllers.Compras
         [HttpPost]
         public ActionResult AñadirIngredientes( ProductoxIngredienteBean prodIngre)
         {
+            comprasfacade.AñadirIngredientesdeproducto(prodIngre);
             return View();
         }
 

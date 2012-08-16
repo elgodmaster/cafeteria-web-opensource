@@ -51,9 +51,9 @@
 
         if (!Model.ListadeIngredientesProveedor[i].Estado_disponible)
         {
-         @Html.HiddenFor(model => model.ListadeIngredientesProveedor[i].ID, new { @readonly = "readonly" }) 
+         
      <tr>       
-                
+                <td> @Html.TextBoxFor(model => model.ListadeIngredientesProveedor[i].ID, new { @readonly = "readonly" }) </td>
                 <td> @Html.TextBoxFor(model => model.ListadeIngredientesProveedor[i].nombre, new { @readonly = "readonly" }) </td>
                 <td> @Html.TextBoxFor(model => model.ListadeIngredientesProveedor[i].precio, new { @class = "validate[custom[onlyNumberSp]]", name = "numsValid", placeholder = "0.00" })         </td>
                    
@@ -61,6 +61,7 @@
         }
         else
         {
+            @Html.HiddenFor(model => model.ListadeIngredientesProveedor[i].ID) 
             @Html.HiddenFor(model => model.ListadeIngredientesProveedor[i].nombre) 
             @Html.HiddenFor(model => model.ListadeIngredientesProveedor[i].precio)         
             

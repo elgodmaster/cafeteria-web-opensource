@@ -9,6 +9,7 @@ namespace Cafeteria.Models.Compra.Producto
     {
         ProductoDao ProductoDAo = new ProductoDao();
 
+        #region Producto
         public List<ProductoBean> ListarProducto(string nombre, string idtipo)
         {
             List<ProductoBean> prod = new List<ProductoBean>();
@@ -38,6 +39,21 @@ namespace Cafeteria.Models.Compra.Producto
         {
             return ProductoDAo.getTipo(ID_tipo);
         }
+        #endregion
+        #region ProductoxIngrediente
+        public ProductoxIngredienteBean listardeingredientesdeproducto(string ID)
+        {
+            return ProductoDAo.listaIngredientes(ID);
+        }
+        public void AñadirIngredientesdeproducto(ProductoxIngredienteBean ProdxIngre)
+        {
+            ProductoDAo.AñadirIngredientes(ProdxIngre);
+        }
+        public void ModificarIngredientesdeproducto(ProductoxIngredienteBean ProdxIngre)
+        {
+            ProductoDAo.ModificarIngredientes(ProdxIngre);
+        }
+        #endregion
 
     }
 }

@@ -14,6 +14,7 @@ namespace Cafeteria.Models.Compra.Producto
         String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
 
+        #region Producto
         public List<ProductoBean> ListarProductos(string nombre, string id_tipo)
         {
             SqlConnection objDB = null;
@@ -34,12 +35,12 @@ namespace Cafeteria.Models.Compra.Producto
                     while (objDataReader.Read())
                     {
                         ProductoBean Producto = new ProductoBean();
-                        Producto.ID = Convert.ToString(objDataReader[0]);
-                        Producto.nombre = Convert.ToString(objDataReader[1]);
-                        Producto.descripcion = Convert.ToString(objDataReader[2]);
-                        Producto.ID_Tipo = Convert.ToString(objDataReader[3]);
+                        Producto.ID = Convert.ToString(objDataReader["idProducto"]);
+                        Producto.nombre = Convert.ToString(objDataReader["nombre"]);
+                        Producto.descripcion = Convert.ToString(objDataReader["descripcion"]);
+                        Producto.ID_Tipo = Convert.ToString(objDataReader["tipo"]);
                         Producto.Nombre_tipo = getTipo(Producto.ID_Tipo);
-                        Producto.estado = Convert.ToString(objDataReader[4]);
+                        Producto.estado = Convert.ToString(objDataReader["estado"]);
                         ListaProductos.Add(Producto);
                     }
                 }
@@ -115,11 +116,12 @@ namespace Cafeteria.Models.Compra.Producto
                 {
                     objDataReader.Read();
                     Producto = new ProductoBean();
-                    Producto.ID = Convert.ToString(objDataReader[0]);//muy importante llenar este campo
-                    Producto.nombre = Convert.ToString(objDataReader[1]);
-                    Producto.descripcion = Convert.ToString(objDataReader[2]);
-                    Producto.ID_Tipo = Convert.ToString(objDataReader[3]);
-                    Producto.estado = Convert.ToString(objDataReader[4]);
+                    Producto.ID = Convert.ToString(objDataReader["idProducto"]);
+                    Producto.nombre = Convert.ToString(objDataReader["nombre"]);
+                    Producto.descripcion = Convert.ToString(objDataReader["descripcion"]);
+                    Producto.ID_Tipo = Convert.ToString(objDataReader["tipo"]);
+                    Producto.Nombre_tipo = getTipo(Producto.ID_Tipo);
+                    Producto.estado = Convert.ToString(objDataReader["estado"]);
                 }
                 return Producto;
             }
@@ -219,7 +221,7 @@ namespace Cafeteria.Models.Compra.Producto
                 {
                     objDataReader.Read();
                     
-                     nombre_tipo= Convert.ToString(objDataReader[0]);
+                     nombre_tipo= Convert.ToString(objDataReader["nombre"]);
                     
                 }
                 return nombre_tipo;
@@ -236,9 +238,130 @@ namespace Cafeteria.Models.Compra.Producto
                     objDB.Close();
                 }
             }
-            
+
+        }
+        #endregion
+
+        #region IngredientexProducto
+
+        public ProductoxIngredienteBean  listaIngredientes(string ID)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                ProductoxIngredienteBean produc = null;
+
+                objDB.Open();
+                String strQuery = "SELECT * FROM Producto_x_Ingrediente WHERE idProducto = @ID";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@ID", ID);
+
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+                produc = new ProductoxIngredienteBean();
+                produc.listaIngre = new List<ProductoxIngrediente>();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        ProductoxIngrediente aux = new ProductoxIngrediente();
+                        aux.ID = Convert.ToString(objDataReader["idIngrediente"]);
+                        aux.cantidad = (int)objDataReader["cantidad"];
+                        aux.medida = (string)objDataReader["unidaddemedida"];
+                        produc.listaIngre.Add(aux);
+                    }
+                }
+                return produc;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Get_ListadeIngredientesxProducto(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
         }
 
+        public void AñadirIngredientes(ProductoxIngredienteBean Producxingre)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < Producxingre.listaIngre.Count; i++)
+                {
+                    if (Producxingre.listaIngre[i].cantidad > 0)
+                    {
+                        String strQuery = "Insert into Producto_x_Ingrediente (idProducto,idIngrediente,cantidad, unidaddemedida) values " +
+                                            "(@idproveedor,@idingrediente,@cantidad,@unidad)";
+
+                        SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                        Utils.agregarParametro(objQuery, "@idproveedor", Producxingre.IDProducto);
+                        Utils.agregarParametro(objQuery, "@idingrediente", Producxingre.listaIngre[i].ID);
+                        Utils.agregarParametro(objQuery, "@cantidad", Producxingre.listaIngre[i].cantidad);
+                        Utils.agregarParametro(objQuery, "@unidad", Producxingre.listaIngre[i].medida);
+                        objQuery.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("Añadir IngredientesxProducto(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        public void ModificarIngredientes(ProductoxIngredienteBean Producxingre)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < Producxingre.listaIngre.Count; i++)
+                {
+                    String strQuery = "Update Producto_x_Ingrediente SET cantidad = @cantidad, unidaddemedida=@unidad  where idProducto=@idproducto and idIngrediente=@idingrediente ";
+
+                    SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                    Utils.agregarParametro(objQuery, "@idproveedor", Producxingre.IDProducto);
+                    Utils.agregarParametro(objQuery, "@idingrediente", Producxingre.listaIngre[i].ID);
+                    Utils.agregarParametro(objQuery, "@cantidad", Producxingre.listaIngre[i].cantidad);
+                    Utils.agregarParametro(objQuery, "@unidad", Producxingre.listaIngre[i].medida);
+                    objQuery.ExecuteNonQuery();
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("Modificar IngredientesxProducto(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        #endregion
 
     }
 }

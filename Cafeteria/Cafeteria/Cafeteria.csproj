@@ -76,6 +76,8 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Administracion\administracionfacade.cs" />
+    <Compile Include="Models\Administracion\Perfil Usuario\PerfilUsuarioBean.cs" />
+    <Compile Include="Models\Administracion\Ubigeo\Ubigeo.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioBean.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioDao.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioService.cs" />
@@ -1380,6 +1382,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\Ubigeo.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1479,6 +1482,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Producto\AñadirIngredientes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Buscar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Details.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

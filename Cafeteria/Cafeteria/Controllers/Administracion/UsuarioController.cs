@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Cafeteria.Models.Administracion.Usuario;
+
 
 namespace Cafeteria.Controllers.Administracion
 {
@@ -12,22 +14,25 @@ namespace Cafeteria.Controllers.Administracion
         public ActionResult Index()
         {
             return View();
+           
+            
+            
         }
 
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
             return View();
         }
 
-
+        #region Crear
         public ActionResult Create()
         {
             return View();
         } 
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(UsuarioBean usuario)
         {
             try
             {
@@ -39,15 +44,16 @@ namespace Cafeteria.Controllers.Administracion
                 return View();
             }
         }
-        
- 
-        public ActionResult Edit(int id)
+        #endregion
+
+        #region editar
+        public ActionResult Edit(string id)
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(UsuarioBean usuario)
         {
             try
             {
@@ -59,25 +65,32 @@ namespace Cafeteria.Controllers.Administracion
                 return View();
             }
         }
+        #endregion
 
- 
-        public ActionResult Delete(int id)
+        #region Eliminar
+        public ActionResult Delete(string ID)
         {
+            return View(/*comprasfacade.BuscarProveedor(ID)*/);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public JsonResult DeleteConfirmed(string ID)
+        {
+            //comprasfacade.EliminarProveedor(ID);
+            return Json(new { me = "" });
+        }
+        #endregion
+
+        #region Buscar
+
+        public ActionResult Buscar() 
+        {
+
             return View();
         }
 
+        #endregion
 
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
     }
 }

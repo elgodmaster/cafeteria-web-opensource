@@ -2,7 +2,7 @@
     $('#idDepartamento').change(function () {
         var idDepartamentoSeleccionado = $(this).val();
         if (idDepartamentoSeleccionado != 0) {
-            $.getJSON('/Hotel/getProvincias', { idDepartamento: idDepartamentoSeleccionado }, function (provincias) {//ver si le puedo cambiar de nombre a la funcion
+            $.getJSON('/Cafeteria/getProvincias', { idDepartamento: idDepartamentoSeleccionado }, function (provincias) {//ver si le puedo cambiar de nombre a la funcion
                 var cmbProvincia = $('#idProvincia');
                 var cmbDistrito = $('#idDistrito');
                 cmbProvincia.empty();
@@ -36,7 +36,7 @@ $(document).ready(function () {
         var idDepartamentoSeleccionado = $('#idDepartamento').val();
         var idProvinciaSeleccionado = $(this).val();
         if (idProvinciaSeleccionado != 0) {
-            $.getJSON('/Hotel/getDistritos', { idProvincia: idProvinciaSeleccionado, idDepartamento: idDepartamentoSeleccionado }, function (distritos) {//ver si le puedo cambiar de nombre a la funcion
+            $.getJSON('/Cafeteria/getDistritos', { idProvincia: idProvinciaSeleccionado, idDepartamento: idDepartamentoSeleccionado }, function (distritos) {//ver si le puedo cambiar de nombre a la funcion
                 var cmbDistrito = $('#idDistrito');
                 cmbDistrito.empty();
                 cmbDistrito.append($('<option/>').text('Seleccione un Distrito').attr('value', '').attr('selected', 'selected'));

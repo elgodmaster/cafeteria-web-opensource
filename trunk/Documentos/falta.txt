@@ -1,0 +1,3 @@
+Diagrama de actividades
+Especificacion de Casos de uso-> todos 
+prototipos ->todos

@@ -1,5 +1,5 @@
 Administracion
-	registrar asistencia 			01 <<<----
+	registrar asistencia 			01 
 	administrar personal			02
 	asignar personal				03 X
 	administrar turnos de personal	04 X
@@ -12,7 +12,7 @@ Venta
 	Administrar productos			08
 	Registrar Venta					09 X
 	Generar Reportes				10
-	Administrar clientes			11 X
+	Administrar clientes			11 
 	
 Compras
 	Administrar proveedor			12

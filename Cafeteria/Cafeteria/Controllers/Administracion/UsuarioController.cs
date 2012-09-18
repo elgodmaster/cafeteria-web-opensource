@@ -37,8 +37,8 @@ namespace Cafeteria.Controllers.Administracion
                 usuarioVMC.Documentos = new List<TipoDocumento>();
                 usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "DNI" });
                 usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "RUC" });
-                usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "PASAPORTE" });
-                usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "CARNET DE EXTRANJERIA" });
+                //usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "PASAPORTE" });
+                //usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "CARNET DE EXTRANJERIA" });
                 //usuarioVMC.PerfilesUsuario = new PerfilUsuarioFacade().listarPerfiles();
                 return View(usuarioVMC);
             }

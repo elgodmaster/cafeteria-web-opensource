@@ -1,4 +1,4 @@
-Administracion
+Administracion							
 	registrar asistencia 			01 		
 	administrar personal			02		
 	asignar personal				03 X	

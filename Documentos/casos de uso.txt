@@ -1,26 +1,26 @@
 Administracion
-	registrar asistencia 			01 
-	administrar personal			02
-	asignar personal				03 X
-	administrar turnos de personal	04 X
-	generar reportes de personal	05
-	Administrar perfil				06
-	Administrar sucursal			07 X
+	registrar asistencia 			01 		
+	administrar personal			02		
+	asignar personal				03 X	
+	administrar turnos de personal	04 X	
+	generar reportes de personal	05		
+	Administrar perfil				06		
+	Administrar sucursal			07 X	
 	
 
 Venta
-	Administrar productos			08
-	Registrar Venta					09 X
-	Generar Reportes				10
-	Administrar clientes			11 
+	Administrar productos			08		
+	Registrar Venta					09 X	
+	Generar Reportes				10	
+	Administrar clientes			11		
 	
 Compras
-	Administrar proveedor			12
-	Administrar orden de compra		13 X
-	Generar reportes				14
+	Administrar proveedor			12		
+	Administrar orden de compra		13 X	
+	Generar reportes				14		
 
 
 Almacen
-	Administrar ingredientes		15
-	Generar reportes de almacen 	16 X
-	Administrar nota de entrada		17 X
+	Administrar ingredientes		15			
+	Generar reportes de almacen 	16 X	
+	Administrar nota de entrada		17 X	

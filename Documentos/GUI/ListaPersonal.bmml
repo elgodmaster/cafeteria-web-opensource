@@ -88,5 +88,10 @@
         <text>90909090</text>
       </controlProperties>
     </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::MenuBar" x="560" y="129" w="408" h="25" measuredW="408" measuredH="29" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Administracion%2C%20Compras%2C%20Ventas%2C%20Almacen%2C%20Reportes</text>
+      </controlProperties>
+    </control>
   </controls>
 </mockup>

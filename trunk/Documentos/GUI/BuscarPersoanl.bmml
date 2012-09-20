@@ -134,5 +134,10 @@
         <text>Asignar%20horario</text>
       </controlProperties>
     </control>
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::MenuBar" x="560" y="129" w="408" h="25" measuredW="408" measuredH="29" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Administracion%2C%20Compras%2C%20Ventas%2C%20Almacen%2C%20Reportes</text>
+      </controlProperties>
+    </control>
   </controls>
 </mockup>

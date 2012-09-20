@@ -5,7 +5,7 @@
         <text>A%20Web%20Page%0Ahttp%3A//www.cafeterias.com</text>
       </controlProperties>
     </control>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::LinkBar" x="758" y="110" w="-1" h="-1" measuredW="126" measuredH="21" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::LinkBar" x="758" y="110" w="-1" h="-1" measuredW="127" measuredH="21" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Iniciar%20Sesion%2C%20Salir</text>
       </controlProperties>
@@ -86,6 +86,11 @@
     <control controlID="52" controlTypeID="com.balsamiq.mockups::Label" x="701" y="220" w="113" h="21" measuredW="59" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Opciones</text>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::MenuBar" x="560" y="129" w="408" h="25" measuredW="408" measuredH="29" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Administracion%2C%20Compras%2C%20Ventas%2C%20Almacen%2C%20Reportes</text>
       </controlProperties>
     </control>
   </controls>

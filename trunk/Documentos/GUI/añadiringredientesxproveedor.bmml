@@ -50,7 +50,7 @@
         <text>Ingredientes%20del%20Proveedor</text>
       </controlProperties>
     </control>
-    <control controlID="53" controlTypeID="com.balsamiq.mockups::DataGrid" x="363" y="349" w="482" h="138" measuredW="221" measuredH="85" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::DataGrid" x="363" y="349" w="482" h="138" measuredW="237" measuredH="85" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
         <text>ID%20%5E%2C%20%20Nombre%20%5E%2C%20Precio%20v%0AINGR0001%2C%20Producto%201%2C%20%0A%20%0A%7B65L%2C%200R%2C%2035%7D</text>
         <verticalScrollbar>true</verticalScrollbar>
@@ -65,6 +65,11 @@
     <control controlID="55" controlTypeID="com.balsamiq.mockups::Button" x="363" y="511" w="70" h="27" measuredW="70" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Aceptar</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::MenuBar" x="560" y="129" w="408" h="25" measuredW="408" measuredH="29" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Administracion%2C%20Compras%2C%20Ventas%2C%20Almacen%2C%20Reportes</text>
       </controlProperties>
     </control>
   </controls>

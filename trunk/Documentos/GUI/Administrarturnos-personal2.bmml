@@ -5,9 +5,9 @@
         <text>A%20Web%20Page%0Ahttp%3A//www.cafeterias.com</text>
       </controlProperties>
     </control>
-    <control controlID="16" controlTypeID="com.balsamiq.mockups::LinkBar" x="842" y="114" w="-1" h="-1" measuredW="127" measuredH="21" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::LinkBar" x="842" y="114" w="-1" h="-1" measuredW="132" measuredH="21" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Iniciar%20Sesion%2C%20Salir</text>
+        <text>Cerrar%20Sesion%2C%20Salir</text>
       </controlProperties>
     </control>
     <control controlID="17" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="241" y="163" w="741" h="423" measuredW="200" measuredH="115" zOrder="2" locked="false" isInGroup="-1">
@@ -16,7 +16,7 @@
         <text>Administrar</text>
       </controlProperties>
     </control>
-    <control controlID="18" controlTypeID="com.balsamiq.mockups::MenuBar" x="578" y="142" w="408" h="25" measuredW="408" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::MenuBar" x="578" y="142" w="408" h="25" measuredW="407" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <selectedIndex>0</selectedIndex>
         <text>Administracion%2C%20Compras%2C%20Ventas%2C%20Almacen%2C%20Reportes</text>
@@ -154,6 +154,11 @@
     <control controlID="63" controlTypeID="com.balsamiq.mockups::Link" x="460" y="541" w="-1" h="-1" measuredW="61" measuredH="21" zOrder="29" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Regresar</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Label" x="314" y="119" w="-1" h="-1" measuredW="152" measuredH="21" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Bienvenido%20Jose%20Ramirez</text>
       </controlProperties>
     </control>
   </controls>

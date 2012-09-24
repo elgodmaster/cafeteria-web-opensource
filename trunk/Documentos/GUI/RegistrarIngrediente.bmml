@@ -5,57 +5,63 @@
         <text>A%20Web%20Page%0Ahttp%3A//www.cafeterias.com</text>
       </controlProperties>
     </control>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::LinkBar" x="758" y="110" w="-1" h="-1" measuredW="127" measuredH="21" zOrder="1" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Iniciar%20Sesion%2C%20Salir</text>
-      </controlProperties>
-    </control>
-    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="350" y="199" w="-1" h="-1" measuredW="52" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="350" y="199" w="-1" h="-1" measuredW="52" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Nombre</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="350" y="370" w="-1" h="-1" measuredW="77" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="350" y="370" w="-1" h="-1" measuredW="77" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Registrar</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextInput" x="501" y="196" w="143" h="-1" measuredW="36" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextInput" x="501" y="196" w="143" h="-1" measuredW="75" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>abc</text>
+        <text>Producto%201</text>
       </controlProperties>
     </control>
-    <control controlID="18" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="872" y="183" w="-1" h="214" measuredW="16" measuredH="100" zOrder="7" locked="false" isInGroup="-1"/>
-    <control controlID="22" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="233" y="154" w="673" h="309" measuredW="200" measuredH="157" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="872" y="183" w="-1" h="214" measuredW="16" measuredH="100" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="233" y="154" w="673" h="309" measuredW="200" measuredH="157" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <selectedIndex>0</selectedIndex>
         <text>Registrar%0ABuscar%0ALista</text>
       </controlProperties>
     </control>
-    <control controlID="23" controlTypeID="com.balsamiq.mockups::Link" x="440" y="373" w="-1" h="-1" measuredW="61" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Link" x="440" y="373" w="-1" h="-1" measuredW="61" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Regresar</text>
       </controlProperties>
     </control>
-    <control controlID="25" controlTypeID="com.balsamiq.mockups::Label" x="350" y="245" w="78" h="23" measuredW="71" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Label" x="350" y="245" w="78" h="23" measuredW="71" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Descripcion</text>
       </controlProperties>
     </control>
-    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="312" y="162" w="174" h="24" measuredW="139" measuredH="24" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="312" y="162" w="174" h="24" measuredW="139" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <size>16</size>
         <text>Registrar%20Producto</text>
       </controlProperties>
     </control>
-    <control controlID="38" controlTypeID="com.balsamiq.mockups::TextArea" x="501" y="245" w="305" h="90" measuredW="200" measuredH="140" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::TextArea" x="501" y="245" w="305" h="90" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="39" controlTypeID="com.balsamiq.mockups::MenuBar" x="501" y="131" w="408" h="25" measuredW="408" measuredH="29" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::MenuBar" x="501" y="131" w="408" h="25" measuredW="407" measuredH="29" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
+        <selectedIndex>1</selectedIndex>
         <text>Administracion%2C%20Compras%2C%20Ventas%2C%20Almacen%2C%20Reportes</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::LinkBar" x="776" y="114" w="-1" h="-1" measuredW="132" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cerrar%20Sesion%2C%20Salir</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Label" x="297" y="114" w="-1" h="-1" measuredW="138" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Bienvenido%20Juan%20Perez</text>
       </controlProperties>
     </control>
   </controls>

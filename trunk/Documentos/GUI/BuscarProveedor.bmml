@@ -5,122 +5,128 @@
         <text>A%20Web%20Page%0Ahttp%3A//www.cafeterias.com</text>
       </controlProperties>
     </control>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::LinkBar" x="758" y="110" w="-1" h="-1" measuredW="127" measuredH="21" zOrder="1" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Iniciar%20Sesion%2C%20Salir</text>
-      </controlProperties>
-    </control>
-    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="350" y="199" w="-1" h="-1" measuredW="79" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="350" y="199" w="-1" h="-1" measuredW="79" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Razon%20Social</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="350" y="273" w="-1" h="-1" measuredW="64" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="350" y="273" w="-1" h="-1" measuredW="64" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Buscar</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextInput" x="501" y="196" w="143" h="-1" measuredW="36" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextInput" x="501" y="196" w="143" h="-1" measuredW="36" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <text>abc</text>
       </controlProperties>
     </control>
-    <control controlID="12" controlTypeID="com.balsamiq.mockups::TextInput" x="501" y="233" w="143" h="-1" measuredW="43" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::TextInput" x="501" y="233" w="143" h="-1" measuredW="44" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Jose</text>
       </controlProperties>
     </control>
-    <control controlID="18" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="926" y="186" w="-1" h="352" measuredW="16" measuredH="100" zOrder="8" locked="false" isInGroup="-1"/>
-    <control controlID="22" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="233" y="154" w="731" h="428" measuredW="200" measuredH="157" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="926" y="186" w="-1" h="352" measuredW="16" measuredH="100" zOrder="7" locked="false" isInGroup="-1"/>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="233" y="154" w="731" h="428" measuredW="200" measuredH="157" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <selectedIndex>1</selectedIndex>
         <text>Registrar%0ABuscar%0ALista</text>
       </controlProperties>
     </control>
-    <control controlID="23" controlTypeID="com.balsamiq.mockups::Link" x="350" y="300" w="-1" h="-1" measuredW="61" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Link" x="350" y="300" w="-1" h="-1" measuredW="61" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Regresar</text>
       </controlProperties>
     </control>
-    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="350" y="235" w="118" h="23" measuredW="108" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="350" y="235" w="118" h="23" measuredW="108" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Nombre%20Contacto</text>
       </controlProperties>
     </control>
-    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="312" y="162" w="174" h="24" measuredW="133" measuredH="24" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="312" y="162" w="174" h="24" measuredW="133" measuredH="24" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <size>16</size>
         <text>Buscar%20Proveedor</text>
       </controlProperties>
     </control>
-    <control controlID="38" controlTypeID="com.balsamiq.mockups::Canvas" x="358" y="342" w="542" h="170" measuredW="100" measuredH="70" zOrder="11" locked="false" isInGroup="-1"/>
-    <control controlID="39" controlTypeID="com.balsamiq.mockups::Label" x="370" y="358" w="-1" h="-1" measuredW="19" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Canvas" x="358" y="342" w="542" h="170" measuredW="100" measuredH="70" zOrder="10" locked="false" isInGroup="-1"/>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Label" x="370" y="358" w="-1" h="-1" measuredW="19" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
         <text>ID</text>
       </controlProperties>
     </control>
-    <control controlID="40" controlTypeID="com.balsamiq.mockups::Label" x="459" y="358" w="79" h="21" measuredW="79" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Label" x="459" y="358" w="79" h="21" measuredW="79" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Razon%20Social</text>
       </controlProperties>
     </control>
-    <control controlID="41" controlTypeID="com.balsamiq.mockups::Label" x="553" y="358" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Label" x="553" y="358" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Ruc</text>
       </controlProperties>
     </control>
-    <control controlID="42" controlTypeID="com.balsamiq.mockups::Label" x="627" y="358" w="-1" h="-1" measuredW="46" measuredH="21" zOrder="15" locked="false" isInGroup="-1">
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Label" x="627" y="358" w="-1" h="-1" measuredW="46" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Estado</text>
       </controlProperties>
     </control>
-    <control controlID="44" controlTypeID="com.balsamiq.mockups::TextInput" x="370" y="379" w="74" h="-1" measuredW="79" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::TextInput" x="370" y="379" w="74" h="-1" measuredW="79" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
       <controlProperties>
         <state>disabled</state>
         <text>PROV0001</text>
       </controlProperties>
     </control>
-    <control controlID="45" controlTypeID="com.balsamiq.mockups::TextInput" x="459" y="379" w="51" h="-1" measuredW="36" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::TextInput" x="459" y="379" w="51" h="-1" measuredW="36" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
       <controlProperties>
         <state>disabled</state>
         <text>abc</text>
       </controlProperties>
     </control>
-    <control controlID="46" controlTypeID="com.balsamiq.mockups::TextInput" x="538" y="379" w="74" h="-1" measuredW="67" measuredH="27" zOrder="18" locked="false" isInGroup="-1">
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::TextInput" x="538" y="379" w="74" h="-1" measuredW="67" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <state>disabled</state>
         <text>9515472</text>
       </controlProperties>
     </control>
-    <control controlID="47" controlTypeID="com.balsamiq.mockups::TextInput" x="627" y="379" w="61" h="-1" measuredW="50" measuredH="27" zOrder="19" locked="false" isInGroup="-1">
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::TextInput" x="627" y="379" w="61" h="-1" measuredW="50" measuredH="27" zOrder="18" locked="false" isInGroup="-1">
       <controlProperties>
         <state>disabled</state>
         <text>Activo</text>
       </controlProperties>
     </control>
-    <control controlID="48" controlTypeID="com.balsamiq.mockups::Icon" x="703" y="380" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="20" locked="false" isInGroup="-1">
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Icon" x="703" y="380" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="19" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>PencilIcon%7Csmall</icon>
       </controlProperties>
     </control>
-    <control controlID="49" controlTypeID="com.balsamiq.mockups::Icon" x="734" y="380" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="21" locked="false" isInGroup="-1">
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Icon" x="734" y="380" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="20" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>XIcon%7Csmall</icon>
       </controlProperties>
     </control>
-    <control controlID="50" controlTypeID="com.balsamiq.mockups::Icon" x="758" y="380" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="22" locked="false" isInGroup="-1">
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Icon" x="758" y="380" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="21" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>SearchIcon%7Csmall</icon>
       </controlProperties>
     </control>
-    <control controlID="51" controlTypeID="com.balsamiq.mockups::Link" x="798" y="394" w="-1" h="-1" measuredW="102" measuredH="21" zOrder="23" locked="false" isInGroup="-1">
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Link" x="798" y="394" w="-1" h="-1" measuredW="102" measuredH="21" zOrder="22" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Ver%20Ingredientes</text>
       </controlProperties>
     </control>
-    <control controlID="52" controlTypeID="com.balsamiq.mockups::MenuBar" x="560" y="129" w="408" h="25" measuredW="408" measuredH="29" zOrder="24" locked="false" isInGroup="-1">
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::MenuBar" x="560" y="129" w="408" h="25" measuredW="407" measuredH="29" zOrder="23" locked="false" isInGroup="-1">
       <controlProperties>
+        <selectedIndex>1</selectedIndex>
         <text>Administracion%2C%20Compras%2C%20Ventas%2C%20Almacen%2C%20Reportes</text>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::LinkBar" x="834" y="112" w="-1" h="-1" measuredW="132" measuredH="21" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cerrar%20Sesion%2C%20Salir</text>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::Label" x="309" y="112" w="-1" h="-1" measuredW="138" measuredH="21" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Bienvenido%20Juan%20Perez</text>
       </controlProperties>
     </control>
   </controls>

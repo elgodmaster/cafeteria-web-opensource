@@ -15,9 +15,9 @@
         <text>Registrar</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextInput" x="501" y="196" w="143" h="-1" measuredW="75" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextInput" x="501" y="196" w="143" h="-1" measuredW="79" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Producto%201</text>
+        <text>Ingrediente</text>
       </controlProperties>
     </control>
     <control controlID="18" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="872" y="183" w="-1" h="214" measuredW="16" measuredH="100" zOrder="6" locked="false" isInGroup="-1"/>
@@ -37,10 +37,10 @@
         <text>Descripcion</text>
       </controlProperties>
     </control>
-    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="312" y="162" w="174" h="24" measuredW="139" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="312" y="162" w="174" h="24" measuredW="157" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <size>16</size>
-        <text>Registrar%20Producto</text>
+        <text>Registrar%20Ingrediente</text>
       </controlProperties>
     </control>
     <control controlID="38" controlTypeID="com.balsamiq.mockups::TextArea" x="501" y="245" w="305" h="90" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
@@ -50,11 +50,11 @@
     </control>
     <control controlID="39" controlTypeID="com.balsamiq.mockups::MenuBar" x="501" y="131" w="408" h="25" measuredW="407" measuredH="29" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
-        <selectedIndex>1</selectedIndex>
+        <selectedIndex>3</selectedIndex>
         <text>Administracion%2C%20Compras%2C%20Ventas%2C%20Almacen%2C%20Reportes</text>
       </controlProperties>
     </control>
-    <control controlID="40" controlTypeID="com.balsamiq.mockups::LinkBar" x="776" y="114" w="-1" h="-1" measuredW="132" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::LinkBar" x="776" y="114" w="-1" h="-1" measuredW="131" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Cerrar%20Sesion%2C%20Salir</text>
       </controlProperties>

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Configuration;
 using System.Data.SqlClient;
 
-namespace Cafeteria.Models.Compra.Producto
+namespace Cafeteria.Models.Venta.Producto
 {
     public class ProductoBean
     {

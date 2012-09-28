@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cafeteria.Models.Compra.Producto.ProductoBean>
+﻿@model IEnumerable<Cafeteria.Models.Venta.Producto.ProductoBean>
 
 <h2>Buscar Ingrediente</h2>
 
@@ -29,7 +29,7 @@
         <input type="submit" value="Buscar" class = "redB" />
         <p></p>
         <p></p>
-        @Html.ActionLink("Regresar", "Buscar") | @Html.ActionLink("Lista de Productos", "Index", "Producto")
+        <a href="javascript:history.back()">Regresar</a> | @Html.ActionLink("Lista de Productos", "Index", "Producto")
     </p>
 }
 

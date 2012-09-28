@@ -7,13 +7,14 @@ using log4net;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models;
 using Cafeteria.Models.Compra.Proveedor;
+using Cafeteria.Models.almacen.Ingrediente;
 
 
 namespace Cafeteria.Controllers.Compras
 {
     public class ProveedorController : Controller
     {
-        private static ILog log = LogManager.GetLogger(typeof(IngredienteController));
+        private static ILog log = LogManager.GetLogger(typeof(ProveedorController));
         comprasfacade comprasfacade = new comprasfacade();
 
         #region Proveedor

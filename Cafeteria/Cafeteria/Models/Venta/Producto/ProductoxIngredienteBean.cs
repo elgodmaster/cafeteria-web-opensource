@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Cafeteria.Models.Compra.Producto
+namespace Cafeteria.Models.Venta.Producto
 {
     public class ProductoxIngredienteBean
     {

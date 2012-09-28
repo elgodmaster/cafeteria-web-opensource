@@ -68,8 +68,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administracion\CafeteriaController.cs" />
     <Compile Include="Controllers\Administracion\UsuarioController.cs" />
-    <Compile Include="Controllers\Compras\IngredienteController.cs" />
-    <Compile Include="Controllers\Compras\ProductoController.cs" />
+    <Compile Include="Controllers\Almacen\IngredienteController.cs" />
+    <Compile Include="Controllers\Venta\ProductoController.cs" />
     <Compile Include="Controllers\Compras\ProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -84,14 +84,14 @@
     <Compile Include="Models\Administracion\Usuario\UsuarioService.cs" />
     <Compile Include="Models\BaseDatos.cs" />
     <Compile Include="Models\Compra\comprasfacade.cs" />
-    <Compile Include="Models\Compra\Ingrediente\IngredienteBean.cs" />
-    <Compile Include="Models\Compra\Ingrediente\Ingredientedao.cs" />
-    <Compile Include="Models\Compra\Ingrediente\IngredienteService.cs" />
-    <Compile Include="Models\Compra\Producto\ProductoBean.cs" />
-    <Compile Include="Models\Compra\Producto\ProductoDao.cs" />
-    <Compile Include="Models\Compra\Producto\ProductoService.cs" />
-    <Compile Include="Models\Compra\Producto\ProductoxIngrediente.cs" />
-    <Compile Include="Models\Compra\Producto\ProductoxIngredienteBean.cs" />
+    <Compile Include="Models\Almacen\Ingrediente\IngredienteBean.cs" />
+    <Compile Include="Models\Almacen\Ingrediente\Ingredientedao.cs" />
+    <Compile Include="Models\Almacen\Ingrediente\IngredienteService.cs" />
+    <Compile Include="Models\Venta\Producto\ProductoBean.cs" />
+    <Compile Include="Models\Venta\Producto\ProductoDao.cs" />
+    <Compile Include="Models\Venta\Producto\ProductoService.cs" />
+    <Compile Include="Models\Venta\Producto\ProductoxIngrediente.cs" />
+    <Compile Include="Models\Venta\Producto\ProductoxIngredienteBean.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorIngrediente.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorxIngredienteBean.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorBean.cs" />
@@ -1418,8 +1418,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Venta\" />
-    <Folder Include="Models\Venta\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

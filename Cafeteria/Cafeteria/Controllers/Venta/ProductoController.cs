@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using log4net;
 using Cafeteria.Models.Compra;
-using Cafeteria.Models.Compra.Producto;
 using Cafeteria.Models;
+using Cafeteria.Models.Venta.Producto;
+using Cafeteria.Models.almacen.Ingrediente;
 
-namespace Cafeteria.Controllers.Compras
+namespace Cafeteria.Controllers.Venta
 {
     public class ProductoController : Controller
     {

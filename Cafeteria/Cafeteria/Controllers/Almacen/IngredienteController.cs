@@ -6,9 +6,10 @@ using System.Web.Mvc;
 using log4net;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models;
+using Cafeteria.Models.almacen.Ingrediente;
 
 
-namespace Cafeteria.Controllers
+namespace Cafeteria.Controllers.Almacen
 {
     public class IngredienteController : Controller
     {

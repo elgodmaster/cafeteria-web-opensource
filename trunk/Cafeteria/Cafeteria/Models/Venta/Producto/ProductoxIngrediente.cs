@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Cafeteria.Models.almacen.Ingrediente;
 
-namespace Cafeteria.Models.Compra.Producto
+namespace Cafeteria.Models.Venta.Producto
 {
     public class ProductoxIngrediente:IngredienteBean
     {

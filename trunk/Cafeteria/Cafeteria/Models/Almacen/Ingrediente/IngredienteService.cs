@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Cafeteria.Models
+namespace Cafeteria.Models.almacen.Ingrediente
 {
     public class IngredienteService
     {

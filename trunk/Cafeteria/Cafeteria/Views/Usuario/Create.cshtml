@@ -1,7 +1,7 @@
 ﻿@model Cafeteria.Models.Administracion.Usuario.UsuarioViewModelCreate
 
 @{
-    ViewBag.Title = "Crear usuario";
+    ViewBag.Title = "Registrar Personal";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -35,7 +35,7 @@
                     @Html.ValidationMessageFor(model => model.idPerfilUsuario)
                 </div>
                 <div class = "clear" ></div>
-            </div>*@
+            </div>
 
                 @for (int i = 0; i < Model.PerfilesUsuario.Count; i++)
                 {
@@ -187,7 +187,7 @@
         </div>
         <p>
             <input class = "redB" type="submit" value="Crear" /> |
-            @Html.ActionLink("Regresar", "Index")
+            <a href="javascript:history.back()">Regresar</a>
         </p>
     </fieldset>
 }

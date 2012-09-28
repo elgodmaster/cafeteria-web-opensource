@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Cafeteria.Models;
 using System.ComponentModel.DataAnnotations;
+using Cafeteria.Models.almacen.Ingrediente;
 
 
 namespace Cafeteria.Models.Compra.Proveedor

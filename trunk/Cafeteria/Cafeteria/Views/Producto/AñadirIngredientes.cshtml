@@ -1,4 +1,4 @@
-﻿@model Cafeteria.Models.Compra.Producto.ProductoxIngredienteBean
+﻿@model Cafeteria.Models.Venta.Producto.ProductoxIngredienteBean
 
 @{
     ViewBag.Title = "AñadirIngredientes";
@@ -85,7 +85,8 @@
 
         </p>    
         
-       @Html.ActionLink("Regresar", "ListarProductos/" + Model.IDProducto, "Proveedor");
+       //@Html.ActionLink("Regresar", "ListarProductos/" + Model.IDProducto, "Proveedor");
+       <a href="javascript:history.back()">Regresar</a>
   }
 
 

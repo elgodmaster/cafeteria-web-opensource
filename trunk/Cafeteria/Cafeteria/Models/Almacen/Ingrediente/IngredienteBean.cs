@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cafeteria.Models
+namespace Cafeteria.Models.almacen.Ingrediente
 {
     public class IngredienteBean
     {

@@ -8,25 +8,28 @@ using Cafeteria.Models.Compra;
 using Cafeteria.Models;
 using Cafeteria.Models.Venta.Producto;
 using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Venta;
+using Cafeteria.Models.Almacen;
 
 namespace Cafeteria.Controllers.Venta
 {
     public class ProductoController : Controller
     {
         private static ILog log = LogManager.GetLogger(typeof(ProductoController));
-        comprasfacade comprasfacade = new comprasfacade();
+        ventafacade Ventafacade = new ventafacade();
+        almacenfacade Almacenfacade = new almacenfacade();
 
         #region Producto
         public ActionResult Index()
         {
-            return View(comprasfacade.ListarProducto("",""));
+            return View(Ventafacade.ListarProducto("", ""));
         }
 
 
         public ActionResult Details(string id)
         {
-            ProductoBean producto= comprasfacade.BuscarProducto(id);
-            producto.Nombre_tipo = comprasfacade.get_tipo(producto.ID_Tipo);
+            ProductoBean producto = Ventafacade.BuscarProducto(id);
+            producto.Nombre_tipo = Ventafacade.get_tipo(producto.ID_Tipo);
             return View(producto);
         }
 
@@ -45,7 +48,7 @@ namespace Cafeteria.Controllers.Venta
 
                 Producto.estado = "ACTIVO";
                 List<ProductoBean> Produc = new List<ProductoBean>();
-                Produc = comprasfacade.ListarProducto(Producto.nombre,"");
+                Produc = Ventafacade.ListarProducto(Producto.nombre, "");
 
                 if (Produc.Count > 0)
                 {
@@ -54,8 +57,8 @@ namespace Cafeteria.Controllers.Venta
                 }
                 else
                 {
-                    
-                    comprasfacade.RegistrarProducto(Producto);
+
+                    Ventafacade.RegistrarProducto(Producto);
                     return RedirectToAction("Index");
                 }
 
@@ -72,7 +75,7 @@ namespace Cafeteria.Controllers.Venta
         #region Buscar
         public ActionResult Buscar()
         {
-            List<ProductoBean> prod = comprasfacade.ListarProducto("","");
+            List<ProductoBean> prod = Ventafacade.ListarProducto("", "");
 
    
             ViewBag.estado = 0;
@@ -83,7 +86,7 @@ namespace Cafeteria.Controllers.Venta
         public ActionResult Buscar(string nombre, string ID_tipo)
         {
             ViewBag.estado = 1;
-            return View(comprasfacade.ListarProducto(nombre, ID_tipo));
+            return View(Ventafacade.ListarProducto(nombre, ID_tipo));
         }
 
         #endregion
@@ -91,7 +94,7 @@ namespace Cafeteria.Controllers.Venta
         #region editar
         public ActionResult Edit(string id)
         {
-            ProductoBean Producto = comprasfacade.BuscarProducto(id);
+            ProductoBean Producto = Ventafacade.BuscarProducto(id);
             return View(Producto);
         }
 
@@ -100,7 +103,7 @@ namespace Cafeteria.Controllers.Venta
         {
             try
             {
-                comprasfacade.ActualizarProducto(Produ);
+                Ventafacade.ActualizarProducto(Produ);
                 return RedirectToAction("Index");
             }
             catch
@@ -113,13 +116,13 @@ namespace Cafeteria.Controllers.Venta
         #region eliminar
         public ActionResult Delete(string ID)
         {
-            return View(comprasfacade.BuscarProducto(ID));
+            return View(Ventafacade.BuscarProducto(ID));
         }
 
         [HttpPost, ActionName("Delete")]
         public JsonResult DeleteConfirmed(string ID)
         {
-            comprasfacade.EliminarProducto(ID);
+            Ventafacade.EliminarProducto(ID);
             return Json(new { me = "" });
         }
 
@@ -129,17 +132,17 @@ namespace Cafeteria.Controllers.Venta
         #region Ingredientes de Producto
         public ViewResult ListarIngredientes(string ID)
         {
-            ProductoBean producto = comprasfacade.BuscarProducto(ID);
+            ProductoBean producto = Ventafacade.BuscarProducto(ID);
             ProductoxIngredienteBean prodIngr = new ProductoxIngredienteBean();
-            prodIngr = comprasfacade.obtenerlistadeingredientesdeProducto(ID);
+            prodIngr = Ventafacade.obtenerlistadeingredientesdeProducto(ID);
             prodIngr.Nombre_Producto = producto.nombre;
             prodIngr.IDProducto = producto.ID;
-            prodIngr.tipo = comprasfacade.get_tipo(producto.ID_Tipo);
+            prodIngr.tipo = Ventafacade.get_tipo(producto.ID_Tipo);
             if (prodIngr.listaIngre.Count > 0) ViewBag.estado = 0;
             else ViewBag.estado = 1;
             for (int i = 0; i < prodIngr.listaIngre.Count; i++)
             {
-                IngredienteBean Ingre = comprasfacade.buscaringrediente(prodIngr.listaIngre[i].ID);
+                IngredienteBean Ingre = Almacenfacade.buscaringrediente(prodIngr.listaIngre[i].ID);
                 prodIngr.listaIngre[i].nombre = Ingre.nombre;
 
             }
@@ -149,7 +152,7 @@ namespace Cafeteria.Controllers.Venta
 
         public ActionResult ModificarIngredientes(ProductoxIngredienteBean prodxingre)
         {
-            comprasfacade.Modificaringredientesdeproducto(prodxingre);
+            Ventafacade.Modificaringredientesdeproducto(prodxingre);
             return RedirectToAction("Index");
         }
 
@@ -161,15 +164,15 @@ namespace Cafeteria.Controllers.Venta
 
         public ActionResult AñadirIngredientes(string ID) //idProducto
         {
-            ProductoBean producto = comprasfacade.BuscarProducto(ID);
-            
-            
-            List<IngredienteBean> Ingredientes = comprasfacade.ListarIngrediente("");
+            ProductoBean producto = Ventafacade.BuscarProducto(ID);
+
+
+            List<IngredienteBean> Ingredientes = Almacenfacade.ListarIngrediente("");
             ProductoxIngredienteBean ProdIngre = new ProductoxIngredienteBean();
             ProdIngre.Nombre_Producto = producto.nombre;
             ProdIngre.IDProducto = producto.ID;
             ProdIngre.listaIngre = new List<ProductoxIngrediente>();
-            ProductoxIngredienteBean aux = comprasfacade.obtenerlistadeingredientesdeProducto(ID);
+            ProductoxIngredienteBean aux = Ventafacade.obtenerlistadeingredientesdeProducto(ID);
 
             for (int j = 0; j < Ingredientes.Count; j++)
             {
@@ -190,7 +193,7 @@ namespace Cafeteria.Controllers.Venta
         [HttpPost]
         public ActionResult AñadirIngredientes( ProductoxIngredienteBean prodIngre)
         {
-            comprasfacade.AñadirIngredientesdeproducto(prodIngre);
+            Ventafacade.AñadirIngredientesdeproducto(prodIngre);
             return View();
         }
 

@@ -8,6 +8,7 @@ using Cafeteria.Models.Compra;
 using Cafeteria.Models;
 using Cafeteria.Models.Compra.Proveedor;
 using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Almacen;
 
 
 namespace Cafeteria.Controllers.Compras
@@ -16,6 +17,7 @@ namespace Cafeteria.Controllers.Compras
     {
         private static ILog log = LogManager.GetLogger(typeof(ProveedorController));
         comprasfacade comprasfacade = new comprasfacade();
+        almacenfacade Almacenfacade = new almacenfacade();
 
         #region Proveedor
         public ActionResult Index()
@@ -145,7 +147,7 @@ namespace Cafeteria.Controllers.Compras
             else ViewBag.estado = 1;
             for (int i = 0; i < ProveIngre.ListadeIngredientesProveedor.Count; i++)
             {
-                IngredienteBean Ingre= comprasfacade.buscaringrediente(ProveIngre.ListadeIngredientesProveedor[i].ID);
+                IngredienteBean Ingre = Almacenfacade.buscaringrediente(ProveIngre.ListadeIngredientesProveedor[i].ID);
                 ProveIngre.ListadeIngredientesProveedor[i].nombre = Ingre.nombre;
                 
             }
@@ -167,7 +169,7 @@ namespace Cafeteria.Controllers.Compras
         public ActionResult AñadirIngredientes(string ID) //idproveedor
         {
             ProveedorBean proveedor = comprasfacade.BuscarProveedor(ID);
-            List<IngredienteBean> Ingredientes = comprasfacade.ListarIngrediente("");
+            List<IngredienteBean> Ingredientes = Almacenfacade.ListarIngrediente("");
             ProveedorxIngredienteBean ProveIngre = new ProveedorxIngredienteBean();
             ProveIngre.nombre_Proveedor = proveedor.razonSocial;
             ProveIngre.idproveedor = proveedor.ID;

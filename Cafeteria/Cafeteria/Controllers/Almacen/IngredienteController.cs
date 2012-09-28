@@ -7,6 +7,7 @@ using log4net;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models;
 using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Almacen;
 
 
 namespace Cafeteria.Controllers.Almacen
@@ -14,11 +15,11 @@ namespace Cafeteria.Controllers.Almacen
     public class IngredienteController : Controller
     {
         private static ILog log = LogManager.GetLogger(typeof(IngredienteController));
-        comprasfacade comprasfacade = new comprasfacade();
+        almacenfacade Almacenfacade = new almacenfacade();
         
         public ActionResult Index()
         {
-            return View(comprasfacade.ListarIngrediente(""));
+            return View(Almacenfacade.ListarIngrediente(""));
         }
 
         #region Create
@@ -35,7 +36,7 @@ namespace Cafeteria.Controllers.Almacen
 
                Ingrediente.estado = "ACTIVO";
                List<IngredienteBean> ingred = new List<IngredienteBean>();
-               ingred = comprasfacade.ListarIngrediente(Ingrediente.nombre);
+               ingred = Almacenfacade.ListarIngrediente(Ingrediente.nombre);
 
                if (ingred.Count > 0)
                {
@@ -44,7 +45,7 @@ namespace Cafeteria.Controllers.Almacen
                }
                else
                {
-                   comprasfacade.RegistrarIngrediente(Ingrediente);
+                   Almacenfacade.RegistrarIngrediente(Ingrediente);
                    return RedirectToAction("Index");
                }
                
@@ -69,14 +70,14 @@ namespace Cafeteria.Controllers.Almacen
         public ActionResult Buscar(string nombre) 
         {
             ViewBag.estado = 1;
-            return View(comprasfacade.ListarIngrediente(nombre));
+            return View(Almacenfacade.ListarIngrediente(nombre));
         }
 
         #endregion
         #region editar
         public ActionResult Edit(string id)
         {
-            IngredienteBean ingre = comprasfacade.buscaringrediente(id);
+            IngredienteBean ingre = Almacenfacade.buscaringrediente(id);
             return View(ingre);
         }
 
@@ -85,7 +86,7 @@ namespace Cafeteria.Controllers.Almacen
         {
             try
             {
-                comprasfacade.actualizaringre(ingre);
+                Almacenfacade.actualizaringre(ingre);
                 return RedirectToAction("Index");
             }
             catch
@@ -97,13 +98,13 @@ namespace Cafeteria.Controllers.Almacen
         #region eliminar
         public ActionResult Delete(string ID)
         {
-            return View(comprasfacade.buscaringrediente(ID));
+            return View(Almacenfacade.buscaringrediente(ID));
         }
 
         [HttpPost, ActionName("Delete")]
         public JsonResult DeleteConfirmed(string ID)
         {
-            comprasfacade.eliminarIngrediente(ID);
+            Almacenfacade.eliminarIngrediente(ID);
             return Json(new { me = "" });
         }
 

@@ -67,8 +67,11 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administracion\CafeteriaController.cs" />
+    <Compile Include="Controllers\Administracion\SucursalController.cs" />
     <Compile Include="Controllers\Administracion\UsuarioController.cs" />
     <Compile Include="Controllers\Almacen\IngredienteController.cs" />
+    <Compile Include="Controllers\Almacen\NotaentradaController.cs" />
+    <Compile Include="Controllers\Compras\OrdencompraController.cs" />
     <Compile Include="Controllers\Venta\ProductoController.cs" />
     <Compile Include="Controllers\Compras\ProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -78,6 +81,9 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Administracion\administracionfacade.cs" />
     <Compile Include="Models\Administracion\Perfil Usuario\PerfilUsuarioBean.cs" />
+    <Compile Include="Models\Administracion\Sucursal\SucursalBean.cs" />
+    <Compile Include="Models\Administracion\Sucursal\SucursalDao.cs" />
+    <Compile Include="Models\Administracion\Sucursal\SucursalService.cs" />
     <Compile Include="Models\Administracion\Ubigeo\Ubigeo.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioBean.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioDao.cs" />

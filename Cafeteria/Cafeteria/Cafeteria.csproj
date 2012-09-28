@@ -82,11 +82,18 @@
     <Compile Include="Models\Administracion\Usuario\UsuarioBean.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioDao.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioService.cs" />
+    <Compile Include="Models\Almacen\almacenfacade.cs" />
+    <Compile Include="Models\Almacen\Notaentrada\Notaentradabean.cs" />
+    <Compile Include="Models\Almacen\Notaentrada\NotaentradaDao.cs" />
+    <Compile Include="Models\Almacen\Notaentrada\NotaentradaService.cs" />
     <Compile Include="Models\BaseDatos.cs" />
     <Compile Include="Models\Compra\comprasfacade.cs" />
     <Compile Include="Models\Almacen\Ingrediente\IngredienteBean.cs" />
     <Compile Include="Models\Almacen\Ingrediente\Ingredientedao.cs" />
     <Compile Include="Models\Almacen\Ingrediente\IngredienteService.cs" />
+    <Compile Include="Models\Compra\Ordencompra\OrdencompraBean.cs" />
+    <Compile Include="Models\Compra\Ordencompra\OrdencompraDao.cs" />
+    <Compile Include="Models\Compra\Ordencompra\OrdencompraService.cs" />
     <Compile Include="Models\Venta\Producto\ProductoBean.cs" />
     <Compile Include="Models\Venta\Producto\ProductoDao.cs" />
     <Compile Include="Models\Venta\Producto\ProductoService.cs" />
@@ -98,6 +105,7 @@
     <Compile Include="Models\Compra\Proveedor\ProveedorDao.cs" />
     <Compile Include="Models\Compra\Proveedor\ProveedorService.cs" />
     <Compile Include="Models\Utils.cs" />
+    <Compile Include="Models\Venta\ventafacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

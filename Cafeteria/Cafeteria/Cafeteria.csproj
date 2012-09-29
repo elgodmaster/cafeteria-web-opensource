@@ -89,6 +89,7 @@
     <Compile Include="Models\Administracion\Usuario\UsuarioDao.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioService.cs" />
     <Compile Include="Models\Almacen\almacenfacade.cs" />
+    <Compile Include="Models\Almacen\Notaentrada\Notaentrada.cs" />
     <Compile Include="Models\Almacen\Notaentrada\Notaentradabean.cs" />
     <Compile Include="Models\Almacen\Notaentrada\NotaentradaDao.cs" />
     <Compile Include="Models\Almacen\Notaentrada\NotaentradaService.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Models\Almacen\Ingrediente\IngredienteBean.cs" />
     <Compile Include="Models\Almacen\Ingrediente\Ingredientedao.cs" />
     <Compile Include="Models\Almacen\Ingrediente\IngredienteService.cs" />
+    <Compile Include="Models\Compra\Ordencompra\detalleordencompra.cs" />
     <Compile Include="Models\Compra\Ordencompra\OrdencompraBean.cs" />
     <Compile Include="Models\Compra\Ordencompra\OrdencompraDao.cs" />
     <Compile Include="Models\Compra\Ordencompra\OrdencompraService.cs" />

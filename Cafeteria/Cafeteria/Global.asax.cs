@@ -33,10 +33,16 @@ namespace tesis
 
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+           AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            log4net.Config.XmlConfigurator.Configure();
+            log.Debug("--- Iniciando el Sitio Web Stardust -----");
+
+            log.Debug("Cargando los mapeos dentro del sistema");
+
         }
     }
 }

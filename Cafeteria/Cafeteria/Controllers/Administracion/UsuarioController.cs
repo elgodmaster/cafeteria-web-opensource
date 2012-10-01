@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Cafeteria.Models.Administracion.Usuario;
 using log4net;
 using Cafeteria.Models;
+using System.Web.Security;
 
 
 namespace Cafeteria.Controllers.Administracion
@@ -110,6 +111,19 @@ namespace Cafeteria.Controllers.Administracion
 
         #endregion
 
+
+
+        [HttpPost]
+        public JsonResult LoginResult(String user, String password)
+        {
+            var usuario = "jose";// usuarioFac.getLogin(user, password);
+            if (usuario != null && !usuario.Equals("ONLINE"))
+            {
+                FormsAuthentication.SetAuthCookie(user, false);
+                //usuarioFac.marcarOnline(usuario.ID);
+            }
+            return new JsonResult() { Data = usuario };
+        }
 
     }
 }

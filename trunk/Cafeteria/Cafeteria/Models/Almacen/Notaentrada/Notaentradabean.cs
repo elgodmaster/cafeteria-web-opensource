@@ -15,8 +15,8 @@ namespace Cafeteria.Models.Almacen.Notaentrada
 
         [Display(Name = "Proveedor")]
         public string nombreproveedor { get; set; }
-        [Display(Name = "hotel")]
-        public string nombrehotel { get; set; }
+        [Display(Name = "Cafeteria")]
+        public string nombrecafeteria { get; set; }
 
         [Display(Name = "Estado")]
         public string estado { get; set; }
@@ -29,8 +29,6 @@ namespace Cafeteria.Models.Almacen.Notaentrada
 
         [Display(Name = "Fecha")]
         public string fechaRegistradaOrdenCompra { get; set; }
-
-
         public List<Notaentrada> detallenotaentrada { get; set; }
 
     }

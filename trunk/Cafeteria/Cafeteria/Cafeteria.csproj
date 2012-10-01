@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administracion\CafeteriaController.cs" />
+    <Compile Include="Controllers\Administracion\LoginController.cs" />
     <Compile Include="Controllers\Administracion\SucursalController.cs" />
     <Compile Include="Controllers\Administracion\UsuarioController.cs" />
     <Compile Include="Controllers\Almacen\IngredienteController.cs" />
@@ -80,6 +81,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Administracion\administracionfacade.cs" />
+    <Compile Include="Models\Administracion\Login\loginBean.cs" />
     <Compile Include="Models\Administracion\Perfil Usuario\PerfilUsuarioBean.cs" />
     <Compile Include="Models\Administracion\Sucursal\SucursalBean.cs" />
     <Compile Include="Models\Administracion\Sucursal\SucursalDao.cs" />
@@ -1397,6 +1399,7 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\Ubigeo.js" />
@@ -1512,6 +1515,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Usuario\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ordencompra\Registrar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AnonLayout.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

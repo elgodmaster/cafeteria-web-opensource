@@ -12,7 +12,7 @@ namespace Cafeteria.Models.Administracion.Login
         [Required(ErrorMessage = "Es necesario que ingrese el Usuario y su Contrasenia")]
         public string Usuario { get; set; }
 
-        [Display(Name = "Contrasenia")]
+        [Display(Name = "Contraseña")]
         [Required(ErrorMessage = "Es necesario que ingrese el Usuario y su Contrasenia")]
         public string Contrasenia { get; set; }
     }

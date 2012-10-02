@@ -3,44 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Cafeteria.Models;
+using Cafeteria.Models.Administracion.Sucursal;
+using log4net;
 
 namespace Cafeteria.Controllers.Administracion
 {
     public class SucursalController : Controller
     {
-        //
-        // GET: /Sucursal/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Sucursal/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Sucursal/Create
-
+        private static ILog log = LogManager.GetLogger(typeof(SucursalController));
+        
+        
+        #region Crear
         public ActionResult Create()
         {
-            return View();
-        } 
-
-        //
-        // POST: /Sucursal/Create
+            var sucursal = new SucursalBean();
+            try
+            {
+                sucursal.Departamentos = Utils.listarDepartamentos();
+                return View(sucursal);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Create - GET(EXCEPTION): ", ex);
+                ModelState.AddModelError("", ex.Message);
+                return View(sucursal);
+            }
+        }
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(SucursalBean suc)
         {
             try
             {
-                // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
@@ -49,57 +44,6 @@ namespace Cafeteria.Controllers.Administracion
                 return View();
             }
         }
-        
-        //
-        // GET: /Sucursal/Edit/5
- 
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Sucursal/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Sucursal/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Sucursal/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        #endregion
     }
 }

@@ -23,7 +23,7 @@
     <fieldset>
         <div class = "widget" >
             <div class = "title" >
-                <img src="@Url.Content("~/Content/images/icons/dark/list.png")" alt class="titleIcon">
+                <img src="@Url.Content("~/Content/images/icons/dark/list.png")"  class="titleIcon">
                 <h6>@ViewBag.Title</h6>
             </div>
             
@@ -42,8 +42,8 @@
                     @Html.HiddenFor(m => m.PerfilesUsuario[i].ID)
                     @Html.HiddenFor(m => m.PerfilesUsuario[i].nombre)
                 }
-
-             @* 
+                *@
+             
             <div class = "formRow" >
                 @Html.LabelFor( model => model.user_account )
                 <div class = "formRight" >
@@ -60,7 +60,7 @@
                     @Html.ValidationMessageFor( model => model.pass )
                 </div>
                 <div class = "clear" ></div>
-            </div>*@
+            </div>
 
             <div class = "formRow" >
                 @Html.LabelFor( model => model.nombres )
@@ -107,7 +107,7 @@
                 <div class = "clear" ></div>
             </div>
 
-            <div class = "formRow" >
+            @*<div class = "formRow" >
                 @Html.LabelFor( model => model.tipoDocumento )
                 <div class = "formRight" >
                     @Html.DropDownListFor( model => model.tipoDocumento , new SelectList( Model.Documentos, "nombre" , "nombre") , "Elije un tipo de documento..." )
@@ -119,7 +119,7 @@
                 @for (int i = 0; i < Model.Documentos.Count; i++)
                 {
                     @Html.HiddenFor(m => m.Documentos[i].nombre)
-                }
+                }*@
 
             <div class = "formRow" >
                 @Html.LabelFor( model => model.nroDocumento )

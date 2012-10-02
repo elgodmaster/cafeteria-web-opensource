@@ -1,7 +1,9 @@
-﻿@model Cafeteria.Models.Administracion.Usuario.UsuarioBean
+﻿@model IEnumerable<Cafeteria.Models.Administracion.Usuario.UsuarioBean>
 
 <h2>Buscar Personal</h2>
 
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
     
 
 @using (Html.BeginForm("Buscar", "Usuario", FormMethod.Post, new { @class = "form" }))
@@ -72,27 +74,30 @@
                 </tr>
             </thead>
                 <tbody>
-@*                @foreach (var item in Model)
+               @foreach (var item in Model)
                 {
                     <tr class="gradeA odd">
                         <td class=" sorting_1">@Html.DisplayFor(modelItem => item.ID)</td>
-                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.nombre)</td>
-                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.descripcion)</td>
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.nombres)</td>
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.apPat)</td>
                         <td class=" sorting_1">@Html.DisplayFor(modelItem => item.estado)</td>
                         <td class=" sorting_1">
                             <a href="@Url.Action("Edit", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
-                         
+                            <a href="@Url.Action("Detalle", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />detalle </a> | 
+
                             @if(item.estado=="ACTIVO"){
                                 <a  ID = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
+                                <a href="@Url.Action("Horario", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Ver horario </a>  
+                                
                             }
 
                         </td>
                     </tr>
         
-                }*@
+                }
             <div id="dialogEliminar" title="Desea Eliminar el Producto?">
 	            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-                El Producto que UD. Elimine ya no podra ser recuperado</p>
+                El Personal que UD. Elimine ya no podra ser recuperado</p>
              </div>
             </tbody>
               
@@ -123,7 +128,7 @@
             draggable: false,
             width: 300,
             modal: true,
-            title: "!Confirmar Eliminacion de Ingrediente",
+            title: "!Confirmar Eliminacion del personal",
             position: "center",
             buttons: {
                 "Aceptar": function () {

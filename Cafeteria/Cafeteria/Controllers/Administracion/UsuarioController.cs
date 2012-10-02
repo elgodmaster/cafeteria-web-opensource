@@ -7,6 +7,7 @@ using Cafeteria.Models.Administracion.Usuario;
 using log4net;
 using Cafeteria.Models;
 using System.Web.Security;
+using Cafeteria.Models.Administracion;
 
 
 namespace Cafeteria.Controllers.Administracion
@@ -14,19 +15,61 @@ namespace Cafeteria.Controllers.Administracion
     public class UsuarioController : Controller
     {
         private static ILog log = LogManager.GetLogger(typeof(UsuarioController));
+        administracionfacade admifacade = new administracionfacade();
+
 
         public ActionResult Index()
         {
-            return View();
+            List<UsuarioBean> usuario = admifacade.ListarPersonal("", "", "", "");
 
-            
+
+            ViewBag.estado = 0;
+            return View(usuario);
+                       
         }
 
-
+        #region detalle
         public ActionResult Details(string id)
         {
+            UsuarioBean usuario = new UsuarioBean();
+            usuario = admifacade.buscarusuario(id);
+            return View(usuario);
+        }
+        #endregion
+
+
+        #region asignarhorario
+
+        public ActionResult Horario(String id)
+        {
+            UsuarioBean usuario = new UsuarioBean();
+            UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
+            usuario = admifacade.buscarusuario(id);
+            usua.ID = usuario.ID;
+            usua.nroDocumento = usuario.nroDocumento;
+            usua.nombres = usuario.nombres +" "+ usuario.apPat + " "+usuario.apMat;
+            usua.dia = new List<string>();
+            usua.horafin = new List<DateTime>();
+            usua.horainicio = new List<DateTime>();
+            usua.dia.Add("Lunes");
+            usua.dia.Add("Martes");
+            usua.dia.Add("Miercoles");
+            usua.dia.Add("Jueves");
+            usua.dia.Add("Viernes");
+            usua.dia.Add("Sabado");
+            usua.dia.Add("Domingo");
+            
+            return View(usua);
+        }
+
+        [HttpPost]
+        public ActionResult Horario(UsuarioxSucursalBean usuario)
+        {
+            
             return View();
         }
+        #endregion
+
 
         #region Crear
         public ActionResult Create()
@@ -35,12 +78,6 @@ namespace Cafeteria.Controllers.Administracion
             try
             {
                 usuarioVMC.Departamentos = Utils.listarDepartamentos();
-                usuarioVMC.Documentos = new List<TipoDocumento>();
-                usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "DNI" });
-                usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "RUC" });
-                //usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "PASAPORTE" });
-                //usuarioVMC.Documentos.Add(new TipoDocumento() { nombre = "CARNET DE EXTRANJERIA" });
-                //usuarioVMC.PerfilesUsuario = new PerfilUsuarioFacade().listarPerfiles();
                 return View(usuarioVMC);
             }
             catch (Exception ex)
@@ -49,10 +86,10 @@ namespace Cafeteria.Controllers.Administracion
                 ModelState.AddModelError("", ex.Message);
                 return View(usuarioVMC);
             }
-        } 
+        }
 
         [HttpPost]
-        public ActionResult Create(UsuarioBean usuario)
+        public ActionResult Create( UsuarioBean usuario)
         {
             try
             {
@@ -69,7 +106,9 @@ namespace Cafeteria.Controllers.Administracion
         #region editar
         public ActionResult Edit(string id)
         {
-            return View();
+            UsuarioBean usuario = new UsuarioBean();
+            usuario = admifacade.buscarusuario(id);
+            return View(usuario);
         }
 
         [HttpPost]
@@ -77,7 +116,7 @@ namespace Cafeteria.Controllers.Administracion
         {
             try
             {
- 
+                //guardar modificaciones
                 return RedirectToAction("Index");
             }
             catch
@@ -100,18 +139,59 @@ namespace Cafeteria.Controllers.Administracion
             return Json(new { me = "" });
         }
         #endregion
-
+                
         #region Buscar
 
-        public ActionResult Buscar() 
+        public ActionResult Buscar()
         {
+            List<UsuarioBean> prod = admifacade.ListarPersonal("", "","", "");
 
+
+            ViewBag.estado = 0;
+            return View(prod);
+        }
+
+        [HttpPost]
+        public ActionResult Buscar(string nombre, string cargo, string dni, string sucursal)
+        {
+            ViewBag.estado = 1;
+            return View(admifacade.ListarPersonal(nombre, cargo, dni, sucursal));
+        }
+
+        #endregion
+
+
+        #region AdministrarPerfil
+
+        public ActionResult AdministrarPerfil()
+        {
+            List<UsuarioBean> usua = admifacade.ListarPersonal("", "", "", "");
+
+            ViewBag.estado = 0;
+
+            return View(usua);
+        }
+
+        [HttpPost]
+        public ActionResult AdministrarPerfil(string id)
+        {
             return View();
         }
 
         #endregion
 
 
+        #region asignarpersonalaSucursal
+
+        public ActionResult AsignarpersonalSucursal()
+        {
+
+            return View();
+        }
+
+        #endregion
+        /*login----------------------------->>>*/
+        #region Login
 
         [HttpPost]
         public JsonResult LoginResult(String user, String password)
@@ -124,6 +204,8 @@ namespace Cafeteria.Controllers.Administracion
             }
             return new JsonResult() { Data = usuario };
         }
+
+        #endregion
 
     }
 }

@@ -21,6 +21,8 @@ namespace Cafeteria.Models.Administracion.Usuario
 
     public class UsuarioViewModelCreate
     {
+        public string ID { get; set; }
+
         [Display(Name = "Perfil Usuario")]
         [Required(ErrorMessage = "Debe ingresar un perfil al usuario")]
         public int idPerfilUsuario { get; set; }
@@ -50,17 +52,13 @@ namespace Cafeteria.Models.Administracion.Usuario
         public string apMat { get; set; }
 
         [Display(Name = "E-mail")]
-        [Remote("ValidaEmail", "Validation")]
+        //[Remote("ValidaEmail", "Validation")]
         public string email { get; set; }
 
         [Display(Name = "Teléfono")]
         [StringLength(7, ErrorMessage = "Debe ingresar un teléfono de 7 dígitos")]
         [RegularExpression("([0-9]+)", ErrorMessage = "El valor ingresado debe tener la sintaxis de un telefóno")]
         public string celular { get; set; }
-
-        [Display(Name = "DNI")]
-        [Required(ErrorMessage = "Debe ingresar un tipo de documento")]
-        public string tipoDocumento { get; set; }
 
         [Display(Name = "Nro. de DNI")]
         [StringLength(12, ErrorMessage = "El nro de documento no debe sobrepasar 8 digitos")]
@@ -84,7 +82,8 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         public List<PerfilUsuarioBean> PerfilesUsuario { get; set; }
         public List<Ubigeo.Ubigeo.Departamento> Departamentos { get; set; }
-        //public List<TipoDocumento> Documentos { get; set; }
+        public string estado { get; set; }
+        
     }
 
     public class UsuarioBean
@@ -122,7 +121,7 @@ namespace Cafeteria.Models.Administracion.Usuario
         public string apMat { get; set; }
 
         [Display(Name = "E-mail")]
-        [Remote("ValidaEmail", "Validation")]
+        //[Remote("ValidaEmail", "Validation")]
         public string email { get; set; }
 
         [Display(Name = "Teléfono")]
@@ -130,11 +129,7 @@ namespace Cafeteria.Models.Administracion.Usuario
         [RegularExpression("([0-9]+)", ErrorMessage = "El valor ingresado debe tener la sintaxis de un telefóno")]
         public string celular { get; set; }
 
-        [Display(Name = "Tipo de documento")]
-        [Required(ErrorMessage = "Debe ingresar un tipo de documento")]
-        public string tipoDocumento { get; set; }
-
-        [Display(Name = "Nro. de Documento")]
+        [Display(Name = "Nro. de DNI")]
         [StringLength(12, ErrorMessage = "El nro de documento no debe sobrepasar 12 digitos")]
         public string nroDocumento { get; set; }
 
@@ -145,15 +140,15 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         [Display(Name = "Departamento")]
         [Required(ErrorMessage = "Debe elegir un departamento")]
-        public int idDepartamento { get; set; }
+        public string idDepartamento { get; set; }
 
         [Display(Name = "Provincia")]
         [Required(ErrorMessage = "Debe elegir una provincia")]
-        public int idProvincia { get; set; }
+        public string idProvincia { get; set; }
 
         [Display(Name = "Distrito")]
         [Required(ErrorMessage = "Debe elegir un distrito")]
-        public int idDistrito { get; set; }
+        public string idDistrito { get; set; }
 
         public string estado { get; set; }
 
@@ -163,8 +158,8 @@ namespace Cafeteria.Models.Administracion.Usuario
         public string nombreDistrito { get; set; }
 
         public List<Ubigeo.Ubigeo.Departamento> Departamentos { get; set; }
-        public List<Ubigeo.Ubigeo.Provincia> Provincias { get; set; }
-        public List<Ubigeo.Ubigeo.Distrito> Distritos { get; set; }
+        //public List<Ubigeo.Ubigeo.Provincia> Provincias { get; set; }
+        //public List<Ubigeo.Ubigeo.Distrito> Distritos { get; set; }
 
         public List<PerfilUsuarioBean> PerfilesUsuario { get; set; }
 

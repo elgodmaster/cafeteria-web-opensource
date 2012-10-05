@@ -74,7 +74,7 @@ namespace Cafeteria.Controllers.Administracion
         #region Crear
         public ActionResult Create()
         {
-            var usuarioVMC = new UsuarioViewModelCreate();
+            var usuarioVMC = new UsuarioBean();
             try
             {
                 usuarioVMC.Departamentos = Utils.listarDepartamentos();
@@ -89,16 +89,30 @@ namespace Cafeteria.Controllers.Administracion
         }
 
         [HttpPost]
-        public ActionResult Create( UsuarioBean usuario)
+        public ActionResult Create(UsuarioBean usuario)
         {
             try
             {
-
-                return RedirectToAction("Index");
+                usuario.estado = "ACTIVO";
+                List<UsuarioBean> usuarios = admifacade.ListarPersonal("", usuario.nroDocumento, "", "");
+                if (usuarios.Count > 0)
+                {
+                    ViewBag.error = "El Usuario ya existe";
+                    return View(usuario);
+                }
+                else
+                {
+                    admifacade.registrarpersonal(usuario);
+                    return RedirectToAction("Index");
+                }
+                //return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                log.Error("Create - POST(EXCEPTION): ", ex);
+                ModelState.AddModelError("", ex.Message);
+                return View(usuario);
+                //return View();
             }
         }
         #endregion
@@ -117,6 +131,7 @@ namespace Cafeteria.Controllers.Administracion
             try
             {
                 //guardar modificaciones
+                admifacade.actualizarusuario(usuario);
                 return RedirectToAction("Index");
             }
             catch
@@ -126,19 +141,7 @@ namespace Cafeteria.Controllers.Administracion
         }
         #endregion
 
-        #region Eliminar
-        public ActionResult Delete(string ID)
-        {
-            return View(/*comprasfacade.BuscarProveedor(ID)*/);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public JsonResult DeleteConfirmed(string ID)
-        {
-            //comprasfacade.EliminarProveedor(ID);
-            return Json(new { me = "" });
-        }
-        #endregion
+        
                 
         #region Buscar
 
@@ -159,6 +162,27 @@ namespace Cafeteria.Controllers.Administracion
         }
 
         #endregion
+
+
+        #region Eliminar
+        public ActionResult Delete(string ID)
+        {
+            return View(admifacade.buscarusuario(ID));
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public JsonResult DeleteConfirmed(string ID)
+        {
+            admifacade.eliminarusuario(ID);
+            //comprasfacade.EliminarProveedor(ID);
+            return Json(new { me = "" });
+        }
+        #endregion
+
+
+
+
+
 
 
         #region AdministrarPerfil

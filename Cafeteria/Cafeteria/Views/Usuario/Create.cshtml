@@ -1,4 +1,4 @@
-﻿@model Cafeteria.Models.Administracion.Usuario.UsuarioViewModelCreate
+﻿@model Cafeteria.Models.Administracion.Usuario.UsuarioBean
 
 @{
     ViewBag.Title = "Registrar Personal";
@@ -89,7 +89,7 @@
                 <div class = "clear" ></div>
             </div>
 
-            <div class = "formRow" >
+           @* <div class = "formRow" >
                 @Html.LabelFor( model => model.email )
                 <div class = "formRight" >
                     @Html.TextBoxFor( model => model.email )
@@ -97,7 +97,7 @@
                 </div>
                 <div class = "clear" ></div>
             </div>
-
+*@
             <div class = "formRow" >
                 @Html.LabelFor( model => model.celular )
                 <div class = "formRight" >

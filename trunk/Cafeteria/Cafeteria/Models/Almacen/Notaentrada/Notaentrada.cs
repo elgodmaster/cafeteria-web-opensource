@@ -18,7 +18,7 @@ namespace Cafeteria.Models.Almacen.Notaentrada
         [RegularExpression("([0-9]+)", ErrorMessage = "Sólo números")]
         [Required(ErrorMessage = "Es necesario ingresar la cantidad entrante")]
         public int cantidadentrante { get; set; }
-        public Boolean estado { get; set; }
+        public Boolean estadonota { get; set; }
 
     }
 }

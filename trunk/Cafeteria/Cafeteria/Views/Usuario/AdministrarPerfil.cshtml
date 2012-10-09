@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cafeteria.Models.Administracion.Usuario.UsuarioxSucursalBean>
+﻿@model Cafeteria.Models.Administracion.Usuario.UsuarioxSucursalBean
 
 @{
     ViewBag.Title = "AdministrarPerfil";
@@ -9,7 +9,7 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm("AdministrarPerfil", "Usuario", FormMethod.Post, new { @class = "form" }))
+@using (Html.BeginForm("AdministrarPerfil2", "Usuario", FormMethod.Post, new { @class = "form" }))
 {
     @Html.ValidationSummary(false)
     <fieldset>
@@ -18,19 +18,24 @@
 
             <div class="formRow">
                 <label>Nombre</label>
-                <div class = "formRight" ><input type = "text" id = "nombre" name = "nombre" class="validate[required,custom[onlyLetterSp]]" ,name="lettersValid", maxlength = "50", placeholder = "Maximo 50 caracteres aqui" /></div>
+                <div class = "formRight" ><input type = "text" id = "nombre" name = "nombre" /></div>
                 <div class = "clear" ></div>
             </div>
             <div class="formRow">
                 <label>DNI</label>
-                <div class = "formRight" ><input type = "text" id = "cargo" name = "cargo" class="validate[required,custom[onlyLetterSp]]" ,name="lettersValid", maxlength = "50", placeholder = "Maximo 50 caracteres aqui" /></div>
+                <div class = "formRight" ><input type = "text" id = "dni" name = "dni" /></div>
                 <div class = "clear" ></div>
             </div>
+
             <div class="formRow">
-                <label>Perfil</label>
-                <div class = "formRight" ><input type = "text" id = "dni" name = "dni" class="validate[required,custom[onlyLetterSp]]" ,name="lettersValid", maxlength = "50", placeholder = "Maximo 50 caracteres aqui" /></div>
+               <label>Perfil</label>                           
+                
+                <div class = "formRight" >
+                <div class = "selector" id= "perfil" name = "perfil" >@Html.DropDownListFor(model => model.idperfil, Model.UsuarioList)</div></div>
                 <div class = "clear" ></div>
             </div>
+
+
         </div>
     </fieldset>
     <p>
@@ -40,7 +45,7 @@
 
 <p></p><p></p>
 
-@if (ViewBag.estado != 0)
+@*@if (ViewBag.estado != 0)
 {    
     <div class="wrapper">
         <div class="widget">
@@ -106,4 +111,4 @@
     </div>
     
     
-}
+}*@

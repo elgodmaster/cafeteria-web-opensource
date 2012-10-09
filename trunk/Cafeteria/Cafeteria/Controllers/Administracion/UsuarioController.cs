@@ -181,27 +181,48 @@ namespace Cafeteria.Controllers.Administracion
 
 
 
-
-
-
-
         #region AdministrarPerfil
 
         public ActionResult AdministrarPerfil()
         {
-            List<UsuarioBean> usua = admifacade.ListarPersonal("", "", "", "");
+            //List<UsuarioBean> usua = admifacade.ListarPersonal2("", "", "", "");
 
+            UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
+            //List<UsuarioxSucursalBean> usa= new List<UsuarioxSucursalBean>();
             ViewBag.estado = 0;
 
             return View(usua);
         }
 
-        [HttpPost]
-        public ActionResult AdministrarPerfil(string id)
+        
+        public ActionResult AdministrarPerfil2(string nombre, string dni, string perfil)
         {
+            //List<UsuarioxSucursalBean> usua = admifacade.ListarPersonal2(nombre, dni, cargo);
+
+            List<UsuarioxSucursalBean> usua = new List<UsuarioxSucursalBean>();
+
+            for (int i = 0; i <= usua.Count; i++)
+            {
+                usua[i].perfilesdelusuario = new List<string>();
+            }
             return View();
         }
 
+        public ActionResult Asignarperfil(string id)
+        {
+            //perfiles que tiene el usuario con el ID
+
+            UsuarioxSucursalBean usuario = new UsuarioxSucursalBean();
+            
+            return View(usuario);
+        }
+
+        [HttpPost]
+        public ActionResult Asignarperfil(UsuarioxSucursalBean usuario)
+        {
+            //guardar nuevos perfiles con estado true
+            return View();
+        }
         #endregion
 
 

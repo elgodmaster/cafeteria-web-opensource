@@ -9,6 +9,12 @@ using Cafeteria.Models.Administracion.Perfil_Usuario;
 namespace Cafeteria.Models.Administracion.Usuario
 {
 
+    public class Perfiles
+    {
+        public string ID { get; set; }
+        public string nombre { get; set; }
+    }
+
    public class UsuarioViewModelList
     {
         public string ID { get; set; }

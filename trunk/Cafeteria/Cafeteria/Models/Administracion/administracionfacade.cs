@@ -44,5 +44,18 @@ namespace Cafeteria.Models.Administracion
 
         
         #endregion
+
+        #region perfil
+
+        public List<UsuarioxSucursalBean> ListarPersonal2(string nombre, string dni, string perfil)
+        {
+            List<UsuarioxSucursalBean> usu = new List<UsuarioxSucursalBean>();
+            usu = usuarioService.ListarPersonal2(nombre, dni, perfil);
+            return usu;
+        }
+        
+
+
+        #endregion
     }
 }

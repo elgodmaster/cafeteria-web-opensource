@@ -13,6 +13,7 @@ namespace Cafeteria.Models.Administracion.Usuario
         String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
 
+        #region usuario
         public List<UsuarioBean> ListarPersonal(string nombre, string dni, string cargo, string sucursal)
         {
             
@@ -238,6 +239,71 @@ namespace Cafeteria.Models.Administracion.Usuario
             }
 
         }
+
+        #endregion
+
+        #region perfil 
+
+        public List<UsuarioxSucursalBean> ListarPersonal2(string nombre, string dni, string perfil)
+        {
+
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<UsuarioxSucursalBean> ListaUsuario = new List<UsuarioxSucursalBean>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM UsuarioxSucursalBean";
+                if (!String.IsNullOrEmpty(dni)) strQuery = strQuery + " WHERE UPPER(numero_documento) LIKE '%" + dni.ToUpper() + "%'";
+                //if (!String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                //if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'"+
+                //                                                                            " AND UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        UsuarioxSucursalBean usuarioelemento = new UsuarioxSucursalBean();
+                        usuarioelemento.ID = Convert.ToString(objDataReader["idUsuario"]);
+                        usuarioelemento.nombres = Convert.ToString(objDataReader["nombre"]);
+                        usuarioelemento.apPat = Convert.ToString(objDataReader["apellido_paterno"]);
+                        usuarioelemento.apMat = Convert.ToString(objDataReader["apellido_materno"]);
+                        usuarioelemento.estado = Convert.ToString(objDataReader["estado"]);
+                        usuarioelemento.email = Convert.ToString(objDataReader["email"]);
+                        usuarioelemento.celular = Convert.ToString(objDataReader["celular"]);
+                        usuarioelemento.direccion = Convert.ToString(objDataReader["direccion"]);
+                        usuarioelemento.idDepartamento = Convert.ToString(objDataReader["idDepartamento"]);
+                        usuarioelemento.idProvincia = Convert.ToString(objDataReader["idProvincia"]);
+                        usuarioelemento.idDistrito = Convert.ToString(objDataReader["idDistrito"]);
+                        ListaUsuario.Add(usuarioelemento);
+                    }
+                }
+
+                return ListaUsuario;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Usuarios(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+
+
+        }
+
+
+        #endregion
+
+
 
     }
 }

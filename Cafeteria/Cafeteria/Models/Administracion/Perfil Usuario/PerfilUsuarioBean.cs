@@ -8,7 +8,7 @@ namespace Cafeteria.Models.Administracion.Perfil_Usuario
 {
     public class PerfilUsuarioBean
     {
-        [Key]
+        
         public string ID { get; set; }
 
         [Display(Name = "Nombre")]
@@ -19,5 +19,7 @@ namespace Cafeteria.Models.Administracion.Perfil_Usuario
         public string descripcion { get; set; }
 
         public string token { get; set; }
+        public Boolean estado { get; set; }
     }
+
 }

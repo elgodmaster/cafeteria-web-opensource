@@ -124,7 +124,6 @@ namespace Cafeteria.Models.Administracion.Usuario
         public void registrarpersonal(UsuarioBean usuario)
         {
             usuario.estado = "ACTIVO";
-            //usuario.CargoContacto = "gG";
             SqlConnection objDB = null;
             int i = Utils.cantidad("Usuario") + 1;
             string ID = "USUA00";//8caracteres-4letras-4#
@@ -212,7 +211,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                 objDB.Open();
                 String strQuery = "UPDATE Usuario SET nombre=@nombre, apellido_paterno=@apepaterno" +
                                   ", apellido_materno=@apematerno, email=@email,direccion=@direccion," +
-                                  "celular=@celular " +
+                                  "celular=@celular, estado=@estado " +
                                   "WHERE idUsuario = @id";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
@@ -223,6 +222,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                 Utils.agregarParametro(objQuery, "@email", usuario.email);
                 Utils.agregarParametro(objQuery, "@direccion", usuario.direccion);
                 Utils.agregarParametro(objQuery, "@celular", usuario.celular);
+                Utils.agregarParametro(objQuery, "@estado", usuario.estado);
                 objQuery.ExecuteNonQuery();
 
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Cafeteria.Models.Administracion.Usuario;
+using Cafeteria.Models.Administracion.Sucursal;
 
 namespace Cafeteria.Models.Administracion
 {
@@ -10,6 +11,8 @@ namespace Cafeteria.Models.Administracion
     {
 
         UsuarioService usuarioService = new UsuarioService();
+        SucursalService sucursalservice = new SucursalService();
+
         #region Personal
         public List<UsuarioBean> ListarPersonal(string nombre, string dni, string cargo, string sucursal)
         {
@@ -57,5 +60,22 @@ namespace Cafeteria.Models.Administracion
 
 
         #endregion
+
+        #region Sucursal
+
+        public void registrarSucursal(SucursalBean suc)
+        {
+            sucursalservice.registrar(suc);
+        }
+
+        public List<SucursalBean> listasucursal()
+        {
+            List<SucursalBean> sucur = new List<SucursalBean>();
+            sucur = sucursalservice.listarsucursal();
+            return sucur;
+        }
+
+        #endregion
+
     }
 }

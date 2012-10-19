@@ -200,10 +200,15 @@ namespace Cafeteria.Controllers.Administracion
             //List<UsuarioxSucursalBean> usua = admifacade.ListarPersonal2(nombre, dni, cargo);
 
             List<UsuarioxSucursalBean> usua = new List<UsuarioxSucursalBean>();
-
-            for (int i = 0; i <= usua.Count; i++)
+            List<string> perf = new List<string>();
+            for (int i = 0; i < 4; i++)
             {
-                usua[i].perfilesdelusuario = new List<string>();
+                perf.Add(" ");
+            }
+
+            for (int i = 0; i < usua.Count; i++)
+            {
+                usua[i].perfilesdelusuario = perf;//new List<string>();
             }
             return View();
         }
@@ -213,6 +218,8 @@ namespace Cafeteria.Controllers.Administracion
             //perfiles que tiene el usuario con el ID
 
             UsuarioxSucursalBean usuario = new UsuarioxSucursalBean();
+
+
             
             return View(usuario);
         }

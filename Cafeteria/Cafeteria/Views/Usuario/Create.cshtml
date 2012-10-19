@@ -26,24 +26,7 @@
                 <img src="@Url.Content("~/Content/images/icons/dark/list.png")"  class="titleIcon">
                 <h6>@ViewBag.Title</h6>
             </div>
-            
-            @*<div class = "formRow" >
-                @Html.LabelFor( model => model.idPerfilUsuario )
-                <div class = "formRight" >
-                    @Html.DropDownListFor( model => model.idPerfilUsuario , new SelectList( Model.PerfilesUsuario, "ID" , "nombre" ) , "Elije un perfil..." )
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    @Html.ValidationMessageFor(model => model.idPerfilUsuario)
-                </div>
-                <div class = "clear" ></div>
-            </div>
-
-                @for (int i = 0; i < Model.PerfilesUsuario.Count; i++)
-                {
-                    @Html.HiddenFor(m => m.PerfilesUsuario[i].ID)
-                    @Html.HiddenFor(m => m.PerfilesUsuario[i].nombre)
-                }
-                *@
-             
+                     
             <div class = "formRow" >
                 @Html.LabelFor( model => model.user_account )
                 <div class = "formRight" >

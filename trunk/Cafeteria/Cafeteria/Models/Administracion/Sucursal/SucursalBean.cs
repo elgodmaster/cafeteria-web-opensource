@@ -43,6 +43,9 @@ namespace Cafeteria.Models.Administracion.Sucursal
         [Display(Name = "Distrito")]
         [Required(ErrorMessage = "Debe elegir un distrito")]
         public string idDistrito { get; set; }
+        
+        [Display(Name = "Estado")]
+        public string Estado { get; set; }
 
         public List<Ubigeo.Ubigeo.Departamento> Departamentos { get; set; }
     }

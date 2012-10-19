@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using Cafeteria.Models;
 using Cafeteria.Models.Administracion.Sucursal;
 using log4net;
+using Cafeteria.Models.Administracion;
 
 namespace Cafeteria.Controllers.Administracion
 {
     public class SucursalController : Controller
     {
         private static ILog log = LogManager.GetLogger(typeof(SucursalController));
-        
+        administracionfacade admin = new administracionfacade();
         
         #region Crear
         public ActionResult Create()
@@ -36,7 +37,8 @@ namespace Cafeteria.Controllers.Administracion
         {
             try
             {
-
+                //registrar a la base 
+                admin.registrarSucursal(suc);
                 return RedirectToAction("Index");
             }
             catch
@@ -45,5 +47,13 @@ namespace Cafeteria.Controllers.Administracion
             }
         }
         #endregion
+
+        public ActionResult Index()
+        {
+            List<SucursalBean> suc=admin.listasucursal();
+            return View(suc);
+        }
+
+
     }
 }

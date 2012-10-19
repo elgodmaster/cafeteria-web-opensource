@@ -88,6 +88,8 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         public List<PerfilUsuarioBean> PerfilesUsuario { get; set; }
         public List<Ubigeo.Ubigeo.Departamento> Departamentos { get; set; }
+
+        [Display(Name = "Estado")]
         public string estado { get; set; }
         
     }

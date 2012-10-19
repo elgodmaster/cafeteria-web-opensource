@@ -54,6 +54,14 @@
                 </div>
                 <div class = "clear" ></div>
             </div>
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.nroDocumento )
+                <div class = "formRight" >
+                    @Html.TextBoxFor( model => model.nroDocumento )
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
 
             <div class = "formRow" >
                 @Html.LabelFor( model => model.celular )
@@ -65,9 +73,9 @@
             </div>
 
             <div class = "formRow" >
-                @Html.LabelFor( model => model.nroDocumento )
+                @Html.LabelFor( model => model.email )
                 <div class = "formRight" >
-                    @Html.TextBoxFor( model => model.nroDocumento )
+                    @Html.TextBoxFor( model => model.email )
                     
                 </div>
                 <div class = "clear" ></div>
@@ -81,6 +89,18 @@
                 </div>
                 <div class = "clear" ></div>
             </div>
+
+
+            <div class="formRow"> @Html.LabelFor(model => model.estado)
+                <div class="formRight"> 
+                                     @Html.RadioButtonFor(model => model.estado, "ACTIVO", true) Activo <br />
+                                     @Html.RadioButtonFor(model => model.estado, "INACTIVO", false) Inactivo    
+                                                                                                            
+                </div> 
+                <div class="clear"></div>
+            </div> 
+
+
 
         </div>
         <p>

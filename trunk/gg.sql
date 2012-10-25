@@ -96,12 +96,12 @@ CREATE  TABLE [Cafeteria] (
 -- -----------------------------------------------------
 -- Table [Basedatos1[.[Empleado[
 -- -----------------------------------------------------
-CREATE  TABLE [Empleado] (
-  [idempleado] VARCHAR(8) NOT NULL ,
-  [fecha_ingreso] DATE NOT NULL ,
-  [fecha_salida] DATE NOT NULL ,
-  [estado] VARCHAR(10) NOT NULL ,
-  PRIMARY KEY ([idempleado]) )
+--CREATE  TABLE [Empleado] (
+  --[idempleado] VARCHAR(8) NOT NULL ,
+  --[fecha_ingreso] DATE NOT NULL ,
+  --[fecha_salida] DATE NOT NULL ,
+  --[estado] VARCHAR(10) NOT NULL ,
+ -- PRIMARY KEY ([idempleado]) )
  
  
 
@@ -325,11 +325,20 @@ CREATE  TABLE [VentaDetalle] (
   [subtotal] DECIMAL(15,2) NOT NULL ,
   PRIMARY KEY ([idVenta], [idProducto]) )
  
+ 
+ 
 CREATE TABLE [Tipo](
 	[id] VARCHAR(8) NOT NULL,
 	[nombre] VARCHAR(20) NOT NULL,
 	PRIMARY KEY([id]))
-
+	
+	
+CREATE TABLE [Perfil_usuario_x_Usuario](
+	[idPerfil_usuario] VARCHAR(8) NOT NULL,
+	[idUsuario] VARCHAR(8) NOT NULL,
+	PRIMARY KEY ([idPerfil_usuario], [idUsuario]) )
+	
+DROP TABLE [Empleado]
 
 --SET SQL_MODE=@OLD_SQL_MODE;
 --SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

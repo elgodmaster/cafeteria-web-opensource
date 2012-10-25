@@ -325,7 +325,10 @@ CREATE  TABLE [VentaDetalle] (
   [subtotal] DECIMAL(15,2) NOT NULL ,
   PRIMARY KEY ([idVenta], [idProducto]) )
  
-
+CREATE TABLE [Tipo](
+	[id] VARCHAR(8) NOT NULL,
+	[nombre] VARCHAR(20) NOT NULL,
+	PRIMARY KEY([id]))
 
 
 --SET SQL_MODE=@OLD_SQL_MODE;

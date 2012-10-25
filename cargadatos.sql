@@ -35,9 +35,9 @@ INSERT INTO Tipo(id, nombre) values ('TIPO0001','Desayuno')
 INSERT INTO Tipo(id, nombre) values ('TIPO0002','Sandwich')
 INSERT INTO Tipo(id, nombre) values ('TIPO0003','Piqueos')
 INSERT INTO Tipo(id, nombre) values ('TIPO0004','Salados')
-INSERT INTO Tipo(id, nombre) values ('TIPO0001','Bebidas')
-INSERT INTO Tipo(id, nombre) values ('TIPO0001','Postres')
-INSERT INTO Tipo(id, nombre) values ('TIPO0001','Helados')
+INSERT INTO Tipo(id, nombre) values ('TIPO0005','Bebidas')
+INSERT INTO Tipo(id, nombre) values ('TIPO0006','Postres')
+INSERT INTO Tipo(id, nombre) values ('TIPO0007','Helados')
 
 ---------------------------------------------------------------------------
 --Inserts de las Proveedor

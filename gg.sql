@@ -1,7 +1,7 @@
 
 
 CREATE  TABLE [Perfil_usuario] (
-  [idPerfil_usuario] INT NOT NULL ,
+  [idPerfil_usuario] VARCHAR(8) NOT NULL ,
   [nombre] VARCHAR(45) NOT NULL ,
   [descripcion] VARCHAR(45) NULL ,
   [token] CHAR(30) NOT NULL ,
@@ -13,7 +13,7 @@ CREATE  TABLE [Perfil_usuario] (
 -- Table [Basedatos1[.[Departamento[
 -- -----------------------------------------------------
 CREATE  TABLE [Departamento] (
-  [idDepartamento] INT NOT NULL ,
+  [idDepartamento] VARCHAR(8) NOT NULL ,
   [nombre] VARCHAR(40) NOT NULL ,
   PRIMARY KEY ([idDepartamento]) )
  
@@ -23,9 +23,9 @@ CREATE  TABLE [Departamento] (
 -- Table [Basedatos1[.[Provincia[
 -- -----------------------------------------------------
 CREATE  TABLE [Provincia] (
-  [idProvincia] INT NOT NULL ,
+  [idProvincia] VARCHAR(8) NOT NULL ,
   [nombre] VARCHAR(40) NOT NULL ,
-  [idDepartamento] INT NOT NULL ,
+  [idDepartamento] VARCHAR(8) NOT NULL ,
   PRIMARY KEY ([idProvincia], [idDepartamento]) )
  
 
@@ -34,9 +34,9 @@ CREATE  TABLE [Provincia] (
 -- Table [Basedatos1[.[Distrito[
 -- -----------------------------------------------------
 CREATE  TABLE [Distrito] (
-  [idDistrito] INT NOT NULL ,
-  [idProvincia] INT NOT NULL ,
-  [idDepartamento] INT NOT NULL ,
+  [idDistrito] VARCHAR(8) NOT NULL ,
+  [idProvincia] VARCHAR(8) NOT NULL ,
+  [idDepartamento] VARCHAR(8) NOT NULL ,
   [nombre] VARCHAR(40) NOT NULL ,
   PRIMARY KEY ([idDistrito], [idProvincia], [idDepartamento]) )
  
@@ -46,11 +46,11 @@ CREATE  TABLE [Distrito] (
 -- Table [Basedatos1[.[Usuario[
 -- -----------------------------------------------------
 CREATE  TABLE [Usuario] (
-  [idUsuario] INT NOT NULL AUTO_INCREMENT ,
-  [idPerfil_usuario] INT NOT NULL ,
-  [idDistrito] INT NOT NULL ,
-  [idProvincia] INT NOT NULL ,
-  [idDepartamento] INT NOT NULL ,
+  [idUsuario] VARCHAR(8) NOT NULL,
+  [idPerfil_usuario] VARCHAR(8) NOT NULL ,
+  [idDistrito] VARCHAR(8) NOT NULL ,
+  [idProvincia] VARCHAR(8) NOT NULL ,
+  [idDepartamento] VARCHAR(8) NOT NULL ,
   [nombre] VARCHAR(45) NOT NULL ,
   [apellido_paterno] VARCHAR(45) NOT NULL ,
   [apellido_materno] VARCHAR(45) NULL ,
@@ -68,8 +68,8 @@ CREATE  TABLE [Usuario] (
 -- Table [Basedatos1[.[Permiso[
 -- -----------------------------------------------------
 CREATE  TABLE [Permiso] (
-  [idPermiso] INT NOT NULL ,
-  [idPerfil_usuario] INT NOT NULL ,
+  [idPermiso] VARCHAR(8) NOT NULL ,
+  [idPerfil_usuario] VARCHAR(8) NOT NULL ,
   PRIMARY KEY ([idPermiso]) )
  
 
@@ -78,7 +78,7 @@ CREATE  TABLE [Permiso] (
 -- Table [Basedatos1[.[Cafeteria[
 -- -----------------------------------------------------
 CREATE  TABLE [Cafeteria] (
-  [idCafeteria] INT NOT NULL ,
+  [idCafeteria] VARCHAR(8) NOT NULL ,
   [nombre] VARCHAR(45) NOT NULL ,
   [razonsocial] VARCHAR(45) NOT NULL ,
   [ruc] VARCHAR(45) NOT NULL ,
@@ -86,9 +86,9 @@ CREATE  TABLE [Cafeteria] (
   [telefono1] VARCHAR(45) NOT NULL ,
   [telefono2] VARCHAR(45) NULL ,
   [estado] VARCHAR(45) NOT NULL ,
-  [idDistrito] INT NOT NULL ,
-  [idProvincia[ INT NOT NULL ,
-  [idDepartamento] INT NOT NULL ,
+  [idDistrito] VARCHAR(8) NOT NULL ,
+  [idProvincia[ VARCHAR(8) NOT NULL ,
+  [idDepartamento] VARCHAR(8) NOT NULL ,
   PRIMARY KEY ([idCafeteria]) )
  
 
@@ -97,12 +97,12 @@ CREATE  TABLE [Cafeteria] (
 -- Table [Basedatos1[.[Empleado[
 -- -----------------------------------------------------
 CREATE  TABLE [Empleado] (
-  [idempleado] INT NOT NULL ,
+  [idempleado] VARCHAR(8) NOT NULL ,
   [fecha_ingreso] DATE NOT NULL ,
   [fecha_salida] DATE NOT NULL ,
   [estado] VARCHAR(10) NOT NULL ,
   PRIMARY KEY ([idempleado]) )
-  PRIMARY KEY ([idempleado]) )
+ 
  
 
 
@@ -110,8 +110,8 @@ CREATE  TABLE [Empleado] (
 -- Table [Basedatos1[.[Cliente[
 -- -----------------------------------------------------
 CREATE  TABLE [Cliente] (
-  [idcliente] INT NOT NULL ,
-  [idCafeteria] INT NOT NULL ,
+  [idcliente] VARCHAR(8) NOT NULL ,
+  [idCafeteria] VARCHAR(8) NOT NULL ,
   [estado] VARCHAR(10) NOT NULL ,
   [fecha_registro] DATE NOT NULL ,
   PRIMARY KEY ([idcliente]) )
@@ -122,10 +122,10 @@ CREATE  TABLE [Cliente] (
 -- Table [Basedatos1[.[Horario[
 -- -----------------------------------------------------
 CREATE  TABLE [Horario] (
-  [idHorario] INT NOT NULL ,
+  [idHorario] VARCHAR(8) NOT NULL ,
   [fechaini] DATE NOT NULL ,
   [fechafin] DATE NULL ,
-  [idempleado] INT NOT NULL ,
+  [idempleado] VARCHAR(8) NOT NULL ,
   PRIMARY KEY ([idHorario]) )
  
 
@@ -134,8 +134,8 @@ CREATE  TABLE [Horario] (
 -- Table [Basedatos1[.[HorarioDetalle[
 -- -----------------------------------------------------
 CREATE  TABLE [HorarioDetalle] (
-  [idHorarioDetalle] INT NOT NULL ,
-  [idHorario] INT NOT NULL ,
+  [idHorarioDetalle] VARCHAR(8) NOT NULL ,
+  [idHorario] VARCHAR(8) NOT NULL ,
   [diasemana] VARCHAR(45) NOT NULL ,
   [horaentrada] VARCHAR(6) NOT NULL ,
   [horasalida] VARCHAR(6) NOT NULL ,
@@ -147,10 +147,10 @@ CREATE  TABLE [HorarioDetalle] (
 -- Table [Basedatos1[.[Asistencia[
 -- -----------------------------------------------------
 CREATE  TABLE [Asistencia] (
-  [idAsistencia] INT NOT NULL ,
+  [idAsistencia] VARCHAR(8) NOT NULL ,
   [horamarcada] VARCHAR(6) NOT NULL ,
   [estado] VARCHAR(45) NOT NULL ,
-  [idHorarioDetalle] INT NOT NULL ,
+  [idHorarioDetalle] VARCHAR(8) NOT NULL ,
   PRIMARY KEY ([idAsistencia]) )
  
 
@@ -159,7 +159,7 @@ CREATE  TABLE [Asistencia] (
 -- Table [Basedatos1[.[Proveedor[
 -- -----------------------------------------------------
 CREATE  TABLE [Proveedor] (
-  [idProveedor] INT NOT NULL ,
+  [idProveedor] VARCHAR(8) NOT NULL ,
   [razonSocial] VARCHAR(45) NOT NULL ,
   [estado] VARCHAR(45) NOT NULL ,
   [contaco] VARCHAR(45) NOT NULL ,
@@ -180,8 +180,8 @@ CREATE  TABLE [Proveedor] (
 -- Table [Basedatos1[.[Almacen[
 -- -----------------------------------------------------
 CREATE  TABLE [Almacen] (
-  [idAlmacen] INT NOT NULL ,
-  [idCafeteria] INT NOT NULL ,
+  [idAlmacen] VARCHAR(8) NOT NULL ,
+  [idCafeteria] VARCHAR(8) NOT NULL ,
   PRIMARY KEY ([idAlmacen], [idCafeteria]) )
  
 
@@ -190,7 +190,7 @@ CREATE  TABLE [Almacen] (
 -- Table [Basedatos1[.[Ingrediente[
 -- -----------------------------------------------------
 CREATE  TABLE [Ingrediente] (
-  [idIngrediente] INT NOT NULL ,
+  [idIngrediente] VARCHAR(8) NOT NULL ,
   [descripcion] VARCHAR(45) NULL ,
   PRIMARY KEY ([idIngrediente]) )
  
@@ -200,8 +200,8 @@ CREATE  TABLE [Ingrediente] (
 -- Table [Basedatos1[.[Ordencompra[
 -- -----------------------------------------------------
 CREATE  TABLE [Ordencompra] (
-  [idOrdencompra] INT NOT NULL ,
-  [idProveedor] INT NOT NULL ,
+  [idOrdencompra] VARCHAR(8) NOT NULL ,
+  [idProveedor] VARCHAR(8) NOT NULL ,
   [estado] VARCHAR(10) NOT NULL ,
   [fechaemitida] DATE NOT NULL ,
   PRIMARY KEY ([idOrdencompra]) )
@@ -212,8 +212,8 @@ CREATE  TABLE [Ordencompra] (
 -- Table [Basedatos1[.[Almacen_x_Producto[
 -- -----------------------------------------------------
 CREATE  TABLE [Almacen_x_Producto] (
-  [idAlmacen] INT NOT NULL ,
-  [idIngrediente] INT NOT NULL ,
+  [idAlmacen] VARCHAR(8) NOT NULL ,
+  [idIngrediente] VARCHAR(8) NOT NULL ,
   [stockactual] INT NOT NULL ,
   [stockminimo] INT NOT NULL ,
   [stockmaximo] INT NOT NULL ,
@@ -225,8 +225,8 @@ CREATE  TABLE [Almacen_x_Producto] (
 -- Table [Basedatos1[.[Proveedor_x_Producto[
 -- -----------------------------------------------------
 CREATE  TABLE [Proveedor_x_Producto] (
-  [idProveedor] INT NOT NULL ,
-  [idIngrediente] INT NOT NULL ,
+  [idProveedor] VARCHAR(8) NOT NULL ,
+  [idIngrediente] VARCHAR(8) NOT NULL ,
   [precio] DECIMAL(15,2) NOT NULL ,
   PRIMARY KEY ([idProveedor], [idIngrediente]) )
  
@@ -236,8 +236,8 @@ CREATE  TABLE [Proveedor_x_Producto] (
 -- Table [Basedatos1[.[Notaentrada[
 -- -----------------------------------------------------
 CREATE  TABLE [Notaentrada] (
-  [idNotaentrada] INT NOT NULL ,
-  [idOrdencompra] INT NOT NULL ,
+  [idNotaentrada] VARCHAR(8) NOT NULL ,
+  [idOrdencompra] VARCHAR(8) NOT NULL ,
   [fechaEntrega] DATE NOT NULL ,
   PRIMARY KEY ([idNotaentrada]) )
  
@@ -247,8 +247,8 @@ CREATE  TABLE [Notaentrada] (
 -- Table [Basedatos1[.[OrdenCompraDetalle[
 -- -----------------------------------------------------
 CREATE  TABLE [OrdenCompraDetalle] (
-  [idOrdencompra] INT NOT NULL ,
-  [idIngrediente] INT NOT NULL ,
+  [idOrdencompra] VARCHAR(8) NOT NULL ,
+  [idIngrediente] VARCHAR(8) NOT NULL ,
   [cantidad] INT NOT NULL ,
   [precio] DECIMAL(15,2) NOT NULL ,
   PRIMARY KEY ([idOrdencompra], [idIngrediente]) )
@@ -259,8 +259,8 @@ CREATE  TABLE [OrdenCompraDetalle] (
 -- Table [Basedatos1[.[notaEntradaDetalle[
 -- -----------------------------------------------------
 CREATE  TABLE [notaEntradaDetalle] (
-  [idNotaentrada] INT NOT NULL ,
-  [idIngrediente] INT NOT NULL ,
+  [idNotaentrada] VARCHAR(8) NOT NULL ,
+  [idIngrediente] VARCHAR(8) NOT NULL ,
   [cantidadentrante] INT NOT NULL ,
   PRIMARY KEY ([idNotaentrada], [idIngrediente]) )
  
@@ -270,7 +270,7 @@ CREATE  TABLE [notaEntradaDetalle] (
 -- Table [Basedatos1[.[Producto[
 -- -----------------------------------------------------
 CREATE  TABLE [Producto] (
-  [idProducto] INT NOT NULL ,
+  [idProducto] VARCHAR(8) NOT NULL ,
   [nombre] VARCHAR(45) NOT NULL ,
   [descripcion] VARCHAR(45) NULL ,
   [tipo] VARCHAR(45) NOT NULL ,
@@ -282,8 +282,8 @@ CREATE  TABLE [Producto] (
 -- Table [Basedatos1[.[Producto_x_Ingrediente[
 -- -----------------------------------------------------
 CREATE  TABLE [Producto_x_Ingrediente] (
-  [idProducto] INT NOT NULL ,
-  [idIngrediente] INT NOT NULL ,
+  [idProducto] VARCHAR(8) NOT NULL ,
+  [idIngrediente] VARCHAR(8) NOT NULL ,
   [cantidad] INT NOT NULL ,
   [unidaddemedida] VARCHAR(45) NOT NULL ,
   PRIMARY KEY ([idProducto], [idIngrediente]) )
@@ -294,8 +294,8 @@ CREATE  TABLE [Producto_x_Ingrediente] (
 -- Table [Basedatos1[.[Cafeteria_x_Producto[
 -- -----------------------------------------------------
 CREATE  TABLE [Cafeteria_x_Producto] (
-  [idCafeteria] INT NOT NULL ,
-  [idProducto] INT NOT NULL ,
+  [idCafeteria] VARCHAR(8) NOT NULL ,
+  [idProducto] VARCHAR(8) NOT NULL ,
   [precio] DECIMAL(15,2) NOT NULL ,
   [estado] VARCHAR(10) NULL ,
   PRIMARY KEY ([idCafeteria], [idProducto]) )
@@ -306,8 +306,8 @@ CREATE  TABLE [Cafeteria_x_Producto] (
 -- Table [Basedatos1[.[Venta[
 -- -----------------------------------------------------
 CREATE  TABLE [Venta] (
-  [idVenta] INT NOT NULL ,
-  [idCafeteria] INT NOT NULL ,
+  [idVenta] VARCHAR(8) NOT NULL ,
+  [idCafeteria] VARCHAR(8) NOT NULL ,
   [fechaventa] VARCHAR(45) NOT NULL ,
   [estado] VARCHAR(10) NOT NULL ,
   [montototal] DECIMAL(15,2) NOT NULL ,
@@ -319,8 +319,8 @@ CREATE  TABLE [Venta] (
 -- Table [Basedatos1[.[VentaDetalle[
 -- -----------------------------------------------------
 CREATE  TABLE [VentaDetalle] (
-  [idVenta] INT NOT NULL ,
-  [idProducto] INT NOT NULL ,
+  [idVenta] VARCHAR(8) NOT NULL ,
+  [idProducto] VARCHAR(8) NOT NULL ,
   [cantidad] INT NOT NULL ,
   [subtotal] DECIMAL(15,2) NOT NULL ,
   PRIMARY KEY ([idVenta], [idProducto]) )
@@ -328,6 +328,6 @@ CREATE  TABLE [VentaDetalle] (
 
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+--SET SQL_MODE=@OLD_SQL_MODE;
+--SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+--SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

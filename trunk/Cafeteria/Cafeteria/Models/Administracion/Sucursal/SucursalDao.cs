@@ -47,6 +47,9 @@ namespace Cafeteria.Models.Administracion.Sucursal
                 Utils.agregarParametro(objQuery, "@estado", suc.Estado);
                 objQuery.ExecuteNonQuery();
 
+                registrarAlmacen(suc.id);
+
+
             }
             catch (Exception e)
             {
@@ -80,19 +83,13 @@ namespace Cafeteria.Models.Administracion.Sucursal
                     while (objDataReader.Read())
                     {
                         SucursalBean sucursal = new SucursalBean();
-                        //Proveedor.ID = Convert.ToString(objDataReader["idProveedor"]);
-                        //Proveedor.razonSocial = Convert.ToString(objDataReader["razonSocial"]);
-                        //Proveedor.estado = Convert.ToString(objDataReader["estado"]);
-                        //Proveedor.contacto = Convert.ToString(objDataReader["contacto"]);
-                        //Proveedor.email_contacto = Convert.ToString(objDataReader["email_contacto"]);
-                        //Proveedor.direccion = Convert.ToString(objDataReader["direccion"]);
-                        //P/roveedor.ruc = Convert.ToString(objDataReader["ruc"]);
-                        //Proveedor.telefono1 = Convert.ToString(objDataReader["telefono1"]);
-                        //Proveedor.CargoContacto = Convert.ToString(objDataReader["cargo_contacto"]);
-                        //Proveedor.telefono_contacto = Convert.ToString(objDataReader["telefono_contacto"]);
-                        //Proveedor.web = Convert.ToString(objDataReader["web"]);
-                        //Proveedor.Observacion = Convert.ToString(objDataReader["observacion"]);
-                        //Proveedor.telefono2 = Convert.ToString(objDataReader["telefono2"]);
+                        sucursal.id= Convert.ToString(objDataReader["idCafeteria"]);
+                        sucursal.nombre = Convert.ToString(objDataReader["nombre"]);
+                        sucursal.Razonsocial = Convert.ToString(objDataReader["razonsocial"]);
+                        sucursal.ruc = Convert.ToString(objDataReader["ruc"]);
+                        sucursal.direccion = Convert.ToString(objDataReader["direccion"]);
+                        sucursal.telefono1 = Convert.ToString(objDataReader["telefono1"]);
+                        sucursal.telefono2 = Convert.ToString(objDataReader["telefono2"]);
                         listasucur.Add(sucursal);
                     }
                 }
@@ -113,6 +110,45 @@ namespace Cafeteria.Models.Administracion.Sucursal
             }
 
         }
+
+        private void registrarAlmacen(string IDsucursal)
+        {
+            SqlConnection objDB = null;
+            string IDNUEVO="";
+            int i = Utils.cantidad("Cafeteria") + 1;
+            string ID = "ALMA00";//8caracteres-4letras-4#
+            if (i < 10) IDNUEVO = ID + "0" + Convert.ToString(i);
+            else IDNUEVO = ID + Convert.ToString(i);
+
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "Insert into Almacen (idCafeteria,idAlmacen) values " +
+                                    "(@idCafeteria, @idAlmacen)";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@idCafeteria", IDsucursal);
+                Utils.agregarParametro(objQuery, "@idAlmacen", IDNUEVO);
+                objQuery.ExecuteNonQuery();
+
+
+
+            }
+            catch (Exception e)
+            {
+                log.Error("Registrar_Almacen(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+        }
+
 
     }
 }

@@ -13,6 +13,15 @@ namespace Cafeteria.Models.Administracion
         UsuarioService usuarioService = new UsuarioService();
         SucursalService sucursalservice = new SucursalService();
 
+        #region login 
+
+        public UsuarioBean Getlogin(string user, string pass)
+        {
+            return usuarioService.getLogin(user, pass);
+        }
+
+        #endregion
+
         #region Personal
         public List<UsuarioBean> ListarPersonal(string nombre, string dni, string cargo, string sucursal)
         {
@@ -50,10 +59,10 @@ namespace Cafeteria.Models.Administracion
 
         #region perfil
 
-        public List<UsuarioxSucursalBean> ListarPersonal2(string nombre, string dni, string perfil)
+        public List<UsuarioxSucursalBean> ListarPersonalconperfil(string nombre, string dni, string perfil)
         {
             List<UsuarioxSucursalBean> usu = new List<UsuarioxSucursalBean>();
-            usu = usuarioService.ListarPersonal2(nombre, dni, perfil);
+            usu = usuarioService.ListarPersonalconperfil(nombre, dni, perfil);
             return usu;
         }
         

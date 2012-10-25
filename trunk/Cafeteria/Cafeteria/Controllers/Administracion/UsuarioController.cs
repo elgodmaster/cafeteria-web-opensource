@@ -195,11 +195,11 @@ namespace Cafeteria.Controllers.Administracion
         }
 
         
-        public ActionResult AdministrarPerfil2(string nombre, string dni, string perfil)
+        public ActionResult AdministrarPerfil2(string nombre, string dni, string idperfil)
         {
-            //List<UsuarioxSucursalBean> usua = admifacade.ListarPersonal2(nombre, dni, cargo);
+            List<UsuarioxSucursalBean> usua = admifacade.ListarPersonalconperfil(nombre, dni, idperfil);
 
-            List<UsuarioxSucursalBean> usua = new List<UsuarioxSucursalBean>();
+            //List<UsuarioxSucursalBean> usua = new List<UsuarioxSucursalBean>();
             List<string> perf = new List<string>();
             for (int i = 0; i < 4; i++)
             {
@@ -248,8 +248,8 @@ namespace Cafeteria.Controllers.Administracion
         [HttpPost]
         public JsonResult LoginResult(String user, String password)
         {
-            var usuario = "jose";// usuarioFac.getLogin(user, password);
-            if (usuario != null && !usuario.Equals("ONLINE"))
+            var usuario = admifacade.Getlogin(user, password);
+            if (usuario != null)// && !usuario.Equals("ONLINE"))
             {
                 FormsAuthentication.SetAuthCookie(user, false);
                 //usuarioFac.marcarOnline(usuario.ID);

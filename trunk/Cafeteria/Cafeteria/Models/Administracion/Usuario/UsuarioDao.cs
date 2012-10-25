@@ -13,6 +13,63 @@ namespace Cafeteria.Models.Administracion.Usuario
         String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
 
+        #region login
+
+        public UsuarioBean getLogin(string user, string pass)
+        {
+            SqlConnection sql = null;
+
+            try
+            {
+                sql = new SqlConnection(cadenaDB);
+
+                sql.Open();
+
+                String command = "Select * from Usuario where user_account = @user_account AND pass = @pass AND estado = @estado";
+
+                SqlCommand query = new SqlCommand(command, sql);
+
+                Utils.agregarParametro(query, "user_account", user);
+                Utils.agregarParametro(query, "pass", pass);
+                Utils.agregarParametro(query, "estado", "ACTIVO");
+
+                SqlDataReader data = query.ExecuteReader();
+
+                string idPerfil = "";
+                UsuarioBean usuario = null;
+
+                if (data.HasRows)
+                {
+                    data.Read();
+                    idPerfil = Convert.ToString(data["idPerfil_usuario"]);
+                    string idUsuario = Convert.ToString (data["idUsuario"]);
+                    usuario = this.buscarusuario(idUsuario);
+                    //return Convert.ToString(data["idUsuario"]); // <------------- comentar ... =)
+                }
+
+                sql.Close();
+
+                //String permisosPerfil = new PerfilUsuarioFacade().getPerfil(idPerfil).token;
+
+                //usuario.estado = permisosPerfil;
+
+                return usuario;
+            }
+            catch (Exception e)
+            {
+                log.Error("getLogin(EXCEPTION): " + e);
+                return null;
+            }
+            finally
+            {
+                if (sql != null) sql.Close();
+            }
+        }
+        
+        
+        #endregion
+
+
         #region usuario
         public List<UsuarioBean> ListarPersonal(string nombre, string dni, string cargo, string sucursal)
         {
@@ -244,7 +301,7 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         #region perfil 
 
-        public List<UsuarioxSucursalBean> ListarPersonal2(string nombre, string dni, string perfil)
+        public List<UsuarioxSucursalBean> ListarPersonalconperfil(string nombre, string dni, string perfil)
         {
 
 
@@ -255,7 +312,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                 List<UsuarioxSucursalBean> ListaUsuario = new List<UsuarioxSucursalBean>();
                 objDB.Open();
                 String strQuery = "SELECT * FROM UsuarioxSucursalBean";
-                if (!String.IsNullOrEmpty(dni)) strQuery = strQuery + " WHERE UPPER(numero_documento) LIKE '%" + dni.ToUpper() + "%'";
+                //if (!String.IsNullOrEmpty(dni)) strQuery = strQuery + " WHERE UPPER(numero_documento) LIKE '%" + dni.ToUpper() + "%'";
                 //if (!String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
                 //if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'"+
                 //                                                                            " AND UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";

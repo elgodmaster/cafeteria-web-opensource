@@ -46,16 +46,26 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         #region perfil
 
-        public List<UsuarioxSucursalBean> ListarPersonal2(string nombre, string dni, string perfil)
+        public List<UsuarioxSucursalBean> ListarPersonalconperfil(string nombre, string dni, string perfil)
         {
             List<UsuarioxSucursalBean> usu = new List<UsuarioxSucursalBean>();
-            usu = usuarioDao.ListarPersonal2(nombre, dni, perfil);
+            usu = usuarioDao.ListarPersonalconperfil(nombre, dni, perfil);
             return usu;
         }
 
 
 
         #endregion
+
+        #region login
+
+        public UsuarioBean getLogin(string usuario, string pass)
+        {
+            return usuarioDao.getLogin(usuario, pass);
+        }
+
+        #endregion
+
 
     } 
 }

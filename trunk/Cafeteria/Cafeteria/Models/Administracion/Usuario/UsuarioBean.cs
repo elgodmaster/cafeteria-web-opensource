@@ -158,7 +158,16 @@ namespace Cafeteria.Models.Administracion.Usuario
         [Required(ErrorMessage = "Debe elegir un distrito")]
         public string idDistrito { get; set; }
 
+        [Display(Name = "Estado")]
         public string estado { get; set; }
+
+        [Display(Name = "Fecha Ingreso")]
+        public DateTime fechaIngreso { get; set; }
+
+        [Display(Name = "Fecha Salida")]
+        public DateTime fechasalida { get; set; }
+
+
 
         public string nombrePerfilUsuario { get; set; }
         public string nombreDepartamento { get; set; }

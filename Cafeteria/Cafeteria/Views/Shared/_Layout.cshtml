@@ -12,7 +12,7 @@
     
     <script src="@Url.Content("~/Scripts/modernizr-1.7.min.js")" type="text/javascript"><a href="../">../</a></script>
 
-    
+    <script src="@Url.Content("~/Scripts/navegacion.js")" type="text/javascript"></script>
 
     <script type="text/javascript" src="@Url.Content( "~/Content/js/plugins/spinner/ui.spinner.js" )" ></script>
     <script type="text/javascript" src="@Url.Content( "~/Content/js/plugins/spinner/jquery.mousewheel.js" )" ></script>
@@ -76,7 +76,7 @@
 
 
           <ul id="menu5" class="nav">
-             <li class="ui"><a href="#" title="" class="exp"><span>Sucursal</span><strong>3</strong></a>
+             <li class="ui"><a href="#" title="" class="exp"><span>Sucursal</span><strong>2</strong></a>
                     <ul class="sub">
                         <li>@Html.ActionLink("Registrar Sucursal", "Create", "Sucursal")</li>
                         <li>@Html.ActionLink("Lista de Sucursales", "Index", "Sucursal")</li>
@@ -87,7 +87,7 @@
 
 
           <ul id="menu4" class="nav">
-             <li class="ui"><a href="#" title="" class="exp"><span>Usuario</span><strong>3</strong></a>
+             <li class="ui"><a href="#" title="" class="exp"><span>Usuario</span><strong>4</strong></a>
                     <ul class="sub">
                         <li>@Html.ActionLink("Registrar", "Create", "Usuario")</li>
                         <li>@Html.ActionLink("Buscar", "Buscar", "Usuario")</li>
@@ -136,7 +136,6 @@
         <div class="topNav">
             <div class="wrapper">
                 <div class="welcome" ><a href="#" title=""><img src="@Url.Content("~/Content/images/userPic.png")" alt="" /></a><span id = "nombreUsuario"></span></div>
-                @*<div class="welcome" id = "nombreUsuario"><a href="#" title=""><img src="@Url.Content("~/Content/images/userPic.png")" alt="" /></a></div>*@
                 <div class="userNav">
                     <ul>
                         <li><a id = "verUsuario" href="#" title=""><img src="@Url.Content("~/Content/images/icons/topnav/profile.png" )" alt="" /><span>Perfil</span></a></li>

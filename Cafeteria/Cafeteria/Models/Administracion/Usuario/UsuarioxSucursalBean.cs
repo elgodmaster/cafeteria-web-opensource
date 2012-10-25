@@ -51,6 +51,10 @@ namespace Cafeteria.Models.Administracion.Usuario
 
             SqlCommand sqlCmd = new SqlCommand(commandString, objDB);
             SqlDataReader dataReader = sqlCmd.ExecuteReader();
+            Perfiles2 perfil2s = new Perfiles2();
+            perfil2s.ID = "PERF0000";
+            perfil2s.nombre = "Todos";
+            listaperfil.Add(perfil2s);
 
             while (dataReader.Read())
             {
@@ -60,7 +64,8 @@ namespace Cafeteria.Models.Administracion.Usuario
 
                 listaperfil.Add(perfil);
             }
-
+            
+            
             return listaperfil;
         }
 

@@ -49,11 +49,59 @@ namespace Cafeteria.Models.Administracion.Usuario
         public List<UsuarioxSucursalBean> ListarPersonalconperfil(string nombre, string dni, string perfil)
         {
             List<UsuarioxSucursalBean> usu = new List<UsuarioxSucursalBean>();
-            usu = usuarioDao.ListarPersonalconperfil(nombre, dni, perfil);
+            List<string> listaidusuarios = usuarioDao.ListarPersonalconperfil(nombre, dni, perfil);
+            //bool estado=false;
+            List<bool> estados = new List<bool>();
+
+            for (int i = 0; i < listaidusuarios.Count; i++)
+            {
+                estados.Add(true);
+            }
+
+            for (int i = 0; i < listaidusuarios.Count; i++)
+            {
+                for (int j = i+1; j < listaidusuarios.Count; j++)
+                {
+                    if (listaidusuarios[i].CompareTo(listaidusuarios[j])==0) { estados[i] = false; }
+                }
+                
+            }
+            
+            for (int i = 0; i < listaidusuarios.Count; i++)
+            {
+                if (estados[i])
+                {
+                    UsuarioBean nuevo = new UsuarioBean();
+                    UsuarioxSucursalBean nue = new UsuarioxSucursalBean();
+                    nuevo = usuarioDao.buscarusuario(listaidusuarios[i]);
+
+
+                    nue.ID = nuevo.ID;
+                    nue.nombres = nuevo.nombres;
+                    nue.apPat = nuevo.apPat;
+                    nue.apMat = nuevo.apMat;
+                    nue.nroDocumento = nuevo.nroDocumento;
+                    nue.perfilesdelusuario = usuarioDao.Listaperfiles(nue.ID);
+                    //nue.perfilesdelusuario = new List<string>();
+                    //nue.perfilesdelusuario.Add(perfil);
+                    usu.Add(nue);
+                }
+            }
+
+           
+
             return usu;
         }
 
+        public List<string> obtenerlistaperfiles(string id)
+        {
+            return usuarioDao.Listaperfiles(id);
+        }
 
+        public List<string> getperfiles()
+        {
+            return usuarioDao.getperfiles();
+        }
 
         #endregion
 

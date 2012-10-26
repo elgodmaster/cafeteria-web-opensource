@@ -25,15 +25,15 @@ namespace Cafeteria.Models.Administracion.Usuario
         public DateTime fechafin { get; set; }
         public string sucursal { get; set; }
         public string cargo { get; set; }
-        public List<String> dia { get; set; }
+        public List<string> dia { get; set; }
         public List<DateTime> horainicio { get; set; }
         public List<DateTime> horafin { get; set; }
-
+        public List<Boolean> estadosdeperfiles { get; set; }
         public string perfil { get; set; }
 
         public string idperfil { get; set; }
 
-        public List<String> perfilesdelusuario { get; set; }
+        public List<string> perfilesdelusuario { get; set; }
 
         public SelectList UsuarioList { get; set; }
         public List<PerfilUsuarioBean> gg { get; set; }

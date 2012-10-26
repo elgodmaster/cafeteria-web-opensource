@@ -65,8 +65,22 @@ namespace Cafeteria.Models.Administracion
             usu = usuarioService.ListarPersonalconperfil(nombre, dni, perfil);
             return usu;
         }
-        
 
+        public List<String> obtenerperfiles(string ID)
+        {
+            List<String> listaperfiles = new List<string>();
+
+            listaperfiles =usuarioService.obtenerlistaperfiles(ID);
+            return listaperfiles;
+        }
+
+        public List<string> getperfiles()
+        {
+            List<string> listaperfiles = new List<string>();
+
+            listaperfiles = usuarioService.getperfiles();
+            return listaperfiles;
+        }
 
         #endregion
 

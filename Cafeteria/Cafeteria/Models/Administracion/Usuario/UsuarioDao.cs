@@ -83,7 +83,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                 objDB.Open();
                 String strQuery = "SELECT * FROM Usuario";
                 if (!String.IsNullOrEmpty(dni)) strQuery = strQuery + " WHERE UPPER(numero_documento) LIKE '%" + dni.ToUpper() + "%'";
-                //if (!String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                if (!String.IsNullOrEmpty(nombre)) strQuery = strQuery + " WHERE UPPER(nombre) LIKE '%" + nombre.ToUpper() + "%'";
                 //if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'"+
                 //                                                                            " AND UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
@@ -301,7 +301,7 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         #region perfil 
 
-        public List<UsuarioxSucursalBean> ListarPersonalconperfil(string nombre, string dni, string perfil)
+        public List<String> ListarPersonalconperfil(string nombre, string dni, string perfil)
         {
 
 
@@ -311,34 +311,33 @@ namespace Cafeteria.Models.Administracion.Usuario
                 objDB = new SqlConnection(cadenaDB);
                 List<UsuarioxSucursalBean> ListaUsuario = new List<UsuarioxSucursalBean>();
                 objDB.Open();
-                String strQuery = "SELECT * FROM UsuarioxSucursalBean";
-                //if (!String.IsNullOrEmpty(dni)) strQuery = strQuery + " WHERE UPPER(numero_documento) LIKE '%" + dni.ToUpper() + "%'";
-                //if (!String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
-                //if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'"+
-                //                                                                            " AND UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                String strQuery = " ";
+                if (perfil.Equals("PERF0000"))
+                {
+                    strQuery = strQuery + "SELECT * FROM Perfil_usuario_x_Usuario";
+                }
+                else
+                {
+                    strQuery = strQuery + "SELECT * FROM Perfil_usuario_x_Usuario where UPPER(idPerfil_usuario) LIKE '%" + perfil.ToUpper() + "%'";
+                }
+
+                List<string> listaIdusuario = new List<string>();
+
+                List<UsuarioBean> usuario = this.ListarPersonal(nombre, dni, " ", " "); // lista de usuarios con nombre y dni
+
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
                 if (objDataReader.HasRows)
                 {
                     while (objDataReader.Read())
                     {
-                        UsuarioxSucursalBean usuarioelemento = new UsuarioxSucursalBean();
-                        usuarioelemento.ID = Convert.ToString(objDataReader["idUsuario"]);
-                        usuarioelemento.nombres = Convert.ToString(objDataReader["nombre"]);
-                        usuarioelemento.apPat = Convert.ToString(objDataReader["apellido_paterno"]);
-                        usuarioelemento.apMat = Convert.ToString(objDataReader["apellido_materno"]);
-                        usuarioelemento.estado = Convert.ToString(objDataReader["estado"]);
-                        usuarioelemento.email = Convert.ToString(objDataReader["email"]);
-                        usuarioelemento.celular = Convert.ToString(objDataReader["celular"]);
-                        usuarioelemento.direccion = Convert.ToString(objDataReader["direccion"]);
-                        usuarioelemento.idDepartamento = Convert.ToString(objDataReader["idDepartamento"]);
-                        usuarioelemento.idProvincia = Convert.ToString(objDataReader["idProvincia"]);
-                        usuarioelemento.idDistrito = Convert.ToString(objDataReader["idDistrito"]);
-                        ListaUsuario.Add(usuarioelemento);
+                        string id = Convert.ToString(objDataReader["idUsuario"]); ;
+                        listaIdusuario.Add(id);
                     }
                 }
 
-                return ListaUsuario;
+                return listaIdusuario;
+                //return ListaUsuario;
             }
             catch (Exception e)
             {
@@ -357,10 +356,148 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         }
 
+        public string getnombreperfil(string idperfil)
+        {
+            string nombre = "";
 
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<UsuarioxSucursalBean> ListaUsuario = new List<UsuarioxSucursalBean>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM Perfil_usuario WHERE UPPER(idPerfil_usuario) LIKE '%" + idperfil.ToUpper() + "%'";
+                               
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        nombre = Convert.ToString(objDataReader["nombre"]);   
+                    }
+                }
+
+                return nombre;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Usuarios(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+            
+        }
+
+        public List<String> Listaperfiles(string IDusuario)
+        {
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<UsuarioxSucursalBean> ListaUsuario = new List<UsuarioxSucursalBean>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM Perfil_usuario_x_usuario WHERE UPPER(idUsuario) LIKE '%" + IDusuario.ToUpper() + "%'";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                List<string> listaperfiles = new List<string>();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        string idperfil = Convert.ToString(objDataReader["idPerfil_usuario"]);
+                        string espacio = " -- ";
+                        listaperfiles.Add(this.getnombreperfil(idperfil));
+                        listaperfiles.Add(espacio);
+                    }
+                }
+
+                return listaperfiles;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Usuarios(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+        }
+
+        public List<String> getperfiles()
+        {
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<UsuarioxSucursalBean> ListaUsuario = new List<UsuarioxSucursalBean>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM Perfil_usuario";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                List<string> listaperfiles = new List<string>();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        string idperfil = Convert.ToString(objDataReader["idPerfil_usuario"]);
+                        //string espacio = " -- ";
+                        listaperfiles.Add(this.getnombreperfil(idperfil));
+                        //listaperfiles.Add(espacio);
+                    }
+                }
+
+                return listaperfiles;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Usuarios(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+        }
+        
         #endregion
 
 
 
     }
 }
+
+
+/*UsuarioxSucursalBean usuarioelemento = new UsuarioxSucursalBean();
+                        usuarioelemento.ID = Convert.ToString(objDataReader["idUsuario"]);
+                        usuarioelemento.nombres = Convert.ToString(objDataReader["nombre"]);
+                        usuarioelemento.apPat = Convert.ToString(objDataReader["apellido_paterno"]);
+                        usuarioelemento.apMat = Convert.ToString(objDataReader["apellido_materno"]);
+                        usuarioelemento.estado = Convert.ToString(objDataReader["estado"]);
+                        usuarioelemento.email = Convert.ToString(objDataReader["email"]);
+                        usuarioelemento.celular = Convert.ToString(objDataReader["celular"]);
+                        usuarioelemento.direccion = Convert.ToString(objDataReader["direccion"]);
+                        usuarioelemento.idDepartamento = Convert.ToString(objDataReader["idDepartamento"]);
+                        usuarioelemento.idProvincia = Convert.ToString(objDataReader["idProvincia"]);
+                        usuarioelemento.idDistrito = Convert.ToString(objDataReader["idDistrito"]);
+                        ListaUsuario.Add(usuarioelemento);*/

@@ -198,19 +198,7 @@ namespace Cafeteria.Controllers.Administracion
         public ActionResult AdministrarPerfil2(string nombre, string dni, string idperfil)
         {
             List<UsuarioxSucursalBean> usua = admifacade.ListarPersonalconperfil(nombre, dni, idperfil);
-
-            //List<UsuarioxSucursalBean> usua = new List<UsuarioxSucursalBean>();
-            List<string> perf = new List<string>();
-            for (int i = 0; i < 4; i++)
-            {
-                perf.Add(" ");
-            }
-
-            for (int i = 0; i < usua.Count; i++)
-            {
-                usua[i].perfilesdelusuario = perf;//new List<string>();
-            }
-            return View();
+            return View(usua);
         }
 
         public ActionResult Asignarperfil(string id)
@@ -218,17 +206,40 @@ namespace Cafeteria.Controllers.Administracion
             //perfiles que tiene el usuario con el ID
 
             UsuarioxSucursalBean usuario = new UsuarioxSucursalBean();
+            List<string> listaperfiles = admifacade.obtenerperfiles(id); //k tiene actualmente
+            UsuarioBean usuar = admifacade.buscarusuario(id);
 
+            usuario.ID = usuar.ID;
+            usuario.nombres = usuar.nombres;
+            usuario.apPat = usuar.apPat;
+            usuario.apMat = usuar.apMat;
+            usuario.nroDocumento = usuar.nroDocumento;
+            usuario.perfilesdelusuario = admifacade.getperfiles();
+            usuario.estadosdeperfiles = new List<bool>();
+            for (int i = 0; i < usuario.perfilesdelusuario.Count; i++)
+            {
+                usuario.estadosdeperfiles.Add(false);
+            }
 
-            
+            for (int i = 0; i < usuario.perfilesdelusuario.Count; i++)
+            {
+                for (int j = 0; j < listaperfiles.Count; j++)
+                {
+                    if (usuario.perfilesdelusuario[i] == listaperfiles[j])
+                    {
+                        usuario.estadosdeperfiles[i] = true;
+                    }
+                }
+            }
             return View(usuario);
         }
 
-        [HttpPost]
-        public ActionResult Asignarperfil(UsuarioxSucursalBean usuario)
+
+        public ActionResult GG2(UsuarioxSucursalBean usuario)
         {
+            int i = 0;
             //guardar nuevos perfiles con estado true
-            return View();
+            return RedirectToAction("Index");
         }
         #endregion
 

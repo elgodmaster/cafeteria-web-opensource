@@ -371,7 +371,7 @@ namespace Cafeteria.Models.Compra.Proveedor
             }
             catch (Exception ex)
             {
-                log.Error("Añadir IngredientesxProveedor(EXCEPTION): ", ex);
+                log.Error("AñadirIngredientesxProveedor(EXCEPTION): ", ex);
                 throw ex;
             }
             finally

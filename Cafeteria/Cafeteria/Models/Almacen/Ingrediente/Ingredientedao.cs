@@ -9,12 +9,14 @@ using System.Web.Configuration;
 using System.Data;
 using log4net;
 
-namespace Cafeteria.Models.almacen.Ingrediente
+namespace Cafeteria.Models.Almacen.Ingrediente
 {
     public class Ingredientedao
     {
         String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
+
+        #region Ingrediente
 
         public List<IngredienteBean> ListarIngrediente(string nombre)
         {
@@ -33,7 +35,7 @@ namespace Cafeteria.Models.almacen.Ingrediente
                    while (objDataReader.Read())
                    {
                         IngredienteBean ingrediente = new IngredienteBean();
-                        ingrediente.ID = Convert.ToString(objDataReader["idIngrediente"]);//muy importante llenar este campo
+                        ingrediente.ID = Convert.ToString(objDataReader["idIngrediente"]);
                         ingrediente.nombre = Convert.ToString(objDataReader["nombre"]);
                         ingrediente.descripcion = Convert.ToString(objDataReader["descripcion"]);
                         ingrediente.estado = Convert.ToString(objDataReader["estado"]);    
@@ -193,5 +195,110 @@ namespace Cafeteria.Models.almacen.Ingrediente
 
         }
 
+
+        #endregion
+
+
+        #region OrdenCompra
+
+        public IngredienteXalmacenBean obtenerlistadAlmacen(string Idalmacen)
+        {
+            IngredienteXalmacenBean prod = new IngredienteXalmacenBean();
+
+           // ProductoXAlmacenBean prod = new ProductoXAlmacenBean();
+            //String cadenaConfiguracion = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
+            int i = 0;
+            //string idal;
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+
+                objDB.Open();
+                String strQuery = "SELECT * FROM Almacen_x_Producto WHERE idAlmacen = @ID";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@ID", Idalmacen);
+
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+
+                //sqlCon.Open();
+                // string commandString = "SELECT * FROM Almacen_x_Producto  WHERE idAlmacen=" + Idalmacen;
+
+                //SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
+                //SqlDataReader dataReader = sqlCmd.ExecuteReader();
+
+                prod.listProdalmacen = new List<IngredienteAlmacen>();
+
+                if (objDataReader.HasRows)
+                {
+                    IngredienteAlmacen prodalmacen = new IngredienteAlmacen();
+
+                    //idal = (String)dataReader["idAlmacen"];
+                    prodalmacen.ID = (String)objDataReader["idIngrediente"];
+                    prodalmacen.stockminimo = (int)objDataReader["stockminimo"];
+                    prodalmacen.stockactual = (int)objDataReader["stockactual"];
+                    prodalmacen.stockmaximo = (int)objDataReader["stockmaximo"];
+                    i++;
+                    prod.listProdalmacen.Add(prodalmacen);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("getIngrediente(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            return prod;
+
+
+        }
+
+        public string getnombreingrediente(string id)
+        {
+            //string gg = "";
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                IngredienteBean ingrediente = null;
+
+                objDB.Open();
+                String strQuery = "SELECT * FROM Ingrediente WHERE idIngrediente = @ID";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@ID", id);
+
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    objDataReader.Read();
+                    ingrediente = new IngredienteBean();
+                    ingrediente.nombre = Convert.ToString(objDataReader["nombre"]);
+
+                }
+                return ingrediente.nombre;
+            }
+            catch (Exception ex)
+            {
+                log.Error("getIngrediente(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+
+        #endregion
     }
 }

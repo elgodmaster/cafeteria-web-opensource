@@ -98,6 +98,22 @@ namespace Cafeteria.Models.Administracion
             return sucur;
         }
 
+        public SucursalBean buscarSucursal(string Id)
+        {
+            SucursalBean suc = new SucursalBean();
+            suc = sucursalservice.buscarSucursal(Id);
+            return suc;
+        }
+
+        public void EliminarSucursal(string Id)
+        {
+            sucursalservice.EliminarSucursal(Id);
+        }
+
+        public void ActualizarSucursal(SucursalBean suc)
+        {
+            sucursalservice.ActualizarSucursal(suc);
+        }
         #endregion
 
     }

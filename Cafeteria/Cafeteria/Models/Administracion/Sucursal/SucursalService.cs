@@ -21,5 +21,22 @@ namespace Cafeteria.Models.Administracion.Sucursal
             return suc;
         }
 
+        public SucursalBean buscarSucursal(string Id)
+        {
+            SucursalBean suc = new SucursalBean();
+            suc=sucursalDAo.buscarSucursal(Id);
+            return suc;
+        }
+
+        public void EliminarSucursal(string Id)
+        {
+            sucursalDAo.EliminarSucursal(Id);
+        }
+
+        public void ActualizarSucursal(SucursalBean suc)
+        {
+            sucursalDAo.ActualizarSucursal(suc);
+        }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using log4net;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models;
-using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Almacen.Ingrediente;
 using Cafeteria.Models.Almacen;
 
 

@@ -19,12 +19,12 @@ namespace Cafeteria.Models.Compra.Ordencompra
     
     public class OrdencompraBean
     {
-         public int idOrdenCompra { get; set; }
-        public int idproveedor { get; set; }
+         public string idOrdenCompra { get; set; }
+        public string idproveedor { get; set; }
 
         public string nombresucursal { get; set; }
 
-        public int idcafeteria { get; set; }
+        public string idcafeteria { get; set; }
         
         [Display(Name = "Proveedor")]
         public string idProv { get; set; } 
@@ -59,25 +59,28 @@ namespace Cafeteria.Models.Compra.Ordencompra
         {
             List<Proveedor> listaProveedor = new List<Proveedor>();
 
-            String cadenaConfiguracion = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
+            String cadenaDB = WebConfigurationManager.ConnectionStrings["Base"].ConnectionString;
+            String Estado = "ACTIVO";
 
-            //String cadenaConfiguracion = ConfigurationManager.ConnectionStrings["CadenaHotelDB"].ConnectionString;
+            SqlConnection objDB = new SqlConnection(cadenaDB);
 
-            SqlConnection sqlCon = new SqlConnection(cadenaConfiguracion);
-            sqlCon.Open();
+            objDB.Open();
 
-            string commandString = "SELECT * FROM Proveedor where estado=1";
-
-            SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
-            SqlDataReader dataReader = sqlCmd.ExecuteReader();
-
-            while (dataReader.Read())
+            String strQuery = "SELECT * FROM Proveedor WHERE estado = @estado";
+            SqlCommand objquery = new SqlCommand(strQuery, objDB);
+            BaseDatos.agregarParametro(objquery, "@estado", Estado);
+            SqlDataReader objDataReader = objquery.ExecuteReader();
+            if (objDataReader.HasRows)
             {
-                Proveedor proveedor = new Proveedor();
-                proveedor.ID = Convert.ToString(dataReader["idProveedor"]);
-                proveedor.Nombre = (string)dataReader["razonSocial"];
+                while (objDataReader.Read())
+                {
 
-                listaProveedor.Add(proveedor);
+                    Proveedor proveedor = new Proveedor();
+                    proveedor.ID = Convert.ToString(objDataReader["idProveedor"]);
+                    proveedor.Nombre = (string)objDataReader["razonSocial"];
+
+                    listaProveedor.Add(proveedor);
+                }
             }
 
             return listaProveedor;

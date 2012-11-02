@@ -188,15 +188,17 @@ namespace Cafeteria.Controllers.Administracion
             //List<UsuarioBean> usua = admifacade.ListarPersonal2("", "", "", "");
 
             UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
-            //List<UsuarioxSucursalBean> usa= new List<UsuarioxSucursalBean>();
+            List<UsuarioxSucursalBean> usa= new List<UsuarioxSucursalBean>();
+            usa.Add(usua);
             ViewBag.estado = 0;
 
-            return View(usua);
+            return View(usa);
         }
 
-        
-        public ActionResult AdministrarPerfil2(string nombre, string dni, string idperfil)
+        [HttpPost]
+        public ActionResult AdministrarPerfil(string nombre, string dni, string idperfil)
         {
+            ViewBag.estado = 1;
             List<UsuarioxSucursalBean> usua = admifacade.ListarPersonalconperfil(nombre, dni, idperfil);
             return View(usua);
         }
@@ -234,10 +236,39 @@ namespace Cafeteria.Controllers.Administracion
             return View(usuario);
         }
 
-
-        public ActionResult GG2(UsuarioxSucursalBean usuario)
+        public ActionResult Modal(string id)
         {
-            int i = 0;
+            UsuarioxSucursalBean usuario = new UsuarioxSucursalBean();
+            List<string> listaperfiles = admifacade.obtenerperfiles(id); //k tiene actualmente
+            UsuarioBean usuar = admifacade.buscarusuario(id);
+
+            usuario.ID = usuar.ID;
+            usuario.nombres = usuar.nombres;
+            usuario.apPat = usuar.apPat;
+            usuario.apMat = usuar.apMat;
+            usuario.nroDocumento = usuar.nroDocumento;
+            usuario.perfilesdelusuario = admifacade.getperfiles();
+            usuario.estadosdeperfiles = new List<bool>();
+            for (int i = 0; i < usuario.perfilesdelusuario.Count; i++)
+            {
+                usuario.estadosdeperfiles.Add(false);
+            }
+
+            for (int i = 0; i < usuario.perfilesdelusuario.Count; i++)
+            {
+                for (int j = 0; j < listaperfiles.Count; j++)
+                {
+                    if (usuario.perfilesdelusuario[i] == listaperfiles[j])
+                    {
+                        usuario.estadosdeperfiles[i] = true;
+                    }
+                }
+            }
+            return PartialView(usuario);
+        }
+        public ActionResult GG2(UsuarioxSucursalBean usuario2)
+        {
+            //int i = 0;
             //guardar nuevos perfiles con estado true
             return RedirectToAction("Index");
         }

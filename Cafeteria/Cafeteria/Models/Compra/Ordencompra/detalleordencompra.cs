@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Almacen.Ingrediente;
 
 namespace Cafeteria.Models.Compra.Ordencompra
 {

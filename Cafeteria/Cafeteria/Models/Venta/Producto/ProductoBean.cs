@@ -32,6 +32,10 @@ namespace Cafeteria.Models.Venta.Producto
         public IEnumerable<TipoProducto> GetTipo()
         {
             List<TipoProducto> ListaTipo = new List<TipoProducto>();
+            TipoProducto TipoP = new TipoProducto();
+            TipoP.ID = "TIPO0000";
+            TipoP.nombre = "Todos";
+            ListaTipo.Add(TipoP);
 
             String cadenaConfiguracion = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
 
@@ -42,6 +46,7 @@ namespace Cafeteria.Models.Venta.Producto
 
             SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
             SqlDataReader dataReader = sqlCmd.ExecuteReader();
+            
 
             while (dataReader.Read())
             {

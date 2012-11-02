@@ -93,6 +93,8 @@
     <Compile Include="Models\Administracion\Usuario\UsuarioService.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioxSucursalBean.cs" />
     <Compile Include="Models\Almacen\almacenfacade.cs" />
+    <Compile Include="Models\Almacen\Ingrediente\IngredienteAlmacen.cs" />
+    <Compile Include="Models\Almacen\Ingrediente\IngredienteXalmacenBean.cs" />
     <Compile Include="Models\Almacen\Notaentrada\Notaentrada.cs" />
     <Compile Include="Models\Almacen\Notaentrada\Notaentradabean.cs" />
     <Compile Include="Models\Almacen\Notaentrada\NotaentradaDao.cs" />
@@ -106,6 +108,8 @@
     <Compile Include="Models\Compra\Ordencompra\OrdencompraBean.cs" />
     <Compile Include="Models\Compra\Ordencompra\OrdencompraDao.cs" />
     <Compile Include="Models\Compra\Ordencompra\OrdencompraService.cs" />
+    <Compile Include="Models\Compra\Ordencompra\OrdenProducto.cs" />
+    <Compile Include="Models\Compra\Ordencompra\Producto.cs" />
     <Compile Include="Models\Venta\Producto\ProductoBean.cs" />
     <Compile Include="Models\Venta\Producto\ProductoDao.cs" />
     <Compile Include="Models\Venta\Producto\ProductoService.cs" />
@@ -1406,6 +1410,7 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\navegacion.js" />
     <Content Include="Scripts\Ubigeo.js" />
+    <Content Include="Scripts\ventanamodal.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1544,10 +1549,19 @@
     <Content Include="Views\Usuario\Asignarperfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Usuario\AdministrarPerfil2.cshtml" />
+    <Content Include="Views\Sucursal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Sucursal\Index.cshtml" />
+    <Content Include="Views\Sucursal\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Modal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ordencompra\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ordencompra\Registrar2.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

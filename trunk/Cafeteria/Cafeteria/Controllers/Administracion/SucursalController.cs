@@ -54,6 +54,44 @@ namespace Cafeteria.Controllers.Administracion
             return View(suc);
         }
 
+        #region editar
+        public ActionResult Edit(string id)
+        {
+            //IngredienteBean ingre = Almacenfacade.buscaringrediente(id);
+            
+            return View(admin.buscarSucursal(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(SucursalBean suc)
+        {
+            try
+            {
+               
+                admin.ActualizarSucursal(suc);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        #endregion
+        #region eliminar
+        public ActionResult Delete(string ID)
+        {
+            return View(admin.buscarSucursal(ID));
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public JsonResult DeleteConfirmed(string ID)
+        {
+            admin.EliminarSucursal(ID);
+            return Json(new { me = "" });
+        }
+
+        #endregion
+
 
     }
 }

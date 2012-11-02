@@ -7,7 +7,7 @@ using log4net;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models;
 using Cafeteria.Models.Venta.Producto;
-using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Almacen.Ingrediente;
 using Cafeteria.Models.Venta;
 using Cafeteria.Models.Almacen;
 

@@ -22,10 +22,15 @@ namespace Cafeteria.Models.Venta.Producto
             {
                 objDB = new SqlConnection(cadenaDB);
                 List<ProductoBean> ListaProductos = new List<ProductoBean>();
+                ProductoBean Producto = new ProductoBean();
                 objDB.Open();
                 String strQuery = "SELECT * FROM Producto";
-                if (!String.IsNullOrEmpty(nombre)) strQuery = strQuery + " WHERE UPPER(nombre) LIKE '%" + nombre.ToUpper() + "%'";
-                if (!String.IsNullOrEmpty(id_tipo)) strQuery = strQuery + " WHERE UPPER(tipo) LIKE '%" + id_tipo.ToUpper() + "%'";
+                if (!String.IsNullOrEmpty(nombre)) strQuery = "SELECT * FROM Producto WHERE UPPER(nombre) LIKE '%" + nombre.ToUpper() + "%'";
+                if (!String.IsNullOrEmpty(id_tipo))
+                {
+                    if(id_tipo!="TIPO0000") strQuery = strQuery + " WHERE UPPER(tipo) LIKE '%" + id_tipo.ToUpper() + "%'";
+
+                }
                 if (!String.IsNullOrEmpty(id_tipo) && !String.IsNullOrEmpty(nombre)) strQuery = strQuery + " WHERE UPPER(tipo) LIKE '%" + id_tipo.ToUpper() + "%'" + " AND UPPER(nombre) LIKE '%" + nombre.ToUpper() + "%'"; 
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
@@ -34,7 +39,7 @@ namespace Cafeteria.Models.Venta.Producto
                 {
                     while (objDataReader.Read())
                     {
-                        ProductoBean Producto = new ProductoBean();
+                        //ProductoBean Producto = new ProductoBean();
                         Producto.ID = Convert.ToString(objDataReader["idProducto"]);
                         Producto.nombre = Convert.ToString(objDataReader["nombre"]);
                         Producto.descripcion = Convert.ToString(objDataReader["descripcion"]);

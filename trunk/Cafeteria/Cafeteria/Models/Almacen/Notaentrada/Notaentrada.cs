@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Almacen.Ingrediente;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cafeteria.Models.Almacen.Notaentrada

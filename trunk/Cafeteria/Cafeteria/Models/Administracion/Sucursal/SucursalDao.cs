@@ -90,6 +90,7 @@ namespace Cafeteria.Models.Administracion.Sucursal
                         sucursal.direccion = Convert.ToString(objDataReader["direccion"]);
                         sucursal.telefono1 = Convert.ToString(objDataReader["telefono1"]);
                         sucursal.telefono2 = Convert.ToString(objDataReader["telefono2"]);
+                        sucursal.Estado = Convert.ToString(objDataReader["estado"]);
                         listasucur.Add(sucursal);
                     }
                 }
@@ -149,6 +150,119 @@ namespace Cafeteria.Models.Administracion.Sucursal
 
         }
 
+        public SucursalBean buscarSucursal(string Id)
+        {
+
+            SucursalBean suc = new SucursalBean();
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                //List<SucursalBean> listasucur = new List<SucursalBean>();
+                objDB.Open();
+                //String strQuery = "SELECT * FROM Cafeteria Where ";
+                String strQuery = "SELECT * FROM Cafeteria WHERE idCafeteria = @ID";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@ID", Id);
+                //SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        
+                        suc.id = Convert.ToString(objDataReader["idCafeteria"]);
+                        suc.nombre = Convert.ToString(objDataReader["nombre"]);
+                        suc.Razonsocial = Convert.ToString(objDataReader["razonsocial"]);
+                        suc.ruc = Convert.ToString(objDataReader["ruc"]);
+                        suc.direccion = Convert.ToString(objDataReader["direccion"]);
+                        suc.telefono1 = Convert.ToString(objDataReader["telefono1"]);
+                        suc.telefono2 = Convert.ToString(objDataReader["telefono2"]);
+                        suc.Estado = Convert.ToString(objDataReader["estado"]);
+                        //listasucur.Add(sucursal);
+                    }
+                }
+
+                return suc;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Sucursal(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+
+
+            //return suc;
+        }
+
+        public void EliminarSucursal(string Id)
+        {
+            string estado = "INACTIVO";
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "UPDATE Cafeteria SET estado=@estado " +
+                                  "WHERE idCafeteria = @id";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@estado", estado);
+                Utils.agregarParametro(objQuery, "@id", Id);
+                objQuery.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                log.Error("Dar de baja a una Sucursal(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        public void ActualizarSucursal(SucursalBean suc)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "UPDATE Cafeteria SET nombre=@nombre, nombreAdministrador=@nomadmin, estado=@estado " +
+                                  " WHERE idCafeteria = @id";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@nombre", suc.nombre);
+                Utils.agregarParametro(objQuery, "@nomadmin", suc.nombreadministrador);
+                Utils.agregarParametro(objQuery, "@estado", suc.Estado);
+                Utils.agregarParametro(objQuery, "@id", suc.id);
+                objQuery.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                log.Error("Actualizar_Sucursal(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
 
     }
 }

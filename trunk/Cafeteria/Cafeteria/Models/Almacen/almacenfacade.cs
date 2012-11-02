@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Almacen.Ingrediente;
 
 namespace Cafeteria.Models.Almacen
 {
@@ -37,7 +37,22 @@ namespace Cafeteria.Models.Almacen
         }
         #endregion
 
+        #region IngredientexAlmacen 
 
+        public IngredienteXalmacenBean obtenerlistadAlmacen(string Idalmacen)
+        {
+            IngredienteXalmacenBean gg = new IngredienteXalmacenBean();
+            gg = Ingredienteservice.obtenerlistadAlmacen(Idalmacen);
+            return gg;
+        }
+
+        public string getnombreingrediente(string id)
+        {
+            string gg = "gg";
+            gg = Ingredienteservice.getnombreingrediente(id);
+            return gg;
+        }
+        #endregion
 
     }
 }

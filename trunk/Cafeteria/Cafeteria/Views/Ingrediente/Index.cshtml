@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cafeteria.Models.almacen.Ingrediente.IngredienteBean>
+﻿@model IEnumerable<Cafeteria.Models.Almacen.Ingrediente.IngredienteBean>
 
 <h2>Lista de Ingredientes</h2>
 
@@ -47,7 +47,7 @@
                 <td>
                     <a href="@Url.Action("Edit", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
                          
-                  <a  id = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Borrar</a>
+                    <a  id = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Borrar</a>
 
                 </td>
            </tr>

@@ -5,7 +5,8 @@ using System.Web;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models.Compra.Proveedor;
 using Cafeteria.Models.Venta.Producto;
-using Cafeteria.Models.almacen.Ingrediente;
+using Cafeteria.Models.Almacen.Ingrediente;
+using Cafeteria.Models.Compra.Ordencompra;
 
 
 namespace Cafeteria.Models.Compra
@@ -14,6 +15,7 @@ namespace Cafeteria.Models.Compra
     {
         //IngredienteService Ingredienteservice = new IngredienteService();
         ProveedorService ProveedorService = new ProveedorService();
+        OrdencompraService ordenservice = new OrdencompraService();
         //ProductoService ProductoService = new ProductoService();
 
         
@@ -75,8 +77,24 @@ namespace Cafeteria.Models.Compra
 
         #endregion
 
+
+        #region ordencompra
+
+
+        public string obteneralmacen(string idsucursal)
+        {
+            string gg = "ALma";
+            gg = ordenservice.obteneralmacen(idsucursal);
+            return gg;
+        }
+
+        public void GuardarOrdenCompra(OrdenProducto ord)
+        {
+            ordenservice.GuardarOrdenCompra(ord);
+        }
         
 
+        #endregion
 
     }
 }

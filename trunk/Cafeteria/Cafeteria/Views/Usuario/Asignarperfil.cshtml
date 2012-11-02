@@ -84,3 +84,21 @@
             <a href="javascript:history.back()">Regresar</a>
 </p>
 }
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.modal').click(function () {
+            $('<div/>').appendTo('body').dialog({
+                close: function (event, ui) {
+                    dialog.remove();
+                },
+                modal: true
+            }).load(this.href, {});
+
+            return false;
+        });
+    });
+</script>
+
+@Html.ActionLink("show modal", "modal", null, new { @class = "modal" })

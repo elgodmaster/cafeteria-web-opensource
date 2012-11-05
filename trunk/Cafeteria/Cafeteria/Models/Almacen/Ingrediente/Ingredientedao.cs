@@ -215,9 +215,9 @@ namespace Cafeteria.Models.Almacen.Ingrediente
                 objDB = new SqlConnection(cadenaDB);
 
                 objDB.Open();
-                String strQuery = "SELECT * FROM Almacen_x_Producto WHERE idAlmacen = @ID";
+                String strQuery = "SELECT * FROM Almacen_x_Producto WHERE idAlmacen = 'ALMA0001'";
                 SqlCommand objquery = new SqlCommand(strQuery, objDB);
-                BaseDatos.agregarParametro(objquery, "@ID", Idalmacen);
+                //BaseDatos.agregarParametro(objquery, "@ID", Idalmacen);
 
                 SqlDataReader objDataReader = objquery.ExecuteReader();
 
@@ -226,18 +226,18 @@ namespace Cafeteria.Models.Almacen.Ingrediente
 
                 //SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
                 //SqlDataReader dataReader = sqlCmd.ExecuteReader();
-
+                string idal = "";
                 prod.listProdalmacen = new List<IngredienteAlmacen>();
 
                 if (objDataReader.HasRows)
                 {
                     IngredienteAlmacen prodalmacen = new IngredienteAlmacen();
 
-                    //idal = (String)dataReader["idAlmacen"];
-                    prodalmacen.ID = (String)objDataReader["idIngrediente"];
-                    prodalmacen.stockminimo = (int)objDataReader["stockminimo"];
-                    prodalmacen.stockactual = (int)objDataReader["stockactual"];
-                    prodalmacen.stockmaximo = (int)objDataReader["stockmaximo"];
+                    idal = Convert.ToString(objDataReader[0]);
+                    prodalmacen.ID = Convert.ToString(objDataReader[1]);
+                    prodalmacen.stockactual = Convert.ToInt32(objDataReader[2]);
+                    prodalmacen.stockminimo = Convert.ToInt32(objDataReader[3]);                   
+                    prodalmacen.stockmaximo = Convert.ToInt32(objDataReader[4]);
                     i++;
                     prod.listProdalmacen.Add(prodalmacen);
                 }

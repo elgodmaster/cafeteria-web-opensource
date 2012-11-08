@@ -57,13 +57,13 @@
                 @Html.LabelFor(model => model.perfil)
                 <div class = "formRight" >
                     <table>
-                    @for (int i = 0; i < Model.perfilesdelusuario.Count; i++)
+                    @for (int i = 0; i < Model.perfilesDelUsuario.Count; i++)
                     {
                         <td>
-                        @Html.DisplayFor(model => model.perfilesdelusuario[i]) 
+                        @Html.DisplayFor(model => model.perfilesDelUsuario[i]) 
                         </td>                        
                         <td>
-                         @Html.CheckBoxFor(model => model.estadosdeperfiles[i], true)
+                         @Html.CheckBoxFor(model => model.estadosDePerfiles[i], true)
                         </td>
                     }
                     </table>  

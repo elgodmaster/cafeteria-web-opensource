@@ -31,14 +31,14 @@
           <div class="formRow">
             <span>Descripcion</span>
             <div class="formRight">
-                @Html.TextAreaFor(model => model.nombreadministrador, new { maxlength = "200", placeholder = "Maximo 200 caracteres aqui" }) 
+                @Html.TextAreaFor(model => model.nombreAdministrador, new { maxlength = "200", placeholder = "Maximo 200 caracteres aqui" }) 
             </div><div class="clear"></div>
            </div>
 
-           <div class="formRow"> @Html.LabelFor(model => model.Estado)
+           <div class="formRow"> @Html.LabelFor(model => model.estado)
                 <div class="formRight"> 
-                                     @Html.RadioButtonFor(model => model.Estado, "ACTIVO", true) Activo <br />
-                                     @Html.RadioButtonFor(model => model.Estado, "INACTIVO", false) Inactivo    
+                                     @Html.RadioButtonFor(model => model.estado, "ACTIVO", true) Activo <br />
+                                     @Html.RadioButtonFor(model => model.estado, "INACTIVO", false) Inactivo    
                                                                                                             
                 </div> 
                 <div class="clear"></div>

@@ -35,9 +35,11 @@
                         </div>
                      </th>
                         
-                 
                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
-
+                       <div class="DataTables_sort_wrapper">
+                        Registrar
+                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                        </div>
                     </th>
 
                 </tr>
@@ -54,9 +56,10 @@
                         @Html.DisplayFor(modelItem => item.telefono1) - @Html.DisplayFor(modelItem => item.telefono2)
                     </td>
                     <td>
-                        @if (item.Estado == "ACTIVO")
+                        @if (item.estado == "ACTIVO")
                         {
-                           <a href="@Url.Action("Registrar", new { id = item.id })"><img src="../../Content/images/icons/color/notebook.png", alt="Edit" />Registrar Orden Compra </a> 
+                           <a href="@Url.Action("Registrar", new { id = item.id })"><img src="../../Content/images/icons/color/notebook.png", alt="Edit" />Por Proveedores </a> 
+                            <a href="@Url.Action("Registrar", new { id = item.id })"><img src="../../Content/images/icons/color/notebook.png", alt="Edit" />Por Productos </a> 
                         }
                     </td>
 

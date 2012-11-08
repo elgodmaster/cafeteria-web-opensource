@@ -81,7 +81,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                     nue.apPat = nuevo.apPat;
                     nue.apMat = nuevo.apMat;
                     nue.nroDocumento = nuevo.nroDocumento;
-                    nue.perfilesdelusuario = usuarioDao.Listaperfiles(nue.ID);
+                    nue.perfilesDelUsuario = usuarioDao.Listaperfiles(nue.ID);
                     //nue.perfilesdelusuario = new List<string>();
                     //nue.perfilesdelusuario.Add(perfil);
                     usu.Add(nue);

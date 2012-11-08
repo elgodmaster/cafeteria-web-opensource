@@ -58,7 +58,6 @@ namespace Cafeteria.Models.Administracion.Usuario
         public string apMat { get; set; }
 
         [Display(Name = "E-mail")]
-        //[Remote("ValidaEmail", "Validation")]
         public string email { get; set; }
 
         [Display(Name = "Teléfono")]
@@ -129,7 +128,6 @@ namespace Cafeteria.Models.Administracion.Usuario
         public string apMat { get; set; }
 
         [Display(Name = "E-mail")]
-        //[Remote("ValidaEmail", "Validation")]
         public string email { get; set; }
 
         [Display(Name = "Teléfono")]
@@ -175,9 +173,6 @@ namespace Cafeteria.Models.Administracion.Usuario
         public string nombreDistrito { get; set; }
 
         public List<Ubigeo.Ubigeo.Departamento> Departamentos { get; set; }
-        //public List<Ubigeo.Ubigeo.Provincia> Provincias { get; set; }
-        //public List<Ubigeo.Ubigeo.Distrito> Distritos { get; set; }
-
         public List<PerfilUsuarioBean> PerfilesUsuario { get; set; }
 
     }

@@ -32,7 +32,7 @@
                <label>Perfil</label>                           
                 
                 <div class = "formRight" >
-                <div class = "selector" >@Html.DropDownListFor(model => model.ElementAt(0).idperfil, Model.ElementAt(0).UsuarioList)</div></div>
+                <div class = "selector" >@Html.DropDownListFor(model => model.ElementAt(0).idPerfil, Model.ElementAt(0).usuarioList)</div></div>
                 <div class = "clear" ></div>
             </div>
 
@@ -91,11 +91,11 @@
                             <tr class="gradeA odd">
                                 <td class=" sorting_1">@Html.DisplayFor(modelItem => item.nombres) @Html.DisplayFor(modelItem => item.apPat)</td>
                                 <td class=" sorting_1">@Html.DisplayFor(modelItem => item.nroDocumento) </td>
-                                <td class=" sorting_1">@Html.DisplayFor(modelItem => item.fechaingreso)</td>
+                                <td class=" sorting_1">@Html.DisplayFor(modelItem => item.fechaIngreso)</td>
                                 <td class=" sorting_1">
-                                    @for (int i = 0; i < item.perfilesdelusuario.Count; i++)
+                                    @for (int i = 0; i < item.perfilesDelUsuario.Count; i++)
                                     {
-                                            @Html.DisplayFor(modelItem => item.perfilesdelusuario[i]) 
+                                            @Html.DisplayFor(modelItem => item.perfilesDelUsuario[i]) 
                                     }
                                 </td>
                                 <td class=" sorting_1">

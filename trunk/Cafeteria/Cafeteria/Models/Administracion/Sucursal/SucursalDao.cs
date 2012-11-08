@@ -21,9 +21,9 @@ namespace Cafeteria.Models.Administracion.Sucursal
             string ID = "SUCU00";//8caracteres-4letras-4#
             if (i < 10) suc.id = ID + "0" + Convert.ToString(i);
             else suc.id = ID + Convert.ToString(i);
-            suc.Razonsocial = "Cafeteria S.A";
+            suc.razonSocial = "Cafeteria S.A";
             suc.ruc = "45678912591";
-            suc.Estado = "ACTIVO";
+            suc.estado = "ACTIVO";
             try
             {
                 objDB = new SqlConnection(cadenaDB);
@@ -40,11 +40,11 @@ namespace Cafeteria.Models.Administracion.Sucursal
                 Utils.agregarParametro(objQuery, "@departamento", suc.idDepartamento);
                 Utils.agregarParametro(objQuery, "@nombre", suc.nombre);
                 Utils.agregarParametro(objQuery, "@ruc", suc.ruc);
-                Utils.agregarParametro(objQuery, "@razonsocial", suc.Razonsocial);
+                Utils.agregarParametro(objQuery, "@razonsocial", suc.razonSocial);
                 Utils.agregarParametro(objQuery, "@direccion", suc.direccion);
                 Utils.agregarParametro(objQuery, "@telefono1", suc.telefono1);
                 Utils.agregarParametro(objQuery, "@telefono2", suc.telefono2);
-                Utils.agregarParametro(objQuery, "@estado", suc.Estado);
+                Utils.agregarParametro(objQuery, "@estado", suc.estado);
                 objQuery.ExecuteNonQuery();
 
                 registrarAlmacen(suc.id);
@@ -85,12 +85,12 @@ namespace Cafeteria.Models.Administracion.Sucursal
                         SucursalBean sucursal = new SucursalBean();
                         sucursal.id= Convert.ToString(objDataReader["idCafeteria"]);
                         sucursal.nombre = Convert.ToString(objDataReader["nombre"]);
-                        sucursal.Razonsocial = Convert.ToString(objDataReader["razonsocial"]);
+                        sucursal.razonSocial = Convert.ToString(objDataReader["razonsocial"]);
                         sucursal.ruc = Convert.ToString(objDataReader["ruc"]);
                         sucursal.direccion = Convert.ToString(objDataReader["direccion"]);
                         sucursal.telefono1 = Convert.ToString(objDataReader["telefono1"]);
                         sucursal.telefono2 = Convert.ToString(objDataReader["telefono2"]);
-                        sucursal.Estado = Convert.ToString(objDataReader["estado"]);
+                        sucursal.estado = Convert.ToString(objDataReader["estado"]);
                         listasucur.Add(sucursal);
                     }
                 }
@@ -173,12 +173,12 @@ namespace Cafeteria.Models.Administracion.Sucursal
                         
                         suc.id = Convert.ToString(objDataReader["idCafeteria"]);
                         suc.nombre = Convert.ToString(objDataReader["nombre"]);
-                        suc.Razonsocial = Convert.ToString(objDataReader["razonsocial"]);
+                        suc.razonSocial = Convert.ToString(objDataReader["razonsocial"]);
                         suc.ruc = Convert.ToString(objDataReader["ruc"]);
                         suc.direccion = Convert.ToString(objDataReader["direccion"]);
                         suc.telefono1 = Convert.ToString(objDataReader["telefono1"]);
                         suc.telefono2 = Convert.ToString(objDataReader["telefono2"]);
-                        suc.Estado = Convert.ToString(objDataReader["estado"]);
+                        suc.estado = Convert.ToString(objDataReader["estado"]);
                         //listasucur.Add(sucursal);
                     }
                 }
@@ -245,8 +245,8 @@ namespace Cafeteria.Models.Administracion.Sucursal
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 Utils.agregarParametro(objQuery, "@nombre", suc.nombre);
-                Utils.agregarParametro(objQuery, "@nomadmin", suc.nombreadministrador);
-                Utils.agregarParametro(objQuery, "@estado", suc.Estado);
+                Utils.agregarParametro(objQuery, "@nomadmin", suc.nombreAdministrador);
+                Utils.agregarParametro(objQuery, "@estado", suc.estado);
                 Utils.agregarParametro(objQuery, "@id", suc.id);
                 objQuery.ExecuteNonQuery();
 

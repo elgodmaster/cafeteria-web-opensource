@@ -65,17 +65,17 @@
             <div class = "formRow" >
                 @Html.LabelFor( model => model.idDepartamento )
                 <div class = "formRight" >
-                    @Html.DropDownListFor(model => model.idDepartamento, new SelectList(Model.Departamentos, "ID", "nombre"), "Elije un departamento...")
+                    @Html.DropDownListFor(model => model.idDepartamento, new SelectList(Model.departamentos, "id", "nombre"), "Elije un departamento...")
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     @Html.ValidationMessageFor( model => model.idDepartamento )
                 </div>
                 <div class = "clear" ></div>
             </div>
 
-                @for (int i = 0; i < Model.Departamentos.Count; i++)
+                @for (int i = 0; i < Model.departamentos.Count; i++)
                 {
-                    @Html.HiddenFor(m => m.Departamentos[i].ID)
-                    @Html.HiddenFor(m => m.Departamentos[i].nombre)
+                    @Html.HiddenFor(m => m.departamentos[i].ID)
+                    @Html.HiddenFor(m => m.departamentos[i].nombre)
                 }
 
             <div class = "formRow" >

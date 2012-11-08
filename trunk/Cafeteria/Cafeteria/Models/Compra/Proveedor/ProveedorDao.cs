@@ -35,16 +35,16 @@ namespace Cafeteria.Models.Compra.Proveedor
                    while (objDataReader.Read())
                    {
                         ProveedorBean Proveedor = new ProveedorBean();
-                        Proveedor.ID = Convert.ToString(objDataReader["idProveedor"]);
+                        Proveedor.id = Convert.ToString(objDataReader["idProveedor"]);
                         Proveedor.razonSocial = Convert.ToString(objDataReader["razonSocial"]);
                         Proveedor.estado = Convert.ToString(objDataReader["estado"]);
                         Proveedor.contacto = Convert.ToString(objDataReader["contacto"]);
-                        Proveedor.email_contacto = Convert.ToString(objDataReader["email_contacto"]);
+                        Proveedor.emailContacto = Convert.ToString(objDataReader["email_contacto"]);
                         Proveedor.direccion = Convert.ToString(objDataReader["direccion"]);
                         Proveedor.ruc = Convert.ToString(objDataReader["ruc"]);
                         Proveedor.telefono1 = Convert.ToString(objDataReader["telefono1"]);
                         Proveedor.CargoContacto = Convert.ToString(objDataReader["cargo_contacto"]);
-                        Proveedor.telefono_contacto = Convert.ToString(objDataReader["telefono_contacto"]);
+                        Proveedor.telefonoContacto = Convert.ToString(objDataReader["telefono_contacto"]);
                         Proveedor.web = Convert.ToString(objDataReader["web"]);
                         Proveedor.Observacion = Convert.ToString(objDataReader["observacion"]);
                         Proveedor.telefono2 = Convert.ToString(objDataReader["telefono2"]);
@@ -75,8 +75,8 @@ namespace Cafeteria.Models.Compra.Proveedor
             SqlConnection objDB = null;
             int i = Utils.cantidad("Proveedor")+1;
             string ID="PROV00";//8caracteres-4letras-4#
-            if (i < 10) Prov.ID = ID + "0" + Convert.ToString(i);
-            else Prov.ID = ID + Convert.ToString(i);
+            if (i < 10) Prov.id = ID + "0" + Convert.ToString(i);
+            else Prov.id = ID + Convert.ToString(i);
 			try
             {
                 objDB = new SqlConnection(cadenaDB);
@@ -87,16 +87,16 @@ namespace Cafeteria.Models.Compra.Proveedor
                                     "@telefono_contacto, @web, @observacion, @telefono2)";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                Utils.agregarParametro(objQuery, "@id", Prov.ID);
+                Utils.agregarParametro(objQuery, "@id", Prov.id);
                 Utils.agregarParametro(objQuery, "@razonsocial", Prov.razonSocial);
                 Utils.agregarParametro(objQuery, "@estado", Prov.estado);
                 Utils.agregarParametro(objQuery, "@contacto", Prov.contacto);
-                Utils.agregarParametro(objQuery, "@email_contacto", Prov.email_contacto);
+                Utils.agregarParametro(objQuery, "@email_contacto", Prov.emailContacto);
                 Utils.agregarParametro(objQuery, "@direccion", Prov.direccion);
                 Utils.agregarParametro(objQuery, "@ruc", Prov.ruc);
                 Utils.agregarParametro(objQuery, "@telefono1", Prov.telefono1);
                 Utils.agregarParametro(objQuery, "@cargo_contacto", Prov.CargoContacto);
-                Utils.agregarParametro(objQuery, "@telefono_contacto", Prov.telefono_contacto);
+                Utils.agregarParametro(objQuery, "@telefono_contacto", Prov.telefonoContacto);
                 Utils.agregarParametro(objQuery, "@web", Prov.web);
                 Utils.agregarParametro(objQuery, "@observacion", Prov.Observacion);
                 Utils.agregarParametro(objQuery, "@telefono2", Prov.telefono2);
@@ -136,16 +136,16 @@ namespace Cafeteria.Models.Compra.Proveedor
                     objDataReader.Read();
                     Proveedor = new ProveedorBean();
 
-                    Proveedor.ID = Convert.ToString(objDataReader["idProveedor"]);
+                    Proveedor.id = Convert.ToString(objDataReader["idProveedor"]);
                     Proveedor.razonSocial = Convert.ToString(objDataReader["razonSocial"]);
                     Proveedor.estado = Convert.ToString(objDataReader["estado"]);
                     Proveedor.contacto = Convert.ToString(objDataReader["contacto"]);
-                    Proveedor.email_contacto = Convert.ToString(objDataReader["email_contacto"]);
+                    Proveedor.emailContacto = Convert.ToString(objDataReader["email_contacto"]);
                     Proveedor.direccion = Convert.ToString(objDataReader["direccion"]);
                     Proveedor.ruc = Convert.ToString(objDataReader["ruc"]);
                     Proveedor.telefono1 = Convert.ToString(objDataReader["telefono1"]);
                     Proveedor.CargoContacto = Convert.ToString(objDataReader["cargo_contacto"]);
-                    Proveedor.telefono_contacto = Convert.ToString(objDataReader["telefono_contacto"]);
+                    Proveedor.telefonoContacto = Convert.ToString(objDataReader["telefono_contacto"]);
                     Proveedor.web = Convert.ToString(objDataReader["web"]);
                     Proveedor.Observacion = Convert.ToString(objDataReader["observacion"]);
                     Proveedor.telefono2 = Convert.ToString(objDataReader["telefono2"]);
@@ -179,16 +179,16 @@ namespace Cafeteria.Models.Compra.Proveedor
                                   "WHERE idProveedor = @id";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                Utils.agregarParametro(objQuery, "@id", Prov.ID);
+                Utils.agregarParametro(objQuery, "@id", Prov.id);
                 Utils.agregarParametro(objQuery, "@razonsocial", Prov.razonSocial);
                 Utils.agregarParametro(objQuery, "@estado", Prov.estado);
                 Utils.agregarParametro(objQuery, "@contacto", Prov.contacto); 
-                Utils.agregarParametro(objQuery, "@email_contacto", Prov.email_contacto);
+                Utils.agregarParametro(objQuery, "@email_contacto", Prov.emailContacto);
                 Utils.agregarParametro(objQuery, "@direccion", Prov.direccion);
                 Utils.agregarParametro(objQuery, "@ruc", Prov.ruc);
                 Utils.agregarParametro(objQuery, "@telefono1", Prov.telefono1);
                 Utils.agregarParametro(objQuery, "@cargo_contacto", Prov.CargoContacto);
-                Utils.agregarParametro(objQuery, "@telefono_contacto", Prov.telefono_contacto);
+                Utils.agregarParametro(objQuery, "@telefono_contacto", Prov.telefonoContacto);
                 Utils.agregarParametro(objQuery, "@web", Prov.web);
                 Utils.agregarParametro(objQuery, "@observacion", Prov.Observacion);
                 Utils.agregarParametro(objQuery, "@telefono2", Prov.telefono2);
@@ -319,15 +319,15 @@ namespace Cafeteria.Models.Compra.Proveedor
 
                 SqlDataReader objDataReader = objquery.ExecuteReader();
                 prov = new ProveedorxIngredienteBean();
-                prov.ListadeIngredientesProveedor = new List<ProveedorIngrediente>();
+                prov.listadeIngredientesProveedor = new List<ProveedorIngrediente>();
                 if (objDataReader.HasRows)
                 {
                     while (objDataReader.Read())
                     {
                         ProveedorIngrediente aux = new ProveedorIngrediente();
-                        aux.ID = Convert.ToString(objDataReader["idIngrediente"]);
+                        aux.id = Convert.ToString(objDataReader["idIngrediente"]);
                         aux.precio = (decimal)objDataReader["precio"];
-                        prov.ListadeIngredientesProveedor.Add(aux);
+                        prov.listadeIngredientesProveedor.Add(aux);
                     }
                 }
                 return prov;
@@ -353,17 +353,17 @@ namespace Cafeteria.Models.Compra.Proveedor
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                for(int i=0; i< ProvxIngre.ListadeIngredientesProveedor.Count;i++)
+                for(int i=0; i< ProvxIngre.listadeIngredientesProveedor.Count;i++)
                 {
-                    if (ProvxIngre.ListadeIngredientesProveedor[i].precio>0)
+                    if (ProvxIngre.listadeIngredientesProveedor[i].precio>0)
                     {
                         String strQuery = "Insert into Proveedor_x_Producto (idProveedor,idIngrediente,precio) values " +
                                             "(@idproveedor,@idingrediente,@precio)";
 
                         SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                        Utils.agregarParametro(objQuery, "@idproveedor", ProvxIngre.idproveedor);
-                        Utils.agregarParametro(objQuery, "@idingrediente", ProvxIngre.ListadeIngredientesProveedor[i].ID);
-                        Utils.agregarParametro(objQuery, "@precio", ProvxIngre.ListadeIngredientesProveedor[i].precio);
+                        Utils.agregarParametro(objQuery, "@idproveedor", ProvxIngre.idProveedor);
+                        Utils.agregarParametro(objQuery, "@idingrediente", ProvxIngre.listadeIngredientesProveedor[i].id);
+                        Utils.agregarParametro(objQuery, "@precio", ProvxIngre.listadeIngredientesProveedor[i].precio);
                         objQuery.ExecuteNonQuery();
                     }
                 }
@@ -390,14 +390,14 @@ namespace Cafeteria.Models.Compra.Proveedor
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                for (int i = 0; i < ProvxIngre.ListadeIngredientesProveedor.Count; i++)
+                for (int i = 0; i < ProvxIngre.listadeIngredientesProveedor.Count; i++)
                 {
                     String strQuery = "Update Proveedor_x_Producto SET precio = @precio where idProveedor=@idproveedor and idIngrediente=@idingrediente ";
 
                     SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                    Utils.agregarParametro(objQuery, "@idproveedor", ProvxIngre.idproveedor);
-                    Utils.agregarParametro(objQuery, "@idingrediente", ProvxIngre.ListadeIngredientesProveedor[i].ID);
-                    Utils.agregarParametro(objQuery, "@precio", ProvxIngre.ListadeIngredientesProveedor[i].precio);
+                    Utils.agregarParametro(objQuery, "@idproveedor", ProvxIngre.idProveedor);
+                    Utils.agregarParametro(objQuery, "@idingrediente", ProvxIngre.listadeIngredientesProveedor[i].id);
+                    Utils.agregarParametro(objQuery, "@precio", ProvxIngre.listadeIngredientesProveedor[i].precio);
                     objQuery.ExecuteNonQuery();
 
                 }

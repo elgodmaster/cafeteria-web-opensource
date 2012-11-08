@@ -11,7 +11,7 @@ namespace Cafeteria.Models.Venta.Producto
 {
     public class ProductoBean
     {
-        public string ID { get; set; }
+        public string id { get; set; }
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Debe ingresar nombre de Producto")]
         [RegularExpression("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$", ErrorMessage = "El nombre ingresado no es válido")]
@@ -19,21 +19,21 @@ namespace Cafeteria.Models.Venta.Producto
         [Display(Name = "Descripción")]
         public string descripcion { get; set; }
 
-        public string ID_Tipo { get; set; }
-        public string Nombre_tipo { get; set; }
+        public string idTipo { get; set; }
+        public string nombreTipo { get; set; }
         
         public string estado { get; set; }
-        public SelectList Listatipo { get; set; }
+        public SelectList listaTipo { get; set; }
 
         public ProductoBean()
         {
-            Listatipo = new SelectList(GetTipo(), "ID", "Nombre");
+            listaTipo = new SelectList(GetTipo(), "ID", "Nombre");
         }
-        public IEnumerable<TipoProducto> GetTipo()
+        public IEnumerable<tipoProducto> GetTipo()
         {
-            List<TipoProducto> ListaTipo = new List<TipoProducto>();
-            TipoProducto TipoP = new TipoProducto();
-            TipoP.ID = "TIPO0000";
+            List<tipoProducto> ListaTipo = new List<tipoProducto>();
+            tipoProducto TipoP = new tipoProducto();
+            TipoP.id = "TIPO0000";
             TipoP.nombre = "Todos";
             ListaTipo.Add(TipoP);
 
@@ -50,26 +50,26 @@ namespace Cafeteria.Models.Venta.Producto
 
             while (dataReader.Read())
             {
-                TipoProducto TipoProducto = new TipoProducto();
-                TipoProducto.ID = Convert.ToString(dataReader["id"]);
-                TipoProducto.nombre = (string)dataReader["nombre"];
+                tipoProducto tipoProducto = new tipoProducto();
+                tipoProducto.id = Convert.ToString(dataReader["id"]);
+                tipoProducto.nombre = (string)dataReader["nombre"];
 
-                ListaTipo.Add(TipoProducto);
+                ListaTipo.Add(tipoProducto);
             }
 
             return ListaTipo;
         }
 
     }
-    public class TipoProducto
+    public class tipoProducto
     {
-        public string ID { get; set; }
+        public string id { get; set; }
         public string nombre { get; set; }
     }
     public class tipo
     {
-        public string ID { get; set; }
-        public List<TipoProducto> Lista { get; set; }
+        public string id { get; set; }
+        public List<tipoProducto> listaProductos { get; set; }
     }
 
 }

@@ -21,7 +21,7 @@ namespace Cafeteria.Controllers.Administracion
             var sucursal = new SucursalBean();
             try
             {
-                sucursal.Departamentos = Utils.listarDepartamentos();
+                sucursal.departamentos = Utils.listarDepartamentos();
                 return View(sucursal);
             }
             catch (Exception ex)

@@ -39,12 +39,12 @@ namespace Cafeteria.Models.Venta.Producto
                 {
                     while (objDataReader.Read())
                     {
-                        //ProductoBean Producto = new ProductoBean();
-                        Producto.ID = Convert.ToString(objDataReader["idProducto"]);
+                        Producto = new ProductoBean();
+                        Producto.id = Convert.ToString(objDataReader["idProducto"]);
                         Producto.nombre = Convert.ToString(objDataReader["nombre"]);
                         Producto.descripcion = Convert.ToString(objDataReader["descripcion"]);
-                        Producto.ID_Tipo = Convert.ToString(objDataReader["tipo"]);
-                        Producto.Nombre_tipo = getTipo(Producto.ID_Tipo);
+                        Producto.idTipo = Convert.ToString(objDataReader["tipo"]);
+                        Producto.nombreTipo = getTipo(Producto.idTipo);
                         Producto.estado = Convert.ToString(objDataReader["estado"]);
                         ListaProductos.Add(Producto);
                     }
@@ -71,8 +71,8 @@ namespace Cafeteria.Models.Venta.Producto
             SqlConnection objDB = null;
             int i = Utils.cantidad("Producto") + 1;
             string ID = "PROD00";//8caracteres-4letras-4#
-            if (i < 10) produ.ID = ID + "0" + Convert.ToString(i);
-            else produ.ID = ID + Convert.ToString(i);
+            if (i < 10) produ.id = ID + "0" + Convert.ToString(i);
+            else produ.id = ID + Convert.ToString(i);
             try
             {
                 objDB = new SqlConnection(cadenaDB);
@@ -81,10 +81,10 @@ namespace Cafeteria.Models.Venta.Producto
                                     "(@id,@nombre, @descripcion,@tipo, @estado)";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                Utils.agregarParametro(objQuery, "@id", produ.ID);
+                Utils.agregarParametro(objQuery, "@id", produ.id);
                 Utils.agregarParametro(objQuery, "@nombre", produ.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", produ.descripcion);
-                Utils.agregarParametro(objQuery, "@tipo", produ.ID_Tipo);
+                Utils.agregarParametro(objQuery, "@tipo", produ.idTipo);
                 Utils.agregarParametro(objQuery, "@estado", produ.estado);
                 objQuery.ExecuteNonQuery();
 
@@ -121,11 +121,11 @@ namespace Cafeteria.Models.Venta.Producto
                 {
                     objDataReader.Read();
                     Producto = new ProductoBean();
-                    Producto.ID = Convert.ToString(objDataReader["idProducto"]);
+                    Producto.id = Convert.ToString(objDataReader["idProducto"]);
                     Producto.nombre = Convert.ToString(objDataReader["nombre"]);
                     Producto.descripcion = Convert.ToString(objDataReader["descripcion"]);
-                    Producto.ID_Tipo = Convert.ToString(objDataReader["tipo"]);
-                    Producto.Nombre_tipo = getTipo(Producto.ID_Tipo);
+                    Producto.idTipo = Convert.ToString(objDataReader["tipo"]);
+                    Producto.nombreTipo = getTipo(Producto.idTipo);
                     Producto.estado = Convert.ToString(objDataReader["estado"]);
                 }
                 return Producto;
@@ -158,8 +158,8 @@ namespace Cafeteria.Models.Venta.Producto
                 Utils.agregarParametro(objQuery, "@nombre", produ.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", produ.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", produ.estado);
-                Utils.agregarParametro(objQuery, "@tipo", produ.ID_Tipo);
-                Utils.agregarParametro(objQuery, "@id", produ.ID);
+                Utils.agregarParametro(objQuery, "@tipo", produ.idTipo);
+                Utils.agregarParametro(objQuery, "@id", produ.id);
                 objQuery.ExecuteNonQuery();
 
             }
@@ -264,16 +264,16 @@ namespace Cafeteria.Models.Venta.Producto
 
                 SqlDataReader objDataReader = objquery.ExecuteReader();
                 produc = new ProductoxIngredienteBean();
-                produc.listaIngre = new List<ProductoxIngrediente>();
+                produc.listaIngredientes = new List<ProductoxIngrediente>();
                 if (objDataReader.HasRows)
                 {
                     while (objDataReader.Read())
                     {
                         ProductoxIngrediente aux = new ProductoxIngrediente();
-                        aux.ID = Convert.ToString(objDataReader["idIngrediente"]);
+                        aux.id = Convert.ToString(objDataReader["idIngrediente"]);
                         aux.cantidad = (int)objDataReader["cantidad"];
                         aux.medida = (string)objDataReader["unidaddemedida"];
-                        produc.listaIngre.Add(aux);
+                        produc.listaIngredientes.Add(aux);
                     }
                 }
                 return produc;
@@ -299,18 +299,18 @@ namespace Cafeteria.Models.Venta.Producto
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                for (int i = 0; i < Producxingre.listaIngre.Count; i++)
+                for (int i = 0; i < Producxingre.listaIngredientes.Count; i++)
                 {
-                    if (Producxingre.listaIngre[i].cantidad > 0)
+                    if (Producxingre.listaIngredientes[i].cantidad > 0)
                     {
                         String strQuery = "Insert into Producto_x_Ingrediente (idProducto,idIngrediente,cantidad, unidaddemedida) values " +
                                             "(@idproveedor,@idingrediente,@cantidad,@unidad)";
 
                         SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                        Utils.agregarParametro(objQuery, "@idproveedor", Producxingre.IDProducto);
-                        Utils.agregarParametro(objQuery, "@idingrediente", Producxingre.listaIngre[i].ID);
-                        Utils.agregarParametro(objQuery, "@cantidad", Producxingre.listaIngre[i].cantidad);
-                        Utils.agregarParametro(objQuery, "@unidad", Producxingre.listaIngre[i].medida);
+                        Utils.agregarParametro(objQuery, "@idproveedor", Producxingre.idProducto);
+                        Utils.agregarParametro(objQuery, "@idingrediente", Producxingre.listaIngredientes[i].id);
+                        Utils.agregarParametro(objQuery, "@cantidad", Producxingre.listaIngredientes[i].cantidad);
+                        Utils.agregarParametro(objQuery, "@unidad", Producxingre.listaIngredientes[i].medida);
                         objQuery.ExecuteNonQuery();
                     }
                 }
@@ -337,15 +337,15 @@ namespace Cafeteria.Models.Venta.Producto
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                for (int i = 0; i < Producxingre.listaIngre.Count; i++)
+                for (int i = 0; i < Producxingre.listaIngredientes.Count; i++)
                 {
                     String strQuery = "Update Producto_x_Ingrediente SET cantidad = @cantidad, unidaddemedida=@unidad  where idProducto=@idproducto and idIngrediente=@idingrediente ";
 
                     SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                    Utils.agregarParametro(objQuery, "@idproveedor", Producxingre.IDProducto);
-                    Utils.agregarParametro(objQuery, "@idingrediente", Producxingre.listaIngre[i].ID);
-                    Utils.agregarParametro(objQuery, "@cantidad", Producxingre.listaIngre[i].cantidad);
-                    Utils.agregarParametro(objQuery, "@unidad", Producxingre.listaIngre[i].medida);
+                    Utils.agregarParametro(objQuery, "@idproveedor", Producxingre.idProducto);
+                    Utils.agregarParametro(objQuery, "@idingrediente", Producxingre.listaIngredientes[i].id);
+                    Utils.agregarParametro(objQuery, "@cantidad", Producxingre.listaIngredientes[i].cantidad);
+                    Utils.agregarParametro(objQuery, "@unidad", Producxingre.listaIngredientes[i].medida);
                     objQuery.ExecuteNonQuery();
 
                 }

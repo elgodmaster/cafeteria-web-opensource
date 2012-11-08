@@ -21,19 +21,19 @@
 
             <fieldset>
                 <div class="form formRow">
-                    @Html.LabelFor(m => m.Usuario)
+                    @Html.LabelFor(m => m.usuario)
                     <div class="loginInput">
-                        @Html.TextBoxFor(m => m.Usuario, new { @class = "logueo" } )
-                        @Html.ValidationMessageFor(m => m.Usuario)
+                        @Html.TextBoxFor(m => m.usuario, new { @class = "logueo" } )
+                        @Html.ValidationMessageFor(m => m.usuario)
                     </div>
                     <div class="clear"></div>
                 </div>
                 
                 <div class="form formRow">
-                    @Html.LabelFor(m => m.Contrasenia)
+                    @Html.LabelFor(m => m.contrasenia)
                     <div class="loginInput">
-                        @Html.PasswordFor(m => m.Contrasenia , new { @class = "logueo" } )
-                        @Html.ValidationMessageFor(m => m.Contrasenia)
+                        @Html.PasswordFor(m => m.contrasenia, new { @class = "logueo" })
+                        @Html.ValidationMessageFor(m => m.contrasenia)
                     </div>
                     <div class="clear"></div>
                 </div>

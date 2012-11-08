@@ -16,7 +16,7 @@
           <div class="formRow">
             <span>ID</span>
             <div class = "formRight" > 
-                @Html.DisplayFor(model => model.ID) @Html.HiddenFor(model => model.ID)
+                @Html.DisplayFor(model => model.id) @Html.HiddenFor(model => model.id)
             </div><div class="clear"></div>
           </div>
 
@@ -32,7 +32,7 @@
                <span>Tipo de Producto</span>                             
                 
                 <div class = "formRight" >
-                <div class = "selector">@Html.DropDownListFor(model => model.ID_Tipo, Model.Listatipo)</div></div>
+                <div class = "selector">@Html.DropDownListFor(model => model.idTipo, Model.listaTipo)</div></div>
                 <div class = "clear" ></div>
             </div>
 

@@ -17,12 +17,12 @@
             <div class="title">
                 <h6>Seleccionar Proveedor</h6>
             </div>
-            @Html.HiddenFor(model => model.idcafeteria) 
+            @Html.HiddenFor(model => model.idCafeteria) 
             <div class="formRow">
-               @Html.LabelFor(model => model.idProv)                              
+               @Html.LabelFor(model => model.idProveedor)                              
                 
                 <div class = "formRight" >
-                <div class = "selector">@Html.DropDownListFor(model => model.idProv, Model.proveedorList)</div></div>
+                <div class = "selector">@Html.DropDownListFor(model => model.idProveedor, Model.listaProveedor)</div></div>
                 <div class = "clear" ></div>
             </div>
 

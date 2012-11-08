@@ -9,7 +9,7 @@ namespace Cafeteria.Models.Administracion.Perfil_Usuario
     public class PerfilUsuarioBean
     {
         
-        public string ID { get; set; }
+        public string id { get; set; }
 
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Debe ingresar un nombre para el perfil de usuario")]

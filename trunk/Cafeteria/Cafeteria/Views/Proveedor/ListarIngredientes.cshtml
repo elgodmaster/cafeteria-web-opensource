@@ -12,24 +12,24 @@
 
  @using (Html.BeginForm("ModificarIngredientes", "Proveedor", FormMethod.Post, new { @class = "form" }))
  {   
-     @Html.HiddenFor(model => model.idproveedor) 
+     @Html.HiddenFor(model => model.idProveedor) 
     <fieldset>
         <div class="widget">
             <div class="title">
                 <h6>Proveedor</h6>
             </div>
-            <div class="formRow"> @Html.LabelFor(model => model.idproveedor)
-                <div class=" formRight">  @Html.TextBoxFor(model => model.idproveedor, new { @readonly = "readonly" })  </div>
+            <div class="formRow"> @Html.LabelFor(model => model.idProveedor)
+                <div class=" formRight">  @Html.TextBoxFor(model => model.idProveedor, new { @readonly = "readonly" })  </div>
                 <div class="clear"></div>
             </div>
-            <div class="formRow"> @Html.LabelFor(model => model.nombre_Proveedor)
-                <div class=" formRight">  @Html.TextBoxFor(model => model.nombre_Proveedor, new { @readonly = "readonly" })  </div>
+            <div class="formRow"> @Html.LabelFor(model => model.nombreProveedor)
+                <div class=" formRight">  @Html.TextBoxFor(model => model.nombreProveedor, new { @readonly = "readonly" })  </div>
                 <div class="clear"></div>
             </div>
             
-             @for (int i = 0; i < Model.ListadeIngredientesProveedor.Count; i++)
+             @for (int i = 0; i < Model.listadeIngredientesProveedor.Count; i++)
              {
-                    @Html.HiddenFor(model => model.ListadeIngredientesProveedor[i].ID)  
+                    @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].id)  
              }
         </div>
     </fieldset>
@@ -41,7 +41,7 @@
      <p></p>
         
      <p>
-    <a href="@Url.Action("AñadirIngredientes", new { ID = Model.idproveedor })"><img src="../../Content/images/icons/color/plus.png", alt="Create" />Añadir más Ingredientes</a>
+    <a href="@Url.Action("AñadirIngredientes", new { ID = Model.idProveedor })"><img src="../../Content/images/icons/color/plus.png", alt="Create" />Añadir más Ingredientes</a>
     </p>
         
          
@@ -78,15 +78,15 @@
 
     <tbody>
 
-    @for (int i = 0; i < Model.ListadeIngredientesProveedor.Count; i++)
+    @for (int i = 0; i < Model.listadeIngredientesProveedor.Count; i++)
     {
-         @Html.HiddenFor(model => model.ListadeIngredientesProveedor[i].ID) 
+         @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].id) 
         <tr class="gradeA odd">
-            <td class="sorting_1">@Html.DisplayFor(model => model.ListadeIngredientesProveedor[i].ID)</td>
-            <td class="sorting_1">@Html.DisplayFor(model => model.ListadeIngredientesProveedor[i].nombre)</td>
-            <td>@Html.DisplayFor(model => model.ListadeIngredientesProveedor[i].precio)</td>
+            <td class="sorting_1">@Html.DisplayFor(model => model.listadeIngredientesProveedor[i].id)</td>
+            <td class="sorting_1">@Html.DisplayFor(model => model.listadeIngredientesProveedor[i].nombre)</td>
+            <td>@Html.DisplayFor(model => model.listadeIngredientesProveedor[i].precio)</td>
              
-             @Html.HiddenFor(model => model.ListadeIngredientesProveedor[i].nombre) 
+             @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].nombre) 
         </tr>
     }
     </tbody>

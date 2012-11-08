@@ -24,11 +24,11 @@
                 </tr>
             </thead>
                     
-                    @for (int i = 0; i < Model.perfilesdelusuario.Count; i++)
+                    @for (int i = 0; i < Model.perfilesDelUsuario.Count; i++)
                     {
                         <tr>
-                         <td>@Html.DisplayFor(model => model.perfilesdelusuario[i]) </td>
-                         <td>@Html.CheckBoxFor(model => model.estadosdeperfiles[i], true) </td>
+                         <td>@Html.DisplayFor(model => model.perfilesDelUsuario[i]) </td>
+                         <td>@Html.CheckBoxFor(model => model.estadosDePerfiles[i], true) </td>
                          </tr>
                     }
 

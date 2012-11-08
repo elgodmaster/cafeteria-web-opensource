@@ -20,7 +20,7 @@
                <span>Tipo de Producto</span>                             
                 
                 <div class = "formRight" >
-                <div class = "selector">@Html.DropDownListFor(modelitem => modelitem.ElementAt(0).ID_Tipo, Model.ElementAt(0).Listatipo)</div></div>
+                <div class = "selector">@Html.DropDownListFor(modelitem => modelitem.ElementAt(0).idTipo, Model.ElementAt(0).listaTipo)</div></div>
                 <div class = "clear" ></div>
             </div>
         </div>
@@ -80,17 +80,17 @@
                 @foreach (var item in Model)
                 {
                     <tr class="gradeA odd">
-                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.ID)</td>
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.id)</td>
                         <td class=" sorting_1">@Html.DisplayFor(modelItem => item.nombre)</td>
-                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.Nombre_tipo)</td>
+                        <td class=" sorting_1">@Html.DisplayFor(modelItem => item.nombreTipo)</td>
                         <td class=" sorting_1">@Html.DisplayFor(modelItem => item.estado)</td>
                         <td class=" sorting_1">
-                            <a href="@Url.Action("Details", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Detalle </a> | 
-                            <a href="@Url.Action("Edit", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
+                            <a href="@Url.Action("Details", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Detalle </a> | 
+                            <a href="@Url.Action("Edit", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
                          
                             @if(item.estado=="ACTIVO"){
-                                <a  ID = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
-                                <a href="@Url.Action("ListarIngredientes", new { id = item.ID })">><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Ingredientes</a>
+                                <a  ID = @item.id class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
+                                <a href="@Url.Action("ListarIngredientes", new { id = item.id })">><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Ingredientes</a>
                             }
 
                         </td>

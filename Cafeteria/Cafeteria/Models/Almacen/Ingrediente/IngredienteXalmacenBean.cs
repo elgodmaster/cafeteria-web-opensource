@@ -10,11 +10,10 @@ namespace Cafeteria.Models.Almacen.Ingrediente
     {
         [Display(Name = "Cafeteria")]
         public String Cafeteria { get; set; }
-        public String idalmacen { get; set; }
+        public String idAlmacen { get; set; }
         public String idCafeteria { get; set; }
         public bool estado { get; set; }
-        public List<IngredienteAlmacen> listProdalmacen { get; set; }
+        public List<IngredienteAlmacen> listProdAlmacen { get; set; }
 
-        //public string conexion { get; set; }
     }
 }

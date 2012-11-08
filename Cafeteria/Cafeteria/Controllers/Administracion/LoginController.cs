@@ -23,9 +23,9 @@ namespace Cafeteria.Controllers.Administracion
             if (ModelState.IsValid)
             {
                 //if (loginmodel.Usuario == "stardust" && loginmodel.Contrasenia == "stardust")
-                if (Utils.comprobarLogin(loginmodel.Usuario, loginmodel.Contrasenia))
+                if (Utils.comprobarLogin(loginmodel.usuario, loginmodel.contrasenia))
                 {
-                    FormsAuthentication.SetAuthCookie(loginmodel.Usuario, false);
+                    FormsAuthentication.SetAuthCookie(loginmodel.usuario, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else

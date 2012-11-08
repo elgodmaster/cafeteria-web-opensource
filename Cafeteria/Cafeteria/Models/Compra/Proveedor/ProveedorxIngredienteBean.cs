@@ -9,8 +9,8 @@ namespace Cafeteria.Models.Compra.Proveedor
     public class ProveedorxIngredienteBean
     {
         [Display(Name = "Proveedor")]
-        public String nombre_Proveedor { get; set; }
-        public string idproveedor { get; set; }
-        public List<ProveedorIngrediente> ListadeIngredientesProveedor { get; set; }
+        public String nombreProveedor { get; set; }
+        public string idProveedor { get; set; }
+        public List<ProveedorIngrediente> listadeIngredientesProveedor { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace Cafeteria.Controllers.Venta
         public ActionResult Details(string id)
         {
             ProductoBean producto = Ventafacade.BuscarProducto(id);
-            producto.Nombre_tipo = Ventafacade.get_tipo(producto.ID_Tipo);
+            producto.nombreTipo = Ventafacade.get_tipo(producto.idTipo);
             return View(producto);
         }
 
@@ -135,15 +135,15 @@ namespace Cafeteria.Controllers.Venta
             ProductoBean producto = Ventafacade.BuscarProducto(ID);
             ProductoxIngredienteBean prodIngr = new ProductoxIngredienteBean();
             prodIngr = Ventafacade.obtenerlistadeingredientesdeProducto(ID);
-            prodIngr.Nombre_Producto = producto.nombre;
-            prodIngr.IDProducto = producto.ID;
-            prodIngr.tipo = Ventafacade.get_tipo(producto.ID_Tipo);
-            if (prodIngr.listaIngre.Count > 0) ViewBag.estado = 0;
+            prodIngr.nombreProducto = producto.nombre;
+            prodIngr.idProducto = producto.id;
+            prodIngr.tipo = Ventafacade.get_tipo(producto.idTipo);
+            if (prodIngr.listaIngredientes.Count > 0) ViewBag.estado = 0;
             else ViewBag.estado = 1;
-            for (int i = 0; i < prodIngr.listaIngre.Count; i++)
+            for (int i = 0; i < prodIngr.listaIngredientes.Count; i++)
             {
-                IngredienteBean Ingre = Almacenfacade.buscaringrediente(prodIngr.listaIngre[i].ID);
-                prodIngr.listaIngre[i].nombre = Ingre.nombre;
+                IngredienteBean Ingre = Almacenfacade.buscaringrediente(prodIngr.listaIngredientes[i].id);
+                prodIngr.listaIngredientes[i].nombre = Ingre.nombre;
 
             }
             return View(prodIngr);
@@ -169,21 +169,21 @@ namespace Cafeteria.Controllers.Venta
 
             List<IngredienteBean> Ingredientes = Almacenfacade.ListarIngrediente("");
             ProductoxIngredienteBean ProdIngre = new ProductoxIngredienteBean();
-            ProdIngre.Nombre_Producto = producto.nombre;
-            ProdIngre.IDProducto = producto.ID;
-            ProdIngre.listaIngre = new List<ProductoxIngrediente>();
+            ProdIngre.nombreProducto = producto.nombre;
+            ProdIngre.idProducto = producto.id;
+            ProdIngre.listaIngredientes = new List<ProductoxIngrediente>();
             ProductoxIngredienteBean aux = Ventafacade.obtenerlistadeingredientesdeProducto(ID);
 
             for (int j = 0; j < Ingredientes.Count; j++)
             {
                 ProductoxIngrediente product = new ProductoxIngrediente();
-                product.ID = Ingredientes[j].ID;
+                product.id = Ingredientes[j].id;
                 product.nombre = Ingredientes[j].nombre;
-                for (int i = 0; i < aux.listaIngre.Count; i++)
+                for (int i = 0; i < aux.listaIngredientes.Count; i++)
                 {
-                    if (aux.listaIngre[i].ID == Ingredientes[j].ID) product.estadod_disponible = false;
+                    if (aux.listaIngredientes[i].id == Ingredientes[j].id) product.estadod_disponible = false;
                 }
-                ProdIngre.listaIngre.Add(product);
+                ProdIngre.listaIngredientes.Add(product);
             }
 
             return View(ProdIngre);

@@ -47,17 +47,17 @@
         if (item.estado == "ACTIVO")
         {
            <tr class="gradeA odd">
-                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                <td>@Html.DisplayFor(modelItem => item.id)</td>
                 <td>@Html.DisplayFor(modelItem => item.razonSocial)</td>
                 <td>@Html.DisplayFor(modelItem => item.ruc)</td>
                 <td>@Html.DisplayFor(modelItem => item.estado)</td>
                 <td>
-                  <a href="@Url.Action("Details", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Detalle </a> | 
-                  <a href="@Url.Action("Edit", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
+                  <a href="@Url.Action("Details", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Detalle </a> | 
+                  <a href="@Url.Action("Edit", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
                          
                   @if(item.estado=="ACTIVO"){
-                        <a  ID = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
-                        <a href="@Url.Action("ListarIngredientes", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Ver Ingredientes </a>    
+                        <a  ID = @item.id class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
+                        <a href="@Url.Action("ListarIngredientes", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Ver Ingredientes </a>    
                   }
 
                 </td>
@@ -65,7 +65,7 @@
         }
         else
         {
-            @Html.HiddenFor(modelItem => item.ID)
+            @Html.HiddenFor(modelItem => item.id)
             @Html.HiddenFor(modelItem => item.razonSocial)
             @Html.HiddenFor(modelItem => item.ruc)
             @Html.HiddenFor(modelItem => item.estado)

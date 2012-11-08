@@ -12,7 +12,7 @@ namespace Cafeteria.Models.Administracion.Sucursal
         public string id { get; set; }
 
         [Display(Name = "Razon Social")]
-        public string Razonsocial { get; set; }
+        public string razonSocial { get; set; }
 
         [Display(Name = "Ruc")]
         public string ruc { get; set; }
@@ -30,7 +30,7 @@ namespace Cafeteria.Models.Administracion.Sucursal
         public string telefono2 { get; set; }
 
         [Display(Name = "Nombre de Administrador")]
-        public string nombreadministrador { get; set; }
+        public string nombreAdministrador { get; set; }
 
         [Display(Name = "Departamento")]
         [Required(ErrorMessage = "Debe elegir un departamento")]
@@ -45,9 +45,9 @@ namespace Cafeteria.Models.Administracion.Sucursal
         public string idDistrito { get; set; }
         
         [Display(Name = "Estado")]
-        public string Estado { get; set; }
+        public string estado { get; set; }
 
-        public List<Ubigeo.Ubigeo.Departamento> Departamentos { get; set; }
+        public List<Ubigeo.Ubigeo.Departamento> departamentos { get; set; }
     }
 
 

@@ -49,8 +49,8 @@ namespace Cafeteria.Controllers.Administracion
             usua.nroDocumento = usuario.nroDocumento;
             usua.nombres = usuario.nombres +" "+ usuario.apPat + " "+usuario.apMat;
             usua.dia = new List<string>();
-            usua.horafin = new List<DateTime>();
-            usua.horainicio = new List<DateTime>();
+            usua.horaFin = new List<DateTime>();
+            usua.horaInicio = new List<DateTime>();
             usua.dia.Add("Lunes");
             usua.dia.Add("Martes");
             usua.dia.Add("Miercoles");
@@ -216,20 +216,20 @@ namespace Cafeteria.Controllers.Administracion
             usuario.apPat = usuar.apPat;
             usuario.apMat = usuar.apMat;
             usuario.nroDocumento = usuar.nroDocumento;
-            usuario.perfilesdelusuario = admifacade.getperfiles();
-            usuario.estadosdeperfiles = new List<bool>();
-            for (int i = 0; i < usuario.perfilesdelusuario.Count; i++)
+            usuario.perfilesDelUsuario = admifacade.getperfiles();
+            usuario.estadosDePerfiles = new List<bool>();
+            for (int i = 0; i < usuario.perfilesDelUsuario.Count; i++)
             {
-                usuario.estadosdeperfiles.Add(false);
+                usuario.estadosDePerfiles.Add(false);
             }
 
-            for (int i = 0; i < usuario.perfilesdelusuario.Count; i++)
+            for (int i = 0; i < usuario.perfilesDelUsuario.Count; i++)
             {
                 for (int j = 0; j < listaperfiles.Count; j++)
                 {
-                    if (usuario.perfilesdelusuario[i] == listaperfiles[j])
+                    if (usuario.perfilesDelUsuario[i] == listaperfiles[j])
                     {
-                        usuario.estadosdeperfiles[i] = true;
+                        usuario.estadosDePerfiles[i] = true;
                     }
                 }
             }
@@ -247,20 +247,20 @@ namespace Cafeteria.Controllers.Administracion
             usuario.apPat = usuar.apPat;
             usuario.apMat = usuar.apMat;
             usuario.nroDocumento = usuar.nroDocumento;
-            usuario.perfilesdelusuario = admifacade.getperfiles();
-            usuario.estadosdeperfiles = new List<bool>();
-            for (int i = 0; i < usuario.perfilesdelusuario.Count; i++)
+            usuario.perfilesDelUsuario = admifacade.getperfiles();
+            usuario.estadosDePerfiles = new List<bool>();
+            for (int i = 0; i < usuario.perfilesDelUsuario.Count; i++)
             {
-                usuario.estadosdeperfiles.Add(false);
+                usuario.estadosDePerfiles.Add(false);
             }
 
-            for (int i = 0; i < usuario.perfilesdelusuario.Count; i++)
+            for (int i = 0; i < usuario.perfilesDelUsuario.Count; i++)
             {
                 for (int j = 0; j < listaperfiles.Count; j++)
                 {
-                    if (usuario.perfilesdelusuario[i] == listaperfiles[j])
+                    if (usuario.perfilesDelUsuario[i] == listaperfiles[j])
                     {
-                        usuario.estadosdeperfiles[i] = true;
+                        usuario.estadosDePerfiles[i] = true;
                     }
                 }
             }

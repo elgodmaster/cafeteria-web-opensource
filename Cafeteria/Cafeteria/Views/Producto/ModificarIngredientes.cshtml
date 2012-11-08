@@ -22,12 +22,12 @@
             <div class="title">
                 <h6>Producto</h6>
             </div>
-            <div class="formRow"> @Html.LabelFor(model => model.IDProducto)
-                <div class=" formRight">  @Html.DisplayFor(model => model.IDProducto)  </div>@Html.HiddenFor(model => model.IDProducto) 
+            <div class="formRow"> @Html.LabelFor(model => model.idProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.idProducto))  </div>@Html.HiddenFor(model => model.idProducto)) 
                 <div class="clear"></div>
             </div>
-            <div class="formRow"> @Html.LabelFor(model => model.Nombre_Producto)
-                <div class=" formRight">  @Html.DisplayFor(model => model.Nombre_Producto)  </div>@Html.HiddenFor(model => model.Nombre_Producto) 
+            <div class="formRow"> @Html.LabelFor(model => model.nombreProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.nombreProducto)  </div>@Html.HiddenFor(model => model.nombreProducto) 
                 <div class="clear"></div>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.tipo)
@@ -57,14 +57,14 @@
     <tbody>
 
   
-    @for (int i = 0; (i < Model.listaIngre.Count); i++)
+    @for (int i = 0; (i < Model.listaIngredientes.Count); i++)
     {
-            @Html.HiddenFor(model => model.listaIngre[i].ID) 
+            @Html.HiddenFor(model => model.listaIngredientes[i].id) 
              <tr>  
-                <td> @Html.DisplayFor(model => model.listaIngre[i].ID)  @Html.HiddenFor(model => model.listaIngre[i].nombre) </td>
-                <td> @Html.TextBoxFor(model => model.listaIngre[i].nombre, new { @class = "validate[custom[onlyNumberSp]]", name = "numsValid", placeholder = "0.00" })         </td>
-                <td> @Html.TextBoxFor(model=> model.listaIngre[i].cantidad)</td>
-                <td> @Html.TextBoxFor(model=> model.listaIngre[i].medida)</td>
+                <td> @Html.DisplayFor(model => model.listaIngredientes[i].id)  @Html.HiddenFor(model => model.listaIngredientes[i].nombre) </td>
+                <td> @Html.TextBoxFor(model => model.listaIngredientes[i].nombre, new { @class = "validate[custom[onlyNumberSp]]", name = "numsValid", placeholder = "0.00" })         </td>
+                <td> @Html.TextBoxFor(model => model.listaIngredientes[i].cantidad)</td>
+                <td> @Html.TextBoxFor(model => model.listaIngredientes[i].medida)</td>
      </tr>
 
     }

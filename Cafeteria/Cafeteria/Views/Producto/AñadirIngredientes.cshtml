@@ -20,12 +20,12 @@
             <div class="title">
                 <h6>Producto</h6>
             </div>
-            <div class="formRow"> @Html.LabelFor(model => model.IDProducto)
-                <div class=" formRight">  @Html.DisplayFor(model => model.IDProducto)  </div>@Html.HiddenFor(model => model.IDProducto) 
+            <div class="formRow"> @Html.LabelFor(model => model.idProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.idProducto)  </div>@Html.HiddenFor(model => model.idProducto) 
                 <div class="clear"></div>
             </div>
-            <div class="formRow"> @Html.LabelFor(model => model.Nombre_Producto)
-                <div class=" formRight">  @Html.DisplayFor(model => model.Nombre_Producto)  </div>@Html.HiddenFor(model => model.Nombre_Producto) 
+            <div class="formRow"> @Html.LabelFor(model => model.nombreProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.nombreProducto)  </div>@Html.HiddenFor(model => model.nombreProducto) 
                 <div class="clear"></div>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.tipo)
@@ -52,25 +52,25 @@
     </thead>
 
     <tbody>
-    @for (int i = 0; i < Model.listaIngre.Count; i++)
+    @for (int i = 0; i < Model.listaIngredientes.Count; i++)
     {
 
-        if (!Model.listaIngre[i].estadod_disponible)
+        if (!Model.listaIngredientes[i].estadod_disponible)
         {
          
      <tr>       
-                <td> @Html.TextBoxFor(model => model.listaIngre[i].ID, new { @readonly = "readonly" }) </td>
-                <td> @Html.TextBoxFor(model => model.listaIngre[i].nombre, new { @readonly = "readonly" }) </td>
-                <td> @Html.TextBoxFor(model => model.listaIngre[i].cantidad, new { @class = "validate[custom[onlyNumberSp]]", name = "numsValid", placeholder = "0.00" })         </td>
-                <td>@Html.TextBoxFor(model => model.listaIngre[i].medida)</td>  
+                <td> @Html.TextBoxFor(model => model.listaIngredientes[i].id, new { @readonly = "readonly" }) </td>
+                <td> @Html.TextBoxFor(model => model.listaIngredientes[i].nombre, new { @readonly = "readonly" }) </td>
+                <td> @Html.TextBoxFor(model => model.listaIngredientes[i].cantidad, new { @class = "validate[custom[onlyNumberSp]]", name = "numsValid", placeholder = "0.00" })         </td>
+                <td>@Html.TextBoxFor(model => model.listaIngredientes[i].medida)</td>  
      </tr>
         }
         else
         {
-            @Html.HiddenFor(model => model.listaIngre[i].ID) 
-            @Html.HiddenFor(model => model.listaIngre[i].nombre) 
-            @Html.HiddenFor(model => model.listaIngre[i].cantidad)         
-            @Html.HiddenFor(model => model.listaIngre[i].medida)
+            @Html.HiddenFor(model => model.listaIngredientes[i].id) 
+            @Html.HiddenFor(model => model.listaIngredientes[i].nombre) 
+            @Html.HiddenFor(model => model.listaIngredientes[i].cantidad)         
+            @Html.HiddenFor(model => model.listaIngredientes[i].medida)
             
         }
     }
@@ -85,7 +85,6 @@
 
         </p>    
         
-       //@Html.ActionLink("Regresar", "ListarProductos/" + Model.IDProducto, "Proveedor");
        <a href="javascript:history.back()">Regresar</a>
   }
 

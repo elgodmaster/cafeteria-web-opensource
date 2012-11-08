@@ -12,25 +12,27 @@ namespace Cafeteria.Models.Compra.Ordencompra
 {
     public class Proveedor
     {
-        public string ID { get; set; }
-        public string Nombre { get; set; }
+        public string id { get; set; }
+        public string nombre { get; set; }
     }
     
     
     public class OrdencompraBean
     {
-         public string idOrdenCompra { get; set; }
-        public string idproveedor { get; set; }
+        public string idOrdenCompra { get; set; }
 
-        public string nombresucursal { get; set; }
+        [Display(Name = "Proveedor")]
+        public string idProveedor { get; set; }
 
-        public string idcafeteria { get; set; }
+        public string nombreSucursal { get; set; }
+
+        public string idCafeteria { get; set; }
+        
+        //[Display(Name = "Proveedor")]
+        //public string idProv { get; set; } 
         
         [Display(Name = "Proveedor")]
-        public string idProv { get; set; } 
-        
-        [Display(Name = "Proveedor")]
-        public string nombreproveedor { get; set; }
+        public string nombreProveedor { get; set; }
 
         [Display(Name = "Ingrediente")]
         public string idIngrediente { get; set; } 
@@ -43,11 +45,11 @@ namespace Cafeteria.Models.Compra.Ordencompra
         public string fecha { get; set; }
 
         [Display(Name = "Precio Total")]
-        public decimal preciototal { get; set; }
+        public decimal precioTotal { get; set; }
 
         //public List<Producto> productoList { get; set; }
 
-        public SelectList proveedorList { get; set; }
+        public SelectList listaProveedor { get; set; }
 
         public List<detalleordencompra> detalle { get; set; }
        // List<DetalleOrdenCompra> detalles { get; set; }
@@ -76,8 +78,8 @@ namespace Cafeteria.Models.Compra.Ordencompra
                 {
 
                     Proveedor proveedor = new Proveedor();
-                    proveedor.ID = Convert.ToString(objDataReader["idProveedor"]);
-                    proveedor.Nombre = (string)objDataReader["razonSocial"];
+                    proveedor.id = Convert.ToString(objDataReader["idProveedor"]);
+                    proveedor.nombre = (string)objDataReader["razonSocial"];
 
                     listaProveedor.Add(proveedor);
                 }
@@ -90,7 +92,7 @@ namespace Cafeteria.Models.Compra.Ordencompra
 
         public OrdencompraBean()
         {
-            proveedorList = new SelectList(getProveedor(), "ID", "Nombre");
+            listaProveedor = new SelectList(getProveedor(), "ID", "Nombre");
         }
 
 

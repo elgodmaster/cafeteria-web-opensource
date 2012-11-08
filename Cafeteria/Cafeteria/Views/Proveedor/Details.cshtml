@@ -18,56 +18,46 @@
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.razonSocial)
                 <div class="formRight">
-                    @Html.TextBoxFor(model => model.razonSocial) </div>
-                <div class="clear"></div>
+                    @Html.DisplayFor(model => model.razonSocial) </div>
             </div>
             <div class="formRow">@Html.LabelFor(model => model.ruc)
-                <div class="formRight"> @Html.TextBoxFor(model => model.ruc)</div>
-                <div class="clear"></div>
+                <div class="formRight"> @Html.DisplayFor(model => model.ruc)</div>
             </div>
 
             <div class="formRow">@Html.LabelFor(model => model.direccion)
-                <div class="formRight"> @Html.TextBoxFor(model => model.direccion) </div>
-                <div class="clear"></div>
+                <div class="formRight"> @Html.DisplayFor(model => model.direccion) </div>
             </div>
             <div class="formRow">@Html.LabelFor(model => model.telefono1)
                  
-                <div class="formRight"> @Html.TextBoxFor(model => model.telefono1) </div>
-                <div class="clear"></div>
+                <div class="formRight"> @Html.DisplayFor(model => model.telefono1) </div>
             </div>
             <div class="formRow">@Html.LabelFor(model => model.telefono2)
                  
-                <div class="formRight"> @Html.TextBoxFor(model => model.telefono2) </div>
-                <div class="clear"></div>
+                <div class="formRight"> @Html.DisplayFor(model => model.telefono2) </div>
             </div>
             <div class="formRow">@Html.LabelFor(model => model.web)
-                <div class="formRight"> @Html.TextBoxFor(model => model.web) </div>
-                <div class="clear"></div>
+                <div class="formRight"> @Html.DisplayFor(model => model.web) </div>
             </div>
             <div class="formRow">@Html.LabelFor(model => model.contacto)
-                <div class="formRight"> @Html.TextBoxFor(model => model.contacto)</div>
-                <div class="clear"></div>
+                <div class="formRight"> @Html.DisplayFor(model => model.contacto)</div>
             </div>
                 
-            <div class="formRow">@Html.LabelFor(model => model.telefono_contacto)
-                <div class="formRight"> @Html.TextBoxFor(model => model.telefono_contacto) </div>
-                <div class="clear"></div>
+            <div class="formRow">@Html.LabelFor(model => model.telefonoContacto)
+                <div class="formRight"> @Html.DisplayFor(model => model.telefonoContacto) </div>
             </div>
-            <div class="formRow">@Html.LabelFor(model => model.email_contacto)
-                <div class="formRight"> @Html.TextBoxFor(model => model.email_contacto) </div>
-                <div class="clear"></div>
+            <div class="formRow">@Html.LabelFor(model => model.emailContacto)
+                <div class="formRight"> @Html.DisplayFor(model => model.emailContacto) </div>
             </div>
             
             <div class="formRow">@Html.LabelFor(model => model.Observacion)
-                <div class="formRight"> @Html.TextAreaFor(model => model.Observacion, new { maxlength = "45" }) </div>
-                <div class="clear"></div>
+                <div class="formRight"> @Html.DisplayFor(model => model.Observacion, new { maxlength = "45" }) </div>
             </div>            
             
         </div>
     </fieldset>
 
      <p>
-        <a href="@Url.Action("Edit", new { id = Model.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar</a> |       
+        <a href="@Url.Action("Edit", new { id = Model.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar</a> |       
         <a href="javascript:history.back()">Regresar</a>
     </p>
 }

@@ -8,12 +8,12 @@ namespace Cafeteria.Models.Venta.Producto
 {
     public class ProductoxIngredienteBean
     {
-        public string IDProducto { get; set; }
+        public string idProducto { get; set; }
         [Display(Name = "Producto")]
-        public string Nombre_Producto { get; set; }
+        public string nombreProducto { get; set; }
         [Display(Name = "Tipo")]
         public string tipo { get; set; }
-        public List<ProductoxIngrediente> listaIngre { get; set; }
+        public List<ProductoxIngrediente> listaIngredientes { get; set; }
 
     }
 }

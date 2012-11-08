@@ -14,7 +14,7 @@
           <div class="formRow">
             <span>Nombre</span>
             <div class = "formRight" > 
-                @Html.TextBoxFor(model => model.nombre)
+                @Html.DisplayFor(model => model.nombre)
                 
             </div><div class="clear"></div>
           </div>
@@ -23,7 +23,7 @@
                <span>Tipo de Producto</span>                             
                 
                 <div class = "formRight" > 
-                    @Html.TextBoxFor(model => model.ID_Tipo)
+                    @Html.DisplayFor(model => model.idTipo)
                 </div>      
                 <div class = "clear" ></div>
             </div>
@@ -31,13 +31,13 @@
           <div class="formRow">
             <span>Descripcion</span>
             <div class="formRight">
-                @Html.TextAreaFor(model => model.descripcion) 
+                @Html.DisplayFor(model => model.descripcion) 
             </div><div class="clear"></div>
            </div>
            <div class="formRow">
             <span>Estado</span>
             <div class="formRight">
-                @Html.TextAreaFor(model => model.estado) 
+                @Html.DisplayFor(model => model.estado) 
             </div><div class="clear"></div>
            </div>
 

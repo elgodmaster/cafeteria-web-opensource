@@ -8,8 +8,8 @@
     });
 
     $('#loginButton').click(function () {
-        var u = $("#Usuario").val();
-        var p = $("#Contrasenia").val();
+        var u = $("#usuario").val();
+        var p = $("#contrasenia").val();
         var jsonLogin = {
             user: u,
             password: p

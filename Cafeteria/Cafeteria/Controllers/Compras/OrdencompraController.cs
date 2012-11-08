@@ -10,11 +10,14 @@ using Cafeteria.Models.Compra.Proveedor;
 using Cafeteria.Models.Compra;
 using Cafeteria.Models.Almacen.Ingrediente;
 using Cafeteria.Models.Almacen;
+using Cafeteria.Models.Almacen.Notaentrada;
+
 
 namespace Cafeteria.Controllers.Compras
 {
     public class OrdencompraController : Controller
     {
+        
         administracionfacade admin = new administracionfacade();
         comprasfacade comprfacade = new comprasfacade();
         almacenfacade almafacade = new almacenfacade();
@@ -25,9 +28,22 @@ namespace Cafeteria.Controllers.Compras
             return View(suc);
         }
 
-        #region Detalle
-        public ActionResult Details(int id)
+       
+
+
+        #region Buscar
+
+        public ActionResult Buscar()
         {
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult Buscar(string nombre)
+        {
+
             return View();
         }
         #endregion
@@ -45,8 +61,8 @@ namespace Cafeteria.Controllers.Compras
         public ActionResult Registrar(OrdencompraBean orden)
         {
             //int ID = Convert.ToInt32(ordenCompra.idProv);
-            orden.idcafeteria = "SUCU0001";
-            return RedirectToAction("Registrar2", new { idproveedor = orden.idProv, idsucursal = orden.idcafeteria });
+            orden.idCafeteria = "SUCU0001";
+            return RedirectToAction("Registrar2", new { idproveedor = orden.idProveedor, idsucursal = orden.idCafeteria });
         }
 
         public ViewResult Registrar2(string idproveedor, string idsucursal) //registrar orden compra.......idproveedor y id sucursal
@@ -63,19 +79,19 @@ namespace Cafeteria.Controllers.Compras
 
             List<Producto> produ = new List<Producto>();
 
-            for (int i = 0; i < ingredientAlmace.listProdalmacen.Count; i++)
+            for (int i = 0; i < ingredientAlmace.listProdAlmacen.Count; i++)
             {
-                for (int j = 0; j < productosprov.ListadeIngredientesProveedor.Count; j++)
+                for (int j = 0; j < productosprov.listadeIngredientesProveedor.Count; j++)
                 {
-                    if (ingredientAlmace.listProdalmacen[i].ID == productosprov.ListadeIngredientesProveedor[j].ID)
+                    if (ingredientAlmace.listProdAlmacen[i].id == productosprov.listadeIngredientesProveedor[j].id)
                     {
                         Producto produc = new Producto();
-                        produc.idproducto = ingredientAlmace.listProdalmacen[i].ID;
-                        produc.Nombre = almafacade.getnombreingrediente(ingredientAlmace.listProdalmacen[i].ID);
-                        produc.precio = productosprov.ListadeIngredientesProveedor[j].precio;
-                        produc.stockActual = ingredientAlmace.listProdalmacen[i].stockactual;
-                        produc.stockMinimo = ingredientAlmace.listProdalmacen[i].stockminimo;
-                        produc.stockMaximo = ingredientAlmace.listProdalmacen[i].stockmaximo;
+                        produc.idproducto = ingredientAlmace.listProdAlmacen[i].id;
+                        produc.Nombre = almafacade.getnombreingrediente(ingredientAlmace.listProdAlmacen[i].id);
+                        produc.precio = productosprov.listadeIngredientesProveedor[j].precio;
+                        produc.stockActual = ingredientAlmace.listProdAlmacen[i].stockactual;
+                        produc.stockMinimo = ingredientAlmace.listProdAlmacen[i].stockminimo;
+                        produc.stockMaximo = ingredientAlmace.listProdAlmacen[i].stockmaximo;
                         if (produc.stockActual <= produc.stockMinimo) { produc.estado = true; cantidad++; }
                         else { produc.estado = false; }
                         produ.Add(produc);
@@ -124,26 +140,97 @@ namespace Cafeteria.Controllers.Compras
 
 
         #region Edit
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
         #endregion
 
+        #region Detalle
+
+        
+        public ActionResult DetalleOrdenC(int id) //id orden compra
+        {
+            OrdencompraBean ordencompra = new OrdencompraBean();//comprfacade.buscarOrdenes(id);
+            ProveedorBean proveedor = comprfacade.BuscarProveedor(ordencompra.idProveedor);
+            ordencompra.nombreProveedor = proveedor.razonSocial;
+
+            for (int i = 0; i < ordencompra.detalle.Count; i++)
+            {
+                IngredienteBean ingre = almafacade.buscaringrediente(ordencompra.detalle[i].id);
+                ordencompra.detalle[i].nombre = ingre.nombre;
+            }
+            ProveedorxIngredienteBean productos = comprfacade.obtenerlistadeingredientes(ordencompra.idProveedor);
+            for (int i = 0; i < ordencompra.detalle.Count; i++)
+            {
+                for (int j = 0; j < productos.listadeIngredientesProveedor.Count; j++)
+                {
+                    if (ordencompra.detalle[i].id == productos.listadeIngredientesProveedor[j].id)
+                    {
+                        ordencompra.detalle[i].preciounitario = productos.listadeIngredientesProveedor[j].precio;
+                    }
+                }
+            }
+
+            List<Notaentradabean> notas = new List<Notaentradabean>();//comprfacade.listarnotasentrada(id);
+            for (int i = 0; i < notas.Count; i++)
+            {
+                int idguiaremision = notas[i].idGuiaRemision;
+                List<Notaentrada> not2 = new List<Notaentrada>();//comprfacade.obtenernotas(idguiaremision);
+                for (int j = 0; j < not2.Count; j++)
+                {
+                    for (int k = 0; k < ordencompra.detalle.Count(); k++)
+                    {
+                        if (ordencompra.detalle[k].id == not2[j].id)
+                        {
+                            ordencompra.detalle[k].Cantidadentrante += not2[j].cantidadrecibida;
+                        }
+                    }
+                }
+            }
+
+            SucursalBean suc = admin.buscarSucursal(ordencompra.idCafeteria);
+            ordencompra.nombreSucursal = suc.nombre;
+            return View(ordencompra);
+        }
+
+        #endregion
+
+        #region Modificar ordencompra
+        public ActionResult ModificarOrdenC(int id) //idordencompra
+        {
+            OrdencompraBean ordencompra = new OrdencompraBean();//comprfacade.buscarOrdenes(id);
+            ProveedorBean proveedor = comprfacade.BuscarProveedor(ordencompra.idProveedor);
+            ordencompra.nombreProveedor = proveedor.razonSocial;
+
+            for (int i = 0; i < ordencompra.detalle.Count; i++)
+            {
+                IngredienteBean ingre = almafacade.buscaringrediente(ordencompra.detalle[i].id);
+                ordencompra.detalle[i].nombre = ingre.nombre;
+            }
+            ProveedorxIngredienteBean productos = comprfacade.obtenerlistadeingredientes(ordencompra.idProveedor);
+            for (int i = 0; i < ordencompra.detalle.Count; i++)
+            {
+                for (int j = 0; j < productos.listadeIngredientesProveedor.Count; j++)
+                {
+                    if (ordencompra.detalle[i].id == productos.listadeIngredientesProveedor[j].id)
+                    {
+                        ordencompra.detalle[i].preciounitario = productos.listadeIngredientesProveedor[j].precio;
+                    }
+                }
+            }
+            SucursalBean suc = admin.buscarSucursal(ordencompra.idCafeteria);
+            ordencompra.nombreSucursal = suc.nombre;
+            return View(ordencompra);
+
+        }
+
+
+        public ActionResult GuardarestadoOrdenC(OrdencompraBean orden)
+        {
+            // guarda el estado de la orden de compra a registrado o cancelado
+            //comprfacade.modificarestadoordencompra(orden.idOrdenCompra, orden.estado);
+            return RedirectToAction("Buscar");
+        }
+
+        #endregion
 
 
     }

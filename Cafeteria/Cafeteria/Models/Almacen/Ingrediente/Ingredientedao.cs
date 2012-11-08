@@ -35,7 +35,7 @@ namespace Cafeteria.Models.Almacen.Ingrediente
                    while (objDataReader.Read())
                    {
                         IngredienteBean ingrediente = new IngredienteBean();
-                        ingrediente.ID = Convert.ToString(objDataReader["idIngrediente"]);
+                        ingrediente.id = Convert.ToString(objDataReader["idIngrediente"]);
                         ingrediente.nombre = Convert.ToString(objDataReader["nombre"]);
                         ingrediente.descripcion = Convert.ToString(objDataReader["descripcion"]);
                         ingrediente.estado = Convert.ToString(objDataReader["estado"]);    
@@ -64,8 +64,8 @@ namespace Cafeteria.Models.Almacen.Ingrediente
             SqlConnection objDB = null;
             int i = Utils.cantidad("Ingrediente")+1;
             string ID="INGR00";//8caracteres-4letras-4#
-			if (i<10) prod.ID=ID+"0"+Convert.ToString(i);
-				else prod.ID=ID+Convert.ToString(i);
+			if (i<10) prod.id=ID+"0"+Convert.ToString(i);
+				else prod.id=ID+Convert.ToString(i);
 			try
             {
                 objDB = new SqlConnection(cadenaDB);
@@ -74,7 +74,7 @@ namespace Cafeteria.Models.Almacen.Ingrediente
                                     "(@id,@nombre, @descripcion, @estado)";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                Utils.agregarParametro(objQuery, "@id", prod.ID);
+                Utils.agregarParametro(objQuery, "@id", prod.id);
                 Utils.agregarParametro(objQuery, "@nombre", prod.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", prod.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", prod.estado);
@@ -113,7 +113,7 @@ namespace Cafeteria.Models.Almacen.Ingrediente
                 {
                     objDataReader.Read();
                     ingrediente = new IngredienteBean();
-                    ingrediente.ID = Convert.ToString(objDataReader["idIngrediente"]);
+                    ingrediente.id = Convert.ToString(objDataReader["idIngrediente"]);
                     ingrediente.nombre = Convert.ToString(objDataReader["nombre"]);
                     ingrediente.descripcion = Convert.ToString(objDataReader["descripcion"]);
                     ingrediente.estado = Convert.ToString(objDataReader["estado"]);   
@@ -227,19 +227,24 @@ namespace Cafeteria.Models.Almacen.Ingrediente
                 //SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
                 //SqlDataReader dataReader = sqlCmd.ExecuteReader();
                 string idal = "";
-                prod.listProdalmacen = new List<IngredienteAlmacen>();
+                prod.listProdAlmacen = new List<IngredienteAlmacen>();
 
                 if (objDataReader.HasRows)
                 {
                     IngredienteAlmacen prodalmacen = new IngredienteAlmacen();
 
+                    //idal = (String)dataReader["idAlmacen"];
+                    prodalmacen.id = (String)objDataReader["idIngrediente"];
+                    prodalmacen.stockminimo = (int)objDataReader["stockminimo"];
+                    prodalmacen.stockactual = (int)objDataReader["stockactual"];
+                    prodalmacen.stockmaximo = (int)objDataReader["stockmaximo"];
                     idal = Convert.ToString(objDataReader[0]);
                     prodalmacen.ID = Convert.ToString(objDataReader[1]);
                     prodalmacen.stockactual = Convert.ToInt32(objDataReader[2]);
                     prodalmacen.stockminimo = Convert.ToInt32(objDataReader[3]);                   
                     prodalmacen.stockmaximo = Convert.ToInt32(objDataReader[4]);
                     i++;
-                    prod.listProdalmacen.Add(prodalmacen);
+                    prod.listProdAlmacen.Add(prodalmacen);
                 }
             }
             catch (Exception ex)

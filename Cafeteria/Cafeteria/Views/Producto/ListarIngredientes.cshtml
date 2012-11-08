@@ -19,12 +19,12 @@
             <div class="title">
                 <h6>Producto</h6>
             </div>
-            <div class="formRow"> @Html.LabelFor(model => model.IDProducto)
-                <div class=" formRight">  @Html.DisplayFor(model => model.IDProducto)  </div>@Html.HiddenFor(model => model.IDProducto) 
+            <div class="formRow"> @Html.LabelFor(model => model.idProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.idProducto)  </div>@Html.HiddenFor(model => model.idProducto) 
                 <div class="clear"></div>
             </div>
-            <div class="formRow"> @Html.LabelFor(model => model.Nombre_Producto)
-                <div class=" formRight">  @Html.DisplayFor(model => model.Nombre_Producto)  </div>@Html.HiddenFor(model => model.Nombre_Producto) 
+            <div class="formRow"> @Html.LabelFor(model => model.nombreProducto)
+                <div class=" formRight">  @Html.DisplayFor(model => model.nombreProducto)  </div>@Html.HiddenFor(model => model.nombreProducto) 
                 <div class="clear"></div>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.tipo)
@@ -32,9 +32,9 @@
                 <div class="clear"></div>
             </div>
             
-             @for (int i = 0; i < Model.listaIngre.Count; i++)
+             @for (int i = 0; i < Model.listaIngredientes.Count; i++)
              {
-                    @Html.HiddenFor(model => model.listaIngre[i].ID)  
+                    @Html.HiddenFor(model => model.listaIngredientes[i].id)  
              }
         </div>
     </fieldset>
@@ -46,7 +46,7 @@
      <p></p>
         
      <p>
-    <a href="@Url.Action("AñadirIngredientes", new { ID = Model.IDProducto })"><img src="../../Content/images/icons/color/plus.png", alt="Create" />Añadir más Ingredientes</a>
+    <a href="@Url.Action("AñadirIngredientes", new { ID = Model.idProducto })"><img src="../../Content/images/icons/color/plus.png", alt="Create" />Añadir más Ingredientes</a>
     </p>
         
          
@@ -89,15 +89,15 @@
 
     <tbody>
 
-    @for (int i = 0; i < Model.listaIngre.Count; i++)
+    @for (int i = 0; i < Model.listaIngredientes.Count; i++)
     {
-         @Html.HiddenFor(model => model.listaIngre[i].ID) 
+         @Html.HiddenFor(model => model.listaIngredientes[i].id) 
         <tr class="gradeA odd">
-            <td class="sorting_1">@Html.DisplayFor(model => model.listaIngre[i].ID)</td>
-            <td class="sorting_1">@Html.DisplayFor(model => model.listaIngre[i].nombre)</td>
-            <td>@Html.DisplayFor(model => model.listaIngre[i].cantidad)</td>
-            <td>@Html.DisplayFor(model => model.listaIngre[i].medida)</td> 
-             @Html.HiddenFor(model => model.listaIngre[i].nombre) 
+            <td class="sorting_1">@Html.DisplayFor(model => model.listaIngredientes[i].id)</td>
+            <td class="sorting_1">@Html.DisplayFor(model => model.listaIngredientes[i].nombre)</td>
+            <td>@Html.DisplayFor(model => model.listaIngredientes[i].cantidad)</td>
+            <td>@Html.DisplayFor(model => model.listaIngredientes[i].medida)</td> 
+             @Html.HiddenFor(model => model.listaIngredientes[i].nombre) 
         </tr>
     }
     </tbody>

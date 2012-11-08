@@ -82,7 +82,7 @@
                         <td class=" sorting_1">@Html.DisplayFor(modelItem => item.estado)</td>
                         <td class=" sorting_1">
                             <a href="@Url.Action("Edit", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
-                            <a href="@Url.Action("Detalle", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />detalle </a> | 
+                            <a href="@Url.Action("Details", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />detalle </a> | 
 
                             @if(item.estado=="ACTIVO"){
                                 <a  ID = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>

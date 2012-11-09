@@ -207,13 +207,12 @@ namespace Cafeteria.Models.Almacen.Ingrediente
 
            // ProductoXAlmacenBean prod = new ProductoXAlmacenBean();
             //String cadenaConfiguracion = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
-            int i = 0;
+            //int i = 0;
             //string idal;
             SqlConnection objDB = null;
             try
             {
                 objDB = new SqlConnection(cadenaDB);
-
                 objDB.Open();
                 String strQuery = "SELECT * FROM Almacen_x_Producto WHERE idAlmacen = 'ALMA0001'";
                 SqlCommand objquery = new SqlCommand(strQuery, objDB);
@@ -221,30 +220,19 @@ namespace Cafeteria.Models.Almacen.Ingrediente
 
                 SqlDataReader objDataReader = objquery.ExecuteReader();
 
-                //sqlCon.Open();
-                // string commandString = "SELECT * FROM Almacen_x_Producto  WHERE idAlmacen=" + Idalmacen;
-
-                //SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
-                //SqlDataReader dataReader = sqlCmd.ExecuteReader();
-                string idal = "";
                 prod.listProdAlmacen = new List<IngredienteAlmacen>();
-
+                
                 if (objDataReader.HasRows)
                 {
-                    IngredienteAlmacen prodalmacen = new IngredienteAlmacen();
-
-                    //idal = (String)dataReader["idAlmacen"];
-                    prodalmacen.id = (String)objDataReader["idIngrediente"];
-                    prodalmacen.stockminimo = (int)objDataReader["stockminimo"];
-                    prodalmacen.stockactual = (int)objDataReader["stockactual"];
-                    prodalmacen.stockmaximo = (int)objDataReader["stockmaximo"];
-                    idal = Convert.ToString(objDataReader[0]);
-                    prodalmacen.ID = Convert.ToString(objDataReader[1]);
-                    prodalmacen.stockactual = Convert.ToInt32(objDataReader[2]);
-                    prodalmacen.stockminimo = Convert.ToInt32(objDataReader[3]);                   
-                    prodalmacen.stockmaximo = Convert.ToInt32(objDataReader[4]);
-                    i++;
-                    prod.listProdAlmacen.Add(prodalmacen);
+                    while (objDataReader.Read())
+                    {
+                        IngredienteAlmacen prodalmacen = new IngredienteAlmacen();
+                        prodalmacen.id = (String)objDataReader["idIngrediente"];
+                        prodalmacen.stockminimo = (int)objDataReader["stockminimo"];
+                        prodalmacen.stockactual = (int)objDataReader["stockactual"];
+                        prodalmacen.stockmaximo = (int)objDataReader["stockmaximo"];
+                        prod.listProdAlmacen.Add(prodalmacen);
+                    }
                 }
             }
             catch (Exception ex)

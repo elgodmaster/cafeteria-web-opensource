@@ -62,8 +62,6 @@ namespace Cafeteria.Models.Compra.Ordencompra
         public void GuardarOrdenCompra(OrdenProducto producto)
         {
 
-
-
             int cantidad = 0;
             for (int i = 0; i < producto.listaProducto.Count; i++)
             {
@@ -73,11 +71,12 @@ namespace Cafeteria.Models.Compra.Ordencompra
             {
                 if (cantidad > 0)
                 {
-                    String cadenaConfiguracion = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
-
-                    SqlConnection sqlCon = new SqlConnection(cadenaConfiguracion);
-                    sqlCon.Open();
-
+                    int m = Utils.cantidad("Ordencompra") + 1;
+                    string ID = "ORDE00";//8caracteres-4letras-4#
+                    if (m < 10) producto.idOrdencompra = ID + "0" + Convert.ToString(m);
+                    else producto.idOrdencompra = ID + Convert.ToString(m);
+                    string estado = "TRAMITE";
+                    
                     decimal total = 0; // decimal
 
                     for (int i = 0; i < producto.listaProducto.Count; i++)
@@ -90,44 +89,25 @@ namespace Cafeteria.Models.Compra.Ordencompra
                         }
                     }
 
-                    string commandString = "INSERT INTO OrdenCompra (fechaemitida, estado, precioTotal, idProveedor, idSucursal) VALUES (GETDATE(), 'Tramite' , " + total + " , " + producto.idproveedor + "," + producto.idcafeteria + " )";//idproveedor
+                    //string commandString = "INSERT INTO Ordencompra (fechaemitida, estado, idOrdencompra, preciototal, idProveedor, idSucursal) VALUES (GETDATE(), 'Tramite' , " + producto.idOrdencompra + " , " + total + " , " + producto.idproveedor + "," + producto.idcafeteria + " )";//idproveedor
 
-                    SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
-                    sqlCmd.ExecuteNonQuery();
+                    //SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
+                    //sqlCmd.ExecuteNonQuery();
 
-                    commandString = "SELECT * FROM OrdenCompra";
+                    SqlConnection objDB = null;
+                    objDB = new SqlConnection(cadenaDB);
+                    objDB.Open();
+                    String strQuery = "INSERT INTO Ordencompra (fechaemitida, estado, idOrdencompra, preciototal, idProveedor, idSucursal) Values (GETDATE(),@estado,@id,@total, @idprov,@idcafe)";
+                    SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                    BaseDatos.agregarParametro(objQuery, "@estado", estado);
+                    BaseDatos.agregarParametro(objQuery, "@id", producto.idOrdencompra);
+                    BaseDatos.agregarParametro(objQuery, "@total", total);
+                    BaseDatos.agregarParametro(objQuery, "@idprov", producto.idproveedor);
+                    BaseDatos.agregarParametro(objQuery, "@idcafe", producto.idcafeteria);
+                    objQuery.ExecuteNonQuery();
 
-                    SqlCommand sqlCmd2 = new SqlCommand(commandString, sqlCon);
-                    SqlDataReader dataReader = sqlCmd2.ExecuteReader();
 
-                    string id = "";
-
-                    while (dataReader.Read())
-                    {
-                        id = (String)dataReader["idOrdencompra"];
-                    }
-
-                    sqlCon.Close();
-
-                    String cadenaConfiguracion2 = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
-
-                    SqlConnection sqlCon2 = new SqlConnection(cadenaConfiguracion2);
-                    sqlCon2.Open();
-
-                    for (int i = 0; i < producto.listaProducto.Count; i++)
-                    {
-                        if (producto.listaProducto[i].estadoguardar)
-                        {
-                            decimal precio = 0; // decimal
-                            Producto prod = producto.listaProducto.ElementAt(i);
-                            precio = (prod.precio * prod.cantidad);
-                            commandString = "INSERT INTO OrdenCompraDetalle (idIngrediente,idOrdencompra,cantidad,precio) VALUES ( " + prod.idproducto + " , " + id + " , " + prod.cantidad + " , " + precio + " )";
-                            SqlCommand sqlCmd3 = new SqlCommand(commandString, sqlCon2);
-                            sqlCmd3.ExecuteNonQuery();
-                        }
-                    }
-
-                    sqlCon2.Close();
+                    this.guardarnotaentrada(producto);
                 }
 
             }
@@ -138,7 +118,143 @@ namespace Cafeteria.Models.Compra.Ordencompra
             }
         }
 
+
+        public void guardarnotaentrada(OrdenProducto producto)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                //String strQuery = "SELECT * FROM Almacen WHERE idCafeteria = @ID";
+                //SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                //BaseDatos.agregarParametro(objQuery, "@ID", );
+                for (int i = 0; i < producto.listaProducto.Count; i++)
+                {
+                    if (producto.listaProducto[i].estadoguardar)
+                    {
+                        decimal precio = 0; // decimal
+                        Producto prod = producto.listaProducto.ElementAt(i);
+                        precio = (prod.precio * prod.cantidad);
+
+                        String strQuery = "Insert Into  OrdenCompraDetalle (idIngrediente,idOrdencompra,cantidad,precio) values(@ID, @idorden, @cant,@precio)";
+                        SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                        BaseDatos.agregarParametro(objQuery, "@ID", prod.idproducto);
+                        BaseDatos.agregarParametro(objQuery, "@idorden", producto.idOrdencompra);
+                        BaseDatos.agregarParametro(objQuery, "@cant", prod.cantidad);
+                        BaseDatos.agregarParametro(objQuery, "@precio", precio);
+                        objQuery.ExecuteNonQuery();
+                        //commandString = "INSERT INTO OrdenCompraDetalle (idIngrediente,idOrdencompra,cantidad,precio) VALUES ( " + prod.idproducto + " , " + producto.idOrdencompra + " , " + prod.cantidad + " , " + precio + " )";
+                        //SqlCommand sqlCmd3 = new SqlCommand(commandString, sqlCon2);
+                        //sqlCmd3.ExecuteNonQuery();
+                    }
+                }
+
+               
+            }
+            catch (Exception e)
+            {
+                log.Error("getalmacen(EXCEPTION):  ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+        }
+
+
+        public List<OrdencompraBean> buscarOrdenescompra(string idprov, string fecha1, string fecha2)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<OrdencompraBean> Listaordenes = new List<OrdencompraBean>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM Ordencompra";
+                if (!String.IsNullOrEmpty(idprov)) strQuery = strQuery + " WHERE UPPER(idProveedor) LIKE '%" + idprov.ToUpper() + "%'";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        OrdencompraBean orden = new OrdencompraBean();
+                        orden.idOrdenCompra = Convert.ToString(objDataReader["idOrdencompra"]);
+                        orden.estado = Convert.ToString(objDataReader["estado"]);
+                        orden.fecha = Convert.ToString(objDataReader["fechaemitida"]);
+                        orden.idCafeteria = Convert.ToString(objDataReader["idSucursal"]);
+                        orden.precioTotal = Convert.ToDecimal(objDataReader["preciototal"]);
+                        Listaordenes.Add(orden);
+                    }
+                }
+
+                return Listaordenes;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista de ordenes de compra(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+
+        }
+
+
         #endregion
+
+        public decimal obtenerPrecio(string idproducto, string idproveedor)
+        {
+            decimal precio = 0;
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT * FROM Proveedor_x_Producto WHERE idProveedor = @ID1 and idIngrediente=@ID2 ";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objQuery, "@ID1", idproveedor);
+                BaseDatos.agregarParametro(objQuery, "@ID2", idproducto);
+
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        precio = Convert.ToDecimal(objDataReader["precio"]);
+
+                    }
+                }
+
+                return precio;
+            }
+            catch (Exception e)
+            {
+                log.Error("getalmacen(EXCEPTION):  ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+        }
 
 
 

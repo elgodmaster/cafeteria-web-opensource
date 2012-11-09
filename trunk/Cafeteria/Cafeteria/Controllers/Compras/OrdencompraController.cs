@@ -29,23 +29,43 @@ namespace Cafeteria.Controllers.Compras
         }
 
        
-
-
         #region Buscar
 
         public ActionResult Buscar()
         {
-
-            return View();
-
+            PagoProveedorBean pagoProveedor = new PagoProveedorBean();
+            return View(pagoProveedor);
         }
 
         [HttpPost]
-        public ActionResult Buscar(string nombre)
+        public ActionResult Buscar(PagoProveedorBean gg)
         {
+            ProveedorBean prove = comprfacade.BuscarProveedor(gg.ID);
+            string nombre = prove.razonSocial;
 
-            return View();
+            return RedirectToAction("Buscar2", new { idprov = gg.ID });
         }
+
+
+        public ActionResult Buscar2(string idprov)
+        {
+            string fecha1 = "";
+            string fecha2 = "";
+
+
+            List<OrdencompraBean> orden = comprfacade.buscarOrdenescompra(idprov, fecha1, fecha2);// new List<OrdencompraBean>();//comprfacade.buscarOrdenes(nombre, fecha1, fecha2);
+
+            for (int i = 0; i < orden.Count; i++)
+            {
+                if (orden[i].estado == "TRAMITE" || orden[i].estado == "Cancelado") orden[i].estado2 = true;
+                else orden[i].estado2 = false;
+                SucursalBean suc = admin.buscarSucursal(orden[i].idCafeteria);
+                orden[i].nombreSucursal = suc.nombre;
+            }
+
+            return View(orden);
+        }
+
         #endregion
 
 
@@ -123,11 +143,13 @@ namespace Cafeteria.Controllers.Compras
                 if (producto.listaProducto[i].cantidad > 0)
                 {
                     producto.listaProducto[i].estadoguardar = true;
+                    producto.listaProducto[i].precio= comprfacade.obtenerPrecio(producto.listaProducto[i].idproducto, producto.idproveedor);
 
                 }
                 else
                 {
                     producto.listaProducto[i].estadoguardar = false;
+                    producto.listaProducto[i].precio = comprfacade.obtenerPrecio(producto.listaProducto[i].idproducto, producto.idproveedor);
                 }
             }
 

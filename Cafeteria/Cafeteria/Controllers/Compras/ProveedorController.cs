@@ -158,6 +158,18 @@ namespace Cafeteria.Controllers.Compras
 
         public ActionResult ModificarIngredientes(ProveedorxIngredienteBean Prov) 
         {
+            ProveedorxIngredienteBean ProveIngre = comprasfacade.obtenerlistadeingredientes(Prov.idProveedor);
+
+            for (int i = 0; i < Prov.listadeIngredientesProveedor.Count; i++)
+            {
+                for (int j = 0; j < ProveIngre.listadeIngredientesProveedor.Count; j++)
+                {
+                    if (Prov.listadeIngredientesProveedor[i].id == ProveIngre.listadeIngredientesProveedor[j].id)
+                    {
+                        Prov.listadeIngredientesProveedor[i].precio = ProveIngre.listadeIngredientesProveedor[j].precio;
+                    }
+                }
+            }
             return View(Prov);
         }
 
@@ -185,7 +197,7 @@ namespace Cafeteria.Controllers.Compras
                 proveedorIngre.nombre = Ingredientes[j].nombre;
                 for (int i = 0; i < aux.listadeIngredientesProveedor.Count; i++)
                 {
-                    if (aux.listadeIngredientesProveedor[i].id == Ingredientes[j].id) proveedorIngre.Estado_disponible = false;
+                    if (aux.listadeIngredientesProveedor[i].id == Ingredientes[j].id) proveedorIngre.Estado_disponible = true;
                 }
                 ProveIngre.listadeIngredientesProveedor.Add(proveedorIngre);
             }

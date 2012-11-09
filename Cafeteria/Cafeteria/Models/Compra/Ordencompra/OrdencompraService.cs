@@ -21,7 +21,17 @@ namespace Cafeteria.Models.Compra.Ordencompra
         {
             orde.GuardarOrdenCompra(ord);
         }
-        
+
+        public decimal obtenerPrecio(string idproducto, string idproveedor)
+        {
+
+            return orde.obtenerPrecio( idproducto, idproveedor);
+        }
+
+        public List<OrdencompraBean> buscarOrdenescompra(string idprov, string fecha1, string fecha2)
+        {
+            return orde.buscarOrdenescompra(idprov, fecha1, fecha2);
+        }
 
     }
 }

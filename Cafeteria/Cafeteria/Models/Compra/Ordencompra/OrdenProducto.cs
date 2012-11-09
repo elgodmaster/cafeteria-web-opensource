@@ -10,7 +10,7 @@ namespace Cafeteria.Models.Compra.Ordencompra
     {
         [Display(Name = "Proveedor")]
         public string proveedor { get; set; }
-
+        public string idOrdencompra { get; set; }
         //public int id { get; set; } //idproveedor
         public string idproveedor { get; set; }
         public List<Producto> listaProducto { get; set; }
@@ -18,7 +18,7 @@ namespace Cafeteria.Models.Compra.Ordencompra
         [Display(Name = "IdCafeteria")]
         public string idcafeteria { get; set; }
 
-        [Display(Name = "Hotel")]
+        [Display(Name = "Sucursal")]
         public string nombrecafeteria { get; set; }
 
         public Boolean estado2 { get; set; }

@@ -168,9 +168,9 @@ namespace Cafeteria.Controllers.Compras
         #region Detalle
 
         
-        public ActionResult DetalleOrdenC(int id) //id orden compra
+        public ActionResult DetalleOrdenC(string id) //id orden compra
         {
-            OrdencompraBean ordencompra = new OrdencompraBean();//comprfacade.buscarOrdenes(id);
+            OrdencompraBean ordencompra = comprfacade.buscarOrdenes(id);
             ProveedorBean proveedor = comprfacade.BuscarProveedor(ordencompra.idProveedor);
             ordencompra.nombreProveedor = proveedor.razonSocial;
 
@@ -191,11 +191,11 @@ namespace Cafeteria.Controllers.Compras
                 }
             }
 
-            List<Notaentradabean> notas = new List<Notaentradabean>();//comprfacade.listarnotasentrada(id);
+            List<Notaentradabean> notas = comprfacade.listarnotasentrada(id);
             for (int i = 0; i < notas.Count; i++)
             {
-                int idguiaremision = notas[i].idGuiaRemision;
-                List<Notaentrada> not2 = new List<Notaentrada>();//comprfacade.obtenernotas(idguiaremision);
+                string idguiaremision = notas[i].idGuiaRemision;
+                List<Notaentrada> not2 = comprfacade.obtenernotas(idguiaremision);
                 for (int j = 0; j < not2.Count; j++)
                 {
                     for (int k = 0; k < ordencompra.detalle.Count(); k++)
@@ -216,9 +216,9 @@ namespace Cafeteria.Controllers.Compras
         #endregion
 
         #region Modificar ordencompra
-        public ActionResult ModificarOrdenC(int id) //idordencompra
+        public ActionResult ModificarOrdenC(string id) //idordencompra
         {
-            OrdencompraBean ordencompra = new OrdencompraBean();//comprfacade.buscarOrdenes(id);
+            OrdencompraBean ordencompra = comprfacade.buscarOrdenes(id);//comprfacade.buscarOrdenes(id);
             ProveedorBean proveedor = comprfacade.BuscarProveedor(ordencompra.idProveedor);
             ordencompra.nombreProveedor = proveedor.razonSocial;
 
@@ -248,7 +248,7 @@ namespace Cafeteria.Controllers.Compras
         public ActionResult GuardarestadoOrdenC(OrdencompraBean orden)
         {
             // guarda el estado de la orden de compra a registrado o cancelado
-            //comprfacade.modificarestadoordencompra(orden.idOrdenCompra, orden.estado);
+            comprfacade.modificarestadoordencompra(orden.idOrdenCompra, orden.estado);
             return RedirectToAction("Buscar");
         }
 

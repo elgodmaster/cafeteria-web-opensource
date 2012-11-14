@@ -7,6 +7,7 @@ using Cafeteria.Models.Compra.Proveedor;
 using Cafeteria.Models.Venta.Producto;
 using Cafeteria.Models.Almacen.Ingrediente;
 using Cafeteria.Models.Compra.Ordencompra;
+using Cafeteria.Models.Almacen.Notaentrada;
 
 
 namespace Cafeteria.Models.Compra
@@ -101,6 +102,31 @@ namespace Cafeteria.Models.Compra
         public List<OrdencompraBean> buscarOrdenescompra(string idprov, string fecha1, string fecha2)
         {
             return ordenservice.buscarOrdenescompra(idprov, fecha1, fecha2);
+        }
+
+        public OrdencompraBean buscarOrdenes(string id)
+        {
+
+            return ordenservice.buscarOrdenes(id);
+        }
+        
+
+        public List<Notaentradabean>   listarnotasentrada(string id)
+        {
+            return ordenservice.listarnotasentrada(id);
+
+        }
+
+
+        public List<Notaentrada> obtenernotas(string id)
+        {
+
+            return ordenservice.obtenernotas(id);
+        }
+
+        public void modificarestadoordencompra(string idOrdenCompra, string estado)
+        {
+             ordenservice.modificarestadoordencompra(idOrdenCompra,estado);
         }
 
         #endregion

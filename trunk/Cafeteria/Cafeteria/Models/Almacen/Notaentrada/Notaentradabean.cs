@@ -8,10 +8,10 @@ namespace Cafeteria.Models.Almacen.Notaentrada
 {
     public class Notaentradabean
     {
-        public int idOrdenCompra { get; set; }
-        public int idCafeteria{ get; set; }
-        public int idProveedor { get; set; }
-        public int idGuiaRemision { get; set; }
+        public string idOrdenCompra { get; set; }
+        public string idCafeteria { get; set; }
+        public string idProveedor { get; set; }
+        public string idGuiaRemision { get; set; }
 
         [Display(Name = "Proveedor")]
         public string nombreProveedor { get; set; }

@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using log4net;
+using Cafeteria.Models.Almacen.Notaentrada;
 
 namespace Cafeteria.Models.Compra.Ordencompra
 {
@@ -179,6 +180,7 @@ namespace Cafeteria.Models.Compra.Ordencompra
                 String strQuery = "SELECT * FROM Ordencompra";
                 if (!String.IsNullOrEmpty(idprov)) strQuery = strQuery + " WHERE UPPER(idProveedor) LIKE '%" + idprov.ToUpper() + "%'";
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
                 if (objDataReader.HasRows)
                 {
@@ -253,6 +255,295 @@ namespace Cafeteria.Models.Compra.Ordencompra
                     objDB.Close();
                 }
             }
+
+        }
+
+
+        #region notaentrada
+
+        public OrdencompraBean buscarOrdenes(string ordencompra)
+        {
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                //List<OrdencompraBean> Listaordenes = new List<OrdencompraBean>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM Ordencompra where idOrdencompra= @id ";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objQuery, "@id", ordencompra);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                OrdencompraBean orden = new OrdencompraBean();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        
+                        orden.idOrdenCompra = Convert.ToString(objDataReader["idOrdencompra"]);
+                        orden.estado = Convert.ToString(objDataReader["estado"]);
+                        orden.fecha = Convert.ToString(objDataReader["fechaemitida"]);
+                        orden.idCafeteria = Convert.ToString(objDataReader["idSucursal"]);
+                        orden.precioTotal = Convert.ToDecimal(objDataReader["preciototal"]);
+                        orden.idProveedor = Convert.ToString(objDataReader["idProveedor"]);
+                        //Listaordenes.Add(orden);
+                    }
+                }
+                orden.detalle = this.retornadetalle(ordencompra);
+
+                return orden;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista de ordenes de compra(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+         
+        }
+
+        public List<detalleordencompra> retornadetalle(string id)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<detalleordencompra> Listaordenes = new List<detalleordencompra>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM OrdenCompraDetalle where idOrdencompra= @id ";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objQuery, "@id", id);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                //OrdencompraBean orden = new OrdencompraBean();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+
+                        detalleordencompra detalle = new detalleordencompra();
+                        //detalle.id = (string)dataReader2["idIngrediente"];
+                        //detalle.Cantidad = (int)dataReader2["cantidad"];
+                        //detalle.precio = (decimal)dataReader2["precio"];
+
+                        detalle.id = Convert.ToString(objDataReader["idIngrediente"]);
+                        detalle.Cantidad = Convert.ToInt32(objDataReader["cantidad"]);
+                        detalle.precio = Convert.ToDecimal(objDataReader["precio"]);
+                        //orden.idCafeteria = Convert.ToString(objDataReader["idSucursal"]);
+                        //orden.precioTotal = Convert.ToDecimal(objDataReader["preciototal"]);
+                        Listaordenes.Add(detalle);
+                    }
+                }
+               // orden.detalle = this.retornadetalle(ordencompra);
+
+                return Listaordenes;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista de ordenes de compra(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+        }
+
+        public List<Notaentradabean> listarnotasentrada(string idordencompra)
+        {
+            //return orde.listarnotasentrada(id);
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<Notaentradabean> Listaordenes = new List<Notaentradabean>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM Notaentrada where idOrdencompra= @id ";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objQuery, "@id", idordencompra);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                //OrdencompraBean orden = new OrdencompraBean();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+
+                        Notaentradabean orden = new Notaentradabean();
+
+                        //detalleordencompra detalle = new detalleordencompra();
+                        //detalle.id = (string)dataReader2["idIngrediente"];
+                        //detalle.Cantidad = (int)dataReader2["cantidad"];
+                        //detalle.precio = (decimal)dataReader2["precio"];
+
+                        orden.idGuiaRemision = Convert.ToString(objDataReader["idNotaentrada"]);
+                        orden.idOrdenCompra = Convert.ToString(objDataReader["idOrdencompra"]);
+                        orden.fechaEmitida = Convert.ToString(objDataReader["fechaEntrega"]);
+                        //orden.idCafeteria = Convert.ToString(objDataReader["idSucursal"]);
+                        //orden.precioTotal = Convert.ToDecimal(objDataReader["preciototal"]);
+                        Listaordenes.Add(orden);
+                    }
+                }
+                // orden.detalle = this.retornadetalle(ordencompra);
+
+                return Listaordenes;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista de ordenes de compra(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+            
+
+        }
+
+
+        public List<Notaentrada> obtenernotas(string idguiaremision)
+        {
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<Notaentrada> Listaordenes = new List<Notaentrada>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM NotaEntradaDetalle where idNotaentrada= @id ";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objQuery, "@id", idguiaremision);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                //OrdencompraBean orden = new OrdencompraBean();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+
+                        Notaentrada nota = new Notaentrada();// orden = new Notaentradabean();
+
+                        nota.id = Convert.ToString(objDataReader["idIngrediente"]);
+                        nota.cantidadentrante = Convert.ToInt32(objDataReader["cantidadentrante"]);
+                        //nota.fechaEmitida = Convert.ToString(objDataReader["fechaEntrega"]);
+                        //orden.idCafeteria = Convert.ToString(objDataReader["idSucursal"]);
+                        //orden.precioTotal = Convert.ToDecimal(objDataReader["preciototal"]);
+                        Listaordenes.Add(nota);
+                    }
+                }
+                // orden.detalle = this.retornadetalle(ordencompra);
+
+                return Listaordenes;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista de ordenes de compra(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            //List<Notaentrada> notas = new List<Notaentrada>();
+            //try
+            //{
+            //    String cadenaConfiguracion = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
+            //    SqlConnection sqlCon = new SqlConnection(cadenaConfiguracion);
+            //    sqlCon.Open();
+            //    string commandString = "SELECT * FROM notaEntradaDetalle WHERE idNotaentrada = " + idguiaremision;
+
+            //    SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
+            //    SqlDataReader dataReader = sqlCmd.ExecuteReader();
+
+            //    while (dataReader.Read())
+            //    {
+            //        Notaentrada nota = new Notaentrada();
+            //        nota.id = (string)dataReader["idIngrediente"];
+            //        nota.cantidadrecibida = (int)dataReader["cantidadentrante"];
+
+            //        notas.Add(nota);
+
+            //    }
+
+            //    sqlCon.Close();
+
+            //}
+            //catch
+            //{
+            //}
+            //return notas;
+
+            //return orde.obtenernotas(id);
+        }
+        
+        
+        
+        
+        #endregion
+
+
+        public void modificarestadoordencompra(string idOrdenCompra, string estado)
+        {
+            //string estado = "INACTIVO";
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "UPDATE Ordencompra SET estado=@estado " +
+                                  "WHERE idOrdencompra = @id";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@estado", estado);
+                Utils.agregarParametro(objQuery, "@id", idOrdenCompra);
+                objQuery.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                log.Error("EliminarProducto(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
 
         }
 

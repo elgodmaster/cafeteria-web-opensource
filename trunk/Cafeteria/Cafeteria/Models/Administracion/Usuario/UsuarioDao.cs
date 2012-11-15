@@ -41,7 +41,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                 if (data.HasRows)
                 {
                     data.Read();
-                    idPerfil = Convert.ToString(data["idPerfil_usuario"]);
+                    //idPerfil = Convert.ToString(data["idPerfil_usuario"]);
                     string idUsuario = Convert.ToString (data["idUsuario"]);
                     usuario = this.buscarusuario(idUsuario);
                     //return Convert.ToString(data["idUsuario"]); // <------------- comentar ... =)

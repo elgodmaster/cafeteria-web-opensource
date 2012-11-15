@@ -15,76 +15,98 @@
                 
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.proveedor)
-                <div class=" formRight">  @Html.DisplayFor(model => model.proveedor, new { @readonly = "readonly" })  </div>
+                <div class=" formRight">  @Html.DisplayFor(model => model.proveedor)  </div>
                 <div class="clear"></div>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.nombrecafeteria) @Html.HiddenFor(model => model.idcafeteria) 
-                <div class=" formRight">  @Html.DisplayFor(model => model.nombrecafeteria, new { @readonly = "readonly" })  </div>
+                <div class=" formRight">  @Html.DisplayFor(model => model.nombrecafeteria)  </div>
                 <div class="clear"></div>
             </div>
             
         </div>
     </fieldset>
+     
+    for (int i = 0; (i < Model.listaProducto.Count); i++)
+    {
+      @Html.HiddenFor(model => model.listaProducto[i].idproducto) @Html.HiddenFor(model => model.listaProducto[i].Nombre)
+    }
     
-
     <p></p><p></p>
 
     <div class="title"><h6>Productos que tiene el Proveedor</h6> </div>
      <p></p><p></p>
     
-        <table cellpadding = "0" cellspacing = "0" width = "100%" class = "sTable" >
-
+     <div class="dataTables_wrapper">
+            
+            <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
     <thead>
         <tr>
-            <td>Producto</td>
-            <td>Precio</td>
-           <td>Stock Actual</td>
-           <td>Stock Minimo</td>
-           <td>Stock Maximo</td>
-           <td>Cantidad</td>
-           
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:150px;" >
+                <div class="DataTables_sort_wrapper">
+                Producto
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+             <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                <div class="DataTables_sort_wrapper">
+                Precio
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                <div class="DataTables_sort_wrapper">
+                Stock Actual
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+             <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                <div class="DataTables_sort_wrapper">
+                Stock Minimo
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                <div class="DataTables_sort_wrapper">
+                Stock Maximo
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+             <th class="ui-state-default" rowspan="1" colspan="1" style="width:100px;" >
+                <div class="DataTables_sort_wrapper">
+                Stock Cantidad
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+
         </tr>
     </thead>
 
     <tbody>
-        
-    @for (int i = 0; (i < Model.listaProducto.Count); i++)
-    {
-    @Html.HiddenFor(model => model.listaProducto[i].idproducto) 
-        if (Model.listaProducto[i].estado)
-        {
-        <tr>       
+                @for (int i = 0; (i < Model.listaProducto.Count); i++)
+                {
+            @Html.HiddenFor(model => model.listaProducto[i].idproducto) @Html.HiddenFor(model => model.listaProducto[i].Nombre)
+                <tr class="gradeA odd">       
                 
-                <td> @Html.TextBoxFor(model => model.listaProducto[i].Nombre, new { @readonly = "readonly" }) </td>
-                <td> @Html.DisplayFor(model => model.listaProducto[i].precio, new { @readonly = "readonly" }) </td>
-                <td> @Html.TextBoxFor(model => model.listaProducto[i].stockActual, new { @readonly = "readonly" })   </td>
-                <td> @Html.TextBoxFor(model => model.listaProducto[i].stockMinimo, new { @readonly = "readonly" })   </td>
-                <td> @Html.TextBoxFor(model => model.listaProducto[i].stockMaximo, new { @readonly = "readonly" })   </td>
-                <td> 
-                    @Html.TextBoxFor(model => model.listaProducto[i].cantidad, new { maxlength = "3", placeholder = "Solo números" })
-                    @Html.ValidationMessageFor(model => model.listaProducto[i].cantidad)
-                </td>
-        </tr>
-        }
-        else
-        {
-            @Html.HiddenFor(model => model.listaProducto[i].Nombre)
-            @Html.DisplayFor(model => model.listaProducto[i].precio)
-            @Html.HiddenFor(model => model.listaProducto[i].stockActual) 
-            @Html.HiddenFor(model => model.listaProducto[i].stockMinimo) 
-            @Html.HiddenFor(model => model.listaProducto[i].stockMaximo)
-            @Html.HiddenFor(model => model.listaProducto[i].cantidad)
-        }
-    }
-           
+                        <td> @Html.DisplayFor(model => model.listaProducto[i].Nombre) </td>
+                        <td> @Html.DisplayFor(model => model.listaProducto[i].precio) </td>
+                        <td> @Html.DisplayFor(model => model.listaProducto[i].stockActual)   </td>
+                        <td> @Html.DisplayFor(model => model.listaProducto[i].stockMinimo)   </td>
+                        <td> @Html.DisplayFor(model => model.listaProducto[i].stockMaximo)   </td>
+                        <td> 
+                            @Html.TextBoxFor(model => model.listaProducto[i].cantidad, new { maxlength = "3", placeholder = "Solo números" })
+                            @Html.ValidationMessageFor(model => model.listaProducto[i].cantidad)
+                        </td>
+                </tr>
+
+
+                }
     </tbody>
-
     </table>
-
-     
+    </div> 
     <p></p><p></p><p></p><p></p>
     <p>        
-       @if (Model.estado2){       
+       @if (Model.estado2)
+       {       
             <input type="submit" value="Crear" class = "redB" />
        }
        | <a href="javascript:window.history.back();">Regresar</a>

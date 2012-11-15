@@ -1411,6 +1411,7 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\navegacion.js" />
     <Content Include="Scripts\Ubigeo.js" />
+    <Content Include="Scripts\ValidacionOrdenDeCompra.js" />
     <Content Include="Scripts\ventanamodal.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

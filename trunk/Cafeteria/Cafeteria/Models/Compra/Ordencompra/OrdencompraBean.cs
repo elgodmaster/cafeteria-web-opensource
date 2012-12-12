@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Configuration;
+using Cafeteria.Models.Almacen.Notaentrada;
 
 namespace Cafeteria.Models.Compra.Ordencompra
 {
@@ -54,7 +55,7 @@ namespace Cafeteria.Models.Compra.Ordencompra
         public List<detalleordencompra> detalle { get; set; }
        // List<DetalleOrdenCompra> detalles { get; set; }
 
-        //public List<NotaEntradaBean> notasentrada { get; set; }
+        public List<Notaentradabean> notasentrada { get; set; }
 
 
         public IEnumerable<Proveedor> getProveedor() 

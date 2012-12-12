@@ -10,18 +10,18 @@
 
  @using (Html.BeginForm("ModificarIngredientes", "Proveedor", FormMethod.Post, new { @class = "form" }))
  {   
-     @Html.HiddenFor(model => model.idProveedor) 
+     @Html.HiddenFor(model => model.idProveedor) @Html.HiddenFor(model => model.nombreProveedor) 
     <fieldset>
         <div class="widget">
             <div class="title">
                 <h6>Proveedor</h6>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.idProveedor)
-                <div class=" formRight">  @Html.TextBoxFor(model => model.idProveedor, new { @readonly = "readonly" })  </div>
+                <div class=" formRight">  @Html.DisplayFor(model => model.idProveedor)  </div>
                 <div class="clear"></div>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.nombreProveedor)
-                <div class=" formRight">  @Html.TextBoxFor(model => model.nombreProveedor, new { @readonly = "readonly" })  </div>
+                <div class=" formRight">  @Html.DisplayFor(model => model.nombreProveedor)  </div>
                 <div class="clear"></div>
             </div>
             
@@ -33,10 +33,9 @@
     </fieldset>
     
 
-    <p></p><p></p><p></p><p></p>
+    <p></p><p></p>
 
     <div class="title"><h6>Ingredientes que tiene el Proveedor</h6> </div>
-     <p></p>
         
      <p>
     <a href="@Url.Action("AñadirIngredientes", new { ID = Model.idProveedor })"><img src="../../Content/images/icons/color/plus.png", alt="Create" />Añadir más Ingredientes</a>
@@ -97,7 +96,7 @@
      
     <p></p><p></p><p></p><p></p>
     <p>
-        @if( ViewBag.estado == 0)
+        @if (ViewBag.estado == 0)
         {
             <input type="submit" value="Modificar" class = "redB" />
         }    

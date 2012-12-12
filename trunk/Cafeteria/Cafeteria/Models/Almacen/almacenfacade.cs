@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Cafeteria.Models.Almacen.Ingrediente;
+using Cafeteria.Models.Almacen.Notaentrada;
 
 namespace Cafeteria.Models.Almacen
 {
     public class almacenfacade
     {
         IngredienteService Ingredienteservice = new IngredienteService();
+        NotaentradaService notservice = new NotaentradaService();
 
         #region Ingrediente
         public List<IngredienteBean> ListarIngrediente(string nombre)
@@ -52,6 +54,24 @@ namespace Cafeteria.Models.Almacen
             gg = Ingredienteservice.getnombreingrediente(id);
             return gg;
         }
+        #endregion
+
+
+        #region notaentrada
+
+        public void guardarnotaentrada(Notaentradabean not, string stado)
+        {
+            notservice.guardarnotaentrada(not, stado);
+
+        }
+
+        public void actualizarstock(Notaentradabean not)
+        {
+            notservice.actualizarstock(not);
+
+        }
+
+
         #endregion
 
     }

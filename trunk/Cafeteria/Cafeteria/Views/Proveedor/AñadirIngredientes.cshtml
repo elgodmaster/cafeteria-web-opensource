@@ -18,11 +18,11 @@
                 <h6>Proveedor</h6>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.idProveedor)
-                <div class=" formRight"> @Html.TextBoxFor(model => model.idProveedor, new { @readonly = "readonly" })  </div>
+                <div class=" formRight"> @Html.DisplayFor(model => model.idProveedor, new { @readonly = "readonly" })  </div>
                 <div class="clear"></div>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.nombreProveedor)
-                <div class=" formRight"> @Html.TextBoxFor(model => model.nombreProveedor, new { @readonly = "readonly" })  </div>
+                <div class=" formRight"> @Html.DisplayFor(model => model.nombreProveedor, new { @readonly = "readonly" })  </div>
                 <div class="clear"></div>
             </div>
             
@@ -30,7 +30,7 @@
         </div>
     </fieldset>
     
-    <p></p><p></p><p></p><p></p>
+    <p></p><p></p>
 
         <table cellpadding = "0" cellspacing = "0" width = "100%" class = "sTable" >
 

@@ -1,12 +1,10 @@
 ﻿@model Cafeteria.Models.Venta.Producto.ProductoxIngredienteBean
 
 @{
-    ViewBag.Title = "AñadirIngredientes";
+    ViewBag.Title = "Añadir Ingredientes";
 }
 
-<h2>AñadirIngredientes</h2>
-
-<p></p><p></p><p></p>
+<p></p><p></p>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
@@ -18,7 +16,7 @@
     <fieldset>
         <div class="widget">
             <div class="title">
-                <h6>Producto</h6>
+                <h6>@ViewBag.Title</h6>
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.idProducto)
                 <div class=" formRight">  @Html.DisplayFor(model => model.idProducto)  </div>@Html.HiddenFor(model => model.idProducto) 
@@ -32,7 +30,6 @@
                 <div class=" formRight">  @Html.DisplayFor(model => model.tipo)  </div>@Html.HiddenFor(model => model.tipo) 
                 <div class="clear"></div>
             </div>
-            
             
         </div>
     </fieldset>

@@ -142,9 +142,10 @@ namespace Cafeteria.Models.Almacen.Ingrediente
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
                 String strQuery = "UPDATE Ingrediente SET nombre=@nombre, descripcion=@descripcion, estado=@estado" +
-                                  "WHERE idIngrediente = @id";
+                                  " WHERE idIngrediente = @id";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@id", ingrediente.id);
                 Utils.agregarParametro(objQuery, "@nombre", ingrediente.nombre);
                 Utils.agregarParametro(objQuery, "@descripcion", ingrediente.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", ingrediente.estado);
@@ -205,18 +206,14 @@ namespace Cafeteria.Models.Almacen.Ingrediente
         {
             IngredienteXalmacenBean prod = new IngredienteXalmacenBean();
 
-           // ProductoXAlmacenBean prod = new ProductoXAlmacenBean();
-            //String cadenaConfiguracion = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
-            //int i = 0;
-            //string idal;
             SqlConnection objDB = null;
             try
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                String strQuery = "SELECT * FROM Almacen_x_Producto WHERE idAlmacen = 'ALMA0001'";
+                String strQuery = "SELECT * FROM Almacen_x_Producto WHERE idAlmacen =@ID";
                 SqlCommand objquery = new SqlCommand(strQuery, objDB);
-                //BaseDatos.agregarParametro(objquery, "@ID", Idalmacen);
+                BaseDatos.agregarParametro(objquery, "@ID", Idalmacen);
 
                 SqlDataReader objDataReader = objquery.ExecuteReader();
 

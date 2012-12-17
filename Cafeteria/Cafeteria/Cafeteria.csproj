@@ -1411,6 +1411,7 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\navegacion.js" />
     <Content Include="Scripts\Ubigeo.js" />
+    <Content Include="Scripts\validacionnotaentrada.js" />
     <Content Include="Scripts\ValidacionOrdenDeCompra.js" />
     <Content Include="Scripts\ventanamodal.js" />
     <Content Include="Web.config">
@@ -1418,9 +1419,11 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -1576,6 +1579,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ordencompra\Buscar2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Notaentrada\ListarNotaEntrada.cshtml" />
+    <Content Include="Views\Notaentrada\RegistrarNotaEntrada.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Notaentrada\DetallenotaEntrada.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -304,10 +304,10 @@ namespace Cafeteria.Models.Venta.Producto
                     if (Producxingre.listaIngredientes[i].cantidad > 0)
                     {
                         String strQuery = "Insert into Producto_x_Ingrediente (idProducto,idIngrediente,cantidad, unidaddemedida) values " +
-                                            "(@idproveedor,@idingrediente,@cantidad,@unidad)";
+                                            "(@idproducto,@idingrediente,@cantidad,@unidad)";
 
                         SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                        Utils.agregarParametro(objQuery, "@idproveedor", Producxingre.idProducto);
+                        Utils.agregarParametro(objQuery, "@idproducto", Producxingre.idProducto);
                         Utils.agregarParametro(objQuery, "@idingrediente", Producxingre.listaIngredientes[i].id);
                         Utils.agregarParametro(objQuery, "@cantidad", Producxingre.listaIngredientes[i].cantidad);
                         Utils.agregarParametro(objQuery, "@unidad", Producxingre.listaIngredientes[i].medida);
@@ -342,7 +342,7 @@ namespace Cafeteria.Models.Venta.Producto
                     String strQuery = "Update Producto_x_Ingrediente SET cantidad = @cantidad, unidaddemedida=@unidad  where idProducto=@idproducto and idIngrediente=@idingrediente ";
 
                     SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                    Utils.agregarParametro(objQuery, "@idproveedor", Producxingre.idProducto);
+                    Utils.agregarParametro(objQuery, "@idproducto", Producxingre.idProducto);
                     Utils.agregarParametro(objQuery, "@idingrediente", Producxingre.listaIngredientes[i].id);
                     Utils.agregarParametro(objQuery, "@cantidad", Producxingre.listaIngredientes[i].cantidad);
                     Utils.agregarParametro(objQuery, "@unidad", Producxingre.listaIngredientes[i].medida);

@@ -59,7 +59,12 @@
             <td>@Html.DisplayFor(modelItem => item.estado)</td>
             <td>
                 <a href="@Url.Action("DetalleOrdenC", new { id = item.idOrdenCompra })"><img src="../../Content/images/icons/color/edit-column.png", alt="Edit" />Detalle </a> | 
-                <a href="@Url.Action("ModificarOrdenC", new { id = item.idOrdenCompra })"><img src="../../Content/images/icons/color/pencil.png", alt="Delete" />Modificar</a>|
+                @if(item.estado.CompareTo("Atendido")!=0)
+                {
+                     <a href="@Url.Action("ModificarOrdenC", new { id = item.idOrdenCompra })"><img src="../../Content/images/icons/color/pencil.png", alt="Delete" />Modificar</a>
+                }
+                |
+                
                 @if (!item.estado2)
                 {
                     

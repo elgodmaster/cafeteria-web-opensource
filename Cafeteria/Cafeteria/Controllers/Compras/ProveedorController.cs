@@ -177,7 +177,6 @@ namespace Cafeteria.Controllers.Compras
         public ActionResult ModificarIngredientes2(ProveedorxIngredienteBean Prov)
         {
             comprasfacade.Modificaringredientes(Prov);
-            //return RedirectToAction("Index");
             return RedirectToAction("ListarIngredientes/" + Prov.idProveedor, "Proveedor");
         }
 
@@ -208,8 +207,18 @@ namespace Cafeteria.Controllers.Compras
         [HttpPost]
         public ActionResult AñadirIngredientes(ProveedorxIngredienteBean ProvexIngre)
         {
+
+            for (int i = 0; i < ProvexIngre.listadeIngredientesProveedor.Count; i++)
+            {
+                string preci = ProvexIngre.listadeIngredientesProveedor[i].precio2;
+                if (!String.IsNullOrEmpty(preci))
+                {
+                    Decimal preci2 = Convert.ToDecimal(preci, new System.Globalization.CultureInfo("en-US"));
+                    ProvexIngre.listadeIngredientesProveedor[i].precio=preci2;
+                }
+            }
+
             comprasfacade.AñadirIngredientes(ProvexIngre);
-            //return View();
             return RedirectToAction("ListarIngredientes/"+ProvexIngre.idProveedor,"Proveedor");
         }
 

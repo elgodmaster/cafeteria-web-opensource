@@ -40,7 +40,6 @@ namespace Cafeteria.Controllers.Almacen
             SucursalBean suc = admin.buscarSucursal(ordencompra.idCafeteria);
             ordencompra.nombreSucursal = suc.nombre;
             return View(ordencompra);
-            //return View();
         }
 
 
@@ -81,7 +80,6 @@ namespace Cafeteria.Controllers.Almacen
 
             }
 
-
             List<Notaentradabean> notas2 = comprfacade.listarnotasentrada(id); // lista de notas de entrada de uan orden de compra
 
             for (int i = 0; i < notas2.Count; i++)
@@ -93,7 +91,7 @@ namespace Cafeteria.Controllers.Almacen
                     {
                         if (notaentrada.detalleNotaEntrada[k].id == detallenotaentrada[j].id)
                         {
-                            notaentrada.detalleNotaEntrada[k].cantidadrecibida += detallenotaentrada[j].cantidadrecibida;
+                            notaentrada.detalleNotaEntrada[k].cantidadrecibida += detallenotaentrada[j].cantidadentrante;
                         }
 
                     }
@@ -118,15 +116,6 @@ namespace Cafeteria.Controllers.Almacen
         [HttpPost]
         public ActionResult RegistrarNotaEntrada(Notaentradabean not) //nueva nota de entrada
         {
-            for (int i = 0; i < not.detalleNotaEntrada.Count; i++)
-            {
-                if (not.detalleNotaEntrada[i].cantidadentrante > not.detalleNotaEntrada[i].cantidadfaltante)
-                {
-                    ViewBag.error = "la cantidad debe ser menor a la cantidad faltante";
-                    not.detalleNotaEntrada[i].cantidadentrante = 0;
-                    return View(not);
-                }
-            }
 
             for (int i = 0; i < not.detalleNotaEntrada.Count; i++)
             {
@@ -150,6 +139,46 @@ namespace Cafeteria.Controllers.Almacen
             almafacade.guardarnotaentrada(not, estado);
             almafacade.actualizarstock(not);//.. cambiar stock de producto
             return RedirectToAction("ListarNotaEntrada/" + not.idOrdenCompra, "Notaentrada");
+        }
+
+        public ActionResult DetallenotaEntrada(string id, string id2) //idguiaremision, idordencompra
+        {
+            Notaentradabean nota = new Notaentradabean();
+
+            nota.detalleNotaEntrada = comprfacade.obtenernotas(id);
+            nota.idGuiaRemision = id;
+            nota.idOrdenCompra = id2;
+            OrdencompraBean ordencompra = comprfacade.buscarOrdenes(id2);
+            nota.idCafeteria = ordencompra.idCafeteria;
+            SucursalBean suc = admin.buscarSucursal(nota.idCafeteria);
+            nota.nombreCafeteria = suc.nombre;
+
+            /*********************/
+
+
+            List<Notaentradabean> notas = comprfacade.listarnotasentrada(id2);
+
+            for (int i = 0; i < notas.Count; i++)
+            {
+                if (notas[i].idGuiaRemision == id)
+                {
+                    nota.fechaEmitida = notas[i].fechaEmitida;
+                }
+            }
+
+            OrdencompraBean orden = comprfacade.buscarOrdenes(id2);
+
+            nota.idProveedor = orden.idProveedor;
+
+            ProveedorBean proveedor = comprfacade.BuscarProveedor(nota.idProveedor);
+            nota.nombreProveedor = proveedor.razonSocial;
+
+            for (int i = 0; i < nota.detalleNotaEntrada.Count; i++)
+            {
+                IngredienteBean ingre = almafacade.buscaringrediente(nota.detalleNotaEntrada[i].id);
+                nota.detalleNotaEntrada[i].nombre = ingre.nombre;
+            }
+            return View(nota);
         }
 
 

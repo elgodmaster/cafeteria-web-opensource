@@ -76,7 +76,7 @@ namespace Cafeteria.Models.Compra.Ordencompra
                     string ID = "ORDE00";//8caracteres-4letras-4#
                     if (m < 10) producto.idOrdencompra = ID + "0" + Convert.ToString(m);
                     else producto.idOrdencompra = ID + Convert.ToString(m);
-                    string estado = "TRAMITE";
+                    string estado = "Tramite";
                     
                     decimal total = 0; // decimal
 
@@ -89,12 +89,6 @@ namespace Cafeteria.Models.Compra.Ordencompra
                             total += (valor * precio);
                         }
                     }
-
-                    //string commandString = "INSERT INTO Ordencompra (fechaemitida, estado, idOrdencompra, preciototal, idProveedor, idSucursal) VALUES (GETDATE(), 'Tramite' , " + producto.idOrdencompra + " , " + total + " , " + producto.idproveedor + "," + producto.idcafeteria + " )";//idproveedor
-
-                    //SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
-                    //sqlCmd.ExecuteNonQuery();
-
                     SqlConnection objDB = null;
                     objDB = new SqlConnection(cadenaDB);
                     objDB.Open();
@@ -108,7 +102,7 @@ namespace Cafeteria.Models.Compra.Ordencompra
                     objQuery.ExecuteNonQuery();
 
 
-                    this.guardarnotaentrada(producto);
+                    this.guardardetalleordencompra(producto);
                 }
 
             }
@@ -120,16 +114,13 @@ namespace Cafeteria.Models.Compra.Ordencompra
         }
 
 
-        public void guardarnotaentrada(OrdenProducto producto)
+        public void guardardetalleordencompra(OrdenProducto producto)
         {
             SqlConnection objDB = null;
             try
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                //String strQuery = "SELECT * FROM Almacen WHERE idCafeteria = @ID";
-                //SqlCommand objQuery = new SqlCommand(strQuery, objDB);
-                //BaseDatos.agregarParametro(objQuery, "@ID", );
                 for (int i = 0; i < producto.listaProducto.Count; i++)
                 {
                     if (producto.listaProducto[i].estadoguardar)
@@ -145,9 +136,6 @@ namespace Cafeteria.Models.Compra.Ordencompra
                         BaseDatos.agregarParametro(objQuery, "@cant", prod.cantidad);
                         BaseDatos.agregarParametro(objQuery, "@precio", precio);
                         objQuery.ExecuteNonQuery();
-                        //commandString = "INSERT INTO OrdenCompraDetalle (idIngrediente,idOrdencompra,cantidad,precio) VALUES ( " + prod.idproducto + " , " + producto.idOrdencompra + " , " + prod.cantidad + " , " + precio + " )";
-                        //SqlCommand sqlCmd3 = new SqlCommand(commandString, sqlCon2);
-                        //sqlCmd3.ExecuteNonQuery();
                     }
                 }
 
@@ -360,8 +348,6 @@ namespace Cafeteria.Models.Compra.Ordencompra
 
         public List<Notaentradabean> listarnotasentrada(string idordencompra)
         {
-            //return orde.listarnotasentrada(id);
-
             SqlConnection objDB = null;
             try
             {
@@ -372,7 +358,6 @@ namespace Cafeteria.Models.Compra.Ordencompra
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 BaseDatos.agregarParametro(objQuery, "@id", idordencompra);
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
-                //OrdencompraBean orden = new OrdencompraBean();
                 if (objDataReader.HasRows)
                 {
                     while (objDataReader.Read())
@@ -380,20 +365,12 @@ namespace Cafeteria.Models.Compra.Ordencompra
 
                         Notaentradabean orden = new Notaentradabean();
 
-                        //detalleordencompra detalle = new detalleordencompra();
-                        //detalle.id = (string)dataReader2["idIngrediente"];
-                        //detalle.Cantidad = (int)dataReader2["cantidad"];
-                        //detalle.precio = (decimal)dataReader2["precio"];
-
                         orden.idGuiaRemision = Convert.ToString(objDataReader["idNotaentrada"]);
                         orden.idOrdenCompra = Convert.ToString(objDataReader["idOrdencompra"]);
                         orden.fechaEmitida = Convert.ToString(objDataReader["fechaEntrega"]);
-                        //orden.idCafeteria = Convert.ToString(objDataReader["idSucursal"]);
-                        //orden.precioTotal = Convert.ToDecimal(objDataReader["preciototal"]);
                         Listaordenes.Add(orden);
                     }
                 }
-                // orden.detalle = this.retornadetalle(ordencompra);
 
                 return Listaordenes;
             }
@@ -408,9 +385,7 @@ namespace Cafeteria.Models.Compra.Ordencompra
                 {
                     objDB.Close();
                 }
-            }
-
-            
+            } 
 
         }
 
@@ -428,23 +403,17 @@ namespace Cafeteria.Models.Compra.Ordencompra
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 BaseDatos.agregarParametro(objQuery, "@id", idguiaremision);
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
-                //OrdencompraBean orden = new OrdencompraBean();
                 if (objDataReader.HasRows)
                 {
                     while (objDataReader.Read())
                     {
 
                         Notaentrada nota = new Notaentrada();// orden = new Notaentradabean();
-
                         nota.id = Convert.ToString(objDataReader["idIngrediente"]);
                         nota.cantidadentrante = Convert.ToInt32(objDataReader["cantidadentrante"]);
-                        //nota.fechaEmitida = Convert.ToString(objDataReader["fechaEntrega"]);
-                        //orden.idCafeteria = Convert.ToString(objDataReader["idSucursal"]);
-                        //orden.precioTotal = Convert.ToDecimal(objDataReader["preciototal"]);
                         Listaordenes.Add(nota);
                     }
                 }
-                // orden.detalle = this.retornadetalle(ordencompra);
 
                 return Listaordenes;
             }
@@ -460,58 +429,8 @@ namespace Cafeteria.Models.Compra.Ordencompra
                     objDB.Close();
                 }
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            //List<Notaentrada> notas = new List<Notaentrada>();
-            //try
-            //{
-            //    String cadenaConfiguracion = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
-            //    SqlConnection sqlCon = new SqlConnection(cadenaConfiguracion);
-            //    sqlCon.Open();
-            //    string commandString = "SELECT * FROM notaEntradaDetalle WHERE idNotaentrada = " + idguiaremision;
-
-            //    SqlCommand sqlCmd = new SqlCommand(commandString, sqlCon);
-            //    SqlDataReader dataReader = sqlCmd.ExecuteReader();
-
-            //    while (dataReader.Read())
-            //    {
-            //        Notaentrada nota = new Notaentrada();
-            //        nota.id = (string)dataReader["idIngrediente"];
-            //        nota.cantidadrecibida = (int)dataReader["cantidadentrante"];
-
-            //        notas.Add(nota);
-
-            //    }
-
-            //    sqlCon.Close();
-
-            //}
-            //catch
-            //{
-            //}
-            //return notas;
-
-            //return orde.obtenernotas(id);
         }
-        
-        
-        
-        
+                
         #endregion
 
 

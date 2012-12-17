@@ -57,7 +57,7 @@ namespace Cafeteria.Controllers.Compras
 
             for (int i = 0; i < orden.Count; i++)
             {
-                if (orden[i].estado == "TRAMITE" || orden[i].estado == "Cancelado") orden[i].estado2 = true;
+                if (orden[i].estado == "Tramite" || orden[i].estado == "Cancelado") orden[i].estado2 = true;
                 else orden[i].estado2 = false;
                 SucursalBean suc = admin.buscarSucursal(orden[i].idCafeteria);
                 orden[i].nombreSucursal = suc.nombre;
@@ -202,7 +202,7 @@ namespace Cafeteria.Controllers.Compras
                     {
                         if (ordencompra.detalle[k].id == not2[j].id)
                         {
-                            ordencompra.detalle[k].Cantidadentrante += not2[j].cantidadrecibida;
+                            ordencompra.detalle[k].Cantidadentrante += not2[j].cantidadentrante;
                         }
                     }
                 }

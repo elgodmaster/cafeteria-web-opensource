@@ -24,6 +24,26 @@ namespace Cafeteria.Models.Compra.Proveedor
                 List<ProveedorBean> ListaIngre = new List<ProveedorBean>();
                 objDB.Open();
                 String strQuery = "SELECT * FROM Proveedor";
+
+                if (!String.IsNullOrEmpty(RazonSocial) || !String.IsNullOrEmpty(contacto))
+                {
+                    if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto))
+                    {
+                        strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'" + " AND UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                    }
+                    else
+                    {
+                        if (!String.IsNullOrEmpty(RazonSocial))
+                        {
+                            strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'";
+                        }
+                        if (!String.IsNullOrEmpty(contacto))
+                        {
+                            strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
+                        }
+                    }
+
+                }
                 //if (!String.IsNullOrEmpty(RazonSocial)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'";
                 //if (!String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(contacto) LIKE '%" + contacto.ToUpper() + "%'";
                 //if (!String.IsNullOrEmpty(RazonSocial) && !String.IsNullOrEmpty(contacto)) strQuery = strQuery + " WHERE UPPER(razonSocial) LIKE '%" + RazonSocial.ToUpper() + "%'"+

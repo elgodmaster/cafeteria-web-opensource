@@ -4,9 +4,7 @@
     ViewBag.Title = "Modificar Ingredientes";
 }
 
-<h2>Modificar Productos</h2>
-<p></p><p></p><p></p>
-
+<h2>@ViewBag.Title</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validationEngine-en.js")" type="text/javascript"></script>
@@ -15,7 +13,7 @@
 
 
  @using (Html.BeginForm("ModificarIngredientes2", "Proveedor", FormMethod.Post, new { @class = "form", id = "validate" }))
-{   
+ {   
     @Html.HiddenFor(model => model.idProveedor)
     <fieldset>
         <div class="widget">
@@ -34,42 +32,65 @@
             
         </div>
     </fieldset>
-    
-
-    <p></p><p></p><p></p><p></p>
-
-        <table cellpadding = "0" cellspacing = "0" width = "100%" class = "sTable" >
-
+      
+         
+     <div class="wrapper">
+    <div class="widget">
+      <div class="title">
+      <h6>Lista de Ingredientes</h6>
+      </div>
+      <div class="dataTables_wrapper">
+            
+            <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
     <thead>
         <tr>
-            <td>Id Ingrediente</td>
-            <td>Ingrediente</td>
-            <td>Precio</td>
-         
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                <div class="DataTables_sort_wrapper">
+                ID
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                <div class="DataTables_sort_wrapper">
+                Nombre
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
+            <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                <div class="DataTables_sort_wrapper">
+                Precio
+                <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
+                </div>
+             </th>
         </tr>
     </thead>
 
     <tbody>
 
-  
-    @for (int i = 0; (i < Model.listadeIngredientesProveedor.Count); i++)
+    @for (int i = 0; i < Model.listadeIngredientesProveedor.Count; i++)
     {
-           
-             <tr>  
-                <td> @Html.DisplayFor(model => model.listadeIngredientesProveedor[i].id)  @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].id)</td> 
-                <td> @Html.DisplayFor(model => model.listadeIngredientesProveedor[i].nombre)  @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].nombre) </td>
-                <td> @Html.TextBoxFor(model => model.listadeIngredientesProveedor[i].precio, new { @class = "validate[custom[onlyNumberSp]]", name = "numsValid", placeholder = "0.00" })         </td>
-              
-     </tr>
-
+         @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].id) 
+        @Html.HiddenFor(model => model.listadeIngredientesProveedor[i].nombre) 
+        <tr class="gradeA odd">
+            <td class="sorting_1">@Html.DisplayFor(model => model.listadeIngredientesProveedor[i].id)</td>
+            <td class="sorting_1">@Html.DisplayFor(model => model.listadeIngredientesProveedor[i].nombre)</td>
+            <td>@Html.TextBoxFor(model => model.listadeIngredientesProveedor[i].precio, new { @class = "validate[custom[onlyNumberSp]]", name = "numsValid", placeholder = "0.00" })</td>
+            
+             
+        </tr>
     }
-           
     </tbody>
-
     </table>
-    <p></p><p></p><p></p><p></p>
+    </div>
+        
+    </div>
+</div>
+     
+     
+     
+    <p></p>
     <p>
         <input type="submit" value="Guardar" class = "redB" />
          <a href="javascript:history.back()">Regresar</a>
     </p>
-    }
+ }

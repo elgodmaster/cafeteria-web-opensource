@@ -72,7 +72,7 @@
                 <div class = "clear" ></div>
             </div>
 
-           @* <div class = "formRow" >
+           <div class = "formRow" >
                 @Html.LabelFor( model => model.email )
                 <div class = "formRight" >
                     @Html.TextBoxFor( model => model.email )
@@ -80,7 +80,7 @@
                 </div>
                 <div class = "clear" ></div>
             </div>
-*@
+
             <div class = "formRow" >
                 @Html.LabelFor( model => model.celular )
                 <div class = "formRight" >
@@ -89,20 +89,6 @@
                 </div>
                 <div class = "clear" ></div>
             </div>
-
-            @*<div class = "formRow" >
-                @Html.LabelFor( model => model.tipoDocumento )
-                <div class = "formRight" >
-                    @Html.DropDownListFor( model => model.tipoDocumento , new SelectList( Model.Documentos, "nombre" , "nombre") , "Elije un tipo de documento..." )
-                    @Html.ValidationMessageFor( model => model.tipoDocumento )
-                </div>
-                <div class = "clear" ></div>
-            </div>
-
-                @for (int i = 0; i < Model.Documentos.Count; i++)
-                {
-                    @Html.HiddenFor(m => m.Documentos[i].nombre)
-                }*@
 
             <div class = "formRow" >
                 @Html.LabelFor( model => model.nroDocumento )

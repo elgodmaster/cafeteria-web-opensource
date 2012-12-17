@@ -83,10 +83,10 @@ namespace Cafeteria.Controllers.Venta
         }
 
         [HttpPost]
-        public ActionResult Buscar(string nombre, string ID_tipo)
+        public ActionResult Buscar(string nombre, string idTipo)
         {
             ViewBag.estado = 1;
-            return View(Ventafacade.ListarProducto(nombre, ID_tipo));
+            return View(Ventafacade.ListarProducto(nombre, idTipo));
         }
 
         #endregion
@@ -152,25 +152,26 @@ namespace Cafeteria.Controllers.Venta
 
         public ActionResult ModificarIngredientes(ProductoxIngredienteBean prodxingre)
         {
-            Ventafacade.Modificaringredientesdeproducto(prodxingre);
-            return RedirectToAction("Index");
+            return View(prodxingre);
         }
 
 
         public ActionResult ModificarIngredientes2(ProductoxIngredienteBean prodxingre)
         {
-            return View(prodxingre);
+            Ventafacade.Modificaringredientesdeproducto(prodxingre);
+            return RedirectToAction("ListarIngredientes/" + prodxingre.idProducto, "Producto");
         }
 
         public ActionResult AñadirIngredientes(string ID) //idProducto
         {
             ProductoBean producto = Ventafacade.BuscarProducto(ID);
 
-
+            
             List<IngredienteBean> Ingredientes = Almacenfacade.ListarIngrediente("");
             ProductoxIngredienteBean ProdIngre = new ProductoxIngredienteBean();
             ProdIngre.nombreProducto = producto.nombre;
             ProdIngre.idProducto = producto.id;
+            ProdIngre.tipo = Ventafacade.get_tipo(producto.idTipo);
             ProdIngre.listaIngredientes = new List<ProductoxIngrediente>();
             ProductoxIngredienteBean aux = Ventafacade.obtenerlistadeingredientesdeProducto(ID);
 
@@ -181,7 +182,7 @@ namespace Cafeteria.Controllers.Venta
                 product.nombre = Ingredientes[j].nombre;
                 for (int i = 0; i < aux.listaIngredientes.Count; i++)
                 {
-                    if (aux.listaIngredientes[i].id == Ingredientes[j].id) product.estadod_disponible = false;
+                    if (aux.listaIngredientes[i].id == Ingredientes[j].id) product.estadod_disponible = true;
                 }
                 ProdIngre.listaIngredientes.Add(product);
             }
@@ -194,7 +195,7 @@ namespace Cafeteria.Controllers.Venta
         public ActionResult AñadirIngredientes( ProductoxIngredienteBean prodIngre)
         {
             Ventafacade.AñadirIngredientesdeproducto(prodIngre);
-            return View();
+            return RedirectToAction("ListarIngredientes/" + prodIngre.idProducto, "Producto");
         }
 
 

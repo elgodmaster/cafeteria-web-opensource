@@ -1,10 +1,10 @@
 ﻿@model Cafeteria.Models.Compra.Ordencompra.OrdencompraBean
 
 @{
-    ViewBag.Title = "DetalleOrdenC";
+    ViewBag.Title = "Detalle Orden Compra";
 }
 
-<h2>DetalleOrdenC</h2>
+<h2>@ViewBag.Title</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
@@ -62,7 +62,7 @@
                         @for (int i = 0; i < Model.detalle.Count; i++)
                         {
                     <tr>       
-                            @Html.HiddenFor(model => model.detalle[i].id);
+                            @Html.HiddenFor(model => model.detalle[i].id)
                         <td> @Html.DisplayFor(model => model.detalle[i].nombre) @Html.HiddenFor(model => model.detalle[i].nombre) </td>
                         <td> @Html.DisplayFor(model => model.detalle[i].Cantidad) @Html.HiddenFor(model => model.detalle[i].Cantidad)</td>
                         <td> @Html.DisplayFor(model => model.detalle[i].Cantidadentrante)  @Html.HiddenFor(model => model.detalle[i].Cantidadentrante)</td>
@@ -76,7 +76,7 @@
                         <td></td>
                         <td></td> 
                         <td></td> 
-                        <td>Monto Total</td>
+                        <td style=" text-align:right">Monto Total</td>
                         <td style=" text-align:right" > @Html.DisplayFor(model => model.precioTotal) @Html.HiddenFor(model => model.precioTotal)</td>
                     </tr>
                 </tbody>

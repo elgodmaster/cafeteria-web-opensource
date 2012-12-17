@@ -8,6 +8,7 @@
 @using (Html.BeginForm("Create", "Producto", FormMethod.Post, new { @class = "form" }))
 {
     @Html.ValidationSummary(true)
+    
     <fieldset>
         <div class="widget">
           <div class="title"><h6>Registrar producto</h6></div>
@@ -15,7 +16,7 @@
             <span>Nombre</span>
             <div class = "formRight" > 
                 @Html.TextBoxFor(model => model.nombre, new { maxlength = "40", placeholder = "Maximo 40 caracteres aqui" })
-                @Html.ValidationMessageFor(model => model.nombre)
+                @Html.ValidationMessageFor(model => model.nombre) @ViewBag.error
             </div><div class="clear"></div>
           </div>
 

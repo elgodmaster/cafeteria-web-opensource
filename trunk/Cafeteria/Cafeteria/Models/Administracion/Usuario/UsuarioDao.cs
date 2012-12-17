@@ -35,7 +35,7 @@ namespace Cafeteria.Models.Administracion.Usuario
 
                 SqlDataReader data = query.ExecuteReader();
 
-                string idPerfil = "";
+                //string idPerfil = "";
                 UsuarioBean usuario = null;
 
                 if (data.HasRows)

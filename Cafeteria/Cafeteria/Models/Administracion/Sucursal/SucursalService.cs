@@ -38,5 +38,20 @@ namespace Cafeteria.Models.Administracion.Sucursal
             sucursalDAo.ActualizarSucursal(suc);
         }
 
+        public List<sucursalproductoBean> obtenerproduct(string idsucursal)
+        {
+            return sucursalDAo.obtenerproduct(idsucursal);
+        }
+
+        public void añadirproductos(SucursalBean suc)
+        {
+            sucursalDAo.añadirproductos(suc);
+        }
+
+        public void modificarproductos(SucursalBean suc)
+        {
+            sucursalDAo.modificarproductos(suc);
+        }
+
     }
 }

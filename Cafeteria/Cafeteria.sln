@@ -8,9 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafeteria", "Cafeteria\Cafe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfReportGenerator", "PdfReportGenerator\PdfReportGenerator.csproj", "{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{005AF247-D9D8-4200-9670-8E918E8136FE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BDA1ADB9-0FB2-4CFF-AFCE-67F6D3A85951}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\Include\itextsharp.dll = ..\..\..\Include\itextsharp.dll
+		PdfReportGenerator\bin\Debug\itextsharp.dll = PdfReportGenerator\bin\Debug\itextsharp.dll
 	EndProjectSection
 EndProject
 Global

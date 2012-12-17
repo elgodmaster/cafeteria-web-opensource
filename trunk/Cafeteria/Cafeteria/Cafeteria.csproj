@@ -86,6 +86,7 @@
     <Compile Include="Models\Administracion\Perfil Usuario\PerfilUsuarioBean.cs" />
     <Compile Include="Models\Administracion\Sucursal\SucursalBean.cs" />
     <Compile Include="Models\Administracion\Sucursal\SucursalDao.cs" />
+    <Compile Include="Models\Administracion\Sucursal\sucursalproductoBean.cs" />
     <Compile Include="Models\Administracion\Sucursal\SucursalService.cs" />
     <Compile Include="Models\Administracion\Ubigeo\Ubigeo.cs" />
     <Compile Include="Models\Administracion\Usuario\UsuarioBean.cs" />
@@ -1586,6 +1587,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Notaentrada\DetallenotaEntrada.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Sucursal\Listaproductos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Sucursal\modificarproduc.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Sucursal\añadirproductos.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

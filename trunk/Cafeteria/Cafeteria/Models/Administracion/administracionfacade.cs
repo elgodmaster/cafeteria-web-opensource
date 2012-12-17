@@ -114,6 +114,23 @@ namespace Cafeteria.Models.Administracion
         {
             sucursalservice.ActualizarSucursal(suc);
         }
+
+
+        public List<sucursalproductoBean> obtenerproductsucursal(string idsucursal)
+        {
+            return sucursalservice.obtenerproduct(idsucursal);
+        }
+
+        public void añadirproductos(SucursalBean suc)
+        {
+            sucursalservice.añadirproductos(suc);
+        }
+
+        public void modificarproductos(SucursalBean suc)
+        {
+            sucursalservice.modificarproductos(suc);
+        }
+
         #endregion
 
     }

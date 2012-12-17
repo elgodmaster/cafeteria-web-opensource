@@ -6,8 +6,6 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p></p><p></p>
-
 <div class="wrapper">
     <div class="widget">
       <div class="title"><h6>@ViewBag.Title</h6></div>
@@ -15,33 +13,28 @@
         <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
             <thead>
                 <tr>
-                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
-                        <div class="DataTables_sort_wrapper">
-                        ID
-                        <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
-                        </div>
-                     </th>
-                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:120px;" >
                         <div class="DataTables_sort_wrapper">
                         Nombre
                         <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
                         </div>
                      </th>
-                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                    <th class="ui-state-default" rowspan="1" colspan="1" style="width:180px;" >
                         <div class="DataTables_sort_wrapper">
                         Direccion
                         <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
                         </div>
                      </th>
 
-                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:209px;" >
+                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:120px;" >
                         <div class="DataTables_sort_wrapper">
                         Telefono
                         <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
                         </div>
                      </th>
                           
-                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:160px;" >
+                     <th class="ui-state-default" rowspan="1" colspan="1" style="width:90px;" >
                         <div class="DataTables_sort_wrapper">
                         Estado
                         <span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-s"></span>
@@ -57,9 +50,8 @@
     <tbody>
         @foreach (var item in Model)
         {
-
+                @Html.HiddenFor(modelItem => item.id)
                <tr class="gradeA odd">
-                    <td>@Html.DisplayFor(modelItem => item.id)</td>
                     <td>@Html.DisplayFor(modelItem => item.nombre)</td>
                     <td>@Html.DisplayFor(modelItem => item.direccion)</td>
                     <td>
@@ -70,9 +62,11 @@
                     </td>
                     <td>
                         <a href="@Url.Action("Edit", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Editar </a> | 
-                        @if(item.estado=="ACTIVO"){ 
+                        @if (item.estado == "Activo")
+                        { 
                             <a  id = @item.id class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Dar de baja</a>
                         }
+                        | <a href="@Url.Action("Listaproductos", new { id = item.id })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Lista de productos </a> 
                     </td>
 
                </tr>

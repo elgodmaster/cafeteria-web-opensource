@@ -48,6 +48,8 @@ namespace Cafeteria.Models.Administracion.Sucursal
         public string estado { get; set; }
 
         public List<Ubigeo.Ubigeo.Departamento> departamentos { get; set; }
+
+        public List<sucursalproductoBean> listaProductos { get; set; }
     }
 
 

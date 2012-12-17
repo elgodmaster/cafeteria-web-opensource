@@ -23,7 +23,7 @@ namespace Cafeteria.Models.Administracion.Sucursal
             else suc.id = ID + Convert.ToString(i);
             suc.razonSocial = "Cafeteria S.A";
             suc.ruc = "45678912591";
-            suc.estado = "ACTIVO";
+            suc.estado = "Activo";
             try
             {
                 objDB = new SqlConnection(cadenaDB);
@@ -66,8 +66,6 @@ namespace Cafeteria.Models.Administracion.Sucursal
 
         public List<SucursalBean> Listarsucursal()
         {
-            //List<SucursalBean> sucur = new List<SucursalBean>();
-            //return sucur;
 
             SqlConnection objDB = null;
             try
@@ -158,13 +156,10 @@ namespace Cafeteria.Models.Administracion.Sucursal
             try
             {
                 objDB = new SqlConnection(cadenaDB);
-                //List<SucursalBean> listasucur = new List<SucursalBean>();
                 objDB.Open();
-                //String strQuery = "SELECT * FROM Cafeteria Where ";
                 String strQuery = "SELECT * FROM Cafeteria WHERE idCafeteria = @ID";
                 SqlCommand objquery = new SqlCommand(strQuery, objDB);
                 BaseDatos.agregarParametro(objquery, "@ID", Id);
-                //SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 SqlDataReader objDataReader = objquery.ExecuteReader();
                 if (objDataReader.HasRows)
                 {
@@ -179,7 +174,6 @@ namespace Cafeteria.Models.Administracion.Sucursal
                         suc.telefono1 = Convert.ToString(objDataReader["telefono1"]);
                         suc.telefono2 = Convert.ToString(objDataReader["telefono2"]);
                         suc.estado = Convert.ToString(objDataReader["estado"]);
-                        //listasucur.Add(sucursal);
                     }
                 }
 
@@ -197,15 +191,11 @@ namespace Cafeteria.Models.Administracion.Sucursal
                     objDB.Close();
                 }
             }
-
-
-
-            //return suc;
         }
 
         public void EliminarSucursal(string Id)
         {
-            string estado = "INACTIVO";
+            string estado = "Inactivo";
             SqlConnection objDB = null;
             try
             {
@@ -254,6 +244,124 @@ namespace Cafeteria.Models.Administracion.Sucursal
             catch (Exception e)
             {
                 log.Error("Actualizar_Sucursal(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        public List<sucursalproductoBean> obtenerproduct(string idsucursal)
+        {
+            List<sucursalproductoBean> suc = new List<sucursalproductoBean>();
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                
+                objDB.Open();
+                String strQuery = "SELECT * FROM Cafeteria_x_Producto where idCafeteria=@ID ";
+                SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objquery, "@ID", idsucursal);
+                SqlDataReader objDataReader = objquery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        sucursalproductoBean aux = new sucursalproductoBean();
+                        aux.id = Convert.ToString(objDataReader["idProducto"]);
+                        aux.cantidad = Convert.ToInt32(objDataReader["cantidad"]);
+                        aux.precioventa = (decimal)(objDataReader["precioventa"]);
+                        aux.precioventa2 = Convert.ToString(objDataReader["precioventa"]);
+                        suc.Add(aux);
+
+                    }
+                }
+                return suc;
+            }
+            catch (Exception e)
+            {
+                log.Error("Productos_Sucursal(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+
+        public void añadirproductos(SucursalBean suc)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < suc.listaProductos.Count; i++)
+                {
+                    if (suc.listaProductos[i].cantidad > 0)
+                    {
+                        String strQuery = "Insert into Cafeteria_x_Producto (idCafeteria,idProducto,precioventa, cantidad) values " +
+                                            "(@idcafe,@idprod,@precio,@cantidad)";
+
+                        SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                        Utils.agregarParametro(objQuery, "@idcafe", suc.id);
+                        Utils.agregarParametro(objQuery, "@idprod", suc.listaProductos[i].id);
+                        Utils.agregarParametro(objQuery, "@precio", suc.listaProductos[i].precioventa);
+                        Utils.agregarParametro(objQuery, "@cantidad", suc.listaProductos[i].cantidad);
+                        objQuery.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("Añadir IngredientesxCafeteria(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        public void modificarproductos(SucursalBean suc)
+        {
+
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < suc.listaProductos.Count; i++)
+                {
+                    String strQuery = "Update Cafeteria_x_Producto SET cantidad = @cantidad, precioventa=@precio  where idProducto=@idprod and idCafeteria=@idcafe ";
+
+                    SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                    Utils.agregarParametro(objQuery, "@idcafe", suc.id);
+                    Utils.agregarParametro(objQuery, "@idprod", suc.listaProductos[i].id);
+                    Utils.agregarParametro(objQuery, "@precio", suc.listaProductos[i].precioventa);
+                    Utils.agregarParametro(objQuery, "@cantidad", suc.listaProductos[i].cantidad);
+                    objQuery.ExecuteNonQuery();
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("Modificar IngredientesxSucursal(EXCEPTION): ", ex);
+                throw ex;
             }
             finally
             {

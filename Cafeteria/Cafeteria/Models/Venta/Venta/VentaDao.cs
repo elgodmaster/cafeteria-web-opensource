@@ -101,5 +101,56 @@ namespace Cafeteria.Models.Venta.Venta
             }
         }
 
+
+        public List<VentaxProductoBean> obtenerlistaproductos(string idSucursal)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<VentaxProductoBean> Listadeproductos = new List<VentaxProductoBean>();
+                VentaxProductoBean prod = new VentaxProductoBean();
+                objDB.Open();
+                String strQuery = "SELECT * FROM Cafeteria_x_Producto WHERE UPPER(idCafeteria) LIKE '%" + idSucursal.ToUpper() + "%'"; 
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        prod = new VentaxProductoBean();
+                        prod.id = Convert.ToString(objDataReader["idProducto"]);
+                        prod.preciouniario = Convert.ToDecimal(objDataReader["precioventa"]);
+                        prod.cantidad = Convert.ToInt32(objDataReader["cantidad"]);
+                       
+                        Listadeproductos.Add(prod);
+                    }
+                }
+
+                return Listadeproductos;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_productos_sucursal(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+
+        public void registrarVenta(VentaBean ven)
+        {
+
+        }
+
+
     }
+
 }

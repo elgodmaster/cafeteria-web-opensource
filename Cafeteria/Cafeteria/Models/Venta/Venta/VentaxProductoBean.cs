@@ -16,5 +16,7 @@ namespace Cafeteria.Models.Venta.Venta
         
         public bool estado_venta { get; set; }
         public int cantidad { get; set; }
+
+        public int cantidadsolicitada { get; set; }
     }
 }

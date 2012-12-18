@@ -22,7 +22,7 @@ INSERT INTO Almacen(idAlmacen, idCafeteria) values ('ALMA0005','SUCU0005')
 ---------------------------------------------------------------------------
 --Inserts de las perfiles
 ---------------------------------------------------------------------------
-INSERT INTO Perfil_usuario(idPerfil_usuario, nombre, token) values ('PERF0001','Administrador', '0000000001')
+INSERT INTO Perfil_usuario(idPerfil_usuario, nombre, token) values ('PERF0001','Administrador', '1111111111')
 INSERT INTO Perfil_usuario(idPerfil_usuario, nombre, token) values ('PERF0002','Recepcionista', '0000000002')
 INSERT INTO Perfil_usuario(idPerfil_usuario, nombre, token) values ('PERF0003','Supervisor de Almacen', '0000000003')
 INSERT INTO Perfil_usuario(idPerfil_usuario, nombre, token) values ('PERF0004','Supervisor de Logistica', '0000000004')

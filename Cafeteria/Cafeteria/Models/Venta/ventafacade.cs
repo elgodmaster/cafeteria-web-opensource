@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Cafeteria.Models.Venta.Producto;
+using Cafeteria.Models.Venta.Venta;
 
 namespace Cafeteria.Models.Venta
 {
     public class ventafacade
     {
         ProductoService ProductoService = new ProductoService();
+        VentaService ventaservice = new VentaService();
 
         #region Producto
         public List<ProductoBean> ListarProducto(string nombre, string idtipo)
@@ -58,6 +60,16 @@ namespace Cafeteria.Models.Venta
         }
 
         #endregion
+
+        #region Venta 
+
+        public List<VentaBean> buscarventas(string fecha, string idsucursal)
+        {
+            return ventaservice.buscarventas(fecha, idsucursal);
+        }
+
+        #endregion
+
 
     }
 }

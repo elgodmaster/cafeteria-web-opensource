@@ -12,10 +12,12 @@ namespace Cafeteria.Models.Venta.Producto
     public class ProductoBean
     {
         public string id { get; set; }
+        
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Debe ingresar nombre de Producto")]
         [RegularExpression("^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$", ErrorMessage = "El nombre ingresado no es válido")]
         public string nombre { get; set; }
+        
         [Display(Name = "Descripción")]
         public string descripcion { get; set; }
 

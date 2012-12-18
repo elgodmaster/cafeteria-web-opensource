@@ -68,6 +68,16 @@ namespace Cafeteria.Models.Venta
             return ventaservice.buscarventas(fecha, idsucursal);
         }
 
+        public List<VentaxProductoBean> obtenerlistaproductos(string idSucursal)
+        {
+            return ventaservice.obtenerlistaproductos(idSucursal);
+        }
+
+        public void registrarVenta(VentaBean ven)
+        {
+            ventaservice.registrarVenta(ven);
+        }
+
         #endregion
 
 

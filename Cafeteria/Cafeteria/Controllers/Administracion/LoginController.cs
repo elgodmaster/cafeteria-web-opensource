@@ -22,7 +22,6 @@ namespace Cafeteria.Controllers.Administracion
         {
             if (ModelState.IsValid)
             {
-                //if (loginmodel.Usuario == "stardust" && loginmodel.Contrasenia == "stardust")
                 if (Utils.comprobarLogin(loginmodel.usuario, loginmodel.contrasenia))
                 {
                     FormsAuthentication.SetAuthCookie(loginmodel.usuario, false);

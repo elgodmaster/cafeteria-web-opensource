@@ -297,6 +297,171 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         }
 
+        public void guardarhorario(UsuarioxSucursalBean usuario)
+        {
+            SqlConnection objDB = null;
+            int i = Utils.cantidad("Horario") + 1;
+            string ID = "HORA00";//8caracteres-4letras-4#
+            if (i < 10) usuario.idhorario = ID + "0" + Convert.ToString(i);
+            else usuario.idhorario = ID + Convert.ToString(i);
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "Insert into Horario( idHorario, fechaini, fechafin, idempleado) values(@idhora,@fecha1" +
+                                  ", @fecha2, @idemple)";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@idhora", usuario.idhorario);
+                Utils.agregarParametro(objQuery, "@fecha1", usuario.fechaIngreso);
+                Utils.agregarParametro(objQuery, "@fecha2", usuario.fechaFin);
+                Utils.agregarParametro(objQuery, "@idemple", usuario.ID);
+                objQuery.ExecuteNonQuery();
+                this.guardardetalle(usuario);
+            }
+            catch (Exception e)
+            {
+                log.Error("Insertar horario(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        private void guardardetalle(UsuarioxSucursalBean usuario)
+        {
+            SqlConnection objDB = null;
+
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < usuario.dia.Count; i++)
+                {
+                    if (!string.IsNullOrEmpty(usuario.horaInicio[i]))
+                    {
+                        
+                        String strQuery = "Insert into HorarioDetalle(idHorario, diasemana, horaentrada, horasalida) values(@idhora,@dia" +
+                                  ", @hora1, @hora2)";
+
+                        SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                        Utils.agregarParametro(objQuery, "@idhora", usuario.idhorario);
+                        Utils.agregarParametro(objQuery, "@dia", usuario.dia[i]);
+                        Utils.agregarParametro(objQuery, "@hora1", usuario.horaInicio[i]);
+                        Utils.agregarParametro(objQuery, "@hora2", usuario.horaFin[i]);
+                        objQuery.ExecuteNonQuery();
+                    }
+                }
+                
+
+            }
+            catch (Exception e)
+            {
+                log.Error("Insertar horariodetalle(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+
+        public UsuarioxSucursalBean obtenerhorario(String id)
+        {
+            SqlConnection objDB = null;
+            UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "Select * from Horario where idempleado=@idemple";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@idemple", id);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+
+                if (objDataReader.HasRows)
+                {
+                    objDataReader.Read();
+                    usua.ID = Convert.ToString(objDataReader["idempleado"]);
+                    usua.fechaIngreso = (DateTime)(objDataReader["fechaini"]);
+                    usua.fechaFin = (DateTime)(objDataReader["fechafin"]);
+                    usua.idhorario = Convert.ToString(objDataReader["idHorario"]);
+                    UsuarioxSucursalBean aux = new UsuarioxSucursalBean();
+                    aux = this.devolverdetallehorario(usua.idhorario);
+                    usua.horaFin = aux.horaFin;
+                    usua.horaInicio = aux.horaInicio;
+                    usua.dia = aux.dia;
+                }
+                
+
+            }
+            catch (Exception e)
+            {
+                log.Error("Insertar horariodetalle(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            return usua;
+        }
+
+        private UsuarioxSucursalBean devolverdetallehorario(string idhorario)
+        {
+            SqlConnection objDB = null; int i = 0;
+            UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
+            usua.dia = new List<string>();
+            usua.horaInicio = new List<string>();
+            usua.horaFin = new List<string>();
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "Select * from HorarioDetalle where idHorario=@idho";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@idho", idhorario);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+
+                if (objDataReader.HasRows)
+                {
+                    usua.dia = new List<string>();
+                    usua.horaInicio = new List<string>();
+                    usua.horaFin = new List<string>();
+                    while (objDataReader.Read())
+                    {
+                        objDataReader.Read();
+                        usua.dia.Add(Convert.ToString(objDataReader["diasemana"]));
+                        usua.horaInicio.Add(Convert.ToString(objDataReader["horaentrada"]));
+                        usua.horaFin.Add(Convert.ToString(objDataReader["horasalida"]));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("Insertar horariodetalle(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            return usua;
+        }
+
         #endregion
 
         #region perfil 
@@ -487,17 +652,3 @@ namespace Cafeteria.Models.Administracion.Usuario
     }
 }
 
-
-/*UsuarioxSucursalBean usuarioelemento = new UsuarioxSucursalBean();
-                        usuarioelemento.ID = Convert.ToString(objDataReader["idUsuario"]);
-                        usuarioelemento.nombres = Convert.ToString(objDataReader["nombre"]);
-                        usuarioelemento.apPat = Convert.ToString(objDataReader["apellido_paterno"]);
-                        usuarioelemento.apMat = Convert.ToString(objDataReader["apellido_materno"]);
-                        usuarioelemento.estado = Convert.ToString(objDataReader["estado"]);
-                        usuarioelemento.email = Convert.ToString(objDataReader["email"]);
-                        usuarioelemento.celular = Convert.ToString(objDataReader["celular"]);
-                        usuarioelemento.direccion = Convert.ToString(objDataReader["direccion"]);
-                        usuarioelemento.idDepartamento = Convert.ToString(objDataReader["idDepartamento"]);
-                        usuarioelemento.idProvincia = Convert.ToString(objDataReader["idProvincia"]);
-                        usuarioelemento.idDistrito = Convert.ToString(objDataReader["idDistrito"]);
-                        ListaUsuario.Add(usuarioelemento);*/

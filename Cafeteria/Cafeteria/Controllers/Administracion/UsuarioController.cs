@@ -40,6 +40,14 @@ namespace Cafeteria.Controllers.Administracion
 
         #region asignarhorario
 
+        public ActionResult verhorario(String id)
+        {
+
+            UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
+            usua = admifacade.obtenerhorario(id);
+            return View(usua);
+        }
+
         public ActionResult Horario(String id)
         {
             UsuarioBean usuario = new UsuarioBean();
@@ -49,8 +57,8 @@ namespace Cafeteria.Controllers.Administracion
             usua.nroDocumento = usuario.nroDocumento;
             usua.nombres = usuario.nombres +" "+ usuario.apPat + " "+usuario.apMat;
             usua.dia = new List<string>();
-            usua.horaFin = new List<DateTime>();
-            usua.horaInicio = new List<DateTime>();
+            usua.horaFin = new List<string>();
+            usua.horaInicio = new List<string>();
             usua.dia.Add("Lunes");
             usua.dia.Add("Martes");
             usua.dia.Add("Miercoles");
@@ -58,6 +66,11 @@ namespace Cafeteria.Controllers.Administracion
             usua.dia.Add("Viernes");
             usua.dia.Add("Sabado");
             usua.dia.Add("Domingo");
+            for (int i = 0; i < usua.dia.Count; i++)
+            {
+                usua.horaFin.Add("");
+                usua.horaInicio.Add("");
+            }
             
             return View(usua);
         }
@@ -65,8 +78,22 @@ namespace Cafeteria.Controllers.Administracion
         [HttpPost]
         public ActionResult Horario(UsuarioxSucursalBean usuario)
         {
+            admifacade.guardarhorario(usuario);
+            return RedirectToAction("verhorario/" + usuario.ID, "Usuario");
+        }
+
+        public ActionResult modificarHorario(UsuarioxSucursalBean usuario)
+        {
             
-            return View();
+            return View(usuario);
+
+        }
+
+        public ActionResult modificarHorario2(UsuarioxSucursalBean usuario)
+        {
+
+            return RedirectToAction("verhorario/" + usuario.ID, "Usuario");
+
         }
         #endregion
 
@@ -105,14 +132,12 @@ namespace Cafeteria.Controllers.Administracion
                     admifacade.registrarpersonal(usuario);
                     return RedirectToAction("Index");
                 }
-                //return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 log.Error("Create - POST(EXCEPTION): ", ex);
                 ModelState.AddModelError("", ex.Message);
                 return View(usuario);
-                //return View();
             }
         }
         #endregion
@@ -284,6 +309,8 @@ namespace Cafeteria.Controllers.Administracion
         }
 
         #endregion
+
+
         /*login----------------------------->>>*/
         #region Login
 

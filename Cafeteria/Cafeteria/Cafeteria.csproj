@@ -93,14 +93,18 @@
     <Compile Include="Controllers\Administracion\CafeteriaController.cs" />
     <Compile Include="Controllers\Administracion\LoginController.cs" />
     <Compile Include="Controllers\Administracion\LogoutController.cs" />
+    <Compile Include="Controllers\Administracion\ReporteadminController.cs" />
     <Compile Include="Controllers\Administracion\SucursalController.cs" />
     <Compile Include="Controllers\Administracion\UsuarioController.cs" />
     <Compile Include="Controllers\Almacen\IngredienteController.cs" />
     <Compile Include="Controllers\Almacen\NotaentradaController.cs" />
+    <Compile Include="Controllers\Almacen\ReportealmaController.cs" />
     <Compile Include="Controllers\Compras\OrdencompraController.cs" />
+    <Compile Include="Controllers\Compras\ReportecompraController.cs" />
     <Compile Include="Controllers\Venta\ProductoController.cs" />
     <Compile Include="Controllers\Compras\ProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Venta\ReporteventaController.cs" />
     <Compile Include="Controllers\Venta\VentaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1634,6 +1638,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Venta\Buscar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\verhorario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\modificarHorario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reporteadmin\filtro.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reporteventa\filtro.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reportecompra\filtro.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reportealma\filtro.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

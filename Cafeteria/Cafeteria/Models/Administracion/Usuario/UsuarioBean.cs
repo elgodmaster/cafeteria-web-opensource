@@ -5,6 +5,8 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Cafeteria.Models.Administracion.Perfil_Usuario;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Cafeteria.Models.Administracion.Usuario
 {
@@ -90,6 +92,9 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         [Display(Name = "Estado")]
         public string estado { get; set; }
+
+        
+        
         
     }
 
@@ -175,6 +180,11 @@ namespace Cafeteria.Models.Administracion.Usuario
         public List<Ubigeo.Ubigeo.Departamento> Departamentos { get; set; }
         public List<PerfilUsuarioBean> PerfilesUsuario { get; set; }
 
+
     }
+
+   
+
+
    
 }

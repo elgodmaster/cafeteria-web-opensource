@@ -50,7 +50,7 @@
 
                             @if(item.estado=="ACTIVO"){
                                 <a  ID = @item.ID class = "eliminar" href=""><img src="../../Content/images/icons/color/cross.png", alt="Delete" />Eliminar</a>
-                                <a href="@Url.Action("Horario", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Ver horario </a>  
+                                <a href="@Url.Action("verhorario", new { id = item.ID })"><img src="../../Content/images/icons/color/pencil.png", alt="Edit" />Ver horario </a>  
                                 
                             }
 

@@ -54,7 +54,16 @@ namespace Cafeteria.Models.Administracion
             usuarioService.actualizarusuario(usuario);
         }
 
-        
+        public void guardarhorario(UsuarioxSucursalBean usuario)
+        {
+            usuarioService.guardarhorario(usuario);
+        }
+
+        public UsuarioxSucursalBean obtenerhorario(String id)
+        {
+            return usuarioService.obtenerhorario(id);
+        }
+
         #endregion
 
         #region perfil

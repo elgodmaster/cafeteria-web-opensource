@@ -1,15 +1,13 @@
 ﻿@model Cafeteria.Models.Administracion.Usuario.UsuarioxSucursalBean
-
 @{
-    ViewBag.Title = "Horario";
+    ViewBag.Title = "horario";
 }
-
-<h2>Horario</h2>
+<h2>Horario del Personal</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm("Horario", "Usuario", FormMethod.Post, new { @class = "form" }))
+@using (Html.BeginForm("modificarHorario", "Usuario", FormMethod.Post, new { @class = "form" }))
 {
     <fieldset>
         <div class = "widget" >
@@ -29,20 +27,18 @@
 
             <div class="formRow">
                <span>Sucursal</span>                             
-                
-                <div class = "formRight" >
-                <div class = "selector">@Html.DropDownListFor(modelitem => modelitem.idsucursal, Model.listaTipo)</div></div>
+                <div class = "formRight" > @Html.DisplayFor(model => model.sucursal) </div>
                 <div class = "clear" ></div>
             </div>
 
             <div class = "formRow" > @Html.LabelFor( model => model.fechaIngreso ) 
-                 <div class = "formRight" >  @Html.TextBoxFor(model => model.fechaIngreso, new { @class = "datepicker" })   </div>
+                 <div class = "formRight" >  @Html.DisplayFor(model => model.fechaIngreso)   </div>
                 <div class = "clear" ></div>
             </div>
 
             <div class = "formRow" > Fecha Fin
                 <div class = "formRight" >
-                       @Html.TextBoxFor(model => model.fechaFin, new {@class="datepicker" })
+                       @Html.DisplayFor(model => model.fechaFin)
                 </div>
                 <div class = "clear" ></div>
             </div>
@@ -51,6 +47,15 @@
         </div>
         
         </fieldset>
+    
+    if (Model.dia.Count <= 0)
+    {
+        <p>
+        <a href="@Url.Action("Horario", new { id = Model.ID })"><img src="../../Content/images/icons/color/plus.png", alt="Create" />Añadir horario</a>
+        </p>
+    }
+    else
+    {
     
         <div class="widget">
           <div class="title"><img src="../../Content/images/icons/dark/frames.png" alt="" class="titleIcon" /><h6>Asignar horario</h6></div>
@@ -66,27 +71,32 @@
          
                 @for (int i=0; i<Model.dia.Count;i++)
                 {
-
-                       <tr >
-                            <td>@Html.DisplayFor(model => Model.dia[i])</td>@Html.HiddenFor(model => Model.dia[i])
-                            <td>@Html.TextBoxFor(model => Model.horaInicio[i], new { @class="timepicker"})</td>
-                            <td>@Html.TextBoxFor(model => Model.horaFin[i], new { @class = "timepicker" })</td>
+                    if (!string.IsNullOrEmpty(Model.dia[i]))
+                    {
+                        <tr >
+                            <td>@Html.DisplayFor(model => Model.dia[i])</td>
+                            <td>@Html.DisplayFor(model => Model.horaInicio[i])</td>
+                            <td>@Html.DisplayFor(model => Model.horaFin[i])</td>
                 
                        </tr>
-        
+                    }
+
+
                 }
                
             </tbody>
         </table>
       </div>
+        <p>
+         <input type="submit" value="Modificar" class = "redB" />  
+         </p>
+    }
 
     
     
     
     <p>
-        <input type="submit" value="Crear" class = "redB" />        
         <a href="javascript:history.back()">Regresar</a>
     </p>
 }
-
 

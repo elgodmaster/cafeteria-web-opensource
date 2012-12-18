@@ -9,10 +9,9 @@ namespace Cafeteria.Controllers.Administracion
 {
     public class LogoutController : Controller
     {
-        public ActionResult Index()//int id)
+        public ActionResult Index()
         {
             FormsAuthentication.SignOut();
-            //new UsuarioFacade().logout(id);
             return RedirectToAction("Index", "Login");
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using Cafeteria.Models.Administracion.Usuario;
 
 namespace Cafeteria.Models.Administracion.Sucursal
 {
@@ -50,6 +51,9 @@ namespace Cafeteria.Models.Administracion.Sucursal
         public List<Ubigeo.Ubigeo.Departamento> departamentos { get; set; }
 
         public List<sucursalproductoBean> listaProductos { get; set; }
+
+        public List<UsuarioBean> listadepersonal { get; set; }
+
     }
 
 

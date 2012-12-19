@@ -9,6 +9,7 @@ using log4net;
 using Cafeteria.Models.Administracion;
 using Cafeteria.Models.Venta.Producto;
 using Cafeteria.Models.Venta;
+using Cafeteria.Models.Administracion.Usuario;
 
 namespace Cafeteria.Controllers.Administracion
 {
@@ -18,6 +19,7 @@ namespace Cafeteria.Controllers.Administracion
         administracionfacade admin = new administracionfacade();
         ventafacade ventafacede = new ventafacade();
 
+        #region Sucursal
         #region Crear
         public ActionResult Create()
         {
@@ -80,6 +82,7 @@ namespace Cafeteria.Controllers.Administracion
             }
         }
         #endregion
+
         #region eliminar
         public ActionResult Delete(string ID)
         {
@@ -95,6 +98,7 @@ namespace Cafeteria.Controllers.Administracion
 
         #endregion
 
+        #endregion 
 
         #region listaproductos
 
@@ -197,6 +201,81 @@ namespace Cafeteria.Controllers.Administracion
             }
             return false;
         }
+        #endregion
+
+
+        #region listadepersonal
+
+        public ActionResult Listadesucursal()
+        {
+            List<SucursalBean> suc = admin.listasucursal();
+            return View(suc);
+        }
+
+        public ActionResult verPersonal(string id)
+        {
+            SucursalBean suc = admin.buscarSucursal(id);
+            List<UsuarioBean> list = admin.obtenerlistapersonal(id);//new List<UsuarioBean>(); //personal de la sucursal con id
+            suc.listadepersonal = new List<UsuarioBean>();
+            if (list.Count > 0) ViewBag.estado = 0;
+            else ViewBag.estado = 1;
+
+            for(int i=0;i<list.Count;i++)
+            {
+                UsuarioBean usua= admin.buscarusuario(list[i].ID);
+                suc.listadepersonal.Add(usua);
+                
+            }
+            return View(suc);
+        }
+
+        public ActionResult Modificarpersonal(SucursalBean suc)
+        {
+
+            return View(suc);
+
+        }
+
+        public ActionResult Modificarpersonal2(SucursalBean suc)
+        {
+
+            admin.eliminarpersonaldesucu(suc);
+            return RedirectToAction("verPersonal/" + suc.id, "Sucursal");
+
+        }
+
+
+        public ActionResult añadirpersonal(string id)
+        {
+            SucursalBean suc = admin.buscarSucursal(id);
+            List<UsuarioBean> list = admin.obtenerlistapersonal(id);
+            List<UsuarioBean> listatotal = admin.ListarPersonal("", "", "", "");
+            suc.listadepersonal = listatotal;
+            int contador = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                for (int j = 0; j < listatotal.Count; j++)
+                {
+                    if (listatotal[j].ID == list[i].ID)
+                    {
+                        listatotal[j].estaen = true; contador++;
+                    }
+                }
+            }
+
+            if (contador > 0) ViewBag.estado = 0;
+            else ViewBag.estado = 1;
+
+            return View(suc);
+        }
+
+        [HttpPost]
+        public ActionResult añadirpersonal(SucursalBean suc)
+        {
+            admin.guardarnuevopersonal(suc);
+            return RedirectToAction("verPersonal/" + suc.id, "Sucursal");
+        }
+
         #endregion
 
     }

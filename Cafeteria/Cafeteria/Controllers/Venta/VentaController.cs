@@ -40,10 +40,16 @@ namespace Cafeteria.Controllers.Venta
 
         #region registrarventa
 
-        public ActionResult Create()
+        public ActionResult Index()
+        {
+            List<SucursalBean> suc = adminfacade.listasucursal();
+            return View(suc);
+        }
+
+        public ActionResult Create(string id)
         {
             VentaBean ventas = new VentaBean();
-            ventas.idSucursal = "SUCU0004";
+            ventas.idSucursal = id;
             SucursalBean suc=adminfacade.buscarSucursal(ventas.idSucursal);
             ventas.nombresucursal = suc.nombre;
 
@@ -66,10 +72,24 @@ namespace Cafeteria.Controllers.Venta
                 }
             }
             return View(ventas);
-        } 
+        }
 
-        [HttpPost]
-        public ActionResult Create(VentaBean venta)
+
+        public ActionResult Create2(VentaBean venta)
+        {
+            try
+            {
+                return View(venta);
+                //return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        
+        public ActionResult Registrar(VentaBean venta)
         {
             try
             {

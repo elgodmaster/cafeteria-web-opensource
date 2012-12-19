@@ -44,6 +44,7 @@ namespace Cafeteria.Models.Administracion.Usuario
         public List<string> perfilesDelUsuario { get; set; }
 
         public SelectList usuarioList { get; set; }
+
         public List<PerfilUsuarioBean> listaPerfilUsuario { get; set; }
 
         public SelectList listaTipo { get; set; }

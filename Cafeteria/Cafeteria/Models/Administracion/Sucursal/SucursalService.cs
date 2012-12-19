@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Cafeteria.Models.Administracion.Usuario;
 
 namespace Cafeteria.Models.Administracion.Sucursal
 {
@@ -51,6 +52,22 @@ namespace Cafeteria.Models.Administracion.Sucursal
         public void modificarproductos(SucursalBean suc)
         {
             sucursalDAo.modificarproductos(suc);
+        }
+
+
+        public List<UsuarioBean> obtenerlistapersonal(string id)
+        {
+            return sucursalDAo.obtenerlistapersonal(id);
+        }
+
+        public void eliminarpersonaldesucu(SucursalBean suc)
+        {
+            sucursalDAo.eliminarpersonaldesucu(suc);
+        }
+
+        public void guardarnuevopersonal(SucursalBean suc)
+        {
+            sucursalDAo.guardarnuevopersonal(suc);
         }
 
     }

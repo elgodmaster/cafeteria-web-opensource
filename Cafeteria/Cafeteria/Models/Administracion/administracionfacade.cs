@@ -142,5 +142,30 @@ namespace Cafeteria.Models.Administracion
 
         #endregion
 
+        #region Sucursalxpersonal
+
+        public List<UsuarioBean> obtenerlistapersonal(string id)
+        {
+            return sucursalservice.obtenerlistapersonal(id);
+        }
+
+        public void eliminarpersonaldesucu(SucursalBean suc)
+        {
+            sucursalservice.eliminarpersonaldesucu(suc);
+        }
+
+        public void guardarnuevopersonal(SucursalBean suc)
+        {
+            sucursalservice.guardarnuevopersonal(suc);
+        }
+
+        public string obtenersucursal(string idusua)
+        {
+            return usuarioService.obtenersucursal(idusua);
+        }
+        
+
+        #endregion
+
     }
 }

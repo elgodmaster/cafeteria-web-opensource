@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Configuration;
 using log4net;
 using System.Data.SqlClient;
+using Cafeteria.Models.Administracion.Usuario;
 
 namespace Cafeteria.Models.Administracion.Sucursal
 {
@@ -361,6 +362,124 @@ namespace Cafeteria.Models.Administracion.Sucursal
             catch (Exception ex)
             {
                 log.Error("Modificar IngredientesxSucursal(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+
+        public List<UsuarioBean> obtenerlistapersonal(string id)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<UsuarioBean> listapers = new List<UsuarioBean>();
+                string estado = "Activo";
+                objDB.Open();
+                String strQuery = "SELECT * FROM Sucursal_x_Usuario where idCafeteria=@id and estado=@estado";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@id", id);
+                Utils.agregarParametro(objQuery, "@estado", estado);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        UsuarioBean usuar = new UsuarioBean();
+                        usuar.ID = Convert.ToString(objDataReader["idUsuario"]);
+                        listapers.Add(usuar);
+                    }
+                }
+
+                return listapers;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Sucursal_personal(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+        }
+
+
+        public void eliminarpersonaldesucu(SucursalBean suc)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                string estado = "Inactivo";
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < suc.listadepersonal.Count; i++)
+                {
+                    if (suc.listadepersonal[i].estadosucur)
+                    {
+                        String strQuery = "Update Sucursal_x_Usuario SET estado = @estado where idCafeteria=@id and idUsuario=@idusu ";
+
+                        SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                        Utils.agregarParametro(objQuery, "@id", suc.id);
+                        Utils.agregarParametro(objQuery, "@idusu", suc.listadepersonal[i].ID);
+                        Utils.agregarParametro(objQuery, "@estado", estado);
+                        objQuery.ExecuteNonQuery();
+                    } 
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Eliminar IngredientesxSucursal(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+
+        public void guardarnuevopersonal(SucursalBean suc)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                string estado = "Activo";
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < suc.listadepersonal.Count; i++)
+                {
+                    if (suc.listadepersonal[i].estadosucur)
+                    {
+                        String strQuery = "Insert into Sucursal_x_Usuario (idCafeteria, idUsuario, estado) values (@id, @idusu, @estado)  ";
+
+                        SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                        Utils.agregarParametro(objQuery, "@id", suc.id);
+                        Utils.agregarParametro(objQuery, "@idusu", suc.listadepersonal[i].ID);
+                        Utils.agregarParametro(objQuery, "@estado", estado);
+                        objQuery.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Eliminar IngredientesxSucursal(EXCEPTION): ", ex);
                 throw ex;
             }
             finally

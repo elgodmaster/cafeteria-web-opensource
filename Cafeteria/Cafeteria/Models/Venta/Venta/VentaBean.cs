@@ -14,6 +14,10 @@ namespace Cafeteria.Models.Venta.Venta
 
         public DateTime fecharegistro { get; set; }
 
+        public string nombrepersona { get; set; }
+        public string dnipersona { get; set; }
+
+
         public string idSucursal { get; set; }
         public string nombresucursal { get; set; }
         public List<VentaxProductoBean> listaproductos { get;set;}

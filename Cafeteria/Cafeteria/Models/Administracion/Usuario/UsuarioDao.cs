@@ -377,6 +377,8 @@ namespace Cafeteria.Models.Administracion.Usuario
         {
             SqlConnection objDB = null;
             UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
+            usua.dia = new List<string>();
+            
             try
             {
                 objDB = new SqlConnection(cadenaDB);
@@ -441,7 +443,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                     usua.horaFin = new List<string>();
                     while (objDataReader.Read())
                     {
-                        objDataReader.Read();
+                        
                         usua.dia.Add(Convert.ToString(objDataReader["diasemana"]));
                         usua.horaInicio.Add(Convert.ToString(objDataReader["horaentrada"]));
                         usua.horaFin.Add(Convert.ToString(objDataReader["horasalida"]));
@@ -460,6 +462,45 @@ namespace Cafeteria.Models.Administracion.Usuario
                 }
             }
             return usua;
+        }
+
+        public string obtenersucursal(string idusua)
+        {
+            SqlConnection objDB = null;
+            string id = "vacio";
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                string estado = "Activo";
+                objDB.Open();
+                String strQuery = "SELECT * FROM Sucursal_x_Usuario where idUsuario=@id and estado=@estado";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@id", idusua);
+                Utils.agregarParametro(objQuery, "@estado", estado);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        id = Convert.ToString(objDataReader["idCafeteria"]);
+                    }
+                }
+
+                
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Sucursal_personal(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            return id;
         }
 
         #endregion

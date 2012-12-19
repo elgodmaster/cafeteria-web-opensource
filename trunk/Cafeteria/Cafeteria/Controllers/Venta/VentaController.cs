@@ -46,6 +46,7 @@ namespace Cafeteria.Controllers.Venta
             return View(suc);
         }
 
+
         public ActionResult Create(string id)
         {
             VentaBean ventas = new VentaBean();
@@ -71,6 +72,10 @@ namespace Cafeteria.Controllers.Venta
                     }
                 }
             }
+            for (int i = 0; i < ventas.listaproductos.Count; i++)
+            {
+                ventas.listaproductos[i].preciounit2 = Convert.ToString(ventas.listaproductos[i].preciouniario);
+            }
             return View(ventas);
         }
 
@@ -79,8 +84,17 @@ namespace Cafeteria.Controllers.Venta
         {
             try
             {
+                decimal total=0;
+                for (int i = 0; i < venta.listaproductos.Count; i++)
+                {
+                    venta.listaproductos[i].subtotal = Convert.ToDecimal(venta.listaproductos[i].preciounit2) * venta.listaproductos[i].cantidadsolicitada;
+                    venta.listaproductos[i].preciosubtotal = Convert.ToString(venta.listaproductos[i].subtotal);
+                    total += venta.listaproductos[i].subtotal;
+                }
+                venta.totalventa = total;
+                venta.totalventa2 = Convert.ToString(total);
+
                 return View(venta);
-                //return RedirectToAction("Index");
             }
             catch
             {
@@ -100,6 +114,33 @@ namespace Cafeteria.Controllers.Venta
             {
                 return View();
             }
+        }
+
+        public ActionResult Details(string id)
+        {
+            VentaBean ventas = ventfacade.buscarventa(id);
+            SucursalBean suc = adminfacade.buscarSucursal(ventas.idSucursal);
+            ventas.nombresucursal = suc.nombre;
+            List<ProductoBean> listproductos = ventfacade.ListarProducto("", "");
+
+            for (int i = 0; i < ventas.listaproductos.Count; i++)
+            {
+                for (int j = 0; j < listproductos.Count; j++)
+                {
+                    if (listproductos[j].id.CompareTo(ventas.listaproductos[i].id) == 0)
+                    {
+                        ventas.listaproductos[i].nombre = listproductos[j].nombre;
+                        ventas.listaproductos[i].nombreTipo = listproductos[j].nombreTipo;
+                        ventas.listaproductos[i].idTipo = listproductos[j].idTipo;
+                        //ventas.listaproductos[i].preciounit2 = Convert.ToString(ventas.listaproductos[i].preciouniario);
+                    }
+                }
+            }
+            for (int i = 0; i < ventas.listaproductos.Count; i++)
+            {
+                ventas.listaproductos[i].preciouniario = ventas.listaproductos[i].subtotal/ (ventas.listaproductos[i].cantidadsolicitada);
+            }
+            return View(ventas);
         }
 
         #endregion

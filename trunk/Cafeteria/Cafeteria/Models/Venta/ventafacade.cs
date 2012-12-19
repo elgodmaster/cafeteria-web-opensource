@@ -78,6 +78,10 @@ namespace Cafeteria.Models.Venta
             ventaservice.registrarVenta(ven);
         }
 
+        public VentaBean buscarventa(string id)
+        {
+            return ventaservice.buscarventa(id);
+        }
         #endregion
 
 

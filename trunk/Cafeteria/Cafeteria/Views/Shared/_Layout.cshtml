@@ -83,10 +83,11 @@
 
           <ul id="menu" class="nav">
 
-             <li class="dash" id = "menu1"><a href="#" title="" class="exp"><span>Sucursal</span><strong>2</strong></a>
+             <li class="dash" id = "menu1"><a href="#" title="" class="exp"><span>Sucursal</span><strong>3</strong></a>
                     <ul class="sub">
                         <li>@Html.ActionLink("Registrar Sucursal", "Create", "Sucursal")</li>
                         <li>@Html.ActionLink("Lista de Sucursales", "Index", "Sucursal")</li>
+                        <li>@Html.ActionLink("Asignar Personal", "Listadesucursal", "Sucursal")</li>
                     </ul>
               </li>
 
@@ -101,7 +102,7 @@
 
              <li class="dash" id = "menu3"><a href="#" title="" class="exp"><span>Venta</span><strong>2</strong></a>
                     <ul class="sub">
-                        <li>@Html.ActionLink("Registrar Venta", "Create", "Venta")</li>
+                        <li>@Html.ActionLink("Registrar Venta", "Index", "Venta")</li>
                         <li>@Html.ActionLink("Buscar ventas realizadas", "Buscar", "Venta")</li>
                         
                     </ul>

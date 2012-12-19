@@ -16,8 +16,8 @@
             <div class = "title" >
                 <img src="@Url.Content("~/Content/images/icons/dark/list.png")"  class="titleIcon">
                 <h6>@ViewBag.Title</h6>
-            </div>
-            <div class = "formRow" >  @Html.LabelFor( model => model.nombres )
+            </div> 
+            <div class = "formRow" >  @Html.LabelFor( model => model.nombres )  @Html.HiddenFor( model => model.ID )
                 <div class = "formRight" > @Html.DisplayFor( model => model.nombres )   </div>
                 <div class = "clear" ></div>
             </div>
@@ -29,9 +29,7 @@
 
             <div class="formRow">
                <span>Sucursal</span>                             
-                
-                <div class = "formRight" >
-                <div class = "selector">@Html.DropDownListFor(modelitem => modelitem.idsucursal, Model.listaTipo)</div></div>
+                <div class = "formRight" > @Html.DisplayFor(model => model.sucursal) </div>
                 <div class = "clear" ></div>
             </div>
 

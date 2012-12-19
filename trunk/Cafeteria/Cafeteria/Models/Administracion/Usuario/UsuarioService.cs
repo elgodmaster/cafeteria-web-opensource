@@ -52,6 +52,12 @@ namespace Cafeteria.Models.Administracion.Usuario
             return usuarioDao.obtenerhorario(id);
         }
 
+        public string obtenersucursal(string idusua)
+        {
+            return usuarioDao.obtenersucursal(idusua);
+        }
+
+
         #endregion
 
         #region perfil

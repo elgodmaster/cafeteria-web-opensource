@@ -8,6 +8,7 @@ using log4net;
 using Cafeteria.Models;
 using System.Web.Security;
 using Cafeteria.Models.Administracion;
+using Cafeteria.Models.Administracion.Sucursal;
 
 
 namespace Cafeteria.Controllers.Administracion
@@ -42,9 +43,18 @@ namespace Cafeteria.Controllers.Administracion
 
         public ActionResult verhorario(String id)
         {
-
+            UsuarioBean usarios = admifacade.buscarusuario(id);
             UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
             usua = admifacade.obtenerhorario(id);
+            usua.ID = id;
+            usua.nombres = usarios.nombres;
+            usua.nroDocumento = usarios.nroDocumento;
+            usua.idsucursal = admifacade.obtenersucursal(id);
+            if (usua.idsucursal.CompareTo("vacio") != 0)
+            {
+                SucursalBean suc = admifacade.buscarSucursal(usua.idsucursal);
+                usua.sucursal = suc.nombre;
+            }
             return View(usua);
         }
 
@@ -55,6 +65,14 @@ namespace Cafeteria.Controllers.Administracion
             usuario = admifacade.buscarusuario(id);
             usua.ID = usuario.ID;
             usua.nroDocumento = usuario.nroDocumento;
+
+            usua.idsucursal = admifacade.obtenersucursal(id);
+            if (usua.idsucursal.CompareTo("vacio") != 0)
+            {
+                SucursalBean suc = admifacade.buscarSucursal(usua.idsucursal);
+                usua.sucursal = suc.nombre;
+            }
+
             usua.nombres = usuario.nombres +" "+ usuario.apPat + " "+usuario.apMat;
             usua.dia = new List<string>();
             usua.horaFin = new List<string>();
@@ -84,7 +102,38 @@ namespace Cafeteria.Controllers.Administracion
 
         public ActionResult modificarHorario(UsuarioxSucursalBean usuario)
         {
-            
+            List<String> dia = new List<string>();
+            List<String> horaini = new List<string>();
+            List<String> horafin = new List<string>();
+            dia.Add("Lunes");
+            dia.Add("Martes");
+            dia.Add("Miercoles");
+            dia.Add("Jueves");
+            dia.Add("Viernes");
+            dia.Add("Sabado");
+            dia.Add("Domingo");
+
+            for (int i = 0; i < dia.Count; i++)
+            {
+                for (int j = 0; j < usuario.dia.Count; j++)
+                {
+                    if (dia[i].CompareTo(usuario.dia[j]) == 0)
+                    {
+                       horaini.Add(usuario.horaInicio[i]);
+                       horafin.Add(usuario.horaFin[i]);
+                    }
+                    else
+                    {
+
+                        horaini.Add("");
+                        horafin.Add("");
+                    }
+                }
+            }
+
+            usuario.dia = dia;
+            usuario.horaInicio = horaini;
+            usuario.horaFin = horafin;
             return View(usuario);
 
         }
@@ -92,6 +141,7 @@ namespace Cafeteria.Controllers.Administracion
         public ActionResult modificarHorario2(UsuarioxSucursalBean usuario)
         {
 
+            
             return RedirectToAction("verhorario/" + usuario.ID, "Usuario");
 
         }

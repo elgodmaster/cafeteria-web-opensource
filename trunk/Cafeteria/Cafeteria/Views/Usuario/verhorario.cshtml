@@ -10,35 +10,35 @@
 @using (Html.BeginForm("modificarHorario", "Usuario", FormMethod.Post, new { @class = "form" }))
 {
     <fieldset>
-        <div class = "widget" >
+        <div class = "widget" >  @Html.HiddenFor(model => model.ID)
             <div class = "title" >
                 <img src="@Url.Content("~/Content/images/icons/dark/list.png")"  class="titleIcon">
                 <h6>@ViewBag.Title</h6>
             </div>
-            <div class = "formRow" >  @Html.LabelFor( model => model.nombres )
-                <div class = "formRight" > @Html.DisplayFor( model => model.nombres )   </div>
+            <div class = "formRow" >  @Html.LabelFor(model => model.nombres)
+                <div class = "formRight" > @Html.DisplayFor(model => model.nombres)   </div>@Html.HiddenFor(model => model.nombres) 
                 <div class = "clear" ></div>
             </div>
 
-            <div class = "formRow" > @Html.LabelFor( model => model.nroDocumento )
-                <div class = "formRight" > @Html.DisplayFor(model => model.nroDocumento) </div>
+            <div class = "formRow" > @Html.LabelFor(model => model.nroDocumento)
+                <div class = "formRight" > @Html.DisplayFor(model => model.nroDocumento) </div> @Html.HiddenFor(model => model.nroDocumento)
                 <div class = "clear" ></div>
             </div>
 
             <div class="formRow">
                <span>Sucursal</span>                             
-                <div class = "formRight" > @Html.DisplayFor(model => model.sucursal) </div>
+                <div class = "formRight" > @Html.DisplayFor(model => model.sucursal) </div> @Html.HiddenFor(model => model.sucursal)
                 <div class = "clear" ></div>
             </div>
 
-            <div class = "formRow" > @Html.LabelFor( model => model.fechaIngreso ) 
-                 <div class = "formRight" >  @Html.DisplayFor(model => model.fechaIngreso)   </div>
+            <div class = "formRow" > @Html.LabelFor(model => model.fechaIngreso) 
+                 <div class = "formRight" >  @Html.DisplayFor(model => model.fechaIngreso)   </div> @Html.HiddenFor(model => model.fechaIngreso) 
                 <div class = "clear" ></div>
             </div>
 
             <div class = "formRow" > Fecha Fin
                 <div class = "formRight" >
-                       @Html.DisplayFor(model => model.fechaFin)
+                       @Html.DisplayFor(model => model.fechaFin)   @Html.HiddenFor(model => model.fechaFin)
                 </div>
                 <div class = "clear" ></div>
             </div>
@@ -69,16 +69,22 @@
                 </thead>
             <tbody>
          
-                @for (int i=0; i<Model.dia.Count;i++)
+                @for (int i = 0; i < Model.dia.Count; i++)
                 {
                     if (!string.IsNullOrEmpty(Model.dia[i]))
                     {
                         <tr >
-                            <td>@Html.DisplayFor(model => Model.dia[i])</td>
-                            <td>@Html.DisplayFor(model => Model.horaInicio[i])</td>
-                            <td>@Html.DisplayFor(model => Model.horaFin[i])</td>
+                            <td>@Html.DisplayFor(model => Model.dia[i])</td>@Html.HiddenFor(model => Model.dia[i])
+                            <td>@Html.DisplayFor(model => Model.horaInicio[i])</td>@Html.HiddenFor(model => Model.horaInicio[i])
+                            <td>@Html.DisplayFor(model => Model.horaFin[i])</td>@Html.HiddenFor(model => Model.horaFin[i])
                 
                        </tr>
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(model => Model.dia[i])
+                           @Html.HiddenFor(model => Model.horaInicio[i])
+                           @Html.HiddenFor(model => Model.horaFin[i])
                     }
 
 

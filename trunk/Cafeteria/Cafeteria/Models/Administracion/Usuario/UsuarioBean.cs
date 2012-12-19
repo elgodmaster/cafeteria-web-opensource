@@ -179,7 +179,8 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         public List<Ubigeo.Ubigeo.Departamento> Departamentos { get; set; }
         public List<PerfilUsuarioBean> PerfilesUsuario { get; set; }
-
+        public Boolean estadosucur { get; set; }
+        public Boolean estaen { get; set; }
 
     }
 

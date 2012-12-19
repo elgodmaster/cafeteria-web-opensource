@@ -148,8 +148,171 @@ namespace Cafeteria.Models.Venta.Venta
         public void registrarVenta(VentaBean ven)
         {
 
+            SqlConnection objDB = null;
+            int i = Utils.cantidad("Venta") + 1;
+            string ID = "VENT00";//8caracteres-4letras-4#
+            if (i < 10) ven.idventa = ID + "0" + Convert.ToString(i);
+            else ven.idventa = ID + Convert.ToString(i);
+            string estado = "Registrado";
+            try
+            {
+                if (Convert.ToDecimal(ven.totalventa2) > 0)
+                {
+                    objDB = new SqlConnection(cadenaDB);
+                    objDB.Open();
+                    String strQuery = "Insert into Venta (idVenta,idCafeteria,fechaventa,estado, montototal, nombrecliente, dnicliente ) values " +
+                                        "(@id,@idCafeteria,@fecha,@estado,@montototal, @nomb, @dni)";
+
+                    SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                    Utils.agregarParametro(objQuery, "@id", ven.idventa);
+                    Utils.agregarParametro(objQuery, "@idCafeteria", ven.idSucursal);
+                    Utils.agregarParametro(objQuery, "@fecha", ven.fecharegistro);
+                    Utils.agregarParametro(objQuery, "@estado", estado);
+                    Utils.agregarParametro(objQuery, "@montototal", Convert.ToDecimal(ven.totalventa2));
+                    Utils.agregarParametro(objQuery, "@nomb", ven.nombrepersona);
+                    Utils.agregarParametro(objQuery, "@dni", ven.dnipersona);
+                    objQuery.ExecuteNonQuery();
+                    this.registrardetalle(ven);
+                }
+
+            }
+            catch (Exception e)
+            {
+                log.Error("Registrar_venta(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            
         }
 
+        private void registrardetalle(VentaBean ven)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < ven.listaproductos.Count; i++)
+                {
+                    if (ven.listaproductos[i].cantidadsolicitada>0)
+                    {
+
+                        String strQuery = "Insert Into  VentaDetalle (idVenta,idProducto,cantidad,subtotal) values(@idven, @idprod, @cant,@precio)";
+                        SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                        BaseDatos.agregarParametro(objQuery, "@idven", ven.idventa);
+                        BaseDatos.agregarParametro(objQuery, "@idprod", ven.listaproductos[i].id);
+                        BaseDatos.agregarParametro(objQuery, "@cant", ven.listaproductos[i].cantidadsolicitada);
+                        BaseDatos.agregarParametro(objQuery, "@precio", Convert.ToDecimal(ven.listaproductos[i].preciosubtotal));
+                        objQuery.ExecuteNonQuery();
+                    }
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                log.Error("getalmacen(EXCEPTION):  ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        public VentaBean buscarventa(string idventa)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT * FROM Venta where idVenta= @id ";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objQuery, "@id", idventa);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                VentaBean venta = new VentaBean();
+
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+
+                        venta.idventa = Convert.ToString(objDataReader["idVenta"]);
+                        venta.idSucursal = Convert.ToString(objDataReader["idCafeteria"]);
+                        venta.fecharegistro = Convert.ToDateTime(objDataReader["fechaventa"]);
+                        venta.totalventa = (decimal)(objDataReader["montototal"]);
+                        venta.nombrepersona = Convert.ToString(objDataReader["nombrecliente"]);
+                        venta.dnipersona = Convert.ToString(objDataReader["dnicliente"]);
+                    }
+                }
+                venta.listaproductos = this.retornadetalle(idventa);
+
+                return venta;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista de ordenes de compra(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        public List<VentaxProductoBean> retornadetalle(string idventa)
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<VentaxProductoBean> Listaproduc = new List<VentaxProductoBean>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM VentaDetalle where idVenta= @id ";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                BaseDatos.agregarParametro(objQuery, "@id", idventa);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+
+                        VentaxProductoBean detalle = new VentaxProductoBean();
+                        detalle.id = Convert.ToString(objDataReader["idProducto"]);
+                        detalle.cantidadsolicitada = Convert.ToInt32(objDataReader["cantidad"]);
+                        detalle.subtotal = Convert.ToDecimal(objDataReader["subtotal"]);
+
+                        Listaproduc.Add(detalle);
+                    }
+                }
+
+                return Listaproduc;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista de ordenes de compra(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
 
     }
 

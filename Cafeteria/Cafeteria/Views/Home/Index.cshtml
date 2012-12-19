@@ -1,10 +1,98 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+ 
+    <script language="javascript" type="text/javascript">
+        //FECHA ACTUAL
+        function obtiene_fecha() {
 
-<h2>@ViewBag.Message</h2>
+            var fecha_actual = new Date()
 
+            var dia = fecha_actual.getDate()
+            var mes = fecha_actual.getMonth() + 1
+            var anio = fecha_actual.getFullYear()
 
-<p>
-   GG 
-</p>
+            if (mes < 10)
+                mes = '0' + mes
+
+            if (dia < 10)
+                dia = '0' + dia
+
+            return (dia + "/" + mes + "/" + anio)
+        }
+
+        function MostrarFecha() {
+            document.write(obtiene_fecha())
+        }
+        
+    </script>
+</head>
+
+<body style=" height:800px;text-align:center">
+        
+   
+    <div id = "idUsuario" ></div>
+    <!-- Right side -->
+    <div id="rightSide" style=" text-align:right; height:900px;  width:900px;">
+        <!-- Top fixed navigation -->
+     <div class="titleArea">
+        <div class="wrapper">            <div class="pageTitle">                <h5>Cafeteria</h5>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="line"></div>
+
+    <div>            </div>
+        <div style=" text-align:center">
+            <div class="widget">       
+                <ul class="tabs">                   <li><a href="#tab1">Sucursales</a></li>                   <li><a href="#tab2">Productos</a></li>
+                </ul>
+                <div class="tab_container">
+                    <div id="tab1" class="tab_content">                        <div>                        La cadena de cafeterias cuenta con diversos servicios en donde el usuario puede encontrar diferentes productos que ofrecemos
+                        </div>
+
+                            <img src="http://conacyempuebla.files.wordpress.com/2011/09/hotel.jpg"  title="Habitaciones amplias" style=" text-align:center; width:230px; height:300px"  />
+                             &nbsp&nbsp&nbsp&nbsp&nbsp 
+                            <img src="http://www.allcretehotels.com/hotel/hotels/elounda_beach_hotel_restaurant.jpg"  title="Lujosos Restaurantes" style=" text-align:center; width:230px; height:300px"  />
+                   
+                        </div>
+                        
+                    <div id="tab2" class="tab_content">                         <div>                        Actualmente se cuenta con diversos Sucursales, que estan ubicados a                        nivel Nacional 
+                        </div>
+
+                            <img src="http://media-cdn.tripadvisor.com/media/photo-s/01/26/4d/9e/vista-del-hotel-de-noche.jpg"  title="Hotel1" style=" text-align:center; width:230px; height:300px"  />
+                             &nbsp&nbsp&nbsp&nbsp&nbsp 
+                            <img src="http://farm3.static.flickr.com/2651/3951566912_5d0b2ec603.jpg"  title="hotel2" style=" text-align:center; width:230px; height:300px"  />
+                    
+                   </div>
+                </div>	
+                <div class="clear"></div>		 
+            </div>        </div>        <span class="balanceAmount">
+                <script language="JavaScript" type="text/javascript">
+                    MostrarFecha();
+                </script>
+            </span>
+        <!-- Main content wrapper -->
+        <div class="wrapper">
+
+            <p></p><p></p>
+          
+        </div>
+    
+        <!-- Footer line -->
+        <footer>
+            <div id="footer">
+                <div class="wrapper"></div>
+                <div style=" text-align:center">Av. Javier Prado  425 - 555  San Isidro, Lima - Peru; Telf.: (51-1) 999-9999;stardust@stardust.com.pe<strong>-</strong>reservas@stardust.com.pe</div>
+                
+
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
+

@@ -25,6 +25,10 @@ namespace Cafeteria.Models.Venta.Venta
             ventadao.registrarVenta(ven);
         }
 
+        public VentaBean buscarventa(string id)
+        {
+            return ventadao.buscarventa(id);
+        }
 
     }
 }

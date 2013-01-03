@@ -10,6 +10,7 @@ namespace Cafeteria.Models.Administracion.Usuario
     public class UsuarioService
     {
         UsuarioDao usuarioDao = new UsuarioDao();
+        static String clavegeneral = "";
         #region usuario
         public List<UsuarioBean> ListarPersonal(string nombre, string dni, string cargo, string sucursal)
         {
@@ -27,8 +28,12 @@ namespace Cafeteria.Models.Administracion.Usuario
 
         public void registrarpersonal(UsuarioBean usuario)
         {
-
+            MD5 md5Hash = MD5.Create();
+            string hash = GetMd5Hash(md5Hash, usuario.pass);
+            usuario.pass = hash;
             usuarioDao.registrarpersonal(usuario);
+
+
         }
 
         public void eliminarusuario(string ID)
@@ -129,11 +134,11 @@ namespace Cafeteria.Models.Administracion.Usuario
         {
             UsuarioBean usua= new UsuarioBean();
             if(verificar(usuario,pass)){
-                return usuarioDao.getLogin(usuario, pass);
+                return usuarioDao.getLogin(usuario, clavegeneral);
             }
             else{
                 
-                return usua;
+                return null;
             }
         }
 
@@ -172,6 +177,7 @@ namespace Cafeteria.Models.Administracion.Usuario
             }
 
             // Return the hexadecimal string. 
+            clavegeneral = sBuilder.ToString();
             return sBuilder.ToString();
         }
 

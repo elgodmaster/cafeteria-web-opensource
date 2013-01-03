@@ -149,6 +149,11 @@ namespace Cafeteria.Models.Administracion
             return sucursalservice.obtenerlistapersonal(id);
         }
 
+        public List<List<String>> obtenerlistapersonaltotal()
+        {
+            return sucursalservice.obtenerlistapersonaltotal();
+        }
+
         public void eliminarpersonaldesucu(SucursalBean suc)
         {
             sucursalservice.eliminarpersonaldesucu(suc);

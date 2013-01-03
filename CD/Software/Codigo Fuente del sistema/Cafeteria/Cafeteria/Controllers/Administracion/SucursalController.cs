@@ -250,20 +250,42 @@ namespace Cafeteria.Controllers.Administracion
             SucursalBean suc = admin.buscarSucursal(id);
             List<UsuarioBean> list = admin.obtenerlistapersonal(id);
             List<UsuarioBean> listatotal = admin.ListarPersonal("", "", "", "");
+            List<List<String>> listattotaldepersonal = admin.obtenerlistapersonaltotal();
+
             suc.listadepersonal = listatotal;
-            int contador = 0;
+            int contador = listatotal.Count;
             for (int i = 0; i < list.Count; i++)
             {
                 for (int j = 0; j < listatotal.Count; j++)
                 {
                     if (listatotal[j].ID == list[i].ID)
                     {
-                        listatotal[j].estaen = true; contador++;
+                        listatotal[j].estaen = true; contador--;
                     }
                 }
             }
+            contador++;
+            for (int i = 0; i < listattotaldepersonal.Count; i++)
+            {
+                for (int j = 0; j < listatotal.Count; j++)
+                {
+                    if (listatotal[j].ID == listattotaldepersonal[i][1])
+                    {
+                        listatotal[j].estaen = true; contador--;
+                    }
+                }
+            
+            }
+            int count = 0;
+            for (int j = 0; j < listatotal.Count; j++)
+            {
+                if (!listatotal[j].estaen)
+                {
+                    count++;
+                }
+            }
 
-            if (contador > 0) ViewBag.estado = 0;
+            if (count > 0) ViewBag.estado = 0;
             else ViewBag.estado = 1;
 
             return View(suc);

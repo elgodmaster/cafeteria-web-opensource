@@ -54,10 +54,15 @@ namespace Cafeteria.Models.Administracion.Sucursal
             sucursalDAo.modificarproductos(suc);
         }
 
-
+        #region personal
         public List<UsuarioBean> obtenerlistapersonal(string id)
         {
             return sucursalDAo.obtenerlistapersonal(id);
+        }
+
+        public List<List<String>> obtenerlistapersonaltotal()
+        {
+            return sucursalDAo.obtenerlistapersonaltotal();
         }
 
         public void eliminarpersonaldesucu(SucursalBean suc)
@@ -69,6 +74,6 @@ namespace Cafeteria.Models.Administracion.Sucursal
         {
             sucursalDAo.guardarnuevopersonal(suc);
         }
-
+        #endregion
     }
 }

@@ -15,7 +15,7 @@
             password: p
         };
         localStorage.setItem("usuario", u);
-        localStorage.setItem("pass", p);
+        
 
         $.ajax({
             type: "POST",

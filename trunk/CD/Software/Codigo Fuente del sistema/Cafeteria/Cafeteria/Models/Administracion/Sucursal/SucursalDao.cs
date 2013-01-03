@@ -15,6 +15,7 @@ namespace Cafeteria.Models.Administracion.Sucursal
         private static ILog log = LogManager.GetLogger(typeof(BaseDatos));
 
 
+        #region sucursal
         public void registrar(SucursalBean suc)
         {
             SqlConnection objDB = null;
@@ -254,7 +255,9 @@ namespace Cafeteria.Models.Administracion.Sucursal
                 }
             }
         }
+        #endregion
 
+        #region productos
         public List<sucursalproductoBean> obtenerproduct(string idsucursal)
         {
             List<sucursalproductoBean> suc = new List<sucursalproductoBean>();
@@ -372,8 +375,9 @@ namespace Cafeteria.Models.Administracion.Sucursal
                 }
             }
         }
+        #endregion
 
-
+        #region sucursalxpersonal
         public List<UsuarioBean> obtenerlistapersonal(string id)
         {
             SqlConnection objDB = null;
@@ -415,6 +419,47 @@ namespace Cafeteria.Models.Administracion.Sucursal
 
         }
 
+        public List<List<String>> obtenerlistapersonaltotal()
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<List<String>> listatotal = new List<List<String>>();
+                string estado = "Activo";
+                objDB.Open();
+                String strQuery = "SELECT * FROM Sucursal_x_Usuario where estado=@estado";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@estado", estado);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        List<String> usuar = new List<String>();
+                        String a,b;
+                        a = Convert.ToString(objDataReader["idCafeteria"]); usuar.Add(a);
+                        b = Convert.ToString(objDataReader["idUsuario"]); usuar.Add(b);
+                        listatotal.Add(usuar);
+                    }
+                }
+
+                return listatotal;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Sucursal_personal(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+        }
 
         public void eliminarpersonaldesucu(SucursalBean suc)
         {
@@ -428,12 +473,11 @@ namespace Cafeteria.Models.Administracion.Sucursal
                 {
                     if (suc.listadepersonal[i].estadosucur)
                     {
-                        String strQuery = "Update Sucursal_x_Usuario SET estado = @estado where idCafeteria=@id and idUsuario=@idusu ";
+                        String strQuery = "Delete Sucursal_x_Usuario where idCafeteria=@id and idUsuario=@idusu ";
 
                         SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                         Utils.agregarParametro(objQuery, "@id", suc.id);
                         Utils.agregarParametro(objQuery, "@idusu", suc.listadepersonal[i].ID);
-                        Utils.agregarParametro(objQuery, "@estado", estado);
                         objQuery.ExecuteNonQuery();
                     } 
 
@@ -452,8 +496,7 @@ namespace Cafeteria.Models.Administracion.Sucursal
                 }
             }
         }
-
-
+        
         public void guardarnuevopersonal(SucursalBean suc)
         {
             SqlConnection objDB = null;
@@ -490,6 +533,8 @@ namespace Cafeteria.Models.Administracion.Sucursal
                 }
             }
         }
+
+        #endregion
 
     }
 }

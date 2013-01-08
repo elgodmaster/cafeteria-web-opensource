@@ -14,11 +14,7 @@
     <fieldset>
         <div class="widget">
             <div class="title">
-                <h6>Sucursal</h6>
-            </div>
-            <div class="formRow"> @Html.LabelFor(model => model.id)
-                <div class=" formRight">  @Html.DisplayFor(model => model.id)  </div>@Html.HiddenFor(model => model.id) 
-                <div class="clear"></div>
+                <h6>Sucursal</h6> @Html.HiddenFor(model => model.id) 
             </div>
             <div class="formRow"> @Html.LabelFor(model => model.nombre)
                 <div class=" formRight">  @Html.DisplayFor(model => model.nombre)  </div>@Html.HiddenFor(model => model.nombre) 
@@ -42,11 +38,10 @@
     
 
     <p></p>
-
-    <div class="title"><h6>Lista de usuario</h6> </div>
-     <p>
     <a href="@Url.Action("añadirpersonal", new { id = Model.id })"><img src="../../Content/images/icons/color/plus.png", alt="Create" />Añadir más Personal</a>
-    </p>
+    
+   <div class="title"><h6>Lista de usuario</h6> </div>
+
         
          
      <div class="wrapper">

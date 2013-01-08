@@ -3,7 +3,6 @@
 <h2>Buscar Ingrediente</h2>
 
     
-
 @using (Html.BeginForm("Buscar", "Ingrediente", FormMethod.Post, new { @class = "form" }))
 {
     @Html.ValidationSummary(false)
@@ -19,16 +18,11 @@
         </div>
     </fieldset>
     <p>
-        <input type="submit" value="Buscar" class = "redB" />
-        <p></p>
-        <p></p>
+        <input type="submit" value="Buscar" class = "redB" /> <p></p>
         <a href="javascript:history.back()">Regresar</a> | @Html.ActionLink("Lista Ingredientes", "Index", "Ingredientes")
     </p>
 }
 
-
-
-<p></p>
 
 @if (ViewBag.estado != 0)
 {    
@@ -94,7 +88,7 @@
              </div>
             </tbody>
               
-              </table>                                                                                                                                                                                                <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
+              </table>   
                            
                
           </div>

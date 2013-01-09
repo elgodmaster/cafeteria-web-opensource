@@ -142,6 +142,9 @@
     <Compile Include="Models\Compra\Ordencompra\PagoProveedorBean.cs" />
     <Compile Include="Models\Compra\Ordencompra\Producto.cs" />
     <Compile Include="Models\Reporte.cs" />
+    <Compile Include="Models\Reportes\ReporteDao.cs" />
+    <Compile Include="Models\Reportes\reportefacade.cs" />
+    <Compile Include="Models\Reportes\ReporteService.cs" />
     <Compile Include="Models\Venta\Producto\ProductoBean.cs" />
     <Compile Include="Models\Venta\Producto\ProductoDao.cs" />
     <Compile Include="Models\Venta\Producto\ProductoService.cs" />

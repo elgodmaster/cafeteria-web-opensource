@@ -19,7 +19,7 @@ namespace Cafeteria.Controllers.Administracion
         }
         public ActionResult Resultado(string cargo, string fecha1, string fecha2, string idSucursal)
         {
-           
+              
             return View();
         }
 

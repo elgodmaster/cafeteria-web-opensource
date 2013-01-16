@@ -21,7 +21,7 @@ namespace Cafeteria.Controllers.Almacen
         }
         public ActionResult Resultado(string fecha1, string fecha2, string idSucursal)
         {
-            reportefacade.reportealmacen(fecha1, fecha2, idSucursal);
+            List<List<String>> lista = reportefacade.reportealmacen(fecha1, fecha2, idSucursal);
             return View();
         }
 

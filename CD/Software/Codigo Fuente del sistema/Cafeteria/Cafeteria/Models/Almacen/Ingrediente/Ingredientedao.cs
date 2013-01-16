@@ -79,7 +79,8 @@ namespace Cafeteria.Models.Almacen.Ingrediente
                 Utils.agregarParametro(objQuery, "@descripcion", prod.descripcion);
                 Utils.agregarParametro(objQuery, "@estado", prod.estado);
                 objQuery.ExecuteNonQuery();
-
+                this.insertaralmacenxingrediente(prod.id);
+                
             }
             catch (Exception e)
             {
@@ -90,10 +91,85 @@ namespace Cafeteria.Models.Almacen.Ingrediente
                 if (objDB != null)
                 {
                     objDB.Close();
+                    
                 }
             }
         }
-        
+
+        private void insertaralmacenxingrediente(string idingre)
+        {
+            SqlConnection objDB = null;
+            List<String> listalmacenes=this.listadealmacenes();
+            int stockact = 100, stockminimo=50, stockmaximo=500;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                
+                objDB.Open();
+                for (int i = 0; i < listalmacenes.Count(); i++)
+                {
+                    String strQuery = "Insert into Almacen_x_Producto (idAlmacen, idIngrediente, stockactual, stockminimo, stockmaximo) values  " +
+                                                        " ( @idalma, @ID, @stocka, @stockmin, @stockmaximo )";
+                    SqlCommand objquery = new SqlCommand(strQuery, objDB);
+                    BaseDatos.agregarParametro(objquery, "@ID", idingre);
+                    BaseDatos.agregarParametro(objquery, "@idalma", listalmacenes[i]);
+                    BaseDatos.agregarParametro(objquery, "@stocka", stockact);
+                    BaseDatos.agregarParametro(objquery, "@stockmin", stockminimo);
+                    BaseDatos.agregarParametro(objquery, "@stockmaximo", stockmaximo);
+                    objquery.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("getIngrediente(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        private List<String> listadealmacenes()
+        {
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                List<String> lista = new List<string>();
+                objDB.Open();
+                String strQuery = "SELECT * FROM Almacen";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        String idalmacen = Convert.ToString(objDataReader["idAlmacen"]);
+                        lista.Add(idalmacen);
+                    }
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                log.Error("getIngrediente(EXCEPTION): ", ex);
+                throw ex;
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+
         public IngredienteBean BuscarIngre(string id)
         {
             

@@ -17,7 +17,7 @@ namespace Cafeteria.Controllers.Administracion
             Reporte reporte = new Reporte();
             return View(reporte);
         }
-        public ActionResult Resultado(string cargo, string fecha1, string fecha2, string idSucursal)
+        public ActionResult Resultado( string fecha1, string fecha2, string idSucursal)
         {
               
             return View();

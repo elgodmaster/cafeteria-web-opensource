@@ -16,6 +16,11 @@ namespace Cafeteria.Models
         public string idproveedor { get; set; }
         public string nombreproveedor { get; set; }
 
+        public List<List<String>> listaalmacen { get; set; }
+        public List<List<String>> listacompras { get; set; }
+        public List<List<String>> listaventas { get; set; }
+        public List<List<String>> listaadministracion { get; set; }
+
         public SelectList listaTipo { get; set; }
         public SelectList listaTipoprov { get; set; }
         public Reporte()

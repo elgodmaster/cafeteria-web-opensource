@@ -167,9 +167,9 @@ namespace Cafeteria.Models.Reportes
                 SqlCommand objQuery;
 
                 string strQuery = "select a.nombre, b.montototal, b.fechaventa  " +
-                                  "from Cafeteria a, Venta bc " +
+                                  "from Cafeteria a, Venta b " +
                                   "where a.idCafeteria= b.idCafeteria  and " +
-                                  "c.fechaemitida  BETWEEN  @fecha1 AND @fecha2 ";
+                                  "b.fechaventa  BETWEEN  @fecha1 AND @fecha2 ";
 
                 if (idSucursal.CompareTo("SUCU0000") != 0) strQuery = strQuery + "and UPPER(a.idCafeteria) LIKE '%" + idSucursal.ToUpper() + "%'";
                 

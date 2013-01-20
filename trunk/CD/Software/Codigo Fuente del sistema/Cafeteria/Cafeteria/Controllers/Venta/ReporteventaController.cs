@@ -25,10 +25,43 @@ namespace Cafeteria.Controllers.Venta
         {
 
             List<List<String>> lista = reportefacade.reporteventas(idSucursal, fecha1, fecha2, monto1, monto2);
-            Reporte reporte = new Reporte();
+            Reporte reporte = new Reporte(); reporte.fecha1 = fecha1; reporte.fecha2 = fecha2;
             reporte.listaventas = lista;
+            List<int> cantidad = new List<int>();
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                int aux = 0;
+                string variable = lista[i][0];
+                for (int j = 0; j < lista.Count; j++)
+                {
+                    if (variable.CompareTo(lista[j][0]) == 0)
+                    {
+                        aux++;
+                    }
+                }
+                cantidad.Add(aux);
+            }
+            reporte.cantidad = cantidad;
+            int k = 1, pos, cant;
+            while (k < reporte.listaalmacen.Count)
+            {
+                if (reporte.listaalmacen[k - 1][0].CompareTo(reporte.listaalmacen[k][0]) == 0)
+                {
+                    pos = k - 1;
+                    cant = reporte.cantidad[pos];
+                    reporte.cantidad[pos] = 1;
+                    k = k + cant - 2;
+                }
+                k++;
+
+            }
+
+            
             return this.ViewPdf("", "reportefinal", reporte);
-            //return View();
+            
+
+
         }
 
 

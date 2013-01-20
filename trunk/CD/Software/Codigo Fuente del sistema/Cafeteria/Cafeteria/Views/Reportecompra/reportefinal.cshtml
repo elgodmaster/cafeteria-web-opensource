@@ -12,7 +12,7 @@
 <table>
 <tr>
    <td align="left"> Stardust  </td>
-   <td align="right"> Fecha y Hora Actual:  </td>
+   <td align="right"> Fecha y Hora:  </td>
 </tr>
 <tr><td></td><td align="right"> @DateTime.Now  </td></tr>
  </table>
@@ -21,22 +21,30 @@
 <div>    </div>
 <div>    </div>
 <div>    </div>
-<div  align="center"><h2>
-    Reporte de Órdenes de Compra
-</h2></div>
+<div  align="center">
+    <h2> Reporte de Compras  </h2>
+    Desde: @Model.fecha1 hasta @Model.fecha2
+</div>
+
 <div>    </div>
 <div>    </div>
 
 <table cellpadding="3" cellspacing="3">
     <tr border="1" bgcolor="#777777" color="#ffffff">
-        <td width="20%" align="center">
-            Fecha de Emisión
+        <td width="35%" align="center">
+            Sucursal
         </td>
-        <td width="50%" align="center">
-            Estado
+        <td width="20%" align="center">
+            Proveedor
+        </td>
+        <td width="25%" align="center">
+            Orden
         </td>
         <td width="30%" align="center">
-            Monto
+           Fecha
+        </td>
+        <td width="20%" align="center">
+            Monto 
         </td>
     </tr>
     @{
@@ -44,24 +52,43 @@
         var evenColor = "#EEFFFF";
         var Odd = OddColor;
     }
-    @for(int i=0; i<Model.listaalmacen.Count;i++)
+    
+    
+    @for (int i = 0; i < Model.listacompras.Count; i++)
     {
-        <tr border="1" bgcolor="@Odd">
-            <td>@Model.listaalmacen[i][0]
-            </td>
-            <td>@Model.listaalmacen[i][1]
-            </td>
-            <td>@Model.listaalmacen[i][2]
-            </td>
-        </tr>
-        if (Odd == OddColor)
-        {
-            Odd = evenColor;
-        }
-        else
-        {
-            Odd = OddColor;
-        }
 
+        if (Model.listacompras[i][5].CompareTo("activo") == 0)
+        {
+            
+           if (Model.cantidad[i] ==1) { 
+                <tr border="1" bgcolor="@Odd">
+                    <td> Sucursal @Model.listacompras[i][0]
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            }
+              <tr border="1" bgcolor="@Odd">
+
+            <td></td>
+            @for (int j = 1; j < Model.listacompras[i].Count-1; j++)
+            {
+                <td>@Model.listacompras[i][j]
+                </td>
+             }
+            </tr>
+
+            if (Odd == OddColor)
+            {
+                Odd = evenColor;
+            }
+            else
+            {
+                Odd = OddColor;
+            }
+        }
     }
 </table>

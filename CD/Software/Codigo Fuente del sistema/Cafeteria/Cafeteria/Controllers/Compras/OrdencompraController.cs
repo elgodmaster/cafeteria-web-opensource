@@ -70,9 +70,10 @@ namespace Cafeteria.Controllers.Compras
 
 
         #region crearOrdenCompra
-        public ActionResult Registrar()
+        public ActionResult Registrar(string id)
         {
             OrdencompraBean ordencompra = new OrdencompraBean();
+            ordencompra.idCafeteria = id;
             return View(ordencompra);
         } 
 
@@ -81,7 +82,7 @@ namespace Cafeteria.Controllers.Compras
         public ActionResult Registrar(OrdencompraBean orden)
         {
             //int ID = Convert.ToInt32(ordenCompra.idProv);
-            orden.idCafeteria = "SUCU0001";
+            //orden.idCafeteria = orden.idCafeteria;
             return RedirectToAction("Registrar2", new { idproveedor = orden.idProveedor, idsucursal = orden.idCafeteria });
         }
 

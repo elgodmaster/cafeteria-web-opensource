@@ -20,6 +20,9 @@ namespace Cafeteria.Models
         public List<List<String>> listacompras { get; set; }
         public List<List<String>> listaventas { get; set; }
         public List<List<String>> listaadministracion { get; set; }
+        public List<int> cantidad { get; set; }
+        public string fecha1 { get; set; }
+        public string fecha2 { get; set; }
 
         public SelectList listaTipo { get; set; }
         public SelectList listaTipoprov { get; set; }

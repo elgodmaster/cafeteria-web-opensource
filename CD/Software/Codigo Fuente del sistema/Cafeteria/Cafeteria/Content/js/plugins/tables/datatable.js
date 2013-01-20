@@ -2257,7 +2257,7 @@
 			 * it's a good effort without getting carried away
 			 */
 			$(nBody).children('tr:even').addClass( oSettings.asDestroyStripes[0] );
-			$(nBody).children('tr:even').addClass(oSettings.asDestroyStripes[1]);
+			$(nBody).children('tr:odd').addClass( oSettings.asDestroyStripes[1] );
 			
 			/* Remove the settings object from the settings array */
 			for ( i=0, iLen=_aoSettings.length ; i<iLen ; i++ )
@@ -7200,7 +7200,7 @@
 			if ( typeof oInit.asStripClasses == 'undefined' && 
 			     typeof oInit.asStripeClasses == 'undefined' )
 			{
-			    oSettings.asStripeClasses.push(oSettings.oClasses.sStripeEven);
+				oSettings.asStripeClasses.push( oSettings.oClasses.sStripeOdd );
 				oSettings.asStripeClasses.push( oSettings.oClasses.sStripeEven );
 			}
 			

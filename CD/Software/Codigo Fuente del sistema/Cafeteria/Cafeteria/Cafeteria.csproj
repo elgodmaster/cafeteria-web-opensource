@@ -1683,18 +1683,6 @@
     <Content Include="Views\Venta\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Reporteventa\Resultado.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Reporteadmin\Resultado.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Reportecompra\Resultado.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Reportealma\Resultado.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Reportealma\reportefinal.cshtml" />
   </ItemGroup>
   <ItemGroup>

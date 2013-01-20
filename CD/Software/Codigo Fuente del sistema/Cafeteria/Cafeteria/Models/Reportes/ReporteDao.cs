@@ -29,11 +29,11 @@ namespace Cafeteria.Models.Reportes
                 {
                     String strQuery = "Select b.nombre, d.nombre,c.stockminimo, c.stockactual, e.cantidad " +
                     "from Almacen a, Cafeteria b, Almacen_x_Producto c, Ingrediente d, " +
-                    "(Select b.idIngrediente as ingrediente, SUM(b.cantidad) as  cantidad " +
+                    "(Select a.idSucursal as sucursal, b.idIngrediente as ingrediente, SUM(b.cantidad) as  cantidad " +
                     " from Ordencompra a, OrdenCompraDetalle b " +
                     "where  a.idOrdencompra=b.idOrdencompra and a.fechaemitida  BETWEEN  @fecha1 AND @fecha2  " +
-                    "GROUP by idIngrediente) e " +
-                    "where a.idCafeteria=b.idCafeteria  " +
+                    "GROUP by b.idIngrediente, a.idSucursal) e " +
+                    "where a.idCafeteria=b.idCafeteria and e.sucursal=a.idCafeteria " +
                     " and a.idAlmacen=c.idAlmacen and c.idIngrediente=d.idIngrediente " +
                     " and e.ingrediente=d.idIngrediente and b.idCafeteria=@idsucur order by 2";
 
@@ -47,11 +47,11 @@ namespace Cafeteria.Models.Reportes
                 {
                     String strQuery = "Select b.nombre, d.nombre, c.stockminimo, c.stockactual, e.cantidad " +
                     "from Almacen a, Cafeteria b, Almacen_x_Producto c, Ingrediente d, " +
-                    "(Select b.idIngrediente as ingrediente, SUM(b.cantidad) as  cantidad " +
+                    "(Select  a.idSucursal as sucursal,b.idIngrediente as ingrediente, SUM(b.cantidad) as  cantidad " +
                     " from Ordencompra a, OrdenCompraDetalle b " +
                     "where  a.idOrdencompra=b.idOrdencompra and a.fechaemitida  BETWEEN  @fecha1 AND @fecha2 " +
-                    "GROUP by idIngrediente) e " +
-                    "where a.idCafeteria=b.idCafeteria  " +
+                    "GROUP by  b.idIngrediente, a.idSucursal) e " +
+                    "where a.idCafeteria=b.idCafeteria and e.sucursal=a.idCafeteria " +
                     " and a.idAlmacen=c.idAlmacen and c.idIngrediente=d.idIngrediente " +
                     " and e.ingrediente=d.idIngrediente order by 1";
 
@@ -107,8 +107,9 @@ namespace Cafeteria.Models.Reportes
                 objDB.Open();
                 List<List<String>> listafinal = new List<List<string>>();
                 SqlCommand objQuery;
+                string estado = "activo";
 
-                string strQuery = "select b.nombre, a.razonSocial, c.idOrdencompra, c.fechaemitida, c.preciototal " + 
+                string strQuery = "select b.nombre, a.razonSocial, c.fechaemitida, sum(c.preciototal) " + 
                                   "from Proveedor a,  Cafeteria b, Ordencompra c "+
                                   "where a.idProveedor=c.idProveedor and b.idCafeteria=c.idSucursal and "+ 
                                   "c.fechaemitida  BETWEEN  @fecha1 AND @fecha2 ";
@@ -116,7 +117,8 @@ namespace Cafeteria.Models.Reportes
                 if (idSucursal.CompareTo("SUCU0000") != 0) strQuery = strQuery + "and UPPER(c.idSucursal) LIKE '%" + idSucursal.ToUpper() + "%'";
                 if (idproveedor.CompareTo("PROV0000") != 0) strQuery = strQuery + "and UPPER(a.idProveedor) LIKE '%" + idproveedor.ToUpper() + "%'";
               
-                
+                strQuery= strQuery + " GROUP by b.nombre, c.fechaemitida,a.razonSocial "
+
                 objQuery = new SqlCommand(strQuery, objDB);
                 Utils.agregarParametro(objQuery, "@fecha1", fecha1);
                 Utils.agregarParametro(objQuery, "@fecha2", fecha2);
@@ -132,6 +134,7 @@ namespace Cafeteria.Models.Reportes
                         string c = Convert.ToString(objDataReader[2]); lis.Add(c);
                         string d = Convert.ToString(objDataReader[3]); lis.Add(d);
                         string e = Convert.ToString(objDataReader[4]); lis.Add(e);
+                        lis.Add(estado);
                         listafinal.Add(lis);
                     }
                 }
@@ -213,6 +216,9 @@ namespace Cafeteria.Models.Reportes
 
         #endregion
 
+        #region area de administrativa
+
+        #endregion
 
     }
 }

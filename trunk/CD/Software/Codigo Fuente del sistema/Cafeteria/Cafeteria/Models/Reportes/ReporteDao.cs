@@ -116,8 +116,8 @@ namespace Cafeteria.Models.Reportes
                
                 if (idSucursal.CompareTo("SUCU0000") != 0) strQuery = strQuery + "and UPPER(c.idSucursal) LIKE '%" + idSucursal.ToUpper() + "%'";
                 if (idproveedor.CompareTo("PROV0000") != 0) strQuery = strQuery + "and UPPER(a.idProveedor) LIKE '%" + idproveedor.ToUpper() + "%'";
-              
-                strQuery= strQuery + " GROUP by b.nombre, c.fechaemitida,a.razonSocial "
+
+                strQuery = strQuery + " GROUP by b.nombre, c.fechaemitida,a.razonSocial ";
 
                 objQuery = new SqlCommand(strQuery, objDB);
                 Utils.agregarParametro(objQuery, "@fecha1", fecha1);
@@ -133,7 +133,6 @@ namespace Cafeteria.Models.Reportes
                         string b = Convert.ToString(objDataReader[1]); lis.Add(b);
                         string c = Convert.ToString(objDataReader[2]); lis.Add(c);
                         string d = Convert.ToString(objDataReader[3]); lis.Add(d);
-                        string e = Convert.ToString(objDataReader[4]); lis.Add(e);
                         lis.Add(estado);
                         listafinal.Add(lis);
                     }
@@ -169,13 +168,14 @@ namespace Cafeteria.Models.Reportes
                 List<List<String>> listafinal = new List<List<string>>();
                 SqlCommand objQuery;
 
-                string strQuery = "select a.nombre, b.montototal, b.fechaventa  " +
+                string strQuery = "select a.nombre, b.fechaventa, sum(b.montototal)   " +
                                   "from Cafeteria a, Venta b " +
                                   "where a.idCafeteria= b.idCafeteria  and " +
                                   "b.fechaventa  BETWEEN  @fecha1 AND @fecha2 ";
 
                 if (idSucursal.CompareTo("SUCU0000") != 0) strQuery = strQuery + "and UPPER(a.idCafeteria) LIKE '%" + idSucursal.ToUpper() + "%'";
-                
+
+                strQuery = strQuery + " group by a.nombre, b.fechaventa ";
 
 
                 objQuery = new SqlCommand(strQuery, objDB);

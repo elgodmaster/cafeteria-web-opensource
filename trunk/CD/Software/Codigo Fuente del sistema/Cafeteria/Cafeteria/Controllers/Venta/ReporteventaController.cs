@@ -44,9 +44,9 @@ namespace Cafeteria.Controllers.Venta
             }
             reporte.cantidad = cantidad;
             int k = 1, pos, cant;
-            while (k < reporte.listaalmacen.Count)
+            while (k < reporte.listaventas.Count)
             {
-                if (reporte.listaalmacen[k - 1][0].CompareTo(reporte.listaalmacen[k][0]) == 0)
+                if (reporte.listaventas[k - 1][0].CompareTo(reporte.listaventas[k][0]) == 0)
                 {
                     pos = k - 1;
                     cant = reporte.cantidad[pos];
@@ -57,6 +57,27 @@ namespace Cafeteria.Controllers.Venta
 
             }
 
+            if (monto1.CompareTo("") != 0 && monto2.CompareTo("") != 0)
+            {
+                //double montoa = 55.5;
+                Decimal montoa = Convert.ToDecimal(monto1, new System.Globalization.CultureInfo("en-US"));
+                Decimal montob = Convert.ToDecimal(monto2, new System.Globalization.CultureInfo("en-US"));
+                for (int i = 0; i < reporte.listaventas.Count; i++)
+                {
+                    Decimal montoaux = Convert.ToDecimal(reporte.listaventas[i][2]);//, new System.Globalization.CultureInfo("en-US"));
+                    reporte.listaventas[i][2] = Convert.ToString(montoaux);
+                    if (montoa <= montoaux && montoaux <= montob)
+                    {
+                        reporte.listaventas[i][3] = "activo";
+
+                    }
+                    else
+                    {
+                        reporte.listaventas[i][3] = "inactivo";
+                    }
+
+                }
+            }
             
             return this.ViewPdf("", "reportefinal", reporte);
             

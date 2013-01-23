@@ -60,16 +60,16 @@ namespace Cafeteria.Controllers.Compras
                 Decimal montob = Convert.ToDecimal(monto2, new System.Globalization.CultureInfo("en-US"));
                 for (int i = 0; i < reporte.listacompras.Count; i++)
                 {
-                    Decimal montoaux = Convert.ToDecimal(reporte.listacompras[i][4]);//, new System.Globalization.CultureInfo("en-US"));
-                    reporte.listacompras[i][4] = Convert.ToString(montoaux);
+                    Decimal montoaux = Convert.ToDecimal(reporte.listacompras[i][3]);//, new System.Globalization.CultureInfo("en-US"));
+                    reporte.listacompras[i][3] = Convert.ToString(montoaux);
                     if (montoa <= montoaux && montoaux <= montob)
                     {
-                        reporte.listacompras[i][5] = "activo";
+                        reporte.listacompras[i][4] = "activo";
                         
                     }
                     else
                     {
-                        reporte.listacompras[i][5] = "inactivo";
+                        reporte.listacompras[i][4] = "inactivo";
                     }
 
                 }

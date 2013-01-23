@@ -6,6 +6,8 @@ using System.Data.SqlClient;
 using log4net;
 using System.Web.Configuration;
 using Cafeteria.Models.Administracion.Ubigeo;
+using System.Net.Mail;
+
 
 namespace Cafeteria.Models
 {
@@ -224,6 +226,33 @@ namespace Cafeteria.Models
                     objDB.Close();
                 }
             }
+        }
+
+
+        public void mandarcorreo(string correodestino, string mensaje, string asunto)
+        {
+            string emailfrom= "giancarlo.rau@pucp.pe";
+            string clave = "614nc4r70";
+            MailMessage objMail;
+            objMail = new MailMessage();
+            objMail.From = new MailAddress(emailfrom); //Remitente
+            objMail.To.Add(correodestino); //Email a enviar 
+            //objMail.CC.Add("copia@destino.com"); //Email a enviar copia
+            //objMail.Bcc.Add("oculto@destino.com"); //Email a enviar oculto
+
+            objMail.Subject = asunto;
+
+
+            objMail.Body = mensaje;
+            objMail.IsBodyHtml = true; //Formato Html del email
+
+            //objMail.Attachments.Add(new Attachment(Adjunto));
+            SmtpClient SmtpMail = new SmtpClient();
+            SmtpMail.Host = "smtp.gmail.com"; //el nombre del servidor de correo
+            //SmtpMail.Port = Puerto; //asignamos el numero de puerto
+            SmtpMail.Credentials = new System.Net.NetworkCredential(emailfrom, clave);
+
+            SmtpMail.Send(objMail);
         }
 
 

@@ -232,13 +232,15 @@ namespace Cafeteria.Models.Administracion.Sucursal
             {
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                String strQuery = "UPDATE Cafeteria SET nombre=@nombre, nombreAdministrador=@nomadmin, estado=@estado " +
+                String strQuery = "UPDATE Cafeteria SET nombre=@nombre, nombreAdministrador=@nomadmin, estado=@estado, telefono1=@tele, telefono2=@tele2 " +
                                   " WHERE idCafeteria = @id";
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 Utils.agregarParametro(objQuery, "@nombre", suc.nombre);
                 Utils.agregarParametro(objQuery, "@nomadmin", suc.nombreAdministrador);
                 Utils.agregarParametro(objQuery, "@estado", suc.estado);
+                Utils.agregarParametro(objQuery, "@tele", suc.telefono1);
+                Utils.agregarParametro(objQuery, "@tele2", suc.telefono2);
                 Utils.agregarParametro(objQuery, "@id", suc.id);
                 objQuery.ExecuteNonQuery();
 

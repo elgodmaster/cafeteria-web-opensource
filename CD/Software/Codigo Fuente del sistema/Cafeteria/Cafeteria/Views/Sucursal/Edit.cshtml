@@ -1,17 +1,17 @@
 ﻿@model Cafeteria.Models.Administracion.Sucursal.SucursalBean
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Sucursal";
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Edit", "Sucursal", FormMethod.Post, new { @class = "form" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
         <div class="widget">
-          <div class="title"><h6>Modificar Producto</h6></div>
+          <div class="title"><h6>Modificar Sucursal</h6></div>
           
           <div class="formRow">
             <span>ID</span>
@@ -20,25 +20,45 @@
             </div><div class="clear"></div>
           </div>
 
-          <div class="formRow">
-            <span>Nombre</span>
-            <div class = "formRight" > 
-                @Html.TextBoxFor(model => model.nombre, new { maxlength = "40", placeholder = "Maximo 40 caracteres aqui" })
-                @Html.ValidationMessageFor(model => model.nombre)
-            </div><div class="clear"></div>
-          </div>
+<div class = "formRow" >
+                @Html.LabelFor( model => model.nombre )
+                <div class = "formRight" >
+                    @Html.TextBoxFor( model => model.nombre )
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
 
-          <div class="formRow">
-            <span>Descripcion</span>
-            <div class="formRight">
-                @Html.TextAreaFor(model => model.nombreAdministrador, new { maxlength = "200", placeholder = "Maximo 200 caracteres aqui" }) 
-            </div><div class="clear"></div>
-           </div>
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.telefono1 )
+                <div class = "formRight" >
+                    @Html.TextBoxFor(model => model.telefono1, new { maxlength = "8" })
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+            <div class = "formRow" >
+                @Html.LabelFor(model => model.telefono2)
+                <div class = "formRight" >
+                    @Html.TextBoxFor(model => model.telefono2, new { maxlength = "8" })
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
+
+            <div class = "formRow" >
+                @Html.LabelFor( model => model.direccion )
+                <div class = "formRight" >
+                    @Html.TextBoxFor( model => model.direccion )
+                    
+                </div>
+                <div class = "clear" ></div>
+            </div>
 
            <div class="formRow"> @Html.LabelFor(model => model.estado)
                 <div class="formRight"> 
-                                     @Html.RadioButtonFor(model => model.estado, "ACTIVO", true) Activo <br />
-                                     @Html.RadioButtonFor(model => model.estado, "INACTIVO", false) Inactivo    
+                                     @Html.RadioButtonFor(model => model.estado, "Activo", true) Activo <br />
+                                     @Html.RadioButtonFor(model => model.estado, "Inactivo", false) Inactivo    
                                                                                                             
                 </div> 
                 <div class="clear"></div>

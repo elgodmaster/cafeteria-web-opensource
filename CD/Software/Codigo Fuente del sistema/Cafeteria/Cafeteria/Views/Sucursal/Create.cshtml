@@ -38,7 +38,7 @@
             <div class = "formRow" >
                 @Html.LabelFor( model => model.telefono1 )
                 <div class = "formRight" >
-                    @Html.TextBoxFor(model => model.telefono1)
+                    @Html.TextBoxFor(model => model.telefono1, new { maxlength = "8" })
                     
                 </div>
                 <div class = "clear" ></div>
@@ -46,7 +46,7 @@
             <div class = "formRow" >
                 @Html.LabelFor(model => model.telefono2)
                 <div class = "formRight" >
-                    @Html.TextBoxFor(model => model.telefono2)
+                    @Html.TextBoxFor(model => model.telefono2, new { maxlength = "8" })
                     
                 </div>
                 <div class = "clear" ></div>

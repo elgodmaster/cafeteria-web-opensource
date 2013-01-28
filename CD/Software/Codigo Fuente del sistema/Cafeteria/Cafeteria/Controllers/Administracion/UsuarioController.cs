@@ -117,18 +117,18 @@ namespace Cafeteria.Controllers.Administracion
 
             for (int i = 0; i < dia.Count; i++)
             {
+                horaini.Add("");
+                horafin.Add("");
+            }
+
+            for (int i = 0; i < dia.Count; i++)
+            {
                 for (int j = 0; j < usuario.dia.Count; j++)
                 {
                     if (dia[i].CompareTo(usuario.dia[j]) == 0)
                     {
-                       horaini.Add(usuario.horaInicio[i]);
-                       horafin.Add(usuario.horaFin[i]);
-                    }
-                    else
-                    {
-
-                        horaini.Add("");
-                        horafin.Add("");
+                       horaini[i]=usuario.horaInicio[j];
+                       horafin[i]=usuario.horaFin[j];
                     }
                 }
             }
@@ -142,7 +142,7 @@ namespace Cafeteria.Controllers.Administracion
 
         public ActionResult modificarHorario2(UsuarioxSucursalBean usuario)
         {
-
+            admifacade.modificarhorario(usuario);
             
             return RedirectToAction("verhorario/" + usuario.ID, "Usuario");
 

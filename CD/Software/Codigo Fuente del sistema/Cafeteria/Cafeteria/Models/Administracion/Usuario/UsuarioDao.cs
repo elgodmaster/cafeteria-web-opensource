@@ -384,8 +384,8 @@ namespace Cafeteria.Models.Administracion.Usuario
                 objDB.Open();
                 for (int i = 0; i < usuario.dia.Count; i++)
                 {
-                    if (!string.IsNullOrEmpty(usuario.horaInicio[i]))
-                    {
+                   // if (!string.IsNullOrEmpty(usuario.horaInicio[i]))
+                  //  {
                         
                         String strQuery = "Insert into HorarioDetalle(idHorario, diasemana, horaentrada, horasalida) values(@idhora,@dia" +
                                   ", @hora1, @hora2)";
@@ -396,7 +396,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                         Utils.agregarParametro(objQuery, "@hora1", usuario.horaInicio[i]);
                         Utils.agregarParametro(objQuery, "@hora2", usuario.horaFin[i]);
                         objQuery.ExecuteNonQuery();
-                    }
+                //    }
                 }
                 
 
@@ -543,6 +543,43 @@ namespace Cafeteria.Models.Administracion.Usuario
                 }
             }
             return id;
+        }
+
+        public void modificarusuario(UsuarioxSucursalBean usuario)
+        {
+            UsuarioxSucursalBean usuarioaux = this.obtenerhorario(usuario.ID);
+            usuario.idhorario = usuarioaux.idhorario;
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < usuario.dia.Count; i++)
+                {
+                    String strQuery = "Update HorarioDetalle set horaentrada=@hora1 , horasalida= @hora2  where " +
+                                  " idHorario=@idhora and diasemana=@dia ";
+
+                    SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                    Utils.agregarParametro(objQuery, "@idhora", usuario.idhorario);
+                    Utils.agregarParametro(objQuery, "@dia", usuario.dia[i]);
+                    Utils.agregarParametro(objQuery, "@hora1", usuario.horaInicio[i]);
+                    Utils.agregarParametro(objQuery, "@hora2", usuario.horaFin[i]);
+                    objQuery.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception e)
+            {
+                log.Error("modificar horariodetalle(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
         }
 
         #endregion

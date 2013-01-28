@@ -54,6 +54,12 @@ namespace Cafeteria.Models.Administracion.Usuario
             usuarioDao.guardarhorario(usuario);
         }
 
+
+        public void modificarhorario(UsuarioxSucursalBean usuario)
+        {
+            usuarioDao.modificarusuario(usuario);
+        }
+
         public UsuarioxSucursalBean obtenerhorario(String id)
         {
             return usuarioDao.obtenerhorario(id);

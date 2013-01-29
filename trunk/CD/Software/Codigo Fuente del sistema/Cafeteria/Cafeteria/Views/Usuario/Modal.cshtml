@@ -3,10 +3,14 @@
     ViewBag.Title = "Asignar Perfil";
 }
 
+
+
 @using (Html.BeginForm("GG2", "Usuario", FormMethod.Post, new { @class = "form" } ))
 {
     <fieldset>
         <div class = "widget" >
+
+        @Html.HiddenFor(model => model.ID)
 
            <table cellpadding = "0" cellspacing = "0" width = "100%" class = "display dTable">
             <thead>
@@ -27,7 +31,7 @@
                     @for (int i = 0; i < Model.perfilesDelUsuario.Count; i++)
                     {
                         <tr>
-                         <td>@Html.DisplayFor(model => model.perfilesDelUsuario[i]) </td>
+                         <td>@Html.DisplayFor(model => model.perfilesDelUsuario[i]) </td>  @Html.HiddenFor(model => model.perfilesDelUsuario[i])
                          <td>@Html.CheckBoxFor(model => model.estadosDePerfiles[i], true) </td>
                          </tr>
                     }
@@ -38,7 +42,7 @@
         
     </fieldset>
     
-@*    <p>
+    <p>
             <input class = "redB" type="submit" value="Guardar" /> 
-</p>*@
+</p>
 }

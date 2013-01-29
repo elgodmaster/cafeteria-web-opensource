@@ -345,9 +345,11 @@ namespace Cafeteria.Controllers.Administracion
         }
         public ActionResult GG2(UsuarioxSucursalBean usuario2)
         {
-            //int i = 0;
+            int i = 0;
             //guardar nuevos perfiles con estado true
-            return RedirectToAction("Index");
+            admifacade.guardarperfil(usuario2);
+            //return RedirectToAction("Index");
+            return RedirectToAction("AdministrarPerfil");
         }
         #endregion
 

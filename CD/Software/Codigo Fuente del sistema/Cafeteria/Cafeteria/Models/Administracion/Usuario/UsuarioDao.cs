@@ -608,7 +608,7 @@ namespace Cafeteria.Models.Administracion.Usuario
 
                 List<string> listaIdusuario = new List<string>();
 
-                List<UsuarioBean> usuario = this.ListarPersonal(nombre, dni, " ", " "); // lista de usuarios con nombre y dni
+//                List<UsuarioBean> usuario = this.ListarPersonal(nombre, dni, " ", " "); // lista de usuarios con nombre y dni
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
@@ -764,7 +764,134 @@ namespace Cafeteria.Models.Administracion.Usuario
             }
 
         }
-        
+
+
+        public DateTime buscarfecha(string id)
+        {
+            DateTime date = new DateTime();
+            SqlConnection objDB = null;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT a.fechaini FROM Horario a where a.idempleado=@id";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@id", id);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        date = Convert.ToDateTime(objDataReader[0]);
+                        //string espacio = " -- ";
+                        //listaperfiles.Add(this.getnombreperfil(idperfil));
+                        //listaperfiles.Add(espacio);
+                    }
+                }
+
+                return date;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Usuarios(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+            //return date;
+        }
+
+        public void guardarperfil(UsuarioxSucursalBean usuario)
+        {
+
+           
+            SqlConnection objDB = null;
+            try
+            {
+
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                for (int i = 0; i < usuario.perfilesDelUsuario.Count; i++) //perfilesDelUsuario
+                {
+
+                    if (usuario.estadosDePerfiles[i])
+                    {
+                        String strQuery = "Insert into  Perfil_usuario_x_Usuario (idPerfil_usuario, idUsuario) values(@id, @id2)";
+
+                        SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                        Utils.agregarParametro(objQuery, "@id", this.buscaridperfil(usuario.perfilesDelUsuario[i]));
+
+                        Utils.agregarParametro(objQuery, "@id2", usuario.ID);
+                        objQuery.ExecuteNonQuery();
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                log.Error("Guardar_perfil(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+
+        private string buscaridperfil(string nombre)
+        {
+            string id=null;
+            SqlConnection objDB = null;
+            try
+            {
+
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT a.idPerfil_usuario FROM Perfil_usuario a WHERE UPPER(nombre) LIKE '%" + nombre.ToUpper() + "%'"; ;
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        id = Convert.ToString(objDataReader[0]);
+                        //string espacio = " -- ";
+                        //listaperfiles.Add(this.getnombreperfil(idperfil));
+                        //listaperfiles.Add(espacio);
+                    }
+                }
+
+                return id;
+            }
+            catch (Exception e)
+            {
+                log.Error("Guardar_perfil(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+        }
+            
+
         #endregion
 
 

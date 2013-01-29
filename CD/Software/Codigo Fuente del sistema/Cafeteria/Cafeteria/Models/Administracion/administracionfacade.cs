@@ -95,6 +95,11 @@ namespace Cafeteria.Models.Administracion
             return listaperfiles;
         }
 
+        public void guardarperfil(UsuarioxSucursalBean usuario)
+        {
+            usuarioService.guardarperfil(usuario);
+        }
+
         #endregion
 
         #region Sucursal

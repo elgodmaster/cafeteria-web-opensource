@@ -80,29 +80,33 @@ namespace Cafeteria.Models.Administracion.Usuario
             List<UsuarioxSucursalBean> usu = new List<UsuarioxSucursalBean>();
             List<string> listaidusuarios = usuarioDao.ListarPersonalconperfil(nombre, dni, perfil);
             //bool estado=false;
+            List<UsuarioBean> usuario = usuarioDao.ListarPersonal(nombre, dni, " ", " ");
+
             List<bool> estados = new List<bool>();
 
-            for (int i = 0; i < listaidusuarios.Count; i++)
+
+
+            for (int i = 0; i < usuario.Count; i++)
             {
                 estados.Add(true);
             }
 
-            for (int i = 0; i < listaidusuarios.Count; i++)
+          /*  for (int i = 0; i < listaidusuarios.Count; i++)
             {
                 for (int j = i+1; j < listaidusuarios.Count; j++)
                 {
                     if (listaidusuarios[i].CompareTo(listaidusuarios[j])==0) { estados[i] = false; }
                 }
                 
-            }
-            
-            for (int i = 0; i < listaidusuarios.Count; i++)
+            }*/
+
+            for (int i = 0; i < usuario.Count; i++)
             {
                 if (estados[i])
                 {
                     UsuarioBean nuevo = new UsuarioBean();
                     UsuarioxSucursalBean nue = new UsuarioxSucursalBean();
-                    nuevo = usuarioDao.buscarusuario(listaidusuarios[i]);
+                    nuevo = usuarioDao.buscarusuario(usuario[i].ID);
 
 
                     nue.ID = nuevo.ID;
@@ -113,6 +117,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                     nue.perfilesDelUsuario = usuarioDao.Listaperfiles(nue.ID);
                     //nue.perfilesdelusuario = new List<string>();
                     //nue.perfilesdelusuario.Add(perfil);
+                    nue.fechaIngreso = usuarioDao.buscarfecha(nue.ID);
                     usu.Add(nue);
                 }
             }
@@ -130,6 +135,11 @@ namespace Cafeteria.Models.Administracion.Usuario
         public List<string> getperfiles()
         {
             return usuarioDao.getperfiles();
+        }
+
+        public void guardarperfil(UsuarioxSucursalBean usuario)
+        {
+            usuarioDao.guardarperfil(usuario);
         }
 
         #endregion

@@ -255,6 +255,39 @@ namespace Cafeteria.Models
             SmtpMail.Send(objMail);
         }
 
+        public string buscarsucursal(string idusuario)
+        {
+            SqlConnection objDB = null;
+            string i = "null";
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT idCafeteria from Sucursal_x_Usuario where UPPER(idUsuario)  LIKE '%" + idusuario.ToUpper() + "%'";
+
+                // WHERE UPPER(numero_documento) LIKE '%" + dni.ToUpper() + "%'";
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    objDataReader.Read();
+                    i = Convert.ToString(objDataReader[0]);
+                }
+                return i;
+            }
+            catch (Exception e)
+            {
+                log.Error("registrarIngrediente(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            return i;
+        }
 
     }
 }

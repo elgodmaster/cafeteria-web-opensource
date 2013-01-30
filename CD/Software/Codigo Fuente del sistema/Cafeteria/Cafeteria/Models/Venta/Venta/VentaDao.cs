@@ -23,8 +23,8 @@ namespace Cafeteria.Models.Venta.Venta
                 VentaBean venta = new VentaBean();
                 objDB.Open();
                 String strQuery = "SELECT * FROM Venta";
-                if (!String.IsNullOrEmpty(fecha)) strQuery = "SELECT * FROM Venta WHERE UPPER(fechaventa) LIKE '%" + fecha.ToUpper() + "%'";
-                if (!String.IsNullOrEmpty(idsucursal))
+                if (!String.IsNullOrEmpty(fecha) && String.IsNullOrEmpty(idsucursal)) strQuery = "SELECT * FROM Venta WHERE UPPER(fechaventa) LIKE '%" + fecha.ToUpper() + "%'";
+                if (!String.IsNullOrEmpty(idsucursal) && String.IsNullOrEmpty(fecha))
                 {
                     if (idsucursal != "SUCU0000") strQuery = strQuery + " WHERE UPPER(idCafeteria) LIKE '%" + idsucursal.ToUpper() + "%'";
 

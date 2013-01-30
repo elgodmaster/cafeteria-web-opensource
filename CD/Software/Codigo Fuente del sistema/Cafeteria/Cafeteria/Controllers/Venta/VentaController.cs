@@ -8,6 +8,7 @@ using Cafeteria.Models.Venta;
 using Cafeteria.Models.Venta.Producto;
 using Cafeteria.Models.Administracion;
 using Cafeteria.Models.Administracion.Sucursal;
+using Cafeteria.Models;
 
 namespace Cafeteria.Controllers.Venta
 {
@@ -47,6 +48,15 @@ namespace Cafeteria.Controllers.Venta
         }
 
 
+        [HttpPost]
+        public JsonResult LoginResult(String user, String pass)
+        {
+            Utils util= new Utils();
+            string id2 = util.buscarsucursal(user);
+            return new JsonResult() { Data = id2 };
+        }
+
+
         public ActionResult Create(string id)
         {
             VentaBean ventas = new VentaBean();
@@ -58,7 +68,7 @@ namespace Cafeteria.Controllers.Venta
 
             List<ProductoBean> listproductos = ventfacade.ListarProducto("", "");// new List<ProductoBean>();
             
-            DateTime thisDay = DateTime.Today;
+            DateTime thisDay = DateTime.Now;
             ventas.fecharegistro = thisDay;
             for (int i = 0; i < ventas.listaproductos.Count; i++)
             {

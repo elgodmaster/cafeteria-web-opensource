@@ -1436,6 +1436,7 @@
     <Content Include="libraries\AutoMapper.dll" />
     <Content Include="libraries\log4net.dll" />
     <Content Include="libraries\log4net.xml" />
+    <Content Include="Scripts\ejemplo.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />

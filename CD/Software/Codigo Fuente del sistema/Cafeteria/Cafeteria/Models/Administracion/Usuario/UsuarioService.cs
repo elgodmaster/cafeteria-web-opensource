@@ -79,50 +79,83 @@ namespace Cafeteria.Models.Administracion.Usuario
         {
             List<UsuarioxSucursalBean> usu = new List<UsuarioxSucursalBean>();
             List<string> listaidusuarios = usuarioDao.ListarPersonalconperfil(nombre, dni, perfil);
+            List<UsuarioBean> usuario; List<bool> estados;
             //bool estado=false;
-            List<UsuarioBean> usuario = usuarioDao.ListarPersonal(nombre, dni, " ", " ");
-
-            List<bool> estados = new List<bool>();
-
-
-
-            for (int i = 0; i < usuario.Count; i++)
+            if (listaidusuarios.Count > 0 && perfil.CompareTo("PERF0000")!=0)
             {
-                estados.Add(true);
-            }
+                usuario = usuarioDao.ListarPersonal(nombre, dni, " ", " ");
 
-          /*  for (int i = 0; i < listaidusuarios.Count; i++)
-            {
-                for (int j = i+1; j < listaidusuarios.Count; j++)
+                estados = new List<bool>();
+
+                for (int i = 0; i < listaidusuarios.Count; i++)
                 {
-                    if (listaidusuarios[i].CompareTo(listaidusuarios[j])==0) { estados[i] = false; }
+                    estados.Add(true);
                 }
-                
-            }*/
 
-            for (int i = 0; i < usuario.Count; i++)
-            {
-                if (estados[i])
+                for (int i = 0; i < listaidusuarios.Count; i++)
                 {
-                    UsuarioBean nuevo = new UsuarioBean();
-                    UsuarioxSucursalBean nue = new UsuarioxSucursalBean();
-                    nuevo = usuarioDao.buscarusuario(usuario[i].ID);
+                    for (int j = i + 1; j < listaidusuarios.Count; j++)
+                    {
+                        if (listaidusuarios[i].CompareTo(listaidusuarios[j]) == 0) { estados[i] = false; }
+                    }
+
+                }
+                for (int i = 0; i < listaidusuarios.Count; i++)
+                {
+                    if (estados[i])
+                    {
+                        UsuarioBean nuevo = new UsuarioBean();
+                        UsuarioxSucursalBean nue = new UsuarioxSucursalBean();
+                        nuevo = usuarioDao.buscarusuario(listaidusuarios[i]);
 
 
-                    nue.ID = nuevo.ID;
-                    nue.nombres = nuevo.nombres;
-                    nue.apPat = nuevo.apPat;
-                    nue.apMat = nuevo.apMat;
-                    nue.nroDocumento = nuevo.nroDocumento;
-                    nue.perfilesDelUsuario = usuarioDao.Listaperfiles(nue.ID);
-                    //nue.perfilesdelusuario = new List<string>();
-                    //nue.perfilesdelusuario.Add(perfil);
-                    nue.fechaIngreso = usuarioDao.buscarfecha(nue.ID);
-                    usu.Add(nue);
+                        nue.ID = nuevo.ID;
+                        nue.nombres = nuevo.nombres;
+                        nue.apPat = nuevo.apPat;
+                        nue.apMat = nuevo.apMat;
+                        nue.nroDocumento = nuevo.nroDocumento;
+                        nue.perfilesDelUsuario = usuarioDao.Listaperfiles(nue.ID);
+                        //nue.perfilesdelusuario = new List<string>();
+                        //nue.perfilesdelusuario.Add(perfil);
+                        nue.fechaIngreso = usuarioDao.buscarfecha(nue.ID);
+                        usu.Add(nue);
+                    }
                 }
             }
+            else
+            {
+                usuario = usuarioDao.ListarPersonal(nombre, dni, " ", " ");
 
-           
+                estados = new List<bool>();
+
+                for (int i = 0; i < usuario.Count; i++)
+                {
+                    estados.Add(true);
+                }
+
+                for (int i = 0; i < usuario.Count; i++)
+                {
+                    if (estados[i])
+                    {
+                        UsuarioBean nuevo = new UsuarioBean();
+                        UsuarioxSucursalBean nue = new UsuarioxSucursalBean();
+                        nuevo = usuarioDao.buscarusuario(usuario[i].ID);
+
+
+                        nue.ID = nuevo.ID;
+                        nue.nombres = nuevo.nombres;
+                        nue.apPat = nuevo.apPat;
+                        nue.apMat = nuevo.apMat;
+                        nue.nroDocumento = nuevo.nroDocumento;
+                        nue.perfilesDelUsuario = usuarioDao.Listaperfiles(nue.ID);
+                        //nue.perfilesdelusuario = new List<string>();
+                        //nue.perfilesdelusuario.Add(perfil);
+                        nue.fechaIngreso = usuarioDao.buscarfecha(nue.ID);
+                        usu.Add(nue);
+                    }
+                }
+
+            }
 
             return usu;
         }

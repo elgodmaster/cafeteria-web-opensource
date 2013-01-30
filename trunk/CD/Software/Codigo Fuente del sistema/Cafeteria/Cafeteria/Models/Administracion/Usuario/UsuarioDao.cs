@@ -809,10 +809,72 @@ namespace Cafeteria.Models.Administracion.Usuario
             //return date;
         }
 
+        private Boolean haydatos(string idusuario)
+        {
+            SqlConnection objDB = null;
+            int i = -1;
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT COUNT(*) from Perfil_usuario_x_Usuario where UPPER(idUsuario) LIKE '%" + idusuario.ToUpper() + "%'"; 
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    objDataReader.Read();
+                    i = Convert.ToInt32(objDataReader[0]);
+                }
+                
+            }
+            catch (Exception e)
+            {
+                log.Error("registrarIngrediente(EXCEPTION): ", e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+            if (i > 0) return true;
+            else return false;
+        }
+
+        private void eliminardatos(string idusuario)
+        {
+            if (haydatos(idusuario))
+            {
+                SqlConnection objDB = null;
+                
+                try
+                {
+                    objDB = new SqlConnection(cadenaDB);
+                    objDB.Open();
+                    String strQuery = "Delete from Perfil_usuario_x_Usuario where UPPER(idUsuario) LIKE '%" + idusuario.ToUpper() + "%'";
+                    SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                    SqlDataReader objDataReader = objQuery.ExecuteReader();
+
+                }
+                catch (Exception e)
+                {
+                    log.Error("registrarIngrediente(EXCEPTION): ", e);
+                }
+                finally
+                {
+                    if (objDB != null)
+                    {
+                        objDB.Close();
+                    }
+                }
+            }
+        }
+
         public void guardarperfil(UsuarioxSucursalBean usuario)
         {
 
-           
+            eliminardatos(usuario.ID);
             SqlConnection objDB = null;
             try
             {
@@ -859,9 +921,11 @@ namespace Cafeteria.Models.Administracion.Usuario
 
                 objDB = new SqlConnection(cadenaDB);
                 objDB.Open();
-                String strQuery = "SELECT a.idPerfil_usuario FROM Perfil_usuario a WHERE UPPER(nombre) LIKE '%" + nombre.ToUpper() + "%'"; ;
+                String strQuery = "SELECT a.idPerfil_usuario FROM Perfil_usuario a WHERE nombre =@nom ";//nombre.ToUpper() + "%'"; 
+
 
                 SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@nom", nombre);
                 SqlDataReader objDataReader = objQuery.ExecuteReader();
 
                 if (objDataReader.HasRows)
@@ -869,9 +933,6 @@ namespace Cafeteria.Models.Administracion.Usuario
                     while (objDataReader.Read())
                     {
                         id = Convert.ToString(objDataReader[0]);
-                        //string espacio = " -- ";
-                        //listaperfiles.Add(this.getnombreperfil(idperfil));
-                        //listaperfiles.Add(espacio);
                     }
                 }
 

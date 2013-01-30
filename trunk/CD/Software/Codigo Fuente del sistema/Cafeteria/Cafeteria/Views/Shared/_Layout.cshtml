@@ -67,6 +67,7 @@
     <script type="text/javascript" src="@Url.Content( "~/Content/js/plugins/elfinder.min.js" )"></script>
 
     <script type="text/javascript" src="@Url.Content( "~/Content/js/custom.js" )"></script>
+    <script src="../../Scripts/ejemplo.js" type="text/javascript"></script>
 
 </head>
 
@@ -105,7 +106,7 @@
 
              <li class="dash" id = "menu3"><a href="#" title="" class="exp"><span>Venta</span><strong>2</strong></a>
                     <ul class="sub">
-                        <li>@Html.ActionLink("Registrar Venta", "Index", "Venta")</li>
+                        <li id="venta">Registrar Venta</li>
                         <li>@Html.ActionLink("Buscar ventas realizadas", "Buscar", "Venta")</li>
                         
                     </ul>

@@ -25,14 +25,14 @@
                 <div class = "clear" ></div>
             </div>
 
-             @*<div class="formRow">
+             <div class="formRow">
                <span>Personal</span>                             
                                                                                         
                 <div class = "formRight" >                                   
-                    @Html.TextBoxFor(model => model.idventa, new { id="abc"})  
+                    @Html.DisplayFor(model => model.nombreusua)   @Html.HiddenFor(model => model.nombreusua)  
                 </div>      
                 <div class = "clear" ></div>
-            </div> *@
+            </div> 
 
           <div class="formRow">
                <span>Fecha Registro</span>                             

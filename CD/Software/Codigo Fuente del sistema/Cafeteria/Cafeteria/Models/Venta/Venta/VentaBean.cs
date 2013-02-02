@@ -16,7 +16,7 @@ namespace Cafeteria.Models.Venta.Venta
 
         public string nombrepersona { get; set; }
         public string dnipersona { get; set; }
-
+        public string nombreusua { get; set; }
 
         public string idSucursal { get; set; }
         public string nombresucursal { get; set; }

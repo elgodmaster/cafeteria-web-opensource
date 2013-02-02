@@ -1453,6 +1453,9 @@
     <Content Include="Scripts\validacionnotaentrada.js" />
     <Content Include="Scripts\ValidacionOrdenDeCompra.js" />
     <Content Include="Scripts\ventanamodal.js" />
+    <Content Include="Views\Venta\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1673,9 +1676,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Sucursal\añadirpersonal.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Venta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Venta\Create2.cshtml" />

@@ -43,17 +43,19 @@ namespace Cafeteria.Controllers.Venta
 
         public ActionResult Index()
         {
-            List<SucursalBean> suc = adminfacade.listasucursal();
-            return View(suc);
+         //   List<SucursalBean> suc = adminfacade.listasucursal();
+           // return View(suc);
+
+            return RedirectToAction("Index", "Home");
         }
 
 
         [HttpPost]
-        public JsonResult LoginResult(String user, String pass)
+        public JsonResult ventasolicitudad(String user, String pass)
         {
             Utils util= new Utils();
             string id2 = util.buscarsucursal(user);
-            return new JsonResult() { Data = id2 };
+            return Json (id2);
         }
 
 

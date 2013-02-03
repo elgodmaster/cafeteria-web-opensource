@@ -181,6 +181,7 @@ namespace Cafeteria.Models.Administracion.Usuario
         public List<PerfilUsuarioBean> PerfilesUsuario { get; set; }
         public Boolean estadosucur { get; set; }
         public Boolean estaen { get; set; }
+        public List<int> listadeperfil { get; set; }
 
     }
 

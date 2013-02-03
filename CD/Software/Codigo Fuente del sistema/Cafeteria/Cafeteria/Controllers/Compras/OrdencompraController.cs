@@ -11,6 +11,7 @@ using Cafeteria.Models.Compra;
 using Cafeteria.Models.Almacen.Ingrediente;
 using Cafeteria.Models.Almacen;
 using Cafeteria.Models.Almacen.Notaentrada;
+using Cafeteria.Models;
 
 
 namespace Cafeteria.Controllers.Compras
@@ -28,7 +29,65 @@ namespace Cafeteria.Controllers.Compras
             return View(suc);
         }
 
-       
+        [HttpPost]
+        public JsonResult listarordenes(String user, String pass)
+        {
+            Utils util = new Utils();
+            string id2 = util.buscarsucursal(user);
+            return Json(id2);
+        }
+
+        public ActionResult listadeordenes(String id)
+        {
+            List<OrdencompraBean> aux = new List<OrdencompraBean>();
+            List<OrdencompraBean> orden = comprfacade.buscarOrdenescompra("", "", "");// new List<OrdencompraBean>();//comprfacade.buscarOrdenes(nombre, fecha1, fecha2);
+
+            for (int i = 0; i < orden.Count; i++)
+            {
+                if (orden[i].idCafeteria.CompareTo(id) == 0)
+                {
+                    aux.Add(orden[i]);
+                }
+            }
+
+            for (int i = 0; i < aux.Count; i++)
+            {
+                if (aux[i].estado == "Tramite" || aux[i].estado == "Cancelado") aux[i].estado2 = true;
+                else aux[i].estado2 = false;
+                SucursalBean suc = admin.buscarSucursal(aux[i].idCafeteria);
+                aux[i].nombreSucursal = suc.nombre;
+            }
+
+            return View(aux);
+
+        }
+
+        public ActionResult listadeordenes2(String id)
+        {
+            List<OrdencompraBean> aux = new List<OrdencompraBean>();
+            List<OrdencompraBean> orden = comprfacade.buscarOrdenescompra("", "", "");// new List<OrdencompraBean>();//comprfacade.buscarOrdenes(nombre, fecha1, fecha2);
+
+            for (int i = 0; i < orden.Count; i++)
+            {
+                if (orden[i].idCafeteria.CompareTo(id) == 0)
+                {
+                    aux.Add(orden[i]);
+                }
+            }
+
+            for (int i = 0; i < aux.Count; i++)
+            {
+                if (aux[i].estado == "Tramite" || aux[i].estado == "Cancelado") aux[i].estado2 = true;
+                else aux[i].estado2 = false;
+                SucursalBean suc = admin.buscarSucursal(aux[i].idCafeteria);
+                aux[i].nombreSucursal = suc.nombre;
+            }
+
+            return View(aux);
+
+        }
+        
+
         #region Buscar
 
         public ActionResult Buscar()
@@ -155,7 +214,7 @@ namespace Cafeteria.Controllers.Compras
             }
 
             comprfacade.GuardarOrdenCompra(producto);
-            return RedirectToAction("Buscar");
+            return RedirectToAction("Index","Home");
         }
 
         #endregion
@@ -250,7 +309,9 @@ namespace Cafeteria.Controllers.Compras
         {
             // guarda el estado de la orden de compra a registrado o cancelado
             comprfacade.modificarestadoordencompra(orden.idOrdenCompra, orden.estado);
-            return RedirectToAction("Buscar");
+
+            //mandar correo electronico
+            return RedirectToAction("Index", "Home");
         }
 
         #endregion

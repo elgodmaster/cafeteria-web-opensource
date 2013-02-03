@@ -171,11 +171,11 @@ namespace Cafeteria.Models.Reportes
                 string strQuery = "select a.nombre, b.fechaventa, sum(b.montototal)   " +
                                   "from Cafeteria a, Venta b " +
                                   "where a.idCafeteria= b.idCafeteria  and " +
-                                  "b.fechaventa  BETWEEN  @fecha1 AND @fecha2 ";
+                                  "b.fechaventa  BETWEEN  @fecha1 AND @fecha2  ";
 
                 if (idSucursal.CompareTo("SUCU0000") != 0) strQuery = strQuery + "and UPPER(a.idCafeteria) LIKE '%" + idSucursal.ToUpper() + "%'";
 
-                strQuery = strQuery + " group by a.nombre, b.fechaventa ";
+                strQuery = strQuery + " group by a.nombre, b.fechaventa order by a.nombre ";
 
 
                 objQuery = new SqlCommand(strQuery, objDB);

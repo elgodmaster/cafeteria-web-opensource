@@ -68,6 +68,9 @@
 
     <script type="text/javascript" src="@Url.Content( "~/Content/js/custom.js" )"></script>
     <script src="../../Scripts/ejemplo.js" type="text/javascript"></script>
+    <script src="../../Scripts/verhorario.js" type="text/javascript"></script>
+    <script src="../../Scripts/Listaordencompra.js" type="text/javascript"></script>
+    <script src="../../Scripts/listadeproductos.js" type="text/javascript"></script>
 
 </head>
 
@@ -87,24 +90,26 @@
 
           <ul id="menu" class="nav">
 
-             <li class="dash" id = "menu1"><a href="#" title="" class="exp"><span>Sucursal</span><strong>3</strong></a>
+             <li class="dash" id = "menu1"><a href="#" title="" class="exp"><span>Sucursal</span><strong>~</strong></a>
                     <ul class="sub">
-                        <li>@Html.ActionLink("Registrar Sucursal", "Create", "Sucursal")</li>
-                        <li>@Html.ActionLink("Lista de Sucursales", "Index", "Sucursal")</li>
-                        <li>@Html.ActionLink("Asignar Personal", "Listadesucursal", "Sucursal")</li>
+                        <li id="menu11">@Html.ActionLink("Registrar Sucursal", "Create", "Sucursal")</li>
+                        <li id="menu12">@Html.ActionLink("Lista de Sucursales", "Index", "Sucursal")</li>
+                        <li id="menu13">@Html.ActionLink("Asignar Personal", "Listadesucursal", "Sucursal")</li>
+                        <li id="menu14"><a>Lista de Productos</a></li>
                     </ul>
               </li>
 
-             <li class="dash" id = "menu2"><a href="#" title="" class="exp"><span>Usuario</span><strong>4</strong></a>
+             <li class="dash" id = "menu2"><a href="#" title="" class="exp"><span>Usuario</span><strong>~</strong></a>
                     <ul class="sub">
-                        <li>@Html.ActionLink("Registrar", "Create", "Usuario")</li>
-                        <li>@Html.ActionLink("Buscar", "Buscar", "Usuario")</li>
-                        <li>@Html.ActionLink("Lista de Usuarios", "Index", "Usuario")</li>
-                        <li>@Html.ActionLink("Asignar Perfil", "AdministrarPerfil", "Usuario")</li>
+                        <li id="menu21">@Html.ActionLink("Registrar", "Create", "Usuario")</li>
+                        <li id="menu22">@Html.ActionLink("Buscar", "Buscar", "Usuario")</li>
+                        <li id="menu23">@Html.ActionLink("Lista de Usuarios", "Index", "Usuario")</li>
+                        <li id="menu24">@Html.ActionLink("Asignar Perfil", "AdministrarPerfil", "Usuario")</li>
+                        <li id="menu25"><a>Ver Horario</a></li>
                     </ul>
               </li>
 
-             <li class="dash" id = "menu3"><a href="#" title="" class="exp"><span>Venta</span><strong>2</strong></a>
+             <li class="dash" id = "menu3"><a href="#" title="" class="exp"><span>Venta</span><strong>~</strong></a>
                     <ul class="sub">
                         <li id="venta"><a>Registrar Venta</a></li>
                         <li>@Html.ActionLink("Buscar ventas realizadas", "Buscar", "Venta")</li>
@@ -112,7 +117,7 @@
                     </ul>
               </li>
 
-             <li class="dash" id = "menu4"><a href="#" title="" class="exp"><span>Producto</span><strong>3</strong></a>
+             <li class="dash" id = "menu4"><a href="#" title="" class="exp"><span>Producto</span><strong>~</strong></a>
                     <ul class="sub">
                         <li>@Html.ActionLink("Registrar Producto", "Create", "Producto")</li>
                         <li>@Html.ActionLink("Buscar Producto", "Buscar", "Producto")</li>
@@ -121,7 +126,7 @@
               </li>
 
 
-             <li class="dash" id = "menu5"><a href="#" title="" class="exp"><span>Ingrediente</span><strong>3</strong></a>
+             <li class="dash" id = "menu5"><a href="#" title="" class="exp"><span>Ingrediente</span><strong>~</strong></a>
                     <ul class="sub">
                         <li>@Html.ActionLink("Registrar Ingrediente", "Create", "Ingrediente")</li>
                         <li>@Html.ActionLink("Buscar Ingrediente", "Buscar", "Ingrediente")</li>
@@ -129,7 +134,7 @@
                     </ul>
               </li>
 
-             <li class="dash" id = "menu6"><a href="#" title="" class="exp"><span>Proveedor</span><strong>3</strong></a>
+             <li class="dash" id = "menu6"><a href="#" title="" class="exp"><span>Proveedor</span><strong>~</strong></a>
                     <ul class="sub">
                         <li>@Html.ActionLink("Registrar", "Create", "Proveedor")</li>
                         <li>@Html.ActionLink("Buscar", "Buscar", "Proveedor")</li>
@@ -137,15 +142,18 @@
                     </ul>
               </li>
 
-             <li class="dash" id = "menu7"><a href="#" title="" class="exp"><span>Orden de Compra</span><strong>2</strong></a>
+             <li class="dash" id = "menu7"><a href="#" title="" class="exp"><span>Orden de Compra</span><strong>~</strong></a>
                     <ul class="sub">
-                        <li>@Html.ActionLink("Registrar", "Index", "Ordencompra")</li>
-                        <li>@Html.ActionLink("Buscar", "Buscar", "Ordencompra")</li>
+                        <li id="menu70"><a>Registrar Orden Compra</a></li>
+                        <li id="menu71">@Html.ActionLink("Registrar", "Index", "Ordencompra")</li>
+                        <li id="menu72">@Html.ActionLink("Buscar", "Buscar", "Ordencompra")</li>
+                        <li id="menu73"><a>Lista de Ordenes de Compra</a></li>
+                        <li id="menu74"><a>Registrar nota de entrada</a></li>
 
                     </ul>
               </li>
 
-             <li class="dash" id = "menu8"><a href="#" title="" class="exp"><span>Reportes</span><strong>4</strong></a>
+             <li class="dash" id = "menu8"><a href="#" title="" class="exp"><span>Reportes</span><strong>~</strong></a>
                     <ul class="sub">
                         <li>@Html.ActionLink("Area Administrativa", "filtro", "Reporteadmin")</li>
                         <li>@Html.ActionLink("Area de Ventas", "filtro", "Reporteventa")</li>

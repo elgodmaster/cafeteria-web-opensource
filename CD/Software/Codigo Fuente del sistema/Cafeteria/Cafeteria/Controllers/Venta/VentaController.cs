@@ -58,6 +58,7 @@ namespace Cafeteria.Controllers.Venta
             return Json (id2);
         }
 
+        
 
         public ActionResult Create(string id)
         {

@@ -34,19 +34,15 @@ namespace Cafeteria.Models.Administracion.Usuario
                 Utils.agregarParametro(query, "user_account", user);
                 Utils.agregarParametro(query, "pass", pass);
                 Utils.agregarParametro(query, "estado", "ACTIVO");
-
                 SqlDataReader data = query.ExecuteReader();
 
-                //string idPerfil = "";
                 UsuarioBean usuario = null;
 
                 if (data.HasRows)
                 {
                     data.Read();
-                    //idPerfil = Convert.ToString(data["idPerfil_usuario"]);
                     string idUsuario = Convert.ToString (data["idUsuario"]);
                     usuario = this.buscarusuario(idUsuario);
-                    //return Convert.ToString(data["idUsuario"]); // <------------- comentar ... =)
                 }
 
                 sql.Close();
@@ -80,11 +76,7 @@ namespace Cafeteria.Models.Administracion.Usuario
 
                 Utils.agregarParametro(query, "user_account", user);
                 Utils.agregarParametro(query, "estado", "ACTIVO");
-
                 SqlDataReader data = query.ExecuteReader();
-
-                //string idPerfil = "";
-                //UsuarioBean usuario = null;
 
                 if (data.HasRows)
                 {
@@ -202,6 +194,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                     usuarioelemento.idDistrito = Convert.ToString(objDataReader["idDistrito"]);
                     usuarioelemento.user_account = Convert.ToString(objDataReader["user_account"]);
                     usuarioelemento.nroDocumento = Convert.ToString(objDataReader["numero_documento"]);
+                    usuarioelemento.listadeperfil = this.perfilesusuario(usuarioelemento.ID);
                 }
                 return usuarioelemento;
             }
@@ -742,9 +735,7 @@ namespace Cafeteria.Models.Administracion.Usuario
                     while (objDataReader.Read())
                     {
                         string idperfil = Convert.ToString(objDataReader["idPerfil_usuario"]);
-                        //string espacio = " -- ";
                         listaperfiles.Add(this.getnombreperfil(idperfil));
-                        //listaperfiles.Add(espacio);
                     }
                 }
 
@@ -951,7 +942,49 @@ namespace Cafeteria.Models.Administracion.Usuario
                 }
             }
         }
-            
+
+        private List<int> perfilesusuario(string idusuario)
+        {
+            SqlConnection objDB = null;
+            List<int> lista = new List<int>();
+
+            try
+            {
+                objDB = new SqlConnection(cadenaDB);
+                objDB.Open();
+                String strQuery = "SELECT a.token FROM Perfil_usuario a, Perfil_usuario_x_Usuario b where a.idPerfil_usuario=b.idPerfil_usuario and b.idUsuario=@id order by 1";
+
+                SqlCommand objQuery = new SqlCommand(strQuery, objDB);
+                Utils.agregarParametro(objQuery, "@id", idusuario);
+                SqlDataReader objDataReader = objQuery.ExecuteReader();
+                if (objDataReader.HasRows)
+                {
+                    while (objDataReader.Read())
+                    {
+                        int valor = Convert.ToInt32(objDataReader[0]);
+                        lista.Add(valor);
+                    }
+                }
+
+                return lista;
+            }
+            catch (Exception e)
+            {
+                log.Error("Lista_Usuarios(EXCEPTION): ", e);
+                throw (e);
+            }
+            finally
+            {
+                if (objDB != null)
+                {
+                    objDB.Close();
+                }
+            }
+
+            //return null;
+        }
+
+
 
         #endregion
 

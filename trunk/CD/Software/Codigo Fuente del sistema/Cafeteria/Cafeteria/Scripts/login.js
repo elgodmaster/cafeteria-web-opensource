@@ -15,7 +15,7 @@
             password: p
         };
         localStorage.setItem("usuario", u);
-        
+
 
         $.ajax({
             type: "POST",
@@ -33,6 +33,8 @@
 
                     var idUsuario = data.ID;
                     var token = data.estado;
+                    var perfiles = data.listadeperfil;
+                    localStorage.setItem("perfiles", perfiles);
 
                     if (idUsuario)
                         localStorage.setItem("idUsuario", idUsuario);

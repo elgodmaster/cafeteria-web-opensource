@@ -60,6 +60,22 @@ namespace Cafeteria.Controllers.Administracion
             return View(usua);
         }
 
+        public ActionResult verhorario2(String id)
+        {
+            UsuarioBean usarios = admifacade.buscarusuario(id);
+            UsuarioxSucursalBean usua = new UsuarioxSucursalBean();
+            usua = admifacade.obtenerhorario(id);
+            usua.ID = id;
+            usua.nombres = usarios.nombres;
+            usua.nroDocumento = usarios.nroDocumento;
+            usua.idsucursal = admifacade.obtenersucursal(id);
+            if (usua.idsucursal.CompareTo("vacio") != 0)
+            {
+                SucursalBean suc = admifacade.buscarSucursal(usua.idsucursal);
+                usua.sucursal = suc.nombre;
+            }
+            return View(usua);
+        }
         public ActionResult Horario(String id)
         {
             UsuarioBean usuario = new UsuarioBean();

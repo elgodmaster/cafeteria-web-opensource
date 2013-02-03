@@ -84,7 +84,7 @@ namespace Cafeteria.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index2", "Home");
                 }
                 else
                 {

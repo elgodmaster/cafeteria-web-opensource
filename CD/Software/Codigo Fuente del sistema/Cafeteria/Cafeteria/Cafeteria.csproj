@@ -218,7 +218,17 @@
     <Content Include="Content\images\backgrounds\titleRowBg.png" />
     <Content Include="Content\images\backgrounds\topnavBg.png" />
     <Content Include="Content\images\backgrounds\tPagination.png" />
+    <Content Include="Content\images\bg_bot.jpg" />
+    <Content Include="Content\images\bg_box1.jpg" />
+    <Content Include="Content\images\bg_img.jpg" />
+    <Content Include="Content\images\bg_img2.jpg" />
+    <Content Include="Content\images\bg_testimonials.gif" />
+    <Content Include="Content\images\bg_top.jpg" />
     <Content Include="Content\images\big.png" />
+    <Content Include="Content\images\button1_bg.gif" />
+    <Content Include="Content\images\button2_bg.gif" />
+    <Content Include="Content\images\button_top.jpg" />
+    <Content Include="Content\images\button_top_active.jpg" />
     <Content Include="Content\images\colorPicker\blank.gif" />
     <Content Include="Content\images\colorPicker\colorpicker_background.png" />
     <Content Include="Content\images\colorPicker\colorpicker_hex.png" />
@@ -1276,6 +1286,9 @@
     <Content Include="Content\images\icons\uploader\throbber.gif" />
     <Content Include="Content\images\icons\uploader\uploaded.png" />
     <Content Include="Content\images\img.png" />
+    <Content Include="Content\images\img1.gif" />
+    <Content Include="Content\images\img2.gif" />
+    <Content Include="Content\images\img3.gif" />
     <Content Include="Content\images\jquery_ui\datePickerArrows.png" />
     <Content Include="Content\images\jquery_ui\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\images\jquery_ui\ui-bg_flat_75_ffffff_40x100.png" />
@@ -1292,6 +1305,7 @@
     <Content Include="Content\images\jquery_ui\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\images\jquery_ui\ui-icons_dcdcdc_256x240.png" />
     <Content Include="Content\images\leftArrow.png" />
+    <Content Include="Content\images\line_top.gif" />
     <Content Include="Content\images\loaders\loader.gif" />
     <Content Include="Content\images\loaders\loader1.gif" />
     <Content Include="Content\images\loaders\loader10.gif" />
@@ -1306,8 +1320,16 @@
     <Content Include="Content\images\loaders\loader8.gif" />
     <Content Include="Content\images\loaders\loader9.gif" />
     <Content Include="Content\images\loginLogo.png" />
+    <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\marker_1.gif" />
     <Content Include="Content\images\negArrow.png" />
+    <Content Include="Content\images\page2_img1.jpg" />
+    <Content Include="Content\images\page2_img2.jpg" />
+    <Content Include="Content\images\page3_img1.jpg" />
+    <Content Include="Content\images\page3_img2.jpg" />
+    <Content Include="Content\images\page4_img1.jpg" />
+    <Content Include="Content\images\page4_img2.jpg" />
     <Content Include="Content\images\posArrow.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnNext.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnPrevious.png" />
@@ -1432,12 +1454,19 @@
     <Content Include="Content\js\plugins\wizard\jquery.form.js" />
     <Content Include="Content\js\plugins\wizard\jquery.form.wizard.js" />
     <Content Include="Content\js\plugins\wizard\jquery.validate.min.js" />
+    <Content Include="Content\layout.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\reset.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
     <Content Include="libraries\AutoMapper.dll" />
     <Content Include="libraries\log4net.dll" />
     <Content Include="libraries\log4net.xml" />
+    <Content Include="Scripts\cufon-replace.js" />
+    <Content Include="Scripts\cufon-yui.js" />
     <Content Include="Scripts\ejemplo.js" />
+    <Content Include="Scripts\html5.js" />
+    <Content Include="Scripts\jquery-1.4.2.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />
@@ -1451,6 +1480,9 @@
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\Myriad_Pro_400.font.js" />
+    <Content Include="Scripts\Myriad_Pro_italic_400.font.js" />
+    <Content Include="Scripts\Myriad_Pro_italic_600.font.js" />
     <Content Include="Scripts\navegacion.js" />
     <Content Include="Scripts\Ubigeo.js" />
     <Content Include="Scripts\validacionnotaentrada.js" />
@@ -1498,7 +1530,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ingrediente\Create.cshtml" />

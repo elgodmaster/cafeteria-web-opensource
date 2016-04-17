@@ -1,0 +1,1 @@
+un sistema de cafeterias que cubre las areas de un negocio de este tipo (ventas, compras, almacen y administracion)
